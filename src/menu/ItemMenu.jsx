@@ -1,4 +1,3 @@
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function ItemMenu({ title, svg, evenodd = false }) {
   return (

@@ -9,11 +9,11 @@ function StudentForm({ formData, setFormData }) {
   return (
     <>
       <form>
-        <div class="grid gap-6 mb-6 lg:grid-cols-2">
+        <div className="grid gap-6 mb-6 lg:grid-cols-2">
           <div>
             <label 
-              for="name" 
-              class={inputLabelClass}
+              htmlFor="name" 
+              className={inputLabelClass}
             >
               Nome
             </label>
@@ -29,8 +29,8 @@ function StudentForm({ formData, setFormData }) {
           </div>
           <div>
             <label 
-              for="phone" 
-              class={inputLabelClass}
+              htmlFor="phone" 
+              className={inputLabelClass}
             >
               Telefone
             </label>
@@ -46,10 +46,10 @@ function StudentForm({ formData, setFormData }) {
             />
           </div>
         </div>
-        <div class="mb-6">
+        <div className="mb-6">
           <label 
-            for="email" 
-            class={inputLabelClass}
+            htmlFor="email" 
+            className={inputLabelClass}
           >
             Email
           </label>

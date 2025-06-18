@@ -1,23 +1,32 @@
 import axios from 'axios'
 
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
-function StudentList() {
+function StudentList({ searchTerm }) {
   const [students, setStudents] = useState([])
 
   const getStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/alunos')
+      const response = await axios.get('http://localhost:3000/students')
       const students = response.data
 
       setStudents(students)
     } catch {
       toast("Ocorreu um erro ao buscar os alunos", { 
         type: 'error'
-      });
+      })
     }
   }
+
+  const filteredStudents = students.filter((student) => {
+    const term = searchTerm.toLowerCase()
+    return (
+      student.name.toLowerCase().includes(term) ||
+      student.email.toLowerCase().includes(term) ||
+      student.phone.toLowerCase().includes(term)
+    )
+  })
 
   useEffect(() => {
     getStudents()
@@ -50,7 +59,7 @@ function StudentList() {
               </thead>
 
               <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                {students.map((student, index) => (
+                {filteredStudents.map((student, index) => (
                   <tr key={index}>
                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                       <div className="flex items-center gap-x-2">

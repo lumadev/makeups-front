@@ -1,4 +1,4 @@
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Link } from "react-router-dom"
 
 import ItemMenu from './ItemMenu'
 
@@ -11,7 +11,6 @@ function Sidebar() {
   return (
     <div
       id="view"
-      className="h-full w-screen flex flex-row"
       x-data="{ sidenav: true }"
     >
       <div
@@ -71,10 +70,12 @@ function Sidebar() {
               evenodd="true"
               svg={svgs.class}
             />
-            <ItemMenu 
-              title="Alunos"
-              svg={svgs.students}
-            />
+            <Link to="/alunos">
+              <ItemMenu 
+                title="Alunos"
+                svg={svgs.students}
+              />
+            </Link>
           </div>
         </div>
       </div>

@@ -43,11 +43,13 @@ function Sidebar() {
 
           {/* Sidebar menu */}
           <div id="menu" className="flex flex-col space-y-2">
-            <ItemMenu 
-              title="Aulas"
-              evenodd="true"
-              svg={svgs.class}
-            />
+            <Link to="/reposicoes">
+              <ItemMenu 
+                title="Reposições"
+                evenodd="true"
+                svg={svgs.class}
+              />
+            </Link>
             <Link to="/alunos">
               <ItemMenu 
                 title="Alunos"

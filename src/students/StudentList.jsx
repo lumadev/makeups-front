@@ -52,9 +52,9 @@ function StudentList({ searchTerm, reloadFlag }) {
                     Data do Cadastro
                   </th>
 
-                  <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  {/* <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     Ações
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
 
@@ -79,7 +79,7 @@ function StudentList({ searchTerm, reloadFlag }) {
                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                       {student.dateRegister}
                     </td>
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
+                    {/* <td className="px-4 py-4 text-sm whitespace-nowrap">
                       <div className="flex items-center gap-x-6">
                         <button className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                           Editar
@@ -88,7 +88,7 @@ function StudentList({ searchTerm, reloadFlag }) {
                           Excluir
                         </button>
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

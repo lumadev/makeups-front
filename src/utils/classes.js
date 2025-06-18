@@ -8,8 +8,11 @@ const inputLabelClass = 'block mb-2 text-sm font-medium text-gray-900 dark:text-
 
 const btnClass = 'px-3 py-2 lg:px-4 bg-blue-500 collapse:bg-green-100 text-white text-sm font-semibold rounded hover:bg-blue-600'
 
+const btnCancelClass = 'bg-gray-100 text-gray-700 px-5 py-2.5 rounded-lg text-sm border'
+
 export { 
   btnClass,
+  btnCancelClass,
   inputClass, 
   inputLabelClass
 }

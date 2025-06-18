@@ -1,5 +1,5 @@
 
-import { btnClass } from '../utils/classes';
+import { btnClass, btnCancelClass } from '../utils/classes';
 import { toast } from 'react-toastify'
 import { useState } from "react";
 
@@ -68,7 +68,7 @@ function StudentNew({ onStudentSaved }) {
 
             <button
               onClick={() => setShowModal(false)}
-              className="bg-gray-100 text-gray-700 px-5 py-2.5 rounded-lg text-sm border"
+              className={btnCancelClass}
             >
               Cancelar
             </button>

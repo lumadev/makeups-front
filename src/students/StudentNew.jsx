@@ -9,7 +9,7 @@ import LoadingButton from '../components/LoadingButton';
 import Modal from "../components/Modal";
 import StudentForm from './StudentForm'
 
-function StudentNew() {
+function StudentNew({ onStudentSaved }) {
   const [showModal, setShowModal] = useState(false)
   const [loading, setLoading] = useState(false);
 
@@ -25,15 +25,18 @@ function StudentNew() {
     try {
       await axios.post('http://localhost:3000/students', formData)
 
-      toast("Ocorreu um erro ao salvar os dados do aluno", { 
+      toast("Aluno salvo com sucesso", { 
         type: 'success'
       })
+
+      onStudentSaved()
     } catch {
       toast("Ocorreu um erro ao salvar os dados do aluno", { 
         type: 'error'
       })
     } finally {
       setShowModal(false)
+      setLoading(false)
     }
   }
 

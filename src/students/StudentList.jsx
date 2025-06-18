@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-function StudentList({ searchTerm }) {
+function StudentList({ searchTerm, reloadFlag }) {
   const [students, setStudents] = useState([])
 
   const getStudents = async () => {
@@ -30,7 +30,7 @@ function StudentList({ searchTerm }) {
 
   useEffect(() => {
     getStudents()
-  }, [])
+  }, [reloadFlag])
 
   return (
     <section className="container mx-auto">

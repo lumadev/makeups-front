@@ -17,7 +17,6 @@ export default function StudentFormModal({
   studentEdit = null
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
-
   const [formData, setFormData] = useState({})
 
   const addStudent = async () => {

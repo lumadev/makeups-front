@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+import { formatDate } from '../utils/date';
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
@@ -123,7 +124,7 @@ function StudentList({ searchTerm, reloadFlag }) {
                       {student.phone}
                     </td>
                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                      {student.dateRegister}
+                      {formatDate(student.dateRegister)}
                     </td>
                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                       <div className="flex items-center gap-x-6">

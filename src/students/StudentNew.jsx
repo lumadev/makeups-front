@@ -1,42 +1,11 @@
 
 import { btnClass } from '../utils/classes'
-import { toast } from 'react-toastify'
 import { useState } from "react";
 
-import axios from 'axios'
-
-import StudentFormModal from './StudentFormModal'
+import StudentFormModal from './form/StudentFormModal'
 
 function StudentNew({ onStudentSaved }) {
   const [showModal, setShowModal] = useState(false)
-  const [loadingSave, setLoadingSave] = useState(false)
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: ""
-  })
-
-  const addStudent = async () => {
-    setLoadingSave(true)
-
-    try {
-      await axios.post('http://localhost:3000/students', formData)
-
-      toast("Aluno salvo com sucesso", { 
-        type: 'success'
-      })
-
-      onStudentSaved()
-    } catch {
-      toast("Ocorreu um erro ao salvar os dados do aluno", { 
-        type: 'error'
-      })
-    } finally {
-      setShowModal(false)
-      setLoadingSave(false)
-    }
-  }
 
   return (
     <>
@@ -50,10 +19,7 @@ function StudentNew({ onStudentSaved }) {
       <StudentFormModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onSubmit={addStudent}
-        loadingSave={loadingSave}
-        formData={formData}
-        setFormData={setFormData}
+        onStudentSaved={onStudentSaved}
       />
     </>
   )

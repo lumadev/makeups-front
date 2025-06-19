@@ -1,4 +1,4 @@
-import { inputClass, inputLabelClass } from '../utils/classes';
+import { inputClass, inputLabelClass } from '../../utils/classes';
 
 function StudentForm({ formData, setFormData }) {
   const handleChange = (event) => {

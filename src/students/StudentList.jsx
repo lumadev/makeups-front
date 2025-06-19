@@ -4,21 +4,13 @@ import { formatDate } from '../utils/date';
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import StudentFormModal from './StudentFormModal'
+import StudentFormModal from './form/StudentFormModal'
 
 function StudentList({ searchTerm, reloadFlag }) {
   const [students, setStudents] = useState([])
 
   const [showModal, setShowModal] = useState(false)
   const [studentEdit, setStudentEdit] = useState({})
-  const [loadingSave, setLoadingSave] = useState(false)
-
-  const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    email: "",
-    phone: ""
-  })
 
   const getStudents = async () => {
     try {
@@ -38,32 +30,7 @@ function StudentList({ searchTerm, reloadFlag }) {
 
   const openModalEdit = (student) => {
     setStudentEdit(student)
-    setFormData(student)
     setShowModal(true)
-  }
-
-  const editStudent = async () => {
-    setLoadingSave(true)
-
-    const idStudent = formData.id
-    try {
-      const response = await axios.put(`http://localhost:3000/students/${idStudent}`, formData)
-      console.log(response)
-
-      toast("Aluno salvo com sucesso", { 
-        type: 'success'
-      })
-
-      // update list with the student updated
-      getStudents()
-    } catch {
-      toast("Ocorreu um erro ao editar o aluno", { 
-        type: 'error'
-      })
-    } finally {
-      setLoadingSave(false)
-      setShowModal(false)
-    }
   }
 
   const filteredStudents = students.filter((student) => {
@@ -150,13 +117,10 @@ function StudentList({ searchTerm, reloadFlag }) {
 
         <StudentFormModal
           isEdit="true"
-          studentEdit={studentEdit}
           isOpen={showModal}
+          studentEdit={studentEdit}
           onClose={() => setShowModal(false)}
-          onSubmit={editStudent}
-          loadingSave={loadingSave}
-          formData={formData}
-          setFormData={setFormData}
+          onStudentSaved={getStudents}
         />
       </div>
     </section>

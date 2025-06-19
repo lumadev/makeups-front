@@ -3,8 +3,21 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import StudentFormModal from './StudentFormModal'
+
 function StudentList({ searchTerm, reloadFlag }) {
   const [students, setStudents] = useState([])
+
+  const [showModal, setShowModal] = useState(false)
+  const [studentEdit, setStudentEdit] = useState({})
+  const [loadingSave, setLoadingSave] = useState(false)
+
+  const [formData, setFormData] = useState({
+    id: "",
+    name: "",
+    email: "",
+    phone: ""
+  })
 
   const getStudents = async () => {
     try {
@@ -16,6 +29,36 @@ function StudentList({ searchTerm, reloadFlag }) {
       toast("Ocorreu um erro ao buscar os alunos", { 
         type: 'error'
       })
+    }
+  }
+
+  const openModalEdit = (student) => {
+    setStudentEdit(student)
+    setFormData(student)
+    setShowModal(true)
+  }
+
+  const editStudent = async () => {
+    setLoadingSave(true)
+
+    const idStudent = formData.id
+    try {
+      const response = await axios.put(`http://localhost:3000/students/${idStudent}`, formData)
+      console.log(response)
+
+      toast("Aluno salvo com sucesso", { 
+        type: 'success'
+      })
+
+      // update list with the student updated
+      getStudents()
+    } catch {
+      toast("Ocorreu um erro ao editar o aluno", { 
+        type: 'error'
+      })
+    } finally {
+      setLoadingSave(false)
+      setShowModal(false)
     }
   }
 
@@ -52,9 +95,9 @@ function StudentList({ searchTerm, reloadFlag }) {
                     Data do Cadastro
                   </th>
 
-                  {/* <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     Ações
-                  </th> */}
+                  </th>
                 </tr>
               </thead>
 
@@ -79,22 +122,38 @@ function StudentList({ searchTerm, reloadFlag }) {
                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                       {student.dateRegister}
                     </td>
-                    {/* <td className="px-4 py-4 text-sm whitespace-nowrap">
+                    <td className="px-4 py-4 text-sm whitespace-nowrap">
                       <div className="flex items-center gap-x-6">
-                        <button className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                        <button 
+                          className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
+                          onClick={() => openModalEdit(student)}
+                        >
                           Editar
                         </button>
-                        <button className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                        {/* <button
+                          className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
+                        >
                           Excluir
-                        </button>
+                        </button> */}
                       </div>
-                    </td> */}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
+
+        <StudentFormModal
+          isEdit="true"
+          studentEdit={studentEdit}
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          onSubmit={editStudent}
+          loadingSave={loadingSave}
+          formData={formData}
+          setFormData={setFormData}
+        />
       </div>
     </section>
   )

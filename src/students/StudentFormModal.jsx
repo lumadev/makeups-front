@@ -9,10 +9,10 @@ export default function StudentFormModal({
   isOpen,
   onClose,
   onSubmit,
-  loading,
+  loadingSave,
   formData,
   setFormData,
-  isEdit = false,
+  isEdit = false
 }) {
   return (
     <Modal
@@ -21,7 +21,7 @@ export default function StudentFormModal({
       title={isEdit ? 'Editar Aluno' : 'Adicionar Aluno'}
       actions={
         <>
-          {loading ? (
+          {loadingSave ? (
             <LoadingButton />
           ) : (
             <button 

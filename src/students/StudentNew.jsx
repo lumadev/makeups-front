@@ -9,16 +9,16 @@ import StudentFormModal from './StudentFormModal'
 
 function StudentNew({ onStudentSaved }) {
   const [showModal, setShowModal] = useState(false)
-  const [loading, setLoading] = useState(false);
+  const [loadingSave, setLoadingSave] = useState(false)
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: ""
-  });
+  })
 
   const addStudent = async () => {
-    setLoading(true)
+    setLoadingSave(true)
 
     try {
       await axios.post('http://localhost:3000/students', formData)
@@ -34,7 +34,7 @@ function StudentNew({ onStudentSaved }) {
       })
     } finally {
       setShowModal(false)
-      setLoading(false)
+      setLoadingSave(false)
     }
   }
 
@@ -51,7 +51,7 @@ function StudentNew({ onStudentSaved }) {
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onSubmit={addStudent}
-        loading={loading}
+        loadingSave={loadingSave}
         formData={formData}
         setFormData={setFormData}
       />

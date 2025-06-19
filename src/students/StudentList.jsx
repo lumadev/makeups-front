@@ -24,6 +24,9 @@ function StudentList({ searchTerm, reloadFlag }) {
       const response = await axios.get('http://localhost:3000/students')
       const students = response.data
 
+      // sort alphabetically
+      students.sort((a, b) => a.name.localeCompare(b.name));
+
       setStudents(students)
     } catch {
       toast("Ocorreu um erro ao buscar os alunos", { 

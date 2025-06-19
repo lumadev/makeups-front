@@ -1,13 +1,11 @@
 
-import { btnClass, btnCancelClass } from '../utils/classes';
+import { btnClass } from '../utils/classes'
 import { toast } from 'react-toastify'
 import { useState } from "react";
 
 import axios from 'axios'
 
-import LoadingButton from '../components/LoadingButton';
-import Modal from "../components/Modal";
-import StudentForm from './StudentForm'
+import StudentFormModal from './StudentFormModal'
 
 function StudentNew({ onStudentSaved }) {
   const [showModal, setShowModal] = useState(false)
@@ -49,34 +47,14 @@ function StudentNew({ onStudentSaved }) {
         Novo Aluno
       </button>
 
-      <Modal
+      <StudentFormModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        title="Adicionar Aluno"
-        actions={
-          <>
-            {loading ? (
-              <LoadingButton />
-            ) : (
-              <button
-                onClick={() => addStudent()}
-                className={btnClass}
-              >
-                Salvar
-              </button>
-            )}
-
-            <button
-              onClick={() => setShowModal(false)}
-              className={btnCancelClass}
-            >
-              Cancelar
-            </button>
-          </>
-        }
-      >
-        <StudentForm formData={formData} setFormData={setFormData} />
-      </Modal>
+        onSubmit={addStudent}
+        loading={loading}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </>
   )
 }

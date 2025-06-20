@@ -107,7 +107,11 @@ export default function StudentFormModal({
         </>
       }
     >
-      <StudentForm formData={formData} setFormData={setFormData} />
+      <StudentForm 
+        isEdit={isEdit}
+        formData={formData} 
+        setFormData={setFormData}
+      />
     </Modal>
   )
 }

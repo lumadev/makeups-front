@@ -29,15 +29,21 @@ export default function StudentAutocomplete({ students, onSelect }) {
 
   return (
     <div className="relative w-full max-w-md">
+      <label 
+        htmlFor="student"
+      >
+        Estudante
+      </label>
       <input
         type="text"
+        id="student"
         value={searchTerm}
         onChange={handleChange}
         onBlur={() => setTimeout(() => setShowSuggestions(false), 100)} // dá tempo para clicar
         onFocus={() => {
           if (filtered.length > 0) setShowSuggestions(true);
         }}
-        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+        className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         placeholder="Digite o nome do aluno"
       />
       {showSuggestions && filtered.length > 0 && (

@@ -81,7 +81,8 @@ function StudentForm({ isEdit = false, formData, setFormData }) {
           </label>
           <input
             type="email"
-            id="email" 
+            id="email"
+            maxLength="200" 
             className={inputClass}
             placeholder="john.doe@company.com"
             value={formData.email}

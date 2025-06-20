@@ -1,8 +1,11 @@
 
-function ItemMenu({ title, svg, evenodd = false }) {
+function ItemMenu({ title, svg, evenodd = false, active = false }) {
   return (
     <div
-      className="flex items-center text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+      className={`
+        flex items-center text-sm font-medium py-2 px-2 rounded-md transition duration-150 ease-in-out
+        ${active ? 'bg-teal-600 text-white scale-105' : 'text-white hover:bg-teal-500 hover:text-white hover:scale-105'}
+      `}
     >
       <svg
         className="w-6 h-6 fill-current inline-block"

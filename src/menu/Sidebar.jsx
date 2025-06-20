@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { useLocation } from 'react-router-dom'
 
 import ItemMenu from './ItemMenu'
 
@@ -10,14 +11,16 @@ const svgs = {
 }
 
 function Sidebar() {
+  const location = useLocation()
+
   return (
     <div
       id="sidebar"
-      className="bg-gray-900 h-screen md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
+      className="bg-gray-900 h-screen md:block shadow-2xl border-r border-gray-800 px-5 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
       x-show="sidenav"
     >
       <div className="md:space-y-10 mt-10">
-        <h1 className="hidden md:block font-bold text-sm md:text-xl text-center text-white">
+        <h1 className="hidden md:block font-bold text-xl mb-6 text-center text-white">
           Reposições
         </h1>
         <div id="profile">
@@ -25,29 +28,31 @@ function Sidebar() {
             <img
               src={musicImg}
               alt="Music"
-              className="rounded-full mx-auto opacity-50"
+              className="rounded-full mx-auto opacity-50 border-2 border-teal-500 ring-1 ring-teal-400"
             />
 
-            <h2 className="mt-4 font-medium text-xs md:text-sm text-center text-teal-400">
+            <h2 className="mt-4 font-medium text-sm md:text-base text-center text-teal-400">
               Weslley Joanes
             </h2>
-            <p className="text-xs text-gray-400 text-center">Administrador</p>
+            <p className="text-sm text-gray-500 text-center">Administrador</p>
           </div>
         </div>
 
         {/* Sidebar menu */}
         <div id="menu" className="flex flex-col space-y-2">
-          <Link to="/reposicoes">
+          <Link to="/reposicoes" className="group">
             <ItemMenu 
               title="Reposições"
               evenodd="true"
               svg={svgs.class}
+              active={location.pathname === '/reposicoes'}
             />
           </Link>
-          <Link to="/alunos">
+          <Link to="/alunos" className="group">
             <ItemMenu 
               title="Alunos"
               svg={svgs.students}
+              active={location.pathname === '/alunos'}
             />
           </Link>
         </div>

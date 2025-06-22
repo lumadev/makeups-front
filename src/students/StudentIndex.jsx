@@ -7,19 +7,28 @@ import StudentSearch  from './StudentSearch'
 function StudentIndex() {
   const [searchTerm, setSearchTerm] = useState('')
   const [reloadFlag, setReloadFlag] = useState(false)
+  const [studentCount, setStudentCount] = useState(0);
 
   const reloadStudents = () => setReloadFlag((prev) => !prev)
 
   return (
     <>
+      {/* Button and modal of new student */}
       <div className="flex my-4">
         <StudentNew onStudentSaved={reloadStudents} />
       </div>
 
-      {/* Busca de alunos */}
-      <StudentSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+      {/* Students search */}
+      {studentCount > 0 && (
+        <StudentSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+      )}
 
-      <StudentList searchTerm={searchTerm} reloadFlag={reloadFlag} />
+      {/* Students list */}
+      <StudentList 
+        searchTerm={searchTerm} 
+        reloadFlag={reloadFlag}
+        onCountChange={setStudentCount}
+      />
     </>
   )
 }

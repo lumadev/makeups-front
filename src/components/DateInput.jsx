@@ -23,8 +23,13 @@ function DateInput({ onChange, title }) {
   };
 
   useEffect(() => {
+    // select current year
     const currentYear = new Date().getFullYear();
     setYear(currentYear)
+
+    // select current month
+    const currentMonth = new Date().getMonth() + 1;
+    setMonth(currentMonth.toString());
   }, []);
 
   return (
@@ -35,20 +40,15 @@ function DateInput({ onChange, title }) {
 
       <div className="flex items-center">
         {/* DIA */}
-        <div className="relative">
-          <select
-            value={day}
-            onChange={(e) => handleChange(e.target.value, month, year, time)}
-            className="appearance-none border border-gray-300 rounded-lg px-3 mr-2 py-2 pr-7 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          >
-            <option value="">Dia</option>
-            {[...Array(31)].map((_, i) => (
-              <option key={i + 1} value={i + 1}>
-                {i + 1}
-              </option>
-            ))}
-          </select>
-        </div>
+        <input
+          type="number"
+          min="1"
+          max="31"
+          value={day}
+          onChange={(e) => handleChange(e.target.value, month, year, time)}
+          placeholder="Dia"
+          className="w-24 mr-2 border border-gray-300 rounded-lg px-3 py-2 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
         {/* MÊS */}
         <select

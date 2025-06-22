@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 
 import './App.css'
 
@@ -12,6 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/reposicoes" replace />} />
           <Route path="alunos" element={<StudentIndex />} />
           <Route path="reposicoes" element={<MakeupIndex />} />
           <Route path="*" element={<NotFound />} />

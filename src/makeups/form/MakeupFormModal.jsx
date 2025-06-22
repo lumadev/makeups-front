@@ -21,7 +21,7 @@ export default function MakeupFormModal({
 
   const addMakeup = async () => {
     setLoadingSave(true)
-
+    
     try {
       await axios.post('http://localhost:3000/makeups', formData)
 
@@ -56,7 +56,7 @@ export default function MakeupFormModal({
     if (isEdit && makeupEdit) {
       setFormData(makeupEdit)
     } else {
-      setFormData({ student: {}, dateOld: "", dateNew: "" })
+      setFormData({ studentId: {}, dateOld: "", dateReposition: "" })
     }
   }, [isEdit, makeupEdit, isOpen])
 

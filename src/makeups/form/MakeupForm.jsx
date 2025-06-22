@@ -8,8 +8,6 @@ import StudentAutocomplete from './StudentAutocomplete';
 
 function MakeupForm({ setFormData }) {
   const [students, setStudents] = useState([]);
-  // const [setDateReposition] = useState(null);
-  // const [setDateOld] = useState(null);
 
   // get students to show in autocomplete field
   const getStudents = async () => {

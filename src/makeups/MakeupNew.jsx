@@ -19,7 +19,7 @@ function MakeupNew({ onMakeupSaved }) {
       <MakeupFormModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onStudentSaved={onMakeupSaved}
+        onMakeupSaved={onMakeupSaved}
       />
     </>
   )

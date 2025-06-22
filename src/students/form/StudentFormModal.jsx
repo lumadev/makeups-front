@@ -85,6 +85,7 @@ export default function StudentFormModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
+      sizeClass="max-w-2xl"
       title={isEdit ? 'Editar Aluno' : 'Adicionar Aluno'}
       actions={
         <>

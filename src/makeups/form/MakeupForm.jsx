@@ -1,16 +1,15 @@
-// import { inputClass, inputLabelClass } from '../../utils/classes';
+import axios from 'axios';
 
-import axios from 'axios'
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 
-import { toast } from 'react-toastify'
-import { useEffect, useState } from 'react'
+import DateInput from "../../components/DateInput";
+import StudentAutocomplete from './StudentAutocomplete';
 
-import StudentAutocomplete from './StudentAutocomplete'
-
-// function MakeupForm({ formData, setFormData }) {
-function MakeupForm() {
+function MakeupForm({ setFormData }) {
   const [students, setStudents] = useState([]);
-  const [setStudentSelected] = useState([]);
+  // const [setDateReposition] = useState(null);
+  // const [setDateOld] = useState(null);
 
   // get students to show in autocomplete field
   const getStudents = async () => {
@@ -29,11 +28,18 @@ function MakeupForm() {
     }
   }
 
-  // const handleChange = (event) => {
-  //   const { id, value } = event.target
-  //   setFormData(prev => ({ ...prev, [id]: value }));
-  // }
-  
+  const handleSelectStudent = (studentId) => {
+    setFormData((prev) => ({ ...prev, studentId }));
+  };
+
+  const setDateReposition = (dateReposition) => {
+    setFormData((prev) => ({ ...prev, dateReposition }));
+  }
+
+  const setDateOld = (dateOld) => {
+    setFormData((prev) => ({ ...prev, dateOld }));
+  }
+
   useEffect(() => {
     getStudents()
   }, []);
@@ -41,28 +47,21 @@ function MakeupForm() {
   return (
     <>
       <form>
-        <div className="grid gap-6 mb-6 lg:grid-cols-2">
+        <div className="grid gap-6 mb-6 grid-cols-[1fr_2fr]">
           <StudentAutocomplete
             students={students}
-            onSelect={(student) => setStudentSelected(student)}
+            onSelect={(student) => handleSelectStudent(student.id)}
           />
-          {/* <div>
-            <label 
-              htmlFor="name" 
-              className={inputLabelClass}
-            >
-              Nome
-            </label>
-            <input 
-              type="text" 
-              id="name" 
-              className={inputClass}
-              placeholder="Nome"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div> */}
+          <DateInput 
+            onChange={setDateReposition}
+            title="Data e horário da reposição"
+          />
+        </div>
+        <div className="grid gap-6 mb-6 lg:grid-cols-2">
+          <DateInput 
+            onChange={setDateOld}
+            title="Data e horário da aula antiga"
+          />
         </div>
       </form>
     </>

@@ -1,4 +1,11 @@
-export default function Modal({ isOpen, onClose, title, children, actions }) {
+export default function Modal({ 
+  isOpen, 
+  onClose, 
+  sizeClass = 'max-w-4xl',
+  title,
+  children, 
+  actions
+}) {
   if (!isOpen) return null;
 
   return (
@@ -7,7 +14,7 @@ export default function Modal({ isOpen, onClose, title, children, actions }) {
       role="dialog"
       aria-modal="true"
     >
-      <div className="relative w-full max-w-2xl px-4 h-auto">
+      <div className={`relative w-full ${sizeClass} px-4 h-auto`}>
         <div className="bg-white rounded-lg shadow dark:bg-gray-700">
           {/* Header */}
           <div className="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-600">

@@ -12,13 +12,15 @@ function MakeupIndex() {
 
   return (
     <>
+      {/* Button and modal of new makeup */}
       <div className="flex my-4">
         <MakeupNew onMakeupSaved={reloadMakeups} />
       </div>
 
-      {/* Busca de alunos */}
+      {/* Makeup search */}
       <MakeupSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
 
+      {/* Makeups list */}
       <MakeupList searchTerm={searchTerm} reloadFlag={reloadFlag} />
     </>
   )

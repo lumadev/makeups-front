@@ -30,8 +30,8 @@ function MakeupForm({ setFormData }) {
     setFormData((prev) => ({ ...prev, studentId }));
   };
 
-  const setDateReposition = (dateReposition) => {
-    setFormData((prev) => ({ ...prev, dateReposition }));
+  const setDateReplacement = (dateReplacement) => {
+    setFormData((prev) => ({ ...prev, dateReplacement }));
   }
 
   const setDateOld = (dateOld) => {
@@ -51,7 +51,7 @@ function MakeupForm({ setFormData }) {
             onSelect={(student) => handleSelectStudent(student.id)}
           />
           <DateInput 
-            onChange={setDateReposition}
+            onChange={setDateReplacement}
             title="Data e horário da reposição"
           />
         </div>

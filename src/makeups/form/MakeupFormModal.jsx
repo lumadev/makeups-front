@@ -56,7 +56,7 @@ export default function MakeupFormModal({
     if (isEdit && makeupEdit) {
       setFormData(makeupEdit)
     } else {
-      setFormData({ studentId: {}, dateOld: "", dateReposition: "" })
+      setFormData({ studentId: {}, dateOld: "", dateReplacement: "" })
     }
   }, [isEdit, makeupEdit, isOpen])
 

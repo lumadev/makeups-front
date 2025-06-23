@@ -7,6 +7,7 @@ import MakeupSearch  from './MakeupSearch'
 function MakeupIndex() {
   const [searchTerm, setSearchTerm] = useState('')
   const [reloadFlag, setReloadFlag] = useState(false)
+  const [makeupCount, setMakeupCount] = useState(0);
 
   const reloadMakeups = () => setReloadFlag((prev) => !prev)
 
@@ -18,10 +19,16 @@ function MakeupIndex() {
       </div>
 
       {/* Makeup search */}
-      <MakeupSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+      {makeupCount > 0 && (
+        <MakeupSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+      )}
 
       {/* Makeups list */}
-      <MakeupList searchTerm={searchTerm} reloadFlag={reloadFlag} />
+      <MakeupList 
+        searchTerm={searchTerm} 
+        reloadFlag={reloadFlag}
+        onCountChange={setMakeupCount}
+      />
     </>
   )
 }

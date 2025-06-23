@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 // import MakeupFormModal from './form/MakeupFormModal'
 
-function MakeupList({ reloadFlag }) {
+function MakeupList({ searchTerm, reloadFlag }) {
   const [makeups, setMakeups] = useState([])
 
   // const [showModal, setShowModal] = useState(false)
@@ -32,14 +32,17 @@ function MakeupList({ reloadFlag }) {
   //   setShowModal(true)
   // }
 
-  // const filteredStudents = students.filter((student) => {
-  //   const term = searchTerm.toLowerCase()
-  //   return (
-  //     student.name.toLowerCase().includes(term) ||
-  //     student.email.toLowerCase().includes(term) ||
-  //     student.phone.toLowerCase().includes(term)
-  //   )
-  // })
+  const filteredMakeups = makeups.filter((makeup) => {
+    const term = searchTerm.toLowerCase()
+    const dateOldMasked = formatDate(makeup.dateOld)
+    const dateReplacement = formatDate(makeup.dateReplacement)
+
+    return (
+      makeup.studentName.toLowerCase().includes(term) ||
+      dateOldMasked.includes(term) ||
+      dateReplacement.includes(term)
+    )
+  })
 
   useEffect(() => {
     getMakeups()
@@ -67,10 +70,10 @@ function MakeupList({ reloadFlag }) {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                    {makeups.map((makeup, index) => (
+                    {filteredMakeups.map((makeup, index) => (
                       <tr key={index}>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          {formatDate(makeup.dateReposition)}
+                          {formatDate(makeup.dateReplacement)}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                           {makeup.studentName}

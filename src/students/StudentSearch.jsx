@@ -1,6 +1,6 @@
 function StudentSearch({ searchTerm, onSearch }) {
   return (
-    <div className="mb-4">
+    <div className="my-8">
       <label htmlFor="search" className="block mb-2 text-sm font-medium text-gray-700">
         Buscar aluno:
       </label>

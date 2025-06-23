@@ -55,7 +55,7 @@ function MakeupForm({ setFormData }) {
             title="Data e horário da reposição"
           />
         </div>
-        <div className="grid gap-6 mb-6 lg:grid-cols-2">
+        <div className="grid gap-6 mb-6 grid-cols-[2fr_1fr]">
           <DateInput 
             onChange={setDateOld}
             title="Data e horário da aula antiga"

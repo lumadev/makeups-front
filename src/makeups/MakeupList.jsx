@@ -56,7 +56,10 @@ function MakeupList({ reloadFlag }) {
                   <thead className="bg-gray-50 dark:bg-gray-800">
                     <tr>
                       <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Data Nova
+                        Data da Reposição
+                      </th>
+                      <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        Estudante
                       </th>
                       <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         Data Antiga
@@ -68,6 +71,9 @@ function MakeupList({ reloadFlag }) {
                       <tr key={index}>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                           {formatDate(makeup.dateReposition)}
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                          {makeup.studentName}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                           {formatDate(makeup.dateOld)}

@@ -1,3 +1,3 @@
 # React + Vite
 
-Projeto em React, Vue e Tailwind, para controlar as reposições de aulas de música.
+Project in React, Vue and Tailwind, to control music class replacements.

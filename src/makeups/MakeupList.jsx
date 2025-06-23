@@ -1,25 +1,26 @@
 import axios from 'axios'
 
-import { formatDate } from '../utils/date';
+import { formatDate, formatDateAndHour } from '../utils/date';
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-// import MakeupFormModal from './form/MakeupFormModal'
+import MakeupFormModal from './form/MakeupFormModal'
 
-function MakeupList({ searchTerm, reloadFlag }) {
+function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
   const [makeups, setMakeups] = useState([])
 
-  // const [showModal, setShowModal] = useState(false)
-  // const [studentEdit, setStudentEdit] = useState({})
+  const [showModal, setShowModal] = useState(false)
+  const [makeupEdit, setMakeupEdit] = useState({})
 
   const getMakeups = async () => {
     try {
       const response = await axios.get('http://localhost:3000/makeups')
-      const makeupsData = response.data
+      const makeups = response.data
 
       // TODO sort by data
 
-      setMakeups(makeupsData)
+      setMakeups(makeups)
+      onCountChange(makeups.length)
     } catch {
       toast("Ocorreu um erro ao buscar os alunos", { 
         type: 'error'
@@ -27,10 +28,10 @@ function MakeupList({ searchTerm, reloadFlag }) {
     }
   }
 
-  // const openModalEdit = (student) => {
-  //   setStudentEdit(student)
-  //   setShowModal(true)
-  // }
+  const openModalEdit = (makeup) => {
+    setMakeupEdit(makeup)
+    setShowModal(true)
+  }
 
   const filteredMakeups = makeups.filter((makeup) => {
     const term = searchTerm.toLowerCase()
@@ -59,10 +60,10 @@ function MakeupList({ searchTerm, reloadFlag }) {
                   <thead className="bg-gray-50 dark:bg-gray-800">
                     <tr>
                       <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Data da Reposição
+                        Estudante
                       </th>
                       <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Estudante
+                        Data da Reposição
                       </th>
                       <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         Data Antiga
@@ -72,18 +73,28 @@ function MakeupList({ searchTerm, reloadFlag }) {
                   <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                     {filteredMakeups.map((makeup, index) => (
                       <tr key={index}>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          {formatDate(makeup.dateReplacement)}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                        <td className="font-bold px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                           {makeup.studentName}
                         </td>
+                        <td className="font-bold px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                          {formatDateAndHour(makeup.dateReplacement)}
+                        </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          {formatDate(makeup.dateOld)}
+                          {formatDateAndHour(makeup.dateOld)}
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-6">
-                            {/* Ações comentadas */}
+                            {/* <button 
+                              className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
+                              onClick={() => openModalEdit(makeup)}
+                            >
+                              Editar
+                            </button> */}
+                            {/* <button
+                              className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
+                            >
+                              Excluir
+                            </button> */}
                           </div>
                         </td>
                       </tr>
@@ -92,6 +103,14 @@ function MakeupList({ searchTerm, reloadFlag }) {
                 </table>
               </div>
             </div>
+
+            <MakeupFormModal
+              isEdit="true"
+              isOpen={showModal}
+              makeupEdit={makeupEdit}
+              onClose={() => setShowModal(false)}
+              onMakeupSaved={getMakeups}
+            />
           </div>
         </section>
       ) : (

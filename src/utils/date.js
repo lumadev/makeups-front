@@ -8,4 +8,15 @@ function formatDate(dateString) {
   return `${day}/${month}/${year}`
 }
 
-export { formatDate }
+function formatDateAndHour(dateString) {
+  const dateFormatted = formatDate(dateString)
+
+  const date = new Date(dateString)
+
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+
+  return `${dateFormatted} ${hours}:${minutes}`
+}
+
+export { formatDate, formatDateAndHour }

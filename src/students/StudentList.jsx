@@ -47,6 +47,9 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   })
 
   useEffect(() => {
+  }, [students, onCountChange])
+
+  useEffect(() => {
     getStudents()
   }, [reloadFlag])
 

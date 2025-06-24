@@ -1,17 +1,15 @@
 import axios from 'axios'
 
+import StudentActions from './StudentActions'
+
+import { applyMask } from '../utils/mask'
 import { formatDate } from '../utils/date';
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import StudentFormModal from './form/StudentFormModal'
-
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
-
-  const [showModal, setShowModal] = useState(false)
-  const [studentEdit, setStudentEdit] = useState({})
 
   const getStudents = async () => {
     try {
@@ -30,11 +28,6 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
     } finally {
       setLoading(false)
     }
-  }
-
-  const openModalEdit = (student) => {
-    setStudentEdit(student)
-    setShowModal(true)
   }
 
   const filteredStudents = students.filter((student) => {
@@ -97,24 +90,17 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          {student.phone}
+                          {applyMask('(99) 99999-9999', student.phone)}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                           {formatDate(student.dateRegister)}
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-6">
-                            <button 
-                              className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-                              onClick={() => openModalEdit(student)}
-                            >
-                              Editar
-                            </button>
-                            {/* <button
-                              className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-                            >
-                              Excluir
-                            </button> */}
+                            <StudentActions
+                              student={student}
+                              getStudents={getStudents}
+                            />
                           </div>
                         </td>
                       </tr>
@@ -123,14 +109,6 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                 </table>
               </div>
             </div>
-
-            <StudentFormModal
-              isEdit="true"
-              isOpen={showModal}
-              studentEdit={studentEdit}
-              onClose={() => setShowModal(false)}
-              onStudentSaved={getStudents}
-            />
           </div>
         </section>
       ) : (

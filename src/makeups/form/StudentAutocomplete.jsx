@@ -33,9 +33,7 @@ export default function StudentAutocomplete({
 
   return (
     <div className="flex flex-col w-full max-w-md relative">
-      <label 
-        htmlFor={isEdit ? 'student-edit' : 'student-create'}
-      >
+      <label htmlFor={isEdit ? 'student-edit' : 'student-create'}>
         Estudante
       </label>
       <input
@@ -43,7 +41,7 @@ export default function StudentAutocomplete({
         id={isEdit ? 'student-edit' : 'student-create'}
         value={searchTerm}
         onChange={handleChange}
-        onBlur={() => setTimeout(() => setShowSuggestions(false), 100)} // dá tempo para clicar
+        onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
         onFocus={() => {
           if (filtered.length > 0) setShowSuggestions(true);
         }}
@@ -51,17 +49,19 @@ export default function StudentAutocomplete({
         placeholder="Digite o nome do aluno"
       />
       {showSuggestions && filtered.length > 0 && (
-        <ul className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md max-h-60 overflow-y-auto shadow-lg">
-          {filtered.map((student) => (
-            <li
-              key={student.id}
-              className="px-4 py-2 cursor-pointer hover:bg-blue-100"
-              onClick={() => handleSelect(student)}
-            >
-              {student.name}
-            </li>
-          ))}
-        </ul>
+        <div className="absolute top-full left-0 right-0 z-10 mt-1 bg-white border border-gray-300 rounded-md max-h-60 overflow-y-auto shadow-lg">
+          <ul>
+            {filtered.map((student) => (
+              <li
+                key={student.id}
+                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                onClick={() => handleSelect(student)}
+              >
+                {student.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

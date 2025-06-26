@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-import StudentActions from './StudentActions'
-
 import { applyMask } from '../utils/mask'
 import { formatDate } from '../utils/date';
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+
+import StudentActions from './StudentActions'
 
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const [students, setStudents] = useState([])

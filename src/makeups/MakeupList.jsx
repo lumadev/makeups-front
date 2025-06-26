@@ -1,18 +1,16 @@
 import axios from 'axios'
 
 import { formatDate, formatDateAndHour } from '../utils/date';
-import { useEffect, useState } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import MakeupFormModal from './form/MakeupFormModal'
+import MakeupActions from './MakeupActions'
 
 function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
   const [makeups, setMakeups] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const [showModal, setShowModal] = useState(false)
-  const [makeupEdit, setMakeupEdit] = useState({})
-
-  const getMakeups = async () => {
+  const getMakeups = useCallback(async () => {
     try {
       const response = await axios.get('http://localhost:3000/makeups')
       const makeups = response.data
@@ -25,13 +23,10 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
       toast("Ocorreu um erro ao buscar os alunos", { 
         type: 'error'
       })
+    } finally {
+      setLoading(false)
     }
-  }
-
-  const openModalEdit = (makeup) => {
-    setMakeupEdit(makeup)
-    setShowModal(true)
-  }
+  }, []);
 
   const filteredMakeups = makeups.filter((makeup) => {
     const term = searchTerm.toLowerCase()
@@ -47,11 +42,11 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
 
   useEffect(() => {
     getMakeups()
-  }, [reloadFlag])
+  }, [reloadFlag, getMakeups])
 
   return (
     <div>
-      {makeups.length > 0 ? (
+      {!loading && makeups.length > 0 ? (
         <section className="container mx-auto">
           <div>
             <div className="min-w-full py-2 align-middle">
@@ -84,17 +79,10 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-6">
-                            {/* <button 
-                              className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-                              onClick={() => openModalEdit(makeup)}
-                            >
-                              Editar
-                            </button> */}
-                            {/* <button
-                              className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-                            >
-                              Excluir
-                            </button> */}
+                            <MakeupActions
+                              makeup={makeup}
+                              getMakeups={getMakeups}
+                            />
                           </div>
                         </td>
                       </tr>
@@ -103,14 +91,6 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
                 </table>
               </div>
             </div>
-
-            <MakeupFormModal
-              isEdit="true"
-              isOpen={showModal}
-              makeupEdit={makeupEdit}
-              onClose={() => setShowModal(false)}
-              onMakeupSaved={getMakeups}
-            />
           </div>
         </section>
       ) : (

@@ -4,28 +4,28 @@ import { useState } from 'react'
 import axios from 'axios'
 
 import ConfirmationDialog from '../components/ConfirmationDialog';
-import StudentFormModal from './form/StudentFormModal'
+import MakeupFormModal from './form/MakeupFormModal'
 
-function StudentActions({ student, getStudents }) {
+function MakeupActions({ makeup, getMakeups }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
 
-  const openModalEdit = () => {
-    setShowModalEdit(true)
-  }
+  // const openModalEdit = () => {
+    // setShowModalEdit(true)
+  // }
 
-  const deleteStudent = async () => {
+  const deleteMakeup = async () => {
     try {
-      const studentId = student.id
-      await axios.delete(`http://localhost:3000/students/${studentId}`)
+      const makeupId = makeup.id
+      await axios.delete(`http://localhost:3000/makeups/${makeupId}`)
 
-      getStudents()
+      getMakeups()
 
-      toast("Aluno excluído com sucesso", { 
+      toast("Reposição excluída com sucesso", { 
         type: 'success'
       })
     } catch {
-      toast("Ocorreu um erro ao excluir o aluno", { 
+      toast("Ocorreu um erro ao excluir a reposição", { 
         type: 'error'
       })
     }
@@ -33,12 +33,12 @@ function StudentActions({ student, getStudents }) {
 
   return (
     <>
-      <button 
+      {/* <button 
         className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
         onClick={() => openModalEdit()}
       >
         Editar
-      </button>
+      </button> */}
       <button
         className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
         onClick={() => setShowDialogDelete(true)}
@@ -48,22 +48,22 @@ function StudentActions({ student, getStudents }) {
 
       {showDialogDelete && (
         <ConfirmationDialog
-          title="Excluir aluno"
-          message={`Deseja realmente excluir o aluno ${student.name}?`}
-          onConfirm={() => deleteStudent()}
+          title="Excluir reposição"
+          message={`Deseja realmente excluir a reposição?`}
+          onConfirm={() => deleteMakeup()}
           onClose={() => setShowDialogDelete(false)}
         />
       )}
 
-      <StudentFormModal
+      <MakeupFormModal
         isEdit="true"
         isOpen={showModalEdit}
-        studentEdit={student}
+        makeupEdit={makeup}
         onClose={() => setShowModalEdit(false)}
-        onStudentSaved={getStudents}
+        onMakeupSaved={getMakeups}
       />
     </>
   )
 }
 
-export default StudentActions
+export default MakeupActions

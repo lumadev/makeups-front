@@ -86,7 +86,11 @@ export default function MakeupFormModal({
         </>
       }
     >
-      <MakeupForm formData={formData} setFormData={setFormData} />
+      <MakeupForm 
+        isEdit={isEdit}
+        formData={formData} 
+        setFormData={setFormData}
+      />
     </Modal>
   )
 }

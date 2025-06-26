@@ -10,9 +10,9 @@ function MakeupActions({ makeup, getMakeups }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
 
-  // const openModalEdit = () => {
-    // setShowModalEdit(true)
-  // }
+  const openModalEdit = () => {
+    setShowModalEdit(true)
+  }
 
   const deleteMakeup = async () => {
     try {
@@ -33,12 +33,12 @@ function MakeupActions({ makeup, getMakeups }) {
 
   return (
     <>
-      {/* <button 
+      <button 
         className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
         onClick={() => openModalEdit()}
       >
         Editar
-      </button> */}
+      </button>
       <button
         className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
         onClick={() => setShowDialogDelete(true)}
@@ -49,7 +49,7 @@ function MakeupActions({ makeup, getMakeups }) {
       {showDialogDelete && (
         <ConfirmationDialog
           title="Excluir reposição"
-          message={`Deseja realmente excluir a reposição?`}
+          message={`Sr. Weslley, deseja realmente excluir a reposição?`}
           onConfirm={() => deleteMakeup()}
           onClose={() => setShowDialogDelete(false)}
         />

@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export default function StudentAutocomplete({ students, onSelect }) {
+export default function StudentAutocomplete({ 
+  isEdit = false,
+  students, 
+  onSelect
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -28,15 +32,15 @@ export default function StudentAutocomplete({ students, onSelect }) {
   };
 
   return (
-    <div className="relative w-full max-w-md">
+    <div className="flex flex-col w-full max-w-md relative">
       <label 
-        htmlFor="student"
+        htmlFor={isEdit ? 'student-edit' : 'student-create'}
       >
         Estudante
       </label>
       <input
         type="text"
-        id="student"
+        id={isEdit ? 'student-edit' : 'student-create'}
         value={searchTerm}
         onChange={handleChange}
         onBlur={() => setTimeout(() => setShowSuggestions(false), 100)} // dá tempo para clicar

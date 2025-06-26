@@ -6,7 +6,10 @@ import { useEffect, useState } from 'react';
 import DateInput from "../../components/DateInput";
 import StudentAutocomplete from './StudentAutocomplete';
 
-function MakeupForm({ setFormData }) {
+function MakeupForm({
+  isEdit = false,
+  setFormData
+}) {
   const [students, setStudents] = useState([]);
 
   // get students to show in autocomplete field

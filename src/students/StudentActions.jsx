@@ -49,7 +49,7 @@ function StudentActions({ student, getStudents }) {
       {showDialogDelete && (
         <ConfirmationDialog
           title="Excluir aluno"
-          message={`Deseja realmente excluir o aluno ${student.name}?`}
+          message={`Sr. Weslley, deseja realmente excluir o aluno ${student.name}?`}
           onConfirm={() => deleteStudent()}
           onClose={() => setShowDialogDelete(false)}
         />

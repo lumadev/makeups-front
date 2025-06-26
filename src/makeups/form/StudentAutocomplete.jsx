@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function StudentAutocomplete({ 
   isEdit = false,
   students, 
-  onSelect
+  onSelect,
+  makeupEdit = null
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  useEffect(() => {
+    if (isEdit && makeupEdit?.studentName) {
+      setSearchTerm(makeupEdit.studentName || "");
+    }
+  }, [isEdit, makeupEdit]);
 
   const handleChange = (e) => {
     const value = e.target.value;

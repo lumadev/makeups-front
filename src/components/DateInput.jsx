@@ -1,11 +1,55 @@
-import { useState } from "react";
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from "react";
 
-function DateInput({ onChange, title }) {
+function DateInput({ 
+  isEdit = false,
+  onChange, 
+  title,
+  makeupEdit = null,
+  fieldName
+}) {
   const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+
+  // for registration, select default current month 
+  const [month, setMonth] = useState(() => {
+    const now = new Date();
+    return isEdit ? "" : (now.getMonth() + 1).toString();
+  });
+
+  // for registration, select default current year
+  const [year, setYear] = useState(() => {
+    const now = new Date();
+    return isEdit ? "" : now.getFullYear().toString();
+  });
+
   const [time, setTime] = useState("");
+
+  const didInitialize = useRef(false);
+
+  useEffect(() => {
+    if (didInitialize.current) return; // já inicializou
+
+    const dateValue = makeupEdit?.[fieldName];
+
+    if (isEdit && dateValue) {
+      const date = new Date(dateValue);
+
+      const d = date.getDate().toString();
+      const m = (date.getMonth() + 1).toString();
+      const y = date.getFullYear().toString();
+      const hh = date.getHours().toString().padStart(2, "0");
+      const mm = date.getMinutes().toString().padStart(2, "0");
+      const t = `${hh}:${mm}`;
+
+      setDay(d);
+      setMonth(m);
+      setYear(y);
+      setTime(t);
+
+      onChange(date);
+      didInitialize.current = true;
+      return;
+    }
+  }, [isEdit, makeupEdit, onChange]);
 
   const handleChange = (newDay, newMonth, newYear, newTime) => {
     setDay(newDay);
@@ -18,20 +62,10 @@ function DateInput({ onChange, title }) {
 
       const date = new Date(newYear, newMonth - 1, newDay, hours, minutes);
 
-      onChange && onChange(date);
+      onChange(date);
     }
   };
-
-  useEffect(() => {
-    // select current year
-    const currentYear = new Date().getFullYear();
-    setYear(currentYear)
-
-    // select current month
-    const currentMonth = new Date().getMonth() + 1;
-    setMonth(currentMonth.toString());
-  }, []);
-
+  
   return (
     <div className="flex flex-col gap-2">
       <label className="text-sm font-medium text-gray-700">

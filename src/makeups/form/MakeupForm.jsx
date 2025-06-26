@@ -8,7 +8,8 @@ import StudentAutocomplete from './StudentAutocomplete';
 
 function MakeupForm({
   isEdit = false,
-  setFormData
+  setFormData,
+  makeupEdit = null
 }) {
   const [students, setStudents] = useState([]);
 
@@ -50,18 +51,26 @@ function MakeupForm({
       <form>
         <div className="grid gap-6 mb-6 grid-cols-[1fr_2fr]">
           <StudentAutocomplete
+            isEdit={isEdit}
+            makeupEdit={makeupEdit}
             students={students}
             onSelect={(student) => handleSelectStudent(student.id)}
           />
           <DateInput 
+            isEdit={isEdit}
+            makeupEdit={makeupEdit}
             onChange={setDateReplacement}
             title="Data e horário da reposição"
+            fieldName="dateReplacement"
           />
         </div>
         <div className="grid gap-6 mb-6 grid-cols-[2fr_1fr]">
           <DateInput 
+            isEdit={isEdit}
+            makeupEdit={makeupEdit}
             onChange={setDateOld}
             title="Data e horário da aula antiga"
+            fieldName="dateOld"
           />
         </div>
       </form>

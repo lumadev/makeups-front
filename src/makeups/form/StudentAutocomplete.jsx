@@ -16,25 +16,40 @@ export default function StudentAutocomplete({
     }
   }, [isEdit, makeupEdit]);
 
+  const filterStudents = (term) => {
+    const filtered = students.filter((student) =>
+      student.name.toLowerCase().includes(term.toLowerCase())
+    );
+    if (filtered) {
+      setFiltered(filtered);
+    }
+  };
+
   const handleChange = (e) => {
+    setShowSuggestions(true);
+
     const value = e.target.value;
     setSearchTerm(value);
 
     // if the text of search is not empty, apply the filter
+    // and show students suggestions
+
     if (value.length > 0) {
-      const matches = students.filter((student) =>
-        student.name.toLowerCase().includes(value.toLowerCase())
-      );
-      setFiltered(matches);
+      filterStudents(value)
       setShowSuggestions(true);
     } else {
       setShowSuggestions(false);
     }
   };
 
-  const handleSelect = (student) => {
+  const handleFocus = () => {
+    if (searchTerm.trim().length > 0) {
+      setShowSuggestions(true);
+    }
+  };
+
+  const handleClick = (student) => {
     setSearchTerm(student.name);
-    setShowSuggestions(false);
     onSelect?.(student); // opcional, pode ser usado para setar estado no pai
   };
 
@@ -49,9 +64,7 @@ export default function StudentAutocomplete({
         value={searchTerm}
         onChange={handleChange}
         onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
-        onFocus={() => {
-          if (filtered.length > 0) setShowSuggestions(true);
-        }}
+        onFocus={handleFocus}
         className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         placeholder="Digite o nome do aluno"
       />
@@ -62,7 +75,11 @@ export default function StudentAutocomplete({
               <li
                 key={student.id}
                 className="px-4 py-2 cursor-pointer hover:bg-blue-100"
-                onClick={() => handleSelect(student)}
+                onClick={() => {
+                  setTimeout(() => {
+                    handleClick(student)
+                  }, 100)
+                }}
               >
                 {student.name}
               </li>

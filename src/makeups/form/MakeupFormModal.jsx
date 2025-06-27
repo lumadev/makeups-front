@@ -19,11 +19,11 @@ export default function MakeupFormModal({
   const [loadingSave, setLoadingSave] = useState(false)
   const [formData, setFormData] = useState({})
 
-  const addMakeup = async () => {
+  const save = async () => {
     setLoadingSave(true)
     
     try {
-      await axios.post('http://localhost:3000/makeups', formData)
+      await saveOrEdit()
 
       toast("Reposição salva com sucesso", { 
         type: 'success'
@@ -40,15 +40,11 @@ export default function MakeupFormModal({
     }
   }
 
-  const editMakeup = async () => {
-    // TODO
-  }
-
-  const save = () => {
+  const saveOrEdit = () => {
     if (isEdit) {
-      editMakeup()
+      return axios.patch(`http://localhost:3000/makeups/${makeupEdit.id}`, formData)
     } else {
-      addMakeup()
+      return axios.post('http://localhost:3000/makeups', formData)
     }
   }
 
@@ -88,6 +84,7 @@ export default function MakeupFormModal({
     >
       <MakeupForm 
         isEdit={isEdit}
+        makeupEdit={makeupEdit}
         formData={formData} 
         setFormData={setFormData}
       />

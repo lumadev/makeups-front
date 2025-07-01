@@ -1,4 +1,4 @@
-import { applyMask } from '../../utils/mask'
+import { applyMaskPhone } from '../../utils/mask'
 import { inputClass, inputLabelClass } from '../../utils/classes';
 import { useEffect, useState } from 'react'
 
@@ -6,10 +6,11 @@ function StudentForm({ isEdit = false, formData, setFormData }) {
   const [phoneMasked, setPhoneMasked] = useState('')
 
   const handlePhoneChanged = (e) => {
-    if (!e.target.value) return
+    const input = e.target.value
 
-    const rawValue = e.target.value.replace(/\D/g, '') // remove não dígitos
-    const masked = applyMask('(99) 99999-9999', rawValue)
+    const rawValue = input.replace(/\D/g, '') // remove não dígitos
+    const masked = applyMaskPhone('(99) 99999-9999', rawValue)
+    
     setPhoneMasked(masked)
 
     // Save raw phone to formData
@@ -26,7 +27,7 @@ function StudentForm({ isEdit = false, formData, setFormData }) {
 
   useEffect(() => {
     if (isEdit && formData.phone) {
-      const masked = applyMask('(99) 99999-9999', formData.phone)
+      const masked = applyMaskPhone('(99) 99999-9999', formData.phone)
       setPhoneMasked(masked)
     }
   }, [isEdit, formData.phone])

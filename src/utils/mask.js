@@ -1,34 +1,34 @@
 /**
  * Apply mask for symbols ".", "-", "/", "(", ")", " "
  * 
- * applyMask('###.###.###-##', document)
- * applyMask('(##) ########', phoneWithoutMask)
+ * applyMaskPhone('###.###.###-##', document)
+ * applyMaskPhone('(##) ########', phoneWithoutMask)
  */
-function applyMask (mask, value) {
-  let posStr = 0
-  let str = ''
+function applyMaskPhone(mask, value) {
+  if (!value) return ''
 
-  const containSymbols = (char) => {
-    const chars = ['.', '-', '/', '(', ')', ' ', ':']
-    for (let i = 0; i < chars.length; i++) {
-      if (char === chars[i]) {
-        return true
+  let masked = ''
+  let digitIndex = 0
+
+  for (let i = 0; i < mask.length; i++) {
+    const maskChar = mask[i]
+
+    if (maskChar === '9') {
+      const digit = value[digitIndex]
+      if (!digit) break 
+
+      masked += digit
+      digitIndex++
+    } else {
+      if (digitIndex < value.length) {
+        masked += maskChar 
+      } else {
+        break
       }
     }
-    return false
   }
-  for (let pos = 0; pos < mask.length; pos++) {
-    const charMask = mask.charAt(pos)
 
-    if (containSymbols(charMask)) {
-      str = str.concat(charMask)
-    } else {
-      const charStr = value.charAt(posStr)
-      str = str.concat(charStr)
-      posStr++
-    }
-  }
-  return str
+  return masked
 }
 
-export { applyMask }
+export { applyMaskPhone }

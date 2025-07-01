@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { applyMask } from '../utils/mask'
+import { applyMaskPhone } from '../utils/mask'
 import { formatDate } from '../utils/date';
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -90,7 +90,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          {applyMask('(99) 99999-9999', student.phone)}
+                          {applyMaskPhone('(99) 99999-9999', student.phone)}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                           {formatDate(student.dateRegister)}

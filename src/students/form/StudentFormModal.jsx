@@ -46,7 +46,7 @@ export default function StudentFormModal({
 
     const idStudent = formData.id
     try {
-      await axios.patch(`http://localhost:3000/students/${idStudent}`, formData)
+      await axios.put(`http://localhost:3000/students/${idStudent}`, formData)
 
       toast("Aluno salvo com sucesso", { 
         type: 'success'

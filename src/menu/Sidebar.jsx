@@ -28,7 +28,7 @@ function Sidebar() {
             <img
               src={musicImg}
               alt="Music"
-              className="rounded-full mx-auto opacity-50 border-2 border-teal-500 ring-1 ring-teal-400"
+              className="rounded-full mx-auto opacity-50 border-2 ring-1 ring-teal-400"
             />
 
             <h2 className="mt-4 font-medium text-sm md:text-base text-center text-teal-400">

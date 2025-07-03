@@ -28,6 +28,8 @@ function MakeupActions({ makeup, getMakeups }) {
       toast("Ocorreu um erro ao excluir a reposição", { 
         type: 'error'
       })
+    } finally {
+      setShowDialogDelete(false)
     }
   }
 

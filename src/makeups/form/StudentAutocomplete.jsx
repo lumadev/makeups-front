@@ -26,8 +26,6 @@ export default function StudentAutocomplete({
   };
 
   const handleChange = (e) => {
-    setShowSuggestions(true);
-
     const value = e.target.value;
     setSearchTerm(value);
 
@@ -50,9 +48,10 @@ export default function StudentAutocomplete({
 
   const handleClick = (student) => {
     setSearchTerm(student.name);
-    onSelect?.(student); // opcional, pode ser usado para setar estado no pai
+    onSelect?.(student);
+    setShowSuggestions(false);
   };
-
+  
   return (
     <div className="flex flex-col w-full max-w-md relative">
       <label htmlFor={isEdit ? 'student-edit' : 'student-create'}>
@@ -63,7 +62,6 @@ export default function StudentAutocomplete({
         id={isEdit ? 'student-edit' : 'student-create'}
         value={searchTerm}
         onChange={handleChange}
-        onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
         onFocus={handleFocus}
         className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         placeholder="Digite o nome do aluno"

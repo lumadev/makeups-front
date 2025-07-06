@@ -4,16 +4,13 @@ function Login() {
     <div className="flex flex-col justify-center items-center bg-white h-screen dark:bg-gray-900">
       <div className="w-full max-w-md px-6 flex flex-col justify-center min-h-screen">  
         <div className="mt-12 mx-auto w-full max-w-sm">
-          <h1 className="text-3xl font-bold text-zinc-950 dark:text-white mb-2">
-            Reposições
-          </h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+          <h1 className ="text-4xl font-bold text-zinc-950 mb-6">
             Sistema de Reposições
-          </p>
+          </h1>
 
           <form className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm text-zinc-950 dark:text-white mb-1">
+              <label htmlFor="email" className="block text-sm text-zinc-950 mb-1">
                 Email
               </label>
               <input
@@ -25,7 +22,7 @@ function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm text-zinc-950 dark:text-white mb-1">
+              <label htmlFor="password" className="block text-sm text-zinc-950 mb-1">
                 Senha
               </label>
               <input

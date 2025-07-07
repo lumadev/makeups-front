@@ -42,7 +42,7 @@ export default function MakeupFormModal({
 
   const saveOrEdit = () => {
     if (isEdit) {
-      return axios.patch(`http://localhost:3000/makeups/${makeupEdit.id}`, formData)
+      return axios.put(`http://localhost:3000/makeups/${makeupEdit.id}`, formData)
     } else {
       return axios.post('http://localhost:3000/makeups', formData)
     }

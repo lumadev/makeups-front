@@ -55,7 +55,7 @@ export default function StudentAutocomplete({
   return (
     <div className="flex flex-col w-full max-w-md relative">
       <label htmlFor={isEdit ? 'student-edit' : 'student-create'}>
-        Estudante
+        Aluno
       </label>
       <input
         type="text"

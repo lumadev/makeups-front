@@ -1,7 +1,6 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-
-import axios from 'axios'
+import { deleteStudent } from "../services/studentService.js";
 
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import StudentFormModal from './form/StudentFormModal'
@@ -14,10 +13,10 @@ function StudentActions({ student, getStudents }) {
     setShowModalEdit(true)
   }
 
-  const deleteStudent = async () => {
+  const deleteStudentApi = async () => {
     try {
       const studentId = student.id
-      await axios.delete(`http://localhost:3000/students/${studentId}`)
+      await deleteStudent(studentId)
 
       getStudents()
 
@@ -28,6 +27,8 @@ function StudentActions({ student, getStudents }) {
       toast("Ocorreu um erro ao excluir o aluno", { 
         type: 'error'
       })
+    } finally {
+      setShowDialogDelete(false)
     }
   }
 
@@ -50,7 +51,7 @@ function StudentActions({ student, getStudents }) {
         <ConfirmationDialog
           title="Excluir aluno"
           message={`Sr. Weslley, deseja realmente excluir o aluno ${student.name}?`}
-          onConfirm={() => deleteStudent()}
+          onConfirm={() => deleteStudentApi()}
           onClose={() => setShowDialogDelete(false)}
         />
       )}

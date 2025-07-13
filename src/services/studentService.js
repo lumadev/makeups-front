@@ -12,4 +12,13 @@ const editStudent = (id, data) => {
   return api.put(`/students/${id}`, data);
 };
 
-export { listStudents, saveStudent, editStudent }
+const deleteStudent = (id) => {
+  return api.delete(`/students/${id}`);
+};
+
+export { 
+  listStudents,
+  saveStudent,
+  editStudent,
+  deleteStudent
+}

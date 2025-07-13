@@ -11,7 +11,7 @@ function Layout() {
       <div style={{ flex: 1, padding: "20px" }}>
         <Outlet />
 
-        <ToastContainer />
+        <ToastContainer autoClose={3000} />
       </div>
     </div>
   )

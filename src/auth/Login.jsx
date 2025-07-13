@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
+import { login } from '../services/authService';
 import { ToastContainer } from 'react-toastify';
-
-import axios from "axios";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const onClickLogin = async (e) => {
     e.preventDefault();
@@ -15,13 +17,13 @@ function Login() {
 
     try {
       const formData = { username, password };
-      await axios.post("http://localhost:3000/auth/login", formData);
+      await login(formData);
 
       toast("Login feito com sucesso", { 
         type: 'success'
       })
 
-      // redirecionar ou salvar token, etc.
+      navigate('/reposicoes');
     } catch {
       toast("Credenciais inválidas", { 
         type: 'error'

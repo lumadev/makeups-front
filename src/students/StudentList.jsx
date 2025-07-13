@@ -1,6 +1,6 @@
 import { applyMaskPhone } from '../utils/mask'
 import { formatDate } from '../utils/date';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { listStudents } from "../services/studentService.js";
 
@@ -10,7 +10,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const getStudents = async () => {
+  const getStudents = useCallback(async () => {
     try {
       const response = await listStudents()
       const students = response.data
@@ -27,7 +27,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [onCountChange])
 
   const filteredStudents = students.filter((student) => {
     const term = searchTerm.toLowerCase()
@@ -39,16 +39,13 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   })
 
   useEffect(() => {
-  }, [students, onCountChange])
-
-  useEffect(() => {
     getStudents()
-  }, [reloadFlag])
+  }, [reloadFlag, getStudents])
 
   return (
     <div>
       {!loading && students.length > 0 ? (
-        <section className="container mx-auto">
+        <section>
           <div>
             <div className="min-w-full py-2 align-middle">
               <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">

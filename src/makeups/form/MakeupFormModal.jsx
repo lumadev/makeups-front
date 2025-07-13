@@ -2,8 +2,7 @@
 import { btnClass, btnCancelClass } from '../../utils/classes'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
-
-import axios from 'axios'
+import { saveMakeup, editMakeup } from "../../services/makeupService";
 
 import LoadingButton from '../../components/LoadingButton'
 import Modal from "../../components/Modal";
@@ -18,6 +17,15 @@ export default function MakeupFormModal({
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
   const [formData, setFormData] = useState({})
+
+  const saveOrEdit = () => {
+    if (isEdit) {
+      const idMakeup = makeupEdit.id
+      return editMakeup(idMakeup, formData);
+    } else {
+      return saveMakeup(formData);
+    }
+  }
 
   const save = async () => {
     setLoadingSave(true)
@@ -37,14 +45,6 @@ export default function MakeupFormModal({
     } finally {
       setLoadingSave(false)
       onClose()
-    }
-  }
-
-  const saveOrEdit = () => {
-    if (isEdit) {
-      return axios.put(`http://localhost:3000/makeups/${makeupEdit.id}`, formData)
-    } else {
-      return axios.post('http://localhost:3000/makeups', formData)
     }
   }
 

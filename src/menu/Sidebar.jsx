@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import ItemMenu from './ItemMenu'
 
@@ -12,6 +12,12 @@ const svgs = {
 
 function Sidebar() {
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
 
   return (
     <div
@@ -23,6 +29,8 @@ function Sidebar() {
         <h1 className="hidden md:block font-bold text-xl mb-6 text-center text-white">
           Reposições
         </h1>
+
+        {/* Usuário logado e logout */}
         <div id="profile">
           <div>
             <img
@@ -31,9 +39,18 @@ function Sidebar() {
               className="rounded-full mx-auto opacity-50 border-2 ring-1 ring-teal-400"
             />
 
-            <h2 className="mt-4 font-medium text-sm md:text-base text-center text-teal-400">
-              Weslley Joanes
-            </h2>
+            <div className="flex justify-center items-center mt-4">
+              <h2 className="font-medium text-sm md:text-base text-center text-teal-400">
+                Weslley Joanes
+              </h2>
+              <a 
+                href="#" 
+                onClick={handleLogout} 
+                className="ml-2 text-white hover:underline"
+              >
+                Sair
+              </a>
+            </div>
             <p className="text-sm text-gray-500 text-center">Administrador</p>
           </div>
         </div>

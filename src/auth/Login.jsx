@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify';
+
 import axios from "axios";
 
 function Login() {
@@ -6,19 +9,23 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const onClickLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const formData = { username, password };
-      const response = await axios.post("http://localhost:3000/auth/login", formData);
+      await axios.post("http://localhost:3000/auth/login", formData);
 
-      console.log("Login successful:", response.data);
+      toast("Login feito com sucesso", { 
+        type: 'success'
+      })
+
       // redirecionar ou salvar token, etc.
-    } catch (error) {
-      console.error("Error during login:", error);
-      // tratar erro, exibir mensagem, etc.
+    } catch {
+      toast("Credenciais inválidas", { 
+        type: 'error'
+      })
     } finally {
       setLoading(false);
     }
@@ -32,7 +39,7 @@ function Login() {
             Sistema de Reposições
           </h1>
 
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-4">
             <div>
               <label htmlFor="username" className="block text-sm text-zinc-950 mb-1">
                 Usuário
@@ -65,11 +72,14 @@ function Login() {
               className={`w-full mt-2 py-3 text-sm font-medium text-white rounded-lg transition-colors ${
                 loading ? "bg-teal-300 cursor-not-allowed" : "bg-teal-400 hover:bg-teal-500"
               }`}
+              onClick={onClickLogin}
             >
               {loading ? "Carregando..." : "Entrar"}
             </button>
           </form>
         </div>
+
+        <ToastContainer autoClose={3000} />
       </div>
 
       <p className="mt-16 text-sm text-zinc-950 dark:text-white text-center">

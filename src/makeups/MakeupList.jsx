@@ -20,7 +20,7 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
       setMakeups(makeups)
       onCountChange(makeups.length)
     } catch {
-      toast("Ocorreu um erro ao buscar os alunos", { 
+      toast("Ocorreu um erro ao buscar as reposições", { 
         type: 'error'
       })
     } finally {

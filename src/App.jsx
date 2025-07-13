@@ -6,6 +6,7 @@ import Layout from './Layout'
 import Login from './auth/Login'
 import MakeupIndex from './makeups/MakeupIndex'
 import NotFound from './errors/NotFound'
+import RequireAuth from './RequireAuth'
 import StudentIndex from './students/StudentIndex'
 
 function App() {
@@ -14,11 +15,15 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />}>
         </Route>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/reposicoes" replace />} />
-          <Route path="alunos" element={<StudentIndex />} />
-          <Route path="reposicoes" element={<MakeupIndex />} />
-          <Route path="*" element={<NotFound />} />
+
+        {/* Protected routes */}
+        <Route element={<RequireAuth />}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Navigate to="/reposicoes" replace />} />
+            <Route path="alunos" element={<StudentIndex />} />
+            <Route path="reposicoes" element={<MakeupIndex />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

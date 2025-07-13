@@ -25,7 +25,7 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
     } finally {
       setLoading(false)
     }
-  }, []);
+  }, [onCountChange])
 
   const filteredMakeups = makeups.filter((makeup) => {
     const term = searchTerm.toLowerCase()

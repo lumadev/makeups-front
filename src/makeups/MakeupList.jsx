@@ -1,8 +1,7 @@
-import axios from 'axios'
-
 import { formatDate, formatDateAndHour } from '../utils/date';
 import { useEffect, useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
+import { listMakeups } from "../services/makeupService";
 
 import MakeupActions from './MakeupActions'
 
@@ -12,13 +11,13 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
 
   const getMakeups = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:3000/makeups')
-      const makeups = response.data
+      const response = await listMakeups();
+      const makeups = response.data;
 
       // TODO sort by data
 
-      setMakeups(makeups)
-      onCountChange(makeups.length)
+      setMakeups(makeups);
+      onCountChange(makeups.length);
     } catch {
       toast("Ocorreu um erro ao buscar as reposições", { 
         type: 'error'

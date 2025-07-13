@@ -1,9 +1,8 @@
-import axios from 'axios'
-
 import { applyMaskPhone } from '../utils/mask'
 import { formatDate } from '../utils/date';
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { listStudents } from "../services/studentService.js";
 
 import StudentActions from './StudentActions'
 
@@ -13,7 +12,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
 
   const getStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/students')
+      const response = await listStudents()
       const students = response.data
 
       // sort alphabetically

@@ -1,7 +1,6 @@
-import axios from 'axios';
-
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { listStudents } from "../../services/studentService";
 
 import DateInput from "../../components/DateInput";
 import StudentAutocomplete from './StudentAutocomplete';
@@ -16,7 +15,7 @@ function MakeupForm({
   // get students to show in autocomplete field
   const getStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/students')
+      const response = await listStudents()
       const students = response.data
 
       // sort alphabetically

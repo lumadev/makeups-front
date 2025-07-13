@@ -1,7 +1,6 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-
-import axios from 'axios'
+import { deleteMakeup } from "../services/makeupService.js";
 
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import MakeupFormModal from './form/MakeupFormModal'
@@ -14,10 +13,10 @@ function MakeupActions({ makeup, getMakeups }) {
     setShowModalEdit(true)
   }
 
-  const deleteMakeup = async () => {
+  const deleteMakeupApi = async () => {
     try {
       const makeupId = makeup.id
-      await axios.delete(`http://localhost:3000/makeups/${makeupId}`)
+      await deleteMakeup(makeupId)
 
       getMakeups()
 
@@ -52,7 +51,7 @@ function MakeupActions({ makeup, getMakeups }) {
         <ConfirmationDialog
           title="Excluir reposição"
           message={`Sr. Weslley, deseja realmente excluir a reposição?`}
-          onConfirm={() => deleteMakeup()}
+          onConfirm={() => deleteMakeupApi()}
           onClose={() => setShowDialogDelete(false)}
         />
       )}

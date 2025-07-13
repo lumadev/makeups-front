@@ -12,4 +12,13 @@ const editMakeup = (id, data) => {
   return api.put(`/makeups/${id}`, data);
 };
 
-export { listMakeups, saveMakeup, editMakeup }
+const deleteMakeup = (id) => {
+  return api.delete(`/makeups/${id}`);
+};
+
+export { 
+  listMakeups,
+  saveMakeup,
+  editMakeup,
+  deleteMakeup
+}

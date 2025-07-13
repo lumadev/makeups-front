@@ -26,7 +26,8 @@ function DateInput({
   const didInitialize = useRef(false);
 
   useEffect(() => {
-    if (didInitialize.current) return; // já inicializou
+    // runs only one time
+    if (!isEdit || !makeupEdit || didInitialize.current) return;
 
     const dateValue = makeupEdit?.[fieldName];
 
@@ -49,7 +50,7 @@ function DateInput({
       didInitialize.current = true;
       return;
     }
-  }, [isEdit, makeupEdit, onChange]);
+  }, [isEdit, makeupEdit, onChange, fieldName]);
 
   const handleChange = (newDay, newMonth, newYear, newTime) => {
     setDay(newDay);

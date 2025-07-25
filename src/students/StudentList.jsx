@@ -44,8 +44,12 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
 
   return (
     <div>
-      {!loading && students.length > 0 ? (
-        <section>
+      {loading ? (
+        <div>
+          <span className="ml-2">Carregando...</span>
+        </div>
+      ) : students.length > 0 ? (
+        <section className="container">
           <div>
             <div className="min-w-full py-2 align-middle">
               <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">

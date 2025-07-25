@@ -45,7 +45,11 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
 
   return (
     <div>
-      {!loading && makeups.length > 0 ? (
+      {loading ? (
+        <div>
+          <span className="ml-2">Carregando...</span>
+        </div>
+      ) : makeups.length > 0 ? (
         <section className="container">
           <div>
             <div className="min-w-full py-2 align-middle">

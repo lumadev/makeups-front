@@ -124,6 +124,7 @@ function DateInput({
           type="number"
           value={year}
           onChange={(e) => handleChange(day, month, e.target.value, time)}
+          placeholder="Ano"
           disabled={isDisabled}
           className={`px-3 py-2 w-24 ${inputBaseClasses} ${disabledClasses}`}
         />

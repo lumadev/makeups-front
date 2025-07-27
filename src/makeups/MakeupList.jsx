@@ -1,21 +1,21 @@
 import { formatDate, formatDateAndHour } from '../utils/date';
-import { useEffect, useCallback, useState } from 'react'
+import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { listMakeups } from "../services/makeupService";
 
 import MakeupActions from './MakeupActions'
 
 function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
+  const isFirstLoad = useRef(true)
+
   const [makeups, setMakeups] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
-  const getMakeups = useCallback(async () => {
+  const getMakeups = useCallback(async (isFirstLoad = false) => {
     try {
       const response = await listMakeups();
       const makeups = response.data;
-
-      // TODO sort by data
 
       setMakeups(makeups);
       onCountChange(makeups.length);
@@ -24,17 +24,19 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
         type: 'error'
       })
     } finally {
-      setLoading(false)
+      if (isFirstLoad) {
+        setLoading(false)
+      }
     }
   }, [onCountChange])
 
-  const onAfterSave = async () => {
+  const refreshMakeups = useCallback(async () => {
     setLoadingAfterSave(true)
 
     await getMakeups()
 
     setLoadingAfterSave(false)
-  }
+  }, [getMakeups])
 
   const filteredMakeups = makeups.filter((makeup) => {
     const term = searchTerm.toLowerCase()
@@ -49,8 +51,17 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
   })
 
   useEffect(() => {
-    getMakeups()
-  }, [reloadFlag, getMakeups])
+    getMakeups(true)
+  }, [getMakeups])
+
+  useEffect(() => {
+    if (isFirstLoad.current) {
+      isFirstLoad.current = false
+      return
+    }
+    // logic triggered only after save new makeup
+    refreshMakeups()
+  }, [reloadFlag, refreshMakeups])
 
   return (
     <div>
@@ -101,7 +112,7 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
                               <div className="flex items-center gap-x-6">
                                 <MakeupActions
                                   makeup={makeup}
-                                  onAfterSave={onAfterSave}
+                                  onAfterSave={refreshMakeups}
                                 />
                               </div>
                             </td>

@@ -52,7 +52,12 @@ function MakeupFormModal({
     if (isEdit && makeupEdit) {
       setFormData(makeupEdit)
     } else {
-      setFormData({ studentId: {}, dateOld: "", dateReplacement: "" })
+      setFormData({ 
+        studentId: {}, 
+        dateOld: "", 
+        dateReplacement: "",
+        isOpenDate: false
+      })
     }
   }, [isEdit, makeupEdit, isOpen])
 

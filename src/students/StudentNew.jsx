@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import StudentFormModal from './form/StudentFormModal'
 
-function StudentNew({ onStudentSaved }) {
+function StudentNew({ onAfterSave }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -19,7 +19,7 @@ function StudentNew({ onStudentSaved }) {
       <StudentFormModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onStudentSaved={onStudentSaved}
+        onAfterSave={onAfterSave}
       />
     </>
   )

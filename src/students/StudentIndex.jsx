@@ -15,7 +15,7 @@ function StudentIndex() {
     <>
       {/* Button and modal of new student */}
       <div className="flex my-4">
-        <StudentNew onStudentSaved={reloadStudents} />
+        <StudentNew onAfterSave={reloadStudents} />
       </div>
 
       {/* Students search */}

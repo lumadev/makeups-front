@@ -8,12 +8,15 @@ import MakeupFormModal from './form/MakeupFormModal'
 function MakeupActions({ makeup, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
+  const [loadingDelete, setLoadingDelete] = useState(false)
 
   const openModalEdit = () => {
     setShowModalEdit(true)
   }
 
   const deleteMakeupApi = async () => {
+    setLoadingDelete(true)
+
     try {
       const makeupId = makeup.id
       await deleteMakeup(makeupId)
@@ -28,6 +31,7 @@ function MakeupActions({ makeup, onAfterSave }) {
         type: 'error'
       })
     } finally {
+      setLoadingDelete(false)
       setShowDialogDelete(false)
     }
   }
@@ -51,6 +55,7 @@ function MakeupActions({ makeup, onAfterSave }) {
         <ConfirmationDialog
           title="Excluir reposição"
           message={`Deseja realmente excluir a reposição?`}
+          loading={loadingDelete}
           onConfirm={() => deleteMakeupApi()}
           onClose={() => setShowDialogDelete(false)}
         />

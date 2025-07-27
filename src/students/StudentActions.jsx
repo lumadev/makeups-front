@@ -8,12 +8,15 @@ import StudentFormModal from './form/StudentFormModal'
 function StudentActions({ student, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
+  const [loadingDelete, setLoadingDelete] = useState(false)
 
   const openModalEdit = () => {
     setShowModalEdit(true)
   }
 
   const deleteStudentApi = async () => {
+    setLoadingDelete(true)
+
     try {
       const studentId = student.id
       await deleteStudent(studentId)
@@ -28,6 +31,7 @@ function StudentActions({ student, onAfterSave }) {
         type: 'error'
       })
     } finally {
+      setLoadingDelete(false)
       setShowDialogDelete(false)
     }
   }
@@ -51,6 +55,7 @@ function StudentActions({ student, onAfterSave }) {
         <ConfirmationDialog
           title="Excluir aluno"
           message={`Deseja realmente excluir o aluno ${student.name}?`}
+          loading={loadingDelete}
           onConfirm={() => deleteStudentApi()}
           onClose={() => setShowDialogDelete(false)}
         />

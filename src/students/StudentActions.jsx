@@ -5,7 +5,7 @@ import { deleteStudent } from "../services/studentService.js";
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import StudentFormModal from './form/StudentFormModal'
 
-function StudentActions({ student, getStudents }) {
+function StudentActions({ student, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
 
@@ -18,7 +18,7 @@ function StudentActions({ student, getStudents }) {
       const studentId = student.id
       await deleteStudent(studentId)
 
-      getStudents()
+      onAfterSave()
 
       toast("Aluno excluído com sucesso", { 
         type: 'success'
@@ -50,7 +50,7 @@ function StudentActions({ student, getStudents }) {
       {showDialogDelete && (
         <ConfirmationDialog
           title="Excluir aluno"
-          message={`Sr. Weslley, deseja realmente excluir o aluno ${student.name}?`}
+          message={`Deseja realmente excluir o aluno ${student.name}?`}
           onConfirm={() => deleteStudentApi()}
           onClose={() => setShowDialogDelete(false)}
         />
@@ -61,7 +61,7 @@ function StudentActions({ student, getStudents }) {
         isOpen={showModalEdit}
         studentEdit={student}
         onClose={() => setShowModalEdit(false)}
-        onStudentSaved={getStudents}
+        onAfterSave={onAfterSave}
       />
     </>
   )

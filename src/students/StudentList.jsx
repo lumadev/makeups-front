@@ -9,10 +9,9 @@ import StudentActions from './StudentActions'
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
+  const [loadingAfterSave, setLoadingAfterSave] = useState(true)
 
   const getStudents = useCallback(async () => {
-    setLoading(true)
-    
     try {
       const response = await listStudents()
       const students = response.data
@@ -31,6 +30,14 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
     }
   }, [onCountChange])
 
+  const onAfterSave = async () => {
+    setLoadingAfterSave(true)
+
+    await getStudents()
+
+    setLoadingAfterSave(false)
+  }
+
   const filteredStudents = students.filter((student) => {
     const term = searchTerm.toLowerCase()
     return (
@@ -48,7 +55,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
     <div>
       {loading ? (
         <div>
-          <span className="ml-2">Carregando...</span>
+          <span className="ml-2">Carregando lista...</span>
         </div>
       ) : students.length > 0 ? (
         <section className="container">
@@ -101,7 +108,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                           <div className="flex items-center gap-x-6">
                             <StudentActions
                               student={student}
-                              getStudents={getStudents}
+                              onAfterSave={onAfterSave}
                             />
                           </div>
                         </td>

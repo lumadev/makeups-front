@@ -12,7 +12,7 @@ export default function StudentFormModal({
   isEdit = false,
   isOpen,
   onClose,
-  onStudentSaved,
+  onAfterSave,
   studentEdit = null
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
@@ -38,7 +38,7 @@ export default function StudentFormModal({
       })
 
       // update list with the student updated
-      onStudentSaved()
+      onAfterSave()
     } catch {
       toast("Ocorreu um erro ao salvar os dados do aluno", { 
         type: 'error'

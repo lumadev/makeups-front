@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import MakeupFormModal from './form/MakeupFormModal'
 
-function MakeupNew({ onMakeupSaved }) {
+function MakeupNew({ onAfterSave }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -19,7 +19,7 @@ function MakeupNew({ onMakeupSaved }) {
       <MakeupFormModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onMakeupSaved={onMakeupSaved}
+        onAfterSave={onAfterSave}
       />
     </>
   )

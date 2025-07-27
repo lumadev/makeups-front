@@ -15,7 +15,7 @@ function MakeupIndex() {
     <>
       {/* Button and modal of new makeup */}
       <div className="flex my-4">
-        <MakeupNew onMakeupSaved={reloadMakeups} />
+        <MakeupNew onAfterSave={reloadMakeups} />
       </div>
 
       {/* Makeup search */}

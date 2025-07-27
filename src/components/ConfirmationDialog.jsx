@@ -1,6 +1,9 @@
+import ConfirmationDialogLoading from './ConfirmationDialogLoading';
+
 function ConfirmationDialog({
   title,
   message,
+  loading = false,
   onConfirm,
   onClose,
   confirmText = 'Confirmar',
@@ -25,16 +28,22 @@ function ConfirmationDialog({
 
         <div className="flex space-x-4 pt-4">
           <div className="flex-1">
-            <h4 className="pr-6 font-medium text-slate-900">
-              {title}
-            </h4>
+            <h4 className="pr-6 font-medium text-slate-900">{title}</h4>
             <div className="mt-1 text-slate-500">{message}</div>
 
             <div className="mt-3 flex space-x-4">
               <button
                 onClick={onConfirm}
-                className="inline-block font-medium leading-loose text-blue-600 hover:text-blue-700"
+                disabled={loading}
+                className={`inline-flex items-center font-medium leading-loose text-blue-600 hover:text-blue-700 ${
+                  loading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
+                {loading && (
+                  <span className="mr-2">
+                    <ConfirmationDialogLoading />
+                  </span>
+                )}
                 {confirmText}
               </button>
               <button
@@ -51,4 +60,4 @@ function ConfirmationDialog({
   );
 }
 
-export default ConfirmationDialog
+export default ConfirmationDialog;

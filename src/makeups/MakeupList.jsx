@@ -8,7 +8,7 @@ import MakeupActions from './MakeupActions'
 function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
   const [makeups, setMakeups] = useState([])
   const [loading, setLoading] = useState(true)
-  const [loadingAfterSave, setLoadingAfterSave] = useState(true)
+  const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
   const getMakeups = useCallback(async () => {
     try {

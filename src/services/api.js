@@ -9,12 +9,19 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    const message = error?.response?.data?.message
+
+    const tokenNotProvided = message === "Token não fornecido.";
+    const tokenInvalidOrExpired = message === "Token inválido ou expirado.";
+    const is401Status = error?.response?.status === 401
+
     if (
       error.response &&
-      (error.response.status === 401 ||
-        error.response.data.message === "Token não fornecido.")
+      (is401Status || tokenNotProvided || tokenInvalidOrExpired)
     ) {
-      window.location.href = "/login"; // redireciona para login
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   }

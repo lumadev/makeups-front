@@ -94,6 +94,9 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
                           <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             Data Antiga
                           </th>
+                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            Ações
+                          </th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
@@ -108,7 +111,7 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                               {formatDateAndHour(makeup.dateOld)}
                             </td>
-                            <td className="px-4 py-4 text-sm whitespace-nowrap">
+                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                               <div className="flex items-center gap-x-6">
                                 <MakeupActions
                                   makeup={makeup}

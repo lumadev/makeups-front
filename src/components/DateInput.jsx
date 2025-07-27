@@ -5,6 +5,7 @@ function DateInput({
   onChange, 
   title,
   makeupEdit = null,
+  isOpenDate,
   fieldName
 }) {
   const [day, setDay] = useState("");
@@ -22,6 +23,7 @@ function DateInput({
   });
 
   const [time, setTime] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const didInitialize = useRef(false);
 
@@ -52,6 +54,10 @@ function DateInput({
     }
   }, [isEdit, makeupEdit, onChange, fieldName]);
 
+  useEffect(() => {
+    setIsDisabled(isOpenDate === true);
+  }, [isOpenDate]);
+
   const handleChange = (newDay, newMonth, newYear, newTime) => {
     setDay(newDay);
     setMonth(newMonth);
@@ -66,6 +72,9 @@ function DateInput({
       onChange(date);
     }
   };
+
+  const inputBaseClasses = "border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none";
+  const disabledClasses = isDisabled ? "bg-gray-100 cursor-not-allowed" : "bg-white";
   
   return (
     <div className="flex flex-col gap-2">
@@ -82,14 +91,16 @@ function DateInput({
           value={day}
           onChange={(e) => handleChange(e.target.value, month, year, time)}
           placeholder="Dia"
-          className="w-24 mr-2 border border-gray-300 rounded-lg px-3 py-2 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={isDisabled}
+          className={`w-24 mr-2 px-3 py-2 ${inputBaseClasses} ${disabledClasses}`}
         />
 
         {/* MÊS */}
         <select
           value={month}
           onChange={(e) => handleChange(day, e.target.value, year, time)}
-          className="flex-grow border border-gray-300 rounded-lg px-3 mr-2 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          disabled={isDisabled}
+          className={`flex-grow px-3 mr-2 ${inputBaseClasses} ${disabledClasses}`}
         >
           <option value="">Mês</option>
           {[...Array(12)].map((_, i) => (
@@ -104,7 +115,8 @@ function DateInput({
           type="time"
           value={time}
           onChange={(e) => handleChange(day, month, year, e.target.value)}
-          className="border border-gray-300 rounded-lg py-2 mr-2 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          disabled={isDisabled}
+          className={`py-2 mr-2 ${inputBaseClasses} ${disabledClasses}`}
         />
 
         {/* ANO */}
@@ -112,7 +124,8 @@ function DateInput({
           type="number"
           value={year}
           onChange={(e) => handleChange(day, month, e.target.value, time)}
-          className="border border-gray-300 rounded-lg px-3 py-2 w-24 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          disabled={isDisabled}
+          className={`px-3 py-2 w-24 ${inputBaseClasses} ${disabledClasses}`}
         />
       </div>
     </div>

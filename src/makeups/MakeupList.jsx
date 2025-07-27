@@ -92,7 +92,7 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
                               {makeup.studentName}
                             </td>
                             <td className="font-bold px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                              {formatDateAndHour(makeup.dateReplacement)}
+                              {makeup.dateReplacement ? formatDateAndHour(makeup.dateReplacement) : 'Em Aberto'}
                             </td>
                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                               {formatDateAndHour(makeup.dateOld)}

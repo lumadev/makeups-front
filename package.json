@@ -7,7 +7,6 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src",
-    "preview": "vite preview",
     "start:front": "pnpm dev",
     "start:back": "cd ../reposicoes-back && node index",
     "start": "concurrently \"pnpm run start:back\" \"pnpm run start:front\""

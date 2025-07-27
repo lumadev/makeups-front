@@ -10,6 +10,8 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
   const [loading, setLoading] = useState(true)
 
   const getMakeups = useCallback(async () => {
+    setLoading(true)
+
     try {
       const response = await listMakeups();
       const makeups = response.data;

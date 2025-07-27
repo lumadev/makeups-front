@@ -11,6 +11,8 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const [loading, setLoading] = useState(true)
 
   const getStudents = useCallback(async () => {
+    setLoading(true)
+    
     try {
       const response = await listStudents()
       const students = response.data

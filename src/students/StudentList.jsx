@@ -1,17 +1,19 @@
 import { applyMaskPhone } from '../utils/mask'
 import { formatDate } from '../utils/date';
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { listStudents } from "../services/studentService.js";
 
 import StudentActions from './StudentActions'
 
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
+  const isFirstLoad = useRef(true)
+
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
-  const [loadingAfterSave, setLoadingAfterSave] = useState(true)
+  const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
-  const getStudents = useCallback(async () => {
+  const getStudents = useCallback(async (isFirstLoad = false) => {
     try {
       const response = await listStudents()
       const students = response.data
@@ -26,17 +28,19 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
         type: 'error'
       })
     } finally {
-      setLoading(false)
+      if (isFirstLoad) {
+        setLoading(false)
+      }
     }
   }, [onCountChange])
 
-  const onAfterSave = async () => {
+  const refreshStudents = useCallback(async () => {
     setLoadingAfterSave(true)
 
     await getStudents()
 
     setLoadingAfterSave(false)
-  }
+  }, [getStudents])
 
   const filteredStudents = students.filter((student) => {
     const term = searchTerm.toLowerCase()
@@ -48,8 +52,17 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   })
 
   useEffect(() => {
-    getStudents()
-  }, [reloadFlag, getStudents])
+    getStudents(true)
+  }, [getStudents])
+
+  useEffect(() => {
+    if (isFirstLoad.current) {
+      isFirstLoad.current = false
+      return
+    }
+    // logic triggered only after save new student
+    refreshStudents()
+  }, [reloadFlag, refreshStudents])
 
   return (
     <div>
@@ -116,7 +129,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                               <div className="flex items-center gap-x-6">
                                 <StudentActions
                                   student={student}
-                                  onAfterSave={onAfterSave}
+                                  onAfterSave={refreshStudents}
                                 />
                               </div>
                             </td>

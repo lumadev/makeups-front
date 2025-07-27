@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function StudentAutocomplete({ 
+function StudentAutocomplete({ 
   isEdit = false,
   students, 
   onSelect,
@@ -88,3 +88,5 @@ export default function StudentAutocomplete({
     </div>
   );
 }
+
+export default StudentAutocomplete

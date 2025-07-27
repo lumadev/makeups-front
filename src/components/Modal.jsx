@@ -1,4 +1,4 @@
-export default function Modal({ 
+function Modal({ 
   isOpen, 
   onClose, 
   sizeClass = 'max-w-4xl',
@@ -52,3 +52,5 @@ export default function Modal({
     </div>
   );
 }
+
+export default Modal

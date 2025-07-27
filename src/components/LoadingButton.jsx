@@ -1,5 +1,5 @@
 
-export default function LoadingButton({ 
+function LoadingButton({ 
   text = "Salvando dados...", 
   className = "", 
   ...props 
@@ -34,3 +34,5 @@ export default function LoadingButton({
     </button>
   );
 }
+
+export default LoadingButton

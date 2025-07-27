@@ -5,9 +5,11 @@ const isAuthenticated = () => {
   return !!localStorage.getItem("token"); 
 };
 
-export default function RequireAuth() {
+function RequireAuth() {
   if (!isAuthenticated()) {
     return <Navigate to="/login" replace />;
   }
   return <Outlet />;
 }
+
+export default RequireAuth

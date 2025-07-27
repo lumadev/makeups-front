@@ -8,7 +8,7 @@ import LoadingButton from '../../components/LoadingButton'
 import Modal from "../../components/Modal";
 import MakeupForm from './MakeupForm'
 
-export default function MakeupFormModal({
+function MakeupFormModal({
   isEdit = false,
   isOpen,
   onClose,
@@ -91,3 +91,5 @@ export default function MakeupFormModal({
     </Modal>
   )
 }
+
+export default MakeupFormModal

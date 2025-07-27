@@ -8,7 +8,7 @@ import LoadingButton from '../../components/LoadingButton'
 import Modal from "../../components/Modal";
 import StudentForm from './StudentForm'
 
-export default function StudentFormModal({
+function StudentFormModal({
   isEdit = false,
   isOpen,
   onClose,
@@ -92,3 +92,5 @@ export default function StudentFormModal({
     </Modal>
   )
 }
+
+export default StudentFormModal

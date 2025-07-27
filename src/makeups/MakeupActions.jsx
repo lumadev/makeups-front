@@ -5,7 +5,7 @@ import { deleteMakeup } from "../services/makeupService.js";
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import MakeupFormModal from './form/MakeupFormModal'
 
-function MakeupActions({ makeup, getMakeups }) {
+function MakeupActions({ makeup, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
 
@@ -18,7 +18,7 @@ function MakeupActions({ makeup, getMakeups }) {
       const makeupId = makeup.id
       await deleteMakeup(makeupId)
 
-      getMakeups()
+      onAfterSave()
 
       toast("Reposição excluída com sucesso", { 
         type: 'success'
@@ -50,7 +50,7 @@ function MakeupActions({ makeup, getMakeups }) {
       {showDialogDelete && (
         <ConfirmationDialog
           title="Excluir reposição"
-          message={`Sr. Weslley, deseja realmente excluir a reposição?`}
+          message={`Deseja realmente excluir a reposição?`}
           onConfirm={() => deleteMakeupApi()}
           onClose={() => setShowDialogDelete(false)}
         />
@@ -61,7 +61,7 @@ function MakeupActions({ makeup, getMakeups }) {
         isOpen={showModalEdit}
         makeupEdit={makeup}
         onClose={() => setShowModalEdit(false)}
-        onMakeupSaved={getMakeups}
+        onAfterSave={onAfterSave}
       />
     </>
   )

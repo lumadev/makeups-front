@@ -12,7 +12,7 @@ export default function MakeupFormModal({
   isEdit = false,
   isOpen,
   onClose,
-  onMakeupSaved,
+  onAfterSave,
   makeupEdit = null
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
@@ -37,7 +37,7 @@ export default function MakeupFormModal({
         type: 'success'
       })
 
-      onMakeupSaved()
+      onAfterSave()
     } catch {
       toast("Ocorreu um erro ao salvar os dados da reposição", { 
         type: 'error'

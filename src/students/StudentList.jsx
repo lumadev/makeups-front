@@ -114,13 +114,13 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                                     {student.name}
                                   </h2>
                                   <p className="text-xs font-normal text-gray-600 dark:text-gray-400">
-                                    {student.email}
+                                    {student.email || 'Sem dados'} 
                                   </p>
                                 </div>
                               </div>
                             </td>
                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                              {applyMaskPhone('(99) 99999-9999', student.phone)}
+                              {student.phone ? applyMaskPhone('(99) 99999-9999', student.phone) : 'Sem dados'}
                             </td>
                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                               {formatDate(student.dateRegister)}

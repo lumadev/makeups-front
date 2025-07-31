@@ -5,7 +5,7 @@ import { listMakeups } from "../services/makeupService";
 
 import MakeupActions from './MakeupActions'
 
-function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
+function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
   const isFirstLoad = useRef(true)
 
   const [makeups, setMakeups] = useState([])
@@ -18,6 +18,7 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange }) {
       const makeups = response.data;
 
       setMakeups(makeups);
+      setMakeupsList(makeups)
       onCountChange(makeups.length);
     } catch {
       toast("Ocorreu um erro ao buscar as reposições", { 

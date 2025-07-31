@@ -6,7 +6,9 @@ import Sidebar from './menu/Sidebar'
 function Layout() {
   return (
     <div style={{ display: "flex", height: "100vh" }}>
-      <Sidebar />
+      <main className="ml-52 p-4">
+        <Sidebar />
+      </main>
 
       <div style={{ flex: 1, padding: "20px" }}>
         <Outlet />

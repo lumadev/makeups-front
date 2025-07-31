@@ -22,7 +22,7 @@ function Sidebar() {
   return (
     <div
       id="sidebar"
-      className="bg-gray-900 h-screen md:block shadow-2xl border-r border-gray-800 px-5 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
+      className="fixed top-0 left-0 bg-gray-900 h-screen md:block shadow-2xl border-r border-gray-800 px-5 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
       x-show="sidenav"
     >
       <div className="md:space-y-10 mt-10">

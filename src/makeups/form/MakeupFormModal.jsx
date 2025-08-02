@@ -1,9 +1,11 @@
 
 import { btnClass, btnCancelClass } from '../../utils/classes'
+import { validateMakeupForm } from '../../utils/makeupUtils'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { saveMakeup, editMakeup } from "../../services/makeupService";
 
+import Alert from '../../components/Alert';
 import LoadingButton from '../../components/LoadingButton'
 import Modal from "../../components/Modal";
 import MakeupForm from './MakeupForm'
@@ -16,18 +18,25 @@ function MakeupFormModal({
   makeupEdit = null
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
+  const [validationMessage, setValidationMessage] = useState('')
   const [formData, setFormData] = useState({})
 
   const saveOrEdit = () => {
     if (isEdit) {
       const idMakeup = makeupEdit.id
-      return editMakeup(idMakeup, formData);
+      return editMakeup(idMakeup, formData)
     } else {
-      return saveMakeup(formData);
+      return saveMakeup(formData)
     }
   }
 
   const save = async () => {
+    const error = validateMakeupForm(formData)
+    if (error) {
+      setValidationMessage(error.errorMessage)
+      return
+    }
+    setValidationMessage('')
     setLoadingSave(true)
     
     try {
@@ -53,7 +62,7 @@ function MakeupFormModal({
       setFormData(makeupEdit)
     } else {
       setFormData({ 
-        studentId: {}, 
+        studentId: "", 
         dateOld: "", 
         dateReplacement: "",
         isOpenDate: false
@@ -87,6 +96,11 @@ function MakeupFormModal({
         </>
       }
     >
+      {validationMessage && (
+        <Alert type="error">
+          {validationMessage}
+        </Alert>
+      )}
       <MakeupForm 
         isEdit={isEdit}
         makeupEdit={makeupEdit}

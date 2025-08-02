@@ -7,7 +7,7 @@ import StudentSearch  from './StudentSearch'
 function StudentIndex() {
   const [searchTerm, setSearchTerm] = useState('')
   const [reloadFlag, setReloadFlag] = useState(false)
-  const [studentCount, setStudentCount] = useState(0);
+  const [studentCount, setStudentCount] = useState(0)
 
   const reloadStudents = () => setReloadFlag((prev) => !prev)
 

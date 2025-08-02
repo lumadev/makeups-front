@@ -8,8 +8,8 @@ import MakeupSearch  from './MakeupSearch'
 function MakeupIndex() {
   const [searchTerm, setSearchTerm] = useState('')
   const [reloadFlag, setReloadFlag] = useState(false)
-  const [makeupCount, setMakeupCount] = useState(0);
-  const [makeups, setMakeups] = useState([]);
+  const [makeupCount, setMakeupCount] = useState(0)
+  const [makeups, setMakeups] = useState([])
 
   const reloadMakeups = () => setReloadFlag((prev) => !prev)
 

@@ -29,7 +29,7 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
         setLoading(false)
       }
     }
-  }, [onCountChange])
+  }, [onCountChange, setMakeupsList])
 
   const refreshMakeups = useCallback(async () => {
     setLoadingAfterSave(true)

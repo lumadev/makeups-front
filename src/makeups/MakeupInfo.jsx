@@ -10,8 +10,8 @@ function MakeupInfo({ makeups = [] }) {
       // in caso of the date to be empty
       if (!dateReplacement) return false
       
-      const todayFormatted = formatDate(new Date());
-      const dateFormatted = formatDate(dateReplacement);
+      const todayFormatted = formatDate(new Date())
+      const dateFormatted = formatDate(dateReplacement)
 
       return dateFormatted === todayFormatted
     });

@@ -68,6 +68,8 @@ function MakeupFormModal({
         isOpenDate: false
       })
     }
+    // always clear validation message when open modal
+    setValidationMessage('')
   }, [isEdit, makeupEdit, isOpen])
 
   return (

@@ -54,7 +54,7 @@ function MakeupActions({ makeup, onAfterSave }) {
       {showDialogDelete && (
         <ConfirmationDialog
           title="Excluir reposição"
-          message={`Deseja realmente excluir a reposição?`}
+          message={`Deseja realmente excluir a reposição do aluno ${makeup.studentName}?`}
           loading={loadingDelete}
           onConfirm={() => deleteMakeupApi()}
           onClose={() => setShowDialogDelete(false)}

@@ -10,7 +10,7 @@ function CheckboxInput({ label, checked, onChange, name }) {
       />
       <span className="text-gray-700">{label}</span>
     </label>
-  );
+  )
 }
 
 export default CheckboxInput

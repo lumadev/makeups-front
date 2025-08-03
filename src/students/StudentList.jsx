@@ -1,8 +1,8 @@
 import { applyMaskPhone } from '../utils/mask'
-import { formatDate } from '../utils/date';
+import { formatDate } from '../utils/date'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { toast } from 'react-toastify'
-import { listStudents } from "../services/studentService.js";
+import { listStudents } from "../services/studentService.js"
 
 import StudentActions from './StudentActions'
 
@@ -19,7 +19,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
       const students = response.data
 
       // sort alphabetically
-      students.sort((a, b) => a.name.localeCompare(b.name));
+      students.sort((a, b) => a.name.localeCompare(b.name))
 
       setStudents(students)
       onCountChange(students.length)

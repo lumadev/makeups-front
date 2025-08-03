@@ -6,7 +6,7 @@ function Modal({
   children, 
   actions
 }) {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div
@@ -50,7 +50,7 @@ function Modal({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Modal

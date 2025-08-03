@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteMakeup } from "../services/makeupService.js";
+import { deleteMakeup } from "../services/makeupService.js"
 
-import ConfirmationDialog from '../components/ConfirmationDialog';
+import ConfirmationDialog from '../components/ConfirmationDialog'
 import MakeupFormModal from './form/MakeupFormModal'
 
 function MakeupActions({ makeup, onAfterSave }) {

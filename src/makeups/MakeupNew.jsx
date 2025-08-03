@@ -1,6 +1,6 @@
 
-import { btnClass } from '../utils/classes';
-import { useState } from "react";
+import { btnClass } from '../utils/classes'
+import { useState } from "react"
 
 import MakeupFormModal from './form/MakeupFormModal'
 

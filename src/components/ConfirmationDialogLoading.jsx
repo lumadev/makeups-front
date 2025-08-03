@@ -22,7 +22,7 @@ function ConfirmationDialogLoading() {
         </path>
       </svg>
     </div>
-  );
+  )
 }
 
 export default ConfirmationDialogLoading

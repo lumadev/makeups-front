@@ -1,5 +1,5 @@
 import { applyMaskPhone } from '../../utils/mask'
-import { inputClass, inputLabelClass } from '../../utils/classes';
+import { inputClass, inputLabelClass } from '../../utils/classes'
 import { useEffect, useState } from 'react'
 
 function StudentForm({ isEdit = false, formData, setFormData }) {
@@ -22,7 +22,7 @@ function StudentForm({ isEdit = false, formData, setFormData }) {
 
   const handleChange = (event) => {
     const { id, value } = event.target
-    setFormData(prev => ({ ...prev, [id]: value }));
+    setFormData(prev => ({ ...prev, [id]: value }))
   }
 
   useEffect(() => {

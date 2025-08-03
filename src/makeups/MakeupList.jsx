@@ -1,7 +1,7 @@
-import { formatDate, formatDateAndHour } from '../utils/date';
+import { formatDate, formatDateAndHour } from '../utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
-import { listMakeups } from "../services/makeupService";
+import { listMakeups } from "../services/makeupService"
 
 import MakeupActions from './MakeupActions'
 
@@ -14,12 +14,12 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
 
   const getMakeups = useCallback(async (isFirstLoad = false) => {
     try {
-      const response = await listMakeups();
-      const makeups = response.data;
+      const response = await listMakeups()
+      const makeups = response.data
 
-      setMakeups(makeups);
+      setMakeups(makeups)
       setMakeupsList(makeups)
-      onCountChange(makeups.length);
+      onCountChange(makeups.length)
     } catch {
       toast("Ocorreu um erro ao buscar as reposições", { 
         type: 'error'

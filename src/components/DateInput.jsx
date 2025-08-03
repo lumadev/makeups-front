@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react"
 
 function DateInput({ 
   isEdit = false,
@@ -8,73 +8,73 @@ function DateInput({
   isOpenDate,
   fieldName
 }) {
-  const [day, setDay] = useState("");
+  const [day, setDay] = useState("")
 
   // for registration, select default current month 
   const [month, setMonth] = useState(() => {
-    const now = new Date();
-    return isEdit ? "" : (now.getMonth() + 1).toString();
-  });
+    const now = new Date()
+    return isEdit ? "" : (now.getMonth() + 1).toString()
+  })
 
   // for registration, select default current year
   const [year, setYear] = useState(() => {
-    const now = new Date();
-    return isEdit ? "" : now.getFullYear().toString();
-  });
+    const now = new Date()
+    return isEdit ? "" : now.getFullYear().toString()
+  })
 
-  const [time, setTime] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [time, setTime] = useState("")
+  const [isDisabled, setIsDisabled] = useState(false)
 
-  const didInitialize = useRef(false);
+  const didInitialize = useRef(false)
 
   useEffect(() => {
     // runs only one time
-    if (!isEdit || !makeupEdit || didInitialize.current) return;
+    if (!isEdit || !makeupEdit || didInitialize.current) return
 
-    const dateValue = makeupEdit?.[fieldName];
+    const dateValue = makeupEdit?.[fieldName]
 
     if (isEdit && dateValue) {
-      const date = new Date(dateValue);
+      const date = new Date(dateValue)
 
-      const d = date.getDate().toString();
-      const m = (date.getMonth() + 1).toString();
-      const y = date.getFullYear().toString();
-      const hh = date.getHours().toString().padStart(2, "0");
-      const mm = date.getMinutes().toString().padStart(2, "0");
-      const t = `${hh}:${mm}`;
+      const d = date.getDate().toString()
+      const m = (date.getMonth() + 1).toString()
+      const y = date.getFullYear().toString()
+      const hh = date.getHours().toString().padStart(2, "0")
+      const mm = date.getMinutes().toString().padStart(2, "0")
+      const t = `${hh}:${mm}`
 
-      setDay(d);
-      setMonth(m);
-      setYear(y);
-      setTime(t);
+      setDay(d)
+      setMonth(m)
+      setYear(y)
+      setTime(t)
 
-      onChange(date);
-      didInitialize.current = true;
-      return;
+      onChange(date)
+      didInitialize.current = true
+      return
     }
-  }, [isEdit, makeupEdit, onChange, fieldName]);
+  }, [isEdit, makeupEdit, onChange, fieldName])
 
   useEffect(() => {
-    setIsDisabled(isOpenDate === true);
-  }, [isOpenDate]);
+    setIsDisabled(isOpenDate === true)
+  }, [isOpenDate])
 
   const handleChange = (newDay, newMonth, newYear, newTime) => {
-    setDay(newDay);
-    setMonth(newMonth);
-    setYear(newYear);
-    setTime(newTime);
+    setDay(newDay)
+    setMonth(newMonth)
+    setYear(newYear)
+    setTime(newTime)
 
     if (newDay && newMonth && newTime) {
-      const [hours, minutes] = newTime.split(":");
+      const [hours, minutes] = newTime.split(":")
 
-      const date = new Date(newYear, newMonth - 1, newDay, hours, minutes);
+      const date = new Date(newYear, newMonth - 1, newDay, hours, minutes)
 
-      onChange(date);
+      onChange(date)
     }
-  };
+  }
 
-  const inputBaseClasses = "border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none";
-  const disabledClasses = isDisabled ? "bg-gray-100 cursor-not-allowed" : "bg-white";
+  const inputBaseClasses = "border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+  const disabledClasses = isDisabled ? "bg-gray-100 cursor-not-allowed" : "bg-white"
   
   return (
     <div className="flex flex-col gap-2">
@@ -130,7 +130,7 @@ function DateInput({
         />
       </div>
     </div>
-  );
+  )
 }
 
 export default DateInput

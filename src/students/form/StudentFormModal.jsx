@@ -2,10 +2,10 @@
 import { btnClass, btnCancelClass } from '../../utils/classes'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
-import { saveStudent, editStudent } from "../../services/studentService";
+import { saveStudent, editStudent } from "../../services/studentService"
 
 import LoadingButton from '../../components/LoadingButton'
-import Modal from "../../components/Modal";
+import Modal from "../../components/Modal"
 import StudentForm from './StudentForm'
 
 function StudentFormModal({
@@ -21,9 +21,9 @@ function StudentFormModal({
   const saveOrEdit = () => {
     if (isEdit) {
       const idStudent = formData.id
-      return editStudent(idStudent, formData);
+      return editStudent(idStudent, formData)
     } else {
-      return saveStudent(formData);
+      return saveStudent(formData)
     }
   }
 

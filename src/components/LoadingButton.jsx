@@ -31,7 +31,7 @@ function LoadingButton({
       </svg>
       {text}
     </button>
-  );
+  )
 }
 
 export default LoadingButton

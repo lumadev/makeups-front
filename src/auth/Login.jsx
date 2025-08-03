@@ -1,40 +1,40 @@
-import { useState } from "react";
+import { useState } from "react"
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom';
-import { login } from '../services/authService';
-import { ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
+import { login } from '../services/authService'
+import { ToastContainer } from 'react-toastify'
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const onClickLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
 
     try {
-      const formData = { username, password };
-      const res = await login(formData);
+      const formData = { username, password }
+      const res = await login(formData)
       const token = res.data.token
 
-      localStorage.setItem("token", token); 
+      localStorage.setItem("token", token) 
 
       toast("Login feito com sucesso", { 
         type: 'success'
       })
 
-      navigate('/reposicoes');
+      navigate('/reposicoes')
     } catch {
       toast("Credenciais inválidas", { 
         type: 'error'
       })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="flex flex-col justify-center items-center bg-white h-screen dark:bg-gray-900">
@@ -99,7 +99,7 @@ function Login() {
         </a>
       </p>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

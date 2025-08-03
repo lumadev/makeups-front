@@ -1,4 +1,4 @@
-import ConfirmationDialogLoading from './ConfirmationDialogLoading';
+import ConfirmationDialogLoading from './ConfirmationDialogLoading'
 
 function ConfirmationDialog({
   title,
@@ -57,7 +57,7 @@ function ConfirmationDialog({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ConfirmationDialog;
+export default ConfirmationDialog

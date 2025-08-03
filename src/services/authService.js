@@ -1,7 +1,7 @@
-import { api } from "./api";
+import { api } from "./api"
 
 const login = (formData) => {
-  return api.post("/auth/login", formData);
-};
+  return api.post("/auth/login", formData)
+}
 
 export { login }

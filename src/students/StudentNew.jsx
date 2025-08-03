@@ -1,6 +1,6 @@
 
 import { btnClass } from '../utils/classes'
-import { useState } from "react";
+import { useState } from "react"
 
 import StudentFormModal from './form/StudentFormModal'
 

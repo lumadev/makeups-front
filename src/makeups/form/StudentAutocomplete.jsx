@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 function StudentAutocomplete({ 
   isEdit = false,
   students, 
+  loadingStudents,
   onSelect,
   makeupEdit = null
 }) {
@@ -87,8 +88,9 @@ function StudentAutocomplete({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        disabled={loadingStudents}
         className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-        placeholder="Digite o nome do aluno"
+        placeholder={loadingStudents ? 'Carregando...' : 'Digite o nome do aluno'}
       />
       {showSuggestions && filtered.length > 0 && (
         <div className="absolute top-full left-0 right-0 z-10 mt-1 bg-white border border-gray-300 rounded-md max-h-60 overflow-y-auto shadow-lg">

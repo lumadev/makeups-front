@@ -12,10 +12,13 @@ function MakeupForm({
   makeupEdit = null
 }) {
   const [students, setStudents] = useState([])
+  const [loadingStudents, setLoadingStudents] = useState(true)
   const [isOpenDate, setIsOpenDate] = useState(false)
 
   // get students to show in autocomplete field
   const getStudents = async () => {
+    setLoadingStudents(true)
+
     try {
       const response = await listStudents()
       const students = response.data
@@ -28,6 +31,8 @@ function MakeupForm({
       toast("Ocorreu um erro ao buscar os alunos", { 
         type: 'error'
       })
+    } finally {
+      setLoadingStudents(false)
     }
   }
 
@@ -80,6 +85,7 @@ function MakeupForm({
             isEdit={isEdit}
             makeupEdit={makeupEdit}
             students={students}
+            loadingStudents={loadingStudents}
             onSelect={(student) => handleSelectStudent(student.id)}
           />
           <DateInput 

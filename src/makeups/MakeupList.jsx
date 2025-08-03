@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { listMakeups } from "../services/makeupService"
 
 import MakeupActions from './MakeupActions'
+import TableHeaderCell from '../components/TableHeaderCell'
 
 function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
   const isFirstLoad = useRef(true)
@@ -86,18 +87,10 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                       <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Aluno
-                          </th>
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Data da Reposição
-                          </th>
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Data Antiga
-                          </th>
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Ações
-                          </th>
+                          <TableHeaderCell>Aluno</TableHeaderCell>
+                          <TableHeaderCell>Data da Reposição</TableHeaderCell>
+                          <TableHeaderCell>Data Antiga</TableHeaderCell>
+                          <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">

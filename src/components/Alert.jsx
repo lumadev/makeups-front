@@ -8,6 +8,7 @@ function Alert({ type, children }) {
   } else {
     classes += 'bg-gray-100 border-gray-500 text-gray-700'
   }
+  classes += ' rounded'
 
   return (
     <div className={classes}>

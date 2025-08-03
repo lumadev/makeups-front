@@ -5,6 +5,7 @@ import { listMakeups } from "../services/makeupService"
 
 import MakeupActions from './MakeupActions'
 import TableHeaderCell from '../components/TableHeaderCell'
+import TableDataCell from '../components/TableDataCell'
 
 function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
   const isFirstLoad = useRef(true)
@@ -96,23 +97,29 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                         {filteredMakeups.map((makeup, index) => (
                           <tr key={index}>
-                            <td className="font-bold px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                            {/* Student */}
+                            <TableDataCell isBold>
                               {makeup.studentName}
-                            </td>
-                            <td className="font-bold px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                              {makeup.dateReplacement ? formatDateAndHour(makeup.dateReplacement) : 'Em Aberto'}
-                            </td>
-                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                            </TableDataCell>
+                            {/* Replacement Date */}
+                            <TableDataCell isBold>
+                              {makeup.dateReplacement
+                                ? formatDateAndHour(makeup.dateReplacement)
+                                : 'Em Aberto'}
+                            </TableDataCell>
+                            {/* Old class date */}
+                            <TableDataCell>
                               {formatDateAndHour(makeup.dateOld)}
-                            </td>
-                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                            </TableDataCell>
+                            {/* Actions of makeup class */}
+                            <TableDataCell>
                               <div className="flex items-center gap-x-6">
                                 <MakeupActions
                                   makeup={makeup}
                                   onAfterSave={refreshMakeups}
                                 />
                               </div>
-                            </td>
+                            </TableDataCell>
                           </tr>
                         ))}
                       </tbody>

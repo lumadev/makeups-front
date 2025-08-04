@@ -5,6 +5,8 @@ import { toast } from 'react-toastify'
 import { listStudents } from "../services/studentService.js"
 
 import StudentActions from './StudentActions'
+import TableHeaderCell from '../components/TableHeaderCell'
+import TableDataCell from '../components/TableDataCell'
 
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const isFirstLoad = useRef(true)
@@ -88,53 +90,52 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                       <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Nome
-                          </th>
-
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Telefone
-                          </th>
-
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Data do Cadastro
-                          </th>
-
-                          <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            Ações
-                          </th>
+                          <TableHeaderCell>Nome</TableHeaderCell>
+                          <TableHeaderCell>Telefone</TableHeaderCell>
+                          <TableHeaderCell>Data do Cadastro</TableHeaderCell>
+                          <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
                       </thead>
 
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                         {filteredStudents.map((student, index) => (
                           <tr key={index}>
-                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+
+                            {/* name and email */}
+                            <TableDataCell>
                               <div className="flex items-center gap-x-2">
                                 <div>
                                   <h2 className="text-sm font-medium text-gray-800 dark:text-white ">
                                     {student.name}
                                   </h2>
                                   <p className="text-xs font-normal text-gray-600 dark:text-gray-400">
-                                    {student.email || 'Sem dados'} 
+                                    {student.email || 'Sem dados'}
                                   </p>
                                 </div>
                               </div>
-                            </td>
-                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                              {student.phone ? applyMaskPhone('(99) 99999-9999', student.phone) : 'Sem dados'}
-                            </td>
-                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                            </TableDataCell>
+
+                            {/* phone number */}
+                            <TableDataCell>
+                              {student.phone
+                                ? applyMaskPhone('(99) 99999-9999', student.phone)
+                                : 'Sem dados'}
+                            </TableDataCell>
+
+                            {/* date register */}
+                            <TableDataCell>
                               {formatDate(student.dateRegister)}
-                            </td>
-                            <td className="px-4 py-4 text-sm whitespace-nowrap">
+                            </TableDataCell>
+                            
+                            {/* actions */}
+                            <TableDataCell>
                               <div className="flex items-center gap-x-6">
                                 <StudentActions
                                   student={student}
                                   onAfterSave={refreshStudents}
                                 />
                               </div>
-                            </td>
+                            </TableDataCell>
                           </tr>
                         ))}
                       </tbody>

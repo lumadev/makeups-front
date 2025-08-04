@@ -61,10 +61,6 @@ function StudentAutocomplete({
       // set student selected even if not clicked
       if (studentMatch && studentMatch.length === 1) {
         handleClick(studentMatch[0])
-
-      // if student is not found, reset search term and set null
-      } else {
-        setSearchTerm("")
       }
       setShowSuggestions(false)
     }, 100)

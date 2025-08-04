@@ -35,11 +35,13 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   }, [onCountChange])
 
   const refreshStudents = useCallback(async () => {
-    setLoadingAfterSave(true)
+    setTimeout(async () => {
+      setLoadingAfterSave(true)
 
-    await getStudents()
+      await getStudents()
 
-    setLoadingAfterSave(false)
+      setLoadingAfterSave(false)
+    }, 1000)
   }, [getStudents])
 
   const filteredStudents = students.filter((student) => {

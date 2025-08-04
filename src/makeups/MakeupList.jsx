@@ -34,11 +34,13 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
   }, [onCountChange, setMakeupsList])
 
   const refreshMakeups = useCallback(async () => {
-    setLoadingAfterSave(true)
+    setTimeout(async () => {
+      setLoadingAfterSave(true)
 
-    await getMakeups()
+      await getMakeups()
 
-    setLoadingAfterSave(false)
+      setLoadingAfterSave(false)
+    }, 1000)
   }, [getMakeups])
 
   const filteredMakeups = makeups.filter((makeup) => {

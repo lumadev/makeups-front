@@ -3,7 +3,7 @@ import { useState } from 'react'
 import MakeupInfo from './MakeupInfo'
 import MakeupList from './list/MakeupList'
 import MakeupNew from './MakeupNew'
-import MakeupSearch  from './MakeupSearch'
+import MakeupSearch  from './list/MakeupSearch'
 
 function MakeupIndex() {
   const [searchTerm, setSearchTerm] = useState('')

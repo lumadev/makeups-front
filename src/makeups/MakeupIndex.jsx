@@ -32,6 +32,7 @@ function MakeupIndex() {
       {/* Makeups list */}
       <MakeupList 
         title="Reposições"
+        screenType="makeups"
         searchTerm={searchTerm} 
         reloadFlag={reloadFlag}
         onCountChange={setMakeupCount}

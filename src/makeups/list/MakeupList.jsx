@@ -1,7 +1,9 @@
 import { formatDate, formatDateAndHour } from '../../utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
+
 import { listMakeups } from "../../services/makeupService"
+import { listMakeupsDone } from "../../services/makeupDoneService"
 
 import MakeupActions from './MakeupActions'
 import TableHeaderCell from '../../components/TableHeaderCell'
@@ -9,12 +11,14 @@ import TableDataCell from '../../components/TableDataCell'
 
 function MakeupList({
   title,
+  screenType = 'makeups',
   searchTerm, 
-  reloadFlag, 
   onCountChange, 
-  setMakeupsList
+  setMakeupsList = null,
+  reloadFlag = null, 
 }) {
   const isFirstLoad = useRef(true)
+  const isScreenMakeups = screenType === 'makeups'
 
   const [makeups, setMakeups] = useState([])
   const [loading, setLoading] = useState(true)
@@ -22,11 +26,20 @@ function MakeupList({
 
   const getMakeups = useCallback(async (isFirstLoad = false) => {
     try {
-      const response = await listMakeups()
-      const makeups = response.data
+      let response
 
+      if (screenType === 'makeups') {
+        response = await listMakeups()
+      } else if (screenType === 'makeups-done') {
+        response = await listMakeupsDone()
+      } else {
+        throw new Error("Tipo de tela inválido")
+      }
+      const makeups = response.data
       setMakeups(makeups)
-      setMakeupsList(makeups)
+
+      // executes only if setMakeupsList is not null
+      setMakeupsList?.(makeups)
       onCountChange(makeups.length)
     } catch {
       toast("Ocorreu um erro ao buscar as reposições", { 
@@ -65,12 +78,13 @@ function MakeupList({
     getMakeups(true)
   }, [getMakeups])
 
+  
+  // logic triggered only after save new makeup
   useEffect(() => {
     if (isFirstLoad.current) {
       isFirstLoad.current = false
       return
     }
-    // logic triggered only after save new makeup
     refreshMakeups()
   }, [reloadFlag, refreshMakeups])
 
@@ -107,35 +121,43 @@ function MakeupList({
                           <TableHeaderCell>Aluno</TableHeaderCell>
                           <TableHeaderCell>Data da Reposição</TableHeaderCell>
                           <TableHeaderCell>Data Antiga</TableHeaderCell>
-                          <TableHeaderCell>Ações</TableHeaderCell>
+                          {isScreenMakeups && (
+                            <TableHeaderCell>Ações</TableHeaderCell>
+                          )}
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                         {filteredMakeups.map((makeup, index) => (
                           <tr key={index}>
+
                             {/* Student */}
                             <TableDataCell isBold>
                               {makeup.studentName}
                             </TableDataCell>
+
                             {/* Replacement Date */}
                             <TableDataCell isBold>
                               {makeup.dateReplacement
                                 ? formatDateAndHour(makeup.dateReplacement)
                                 : 'Em Aberto'}
                             </TableDataCell>
+
                             {/* Old class date */}
                             <TableDataCell>
                               {formatDateAndHour(makeup.dateOld)}
                             </TableDataCell>
+
                             {/* Actions of makeup class */}
-                            <TableDataCell>
-                              <div className="flex items-center gap-x-6">
-                                <MakeupActions
-                                  makeup={makeup}
-                                  onAfterSave={refreshMakeups}
-                                />
-                              </div>
-                            </TableDataCell>
+                            {isScreenMakeups && (
+                              <TableDataCell>
+                                <div className="flex items-center gap-x-6">
+                                  <MakeupActions
+                                    makeup={makeup}
+                                    onAfterSave={refreshMakeups}
+                                  />
+                                </div>
+                              </TableDataCell>
+                            )}
                           </tr>
                         ))}
                       </tbody>

@@ -1,24 +1,11 @@
-
-function ItemMenu({ title, svg, evenodd = false, active = false }) {
+function ItemMenu({ title, active, evenodd, icon }) {
   return (
     <div
-      className={`
-        flex items-center text-sm font-medium py-2 px-2 rounded-md transition duration-150 ease-in-out
-        ${active ? 'bg-teal-600 text-white scale-105' : 'text-white hover:bg-teal-500 hover:text-white hover:scale-105'}
-      `}
+      className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-all duration-200 
+        ${active ? 'bg-teal-500 text-white' : evenodd ? 'bg-gray-800 text-gray-300' : 'text-gray-400 hover:bg-gray-700'}`}
     >
-      <svg
-        className="w-6 h-6 fill-current inline-block"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d={svg}
-          {...(evenodd && { fillRule: "evenodd", clipRule: "evenodd" })}
-        ></path>
-      </svg>
-      <span className="ml-1">{title}</span>
+      {icon}
+      <span className="text-sm font-medium">{title}</span>
     </div>
   )
 }

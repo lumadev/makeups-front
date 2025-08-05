@@ -77,13 +77,19 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
       ) : (
         <>
           {loadingAfterSave && (
-            <div>
+            <div className="mb-4">
               <span>Atualizando lista...</span>
             </div>
           )}
 
           {makeups.length > 0 ? (
             <section className="container mt-2">
+              <div className="flex items-center justify-between">
+                <h2 className="font-semibold">Reposições</h2>
+                <span className="text-gray-400">
+                  {filteredMakeups.length} no total
+                </span>
+              </div>
               <div>
                 <div className="min-w-full py-2 align-middle">
                   <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">

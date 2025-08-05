@@ -16,9 +16,14 @@ const deleteMakeup = (id) => {
   return api.delete(`/makeups/${id}`)
 }
 
+const markMakeupAsDone = (id) => {
+  return api.put(`/makeups/${id}/mark-as-done`)
+}
+
 export { 
   listMakeups,
   saveMakeup,
   editMakeup,
-  deleteMakeup
+  deleteMakeup,
+  markMakeupAsDone
 }

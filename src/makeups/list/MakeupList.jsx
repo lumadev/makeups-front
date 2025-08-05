@@ -1,13 +1,19 @@
-import { formatDate, formatDateAndHour } from '../utils/date'
+import { formatDate, formatDateAndHour } from '../../utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
-import { listMakeups } from "../services/makeupService"
+import { listMakeups } from "../../services/makeupService"
 
 import MakeupActions from './MakeupActions'
-import TableHeaderCell from '../components/TableHeaderCell'
-import TableDataCell from '../components/TableDataCell'
+import TableHeaderCell from '../../components/TableHeaderCell'
+import TableDataCell from '../../components/TableDataCell'
 
-function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
+function MakeupList({
+  title,
+  searchTerm, 
+  reloadFlag, 
+  onCountChange, 
+  setMakeupsList
+}) {
   const isFirstLoad = useRef(true)
 
   const [makeups, setMakeups] = useState([])
@@ -85,7 +91,9 @@ function MakeupList({ searchTerm, reloadFlag, onCountChange, setMakeupsList }) {
           {makeups.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold">Reposições</h2>
+                <h2 className="font-semibold">
+                  {title}
+                </h2>
                 <span className="text-gray-400">
                   {filteredMakeups.length} no total
                 </span>

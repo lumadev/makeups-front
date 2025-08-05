@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteMakeup, markMakeupAsDone } from "../services/makeupService.js"
+import { deleteMakeup, markMakeupAsDone } from "../../services/makeupService.js"
 
 import { IconCheck } from '@tabler/icons-react'
 
-import ConfirmationDialog from '../components/ConfirmationDialog'
-import MakeupFormModal from './form/MakeupFormModal'
+import ConfirmationDialog from '../../components/ConfirmationDialog'
+import MakeupFormModal from '../form/MakeupFormModal'
 
 function MakeupActions({ makeup, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)

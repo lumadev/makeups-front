@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import MakeupInfo from './MakeupInfo'
-import MakeupList from './MakeupList'
+import MakeupList from './list/MakeupList'
 import MakeupNew from './MakeupNew'
 import MakeupSearch  from './MakeupSearch'
 
@@ -31,6 +31,7 @@ function MakeupIndex() {
 
       {/* Makeups list */}
       <MakeupList 
+        title="Reposições"
         searchTerm={searchTerm} 
         reloadFlag={reloadFlag}
         onCountChange={setMakeupCount}

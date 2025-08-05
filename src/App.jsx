@@ -5,6 +5,7 @@ import './App.css'
 import Layout from './Layout'
 import Login from './auth/Login'
 import MakeupIndex from './makeups/MakeupIndex'
+import MakeupDoneIndex from './makeupsDone/MakeupDoneIndex'
 import NotFound from './errors/NotFound'
 import RequireAuth from './RequireAuth'
 import StudentIndex from './students/StudentIndex'
@@ -22,6 +23,7 @@ function App() {
             <Route index element={<Navigate to="/reposicoes" replace />} />
             <Route path="alunos" element={<StudentIndex />} />
             <Route path="reposicoes" element={<MakeupIndex />} />
+            <Route path="reposicoes-concluidas" element={<MakeupDoneIndex />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

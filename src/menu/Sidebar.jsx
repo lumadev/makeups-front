@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom"
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import {
+  IconSchool,
+  IconUser,
+  IconCheck
+} from '@tabler/icons-react'
+
 import ItemMenu from './ItemMenu'
 
 import musicImg from '../assets/musica.jpg'
-
-const svgs = {
-  class: 'M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z',
-  students: 'M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z'
-}
 
 function Sidebar() {
   const location = useLocation()
@@ -61,14 +62,22 @@ function Sidebar() {
             <ItemMenu 
               title="Reposições"
               evenodd="true"
-              svg={svgs.class}
+              icon={<IconSchool size={20} />}
               active={location.pathname === '/reposicoes'}
+            />
+          </Link>
+          <Link to="/reposicoes-concluidas" className="group">
+            <ItemMenu 
+              title="Concluídas"
+              evenodd="true"
+              icon={<IconCheck size={20} />}
+              active={location.pathname === '/reposicoes-concluidas'}
             />
           </Link>
           <Link to="/alunos" className="group">
             <ItemMenu 
               title="Alunos"
-              svg={svgs.students}
+              icon={<IconUser size={20} />}
               active={location.pathname === '/alunos'}
             />
           </Link>

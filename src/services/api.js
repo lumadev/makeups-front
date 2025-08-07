@@ -5,7 +5,39 @@ const api = axios.create({
   withCredentials: true
 })
 
-// add interceptor to check token expiration
+// request interceptor to save last request hour
+api.interceptors.request.use(
+  (config) => {
+    const now = new Date()
+
+    const lastRequest = localStorage.getItem("lastRequestHour")
+
+    if (lastRequest) {
+      const lastRequestDate = new Date(lastRequest)
+      const diffInMs = now.getTime() - lastRequestDate.getTime()
+      const diffInHours = diffInMs / (1000 * 60 * 60)
+
+      // if last request was more than 8 hours ago
+      if (diffInHours > 8) {
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login"
+        }
+        return Promise.reject(new Error("Sessão expirada por inatividade."))
+      }
+    }
+    // save last hour as lastRequestHour
+    if (window.location.pathname !== "/login") {
+      localStorage.setItem("lastRequestHour", now.toISOString())
+    }
+
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+
+// response interceptor to check token expiration
 api.interceptors.response.use(
   (response) => response,
   (error) => {

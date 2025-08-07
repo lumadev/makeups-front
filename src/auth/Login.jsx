@@ -15,6 +15,11 @@ function Login() {
     e.preventDefault()
     setLoading(true)
 
+    // Mostra aviso se demorar mais de 5s
+    const warningTimeout = setTimeout(() => {
+      toast.warn("O login está demorando mais do que o normal...")
+    }, 5000)
+
     try {
       const formData = { username, password }
       const res = await login(formData)
@@ -36,6 +41,7 @@ function Login() {
         type: 'error'
       })
     } finally {
+      clearTimeout(warningTimeout)
       setLoading(false)
     }
   }

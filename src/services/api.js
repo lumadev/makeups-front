@@ -11,8 +11,9 @@ api.interceptors.request.use(
     const now = new Date()
 
     const lastRequest = localStorage.getItem("lastRequestHour")
+    const isLoginPage = window.location.pathname === "/login"
 
-    if (lastRequest) {
+    if (lastRequest && !isLoginPage) {
       const lastRequestDate = new Date(lastRequest)
       const diffInMs = now.getTime() - lastRequestDate.getTime()
       const diffInHours = diffInMs / (1000 * 60 * 60)
@@ -26,7 +27,7 @@ api.interceptors.request.use(
       }
     }
     // save last hour as lastRequestHour
-    if (window.location.pathname !== "/login") {
+    if (!isLoginPage) {
       localStorage.setItem("lastRequestHour", now.toISOString())
     }
 

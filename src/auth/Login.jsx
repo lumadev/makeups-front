@@ -26,6 +26,10 @@ function Login() {
         type: 'success'
       })
 
+      // reboot lastRequestHour
+      const now = new Date()
+      localStorage.setItem("lastRequestHour", now.toISOString())
+
       navigate('/reposicoes')
     } catch {
       toast("Credenciais inválidas", { 

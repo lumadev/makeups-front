@@ -24,12 +24,9 @@ function Sidebar() {
   // Detectar se é mobile baseado na largura da tela
   useEffect(() => {
     function handleResize() {
-      setIsMobile(window.innerWidth < 768) // breakpoint md do Tailwind (768px)
-      if (window.innerWidth >= 768) {
-        setSidebarOpen(true) // no desktop sempre aberto
-      } else {
-        setSidebarOpen(false) // no mobile iniciar fechado
-      }
+      const isNowMobile = window.innerWidth < 768
+      setIsMobile(isNowMobile)
+      setSidebarOpen(!isNowMobile) // aberto em desktop, fechado em mobile
     }
 
     handleResize()
@@ -60,12 +57,13 @@ function Sidebar() {
         id="sidebar"
         className={`
           fixed top-0 left-0 bg-gray-900 h-screen shadow-2xl border-r border-gray-800 px-5
-          transition-transform duration-300 ease-in-out
+          transition-all duration-300 ease-in-out
           ${isMobile ? 'w-60' : 'w-60 md:w-60 lg:w-60'}
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${sidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}
           overflow-x-hidden
           z-40
-          ${!isMobile ? 'block' : 'block'} 
+          ${!isMobile ? 'opacity-100 translate-x-0' : ''}
+          ${isMobile ? 'transition-transform transition-opacity' : ''}
         `}
       >
         <div className="md:space-y-10 mt-10">
@@ -130,7 +128,7 @@ function Sidebar() {
       {/* Fundo escuro semi-transparente no mobile quando o menu está aberto */}
       {isMobile && sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300"
           onClick={() => setSidebarOpen(false)}
           aria-hidden="true"
         />

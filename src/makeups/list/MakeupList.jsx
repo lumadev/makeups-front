@@ -8,6 +8,7 @@ import { listMakeupsDone } from "../../services/makeupDoneService"
 import MakeupActions from './MakeupActions'
 import TableHeaderCell from '../../components/TableHeaderCell'
 import TableDataCell from '../../components/TableDataCell'
+import SkeletonList from '../../components/SkeletonList'
 
 function MakeupList({
   title,
@@ -50,7 +51,7 @@ function MakeupList({
         setLoading(false)
       }
     }
-  }, [onCountChange, setMakeupsList])
+  }, [onCountChange, setMakeupsList, screenType])
 
   const refreshMakeups = useCallback(async () => {
     setTimeout(async () => {
@@ -91,9 +92,7 @@ function MakeupList({
   return (
     <div>
       {loading ? (
-        <div>
-          <span className="ml-2">Carregando lista...</span>
-        </div>
+        <SkeletonList isMakeupsList={screenType === 'makeups'} />
       ) : (
         <>
           {loadingAfterSave && (

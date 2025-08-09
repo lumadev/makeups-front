@@ -80,7 +80,7 @@ function MakeupForm({
   return (
     <>
       <form>
-        <div className="grid gap-6 mb-6 grid-cols-[1fr_2fr]">
+        <div className="grid gap-6 mb-6 grid-cols-1 md:grid-cols-[1fr_2fr]">
           <StudentAutocomplete
             isEdit={isEdit}
             makeupEdit={makeupEdit}
@@ -96,7 +96,8 @@ function MakeupForm({
             fieldName="dateOld"
           />
         </div>
-        <div className="grid gap-6 mb-6 grid-cols-[2fr_1fr]">
+
+        <div className="grid gap-6 mb-6 grid-cols-1 md:grid-cols-[2fr_1fr]">
           <DateInput 
             isEdit={isEdit}
             makeupEdit={makeupEdit}
@@ -105,7 +106,7 @@ function MakeupForm({
             title="Data e horário da reposição"
             fieldName="dateReplacement"
           />
-          <div className="mt-9">
+          <div className="flex items-center md:mt-2">
             <CheckboxInput
               label="Em Aberto"
               checked={isOpenDate}

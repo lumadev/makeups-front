@@ -25,6 +25,27 @@ function MakeupList({
   const [loading, setLoading] = useState(true)
   const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
+  // filter based on filter search
+  const filteredMakeups = makeups.filter((makeup) => {
+    const term = searchTerm.toLowerCase()
+    const dateOldMasked = formatDate(makeup.dateOld)
+    const dateReplacement = formatDate(makeup.dateReplacement)
+
+    return (
+      makeup.studentName.toLowerCase().includes(term) ||
+      dateOldMasked.includes(term) ||
+      dateReplacement.includes(term)
+    )
+  })
+
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10
+  const totalPages = Math.ceil(filteredMakeups.length / itemsPerPage)
+
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const paginatedMakeups = filteredMakeups.slice(startIndex, startIndex + itemsPerPage)
+
   const getMakeups = useCallback(async (isFirstLoad = false) => {
     try {
       let response
@@ -62,18 +83,6 @@ function MakeupList({
       setLoadingAfterSave(false)
     }, 1000)
   }, [getMakeups])
-
-  const filteredMakeups = makeups.filter((makeup) => {
-    const term = searchTerm.toLowerCase()
-    const dateOldMasked = formatDate(makeup.dateOld)
-    const dateReplacement = formatDate(makeup.dateReplacement)
-
-    return (
-      makeup.studentName.toLowerCase().includes(term) ||
-      dateOldMasked.includes(term) ||
-      dateReplacement.includes(term)
-    )
-  })
 
   useEffect(() => {
     getMakeups(true)
@@ -126,7 +135,7 @@ function MakeupList({
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                        {filteredMakeups.map((makeup, index) => (
+                        {paginatedMakeups.map((makeup, index) => (
                           <tr key={index}>
 
                             {/* Student */}
@@ -162,6 +171,38 @@ function MakeupList({
                       </tbody>
                     </table>
                   </div>
+                  
+                  {totalPages > 1 && (
+                    <div className="flex justify-center items-center gap-2 mt-4 mb-2">
+                      <button
+                        onClick={() => setCurrentPage(page => Math.max(page - 1, 1))}
+                        disabled={currentPage === 1}
+                        className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                      >
+                        Anterior
+                      </button>
+
+                      {Array.from({ length: totalPages }, (_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentPage(i + 1)}
+                          className={`px-3 py-1 rounded ${
+                            currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                          }`}
+                        >
+                          {i + 1}
+                        </button>
+                      ))}
+
+                      <button
+                        onClick={() => setCurrentPage(page => Math.min(page + 1, totalPages))}
+                        disabled={currentPage === totalPages}
+                        className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                      >
+                        Próximo
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </section>

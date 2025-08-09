@@ -1,20 +1,17 @@
-function Alert({ type, children }) {
-  let classes = 'p-4 mb-4 rounded border-l-4 '
+function Alert({ type = "info", children }) {
+  let classes = "p-4 mb-4 rounded-lg flex items-center gap-2 shadow-sm"
 
-  if (type === 'warning') {
-    classes += 'bg-yellow-100 border-yellow-500 text-yellow-700'
-  } else if (type === 'error') {
-    classes += 'bg-red-100 border-red-500 text-red-700'
+  if (type === "info") {
+    classes += " bg-blue-50 text-blue-800"
+  } else if (type === "warning") {
+    classes += " bg-amber-50 text-amber-800"
+  } else if (type === "error") {
+    classes += " bg-rose-50 text-rose-800"
   } else {
-    classes += 'bg-gray-100 border-gray-500 text-gray-700'
+    classes += " bg-slate-50 text-slate-700"
   }
-  classes += ' rounded'
 
-  return (
-    <div className={classes}>
-      {children}
-    </div>
-  )
+  return <div className={classes}>{children}</div>
 }
 
 export default Alert

@@ -7,6 +7,7 @@ import { listStudents } from "../services/studentService.js"
 import StudentActions from './StudentActions'
 import TableHeaderCell from '../components/table/TableHeaderCell'
 import TableDataCell from '../components/table/TableDataCell'
+import SkeletonStudentList from '../components/skeleton/SkeletonStudentList'
 
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const isFirstLoad = useRef(true)
@@ -71,9 +72,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   return (
     <div>
       {loading ? (
-        <div>
-          <span className="ml-2">Carregando lista...</span>
-        </div>
+        <SkeletonStudentList/>
       ) : (
         <>
           {loadingAfterSave && (

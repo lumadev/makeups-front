@@ -5,8 +5,8 @@ import { toast } from 'react-toastify'
 import { listStudents } from "../services/studentService.js"
 
 import StudentActions from './StudentActions'
-import TableHeaderCell from '../components/TableHeaderCell'
-import TableDataCell from '../components/TableDataCell'
+import TableHeaderCell from '../components/table/TableHeaderCell'
+import TableDataCell from '../components/table/TableDataCell'
 
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const isFirstLoad = useRef(true)

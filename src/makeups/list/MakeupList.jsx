@@ -6,9 +6,9 @@ import { listMakeups } from "../../services/makeupService"
 import { listMakeupsDone } from "../../services/makeupDoneService"
 
 import MakeupActions from './MakeupActions'
-import TableHeaderCell from '../../components/TableHeaderCell'
-import TableDataCell from '../../components/TableDataCell'
-import SkeletonList from '../../components/SkeletonList'
+import TableHeaderCell from '../../components/table/TableHeaderCell'
+import TableDataCell from '../../components/table/TableDataCell'
+import SkeletonMakeupList from '../../components/SkeletonMakeupList'
 
 function MakeupList({
   title,
@@ -92,7 +92,7 @@ function MakeupList({
   return (
     <div>
       {loading ? (
-        <SkeletonList isMakeupsList={screenType === 'makeups'} />
+        <SkeletonMakeupList isMakeupsList={screenType === 'makeups'} />
       ) : (
         <>
           {loadingAfterSave && (

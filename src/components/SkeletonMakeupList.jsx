@@ -1,7 +1,7 @@
-import TableHeaderCell from './TableHeaderCell'
-import TableDataCell from './TableDataCell'
+import TableHeaderCell from './table/TableDataCell'
+import TableDataCell from './table/TableDataCell'
 
-function SkeletonList({ isMakeupsList = false }) {
+function SkeletonMakeupList({ isMakeupsList = false }) {
   return (
     <section className="container mt-2">
       <div className="flex items-center justify-between mb-2">
@@ -45,4 +45,4 @@ function SkeletonList({ isMakeupsList = false }) {
   )
 }
 
-export default SkeletonList
+export default SkeletonMakeupList

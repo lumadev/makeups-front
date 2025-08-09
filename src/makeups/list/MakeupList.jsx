@@ -8,7 +8,7 @@ import { listMakeupsDone } from "../../services/makeupDoneService"
 import MakeupActions from './MakeupActions'
 import TableHeaderCell from '../../components/table/TableHeaderCell'
 import TableDataCell from '../../components/table/TableDataCell'
-import SkeletonMakeupList from '../../components/SkeletonMakeupList'
+import SkeletonMakeupList from '../../components/skeleton/SkeletonMakeupList'
 
 function MakeupList({
   title,

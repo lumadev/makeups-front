@@ -1,5 +1,5 @@
-import TableHeaderCell from './table/TableDataCell'
-import TableDataCell from './table/TableDataCell'
+import TableHeaderCell from '../table/TableDataCell'
+import TableDataCell from '../table/TableDataCell'
 
 function SkeletonMakeupList({ isMakeupsList = false }) {
   return (

@@ -4,7 +4,7 @@ import { deleteMakeup, markMakeupAsDone } from "../../services/makeupService.js"
 
 import { IconCheck } from '@tabler/icons-react'
 
-import ConfirmationDialog from '../../components/ConfirmationDialog'
+import ConfirmationDialog from '../../components/confirmation/ConfirmationDialog'
 import MakeupFormModal from '../form/MakeupFormModal'
 
 function MakeupActions({ makeup, onAfterSave }) {

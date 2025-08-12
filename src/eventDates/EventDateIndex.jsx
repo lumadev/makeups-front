@@ -1,22 +1,22 @@
 import { useState } from 'react'
 
 import EventDateList from './EventDateList'
-// import EventDateNew from './EventDateNew'
+import EventDateNew from './EventDateNew'
 import EventDateSearch from './EventDateSearch'
 
 function EventDateIndex() {
   const [searchTerm, setSearchTerm] = useState('')
-  // const [reloadFlag, setReloadFlag] = useState(false)
+  const [reloadFlag, setReloadFlag] = useState(false)
   const [dateEventCount, setDateEventCount] = useState(0)
 
-  // const reloadDateEvents = () => setReloadFlag((prev) => !prev)
+  const reloadDateEvents = () => setReloadFlag((prev) => !prev)
 
   return (
     <>
       {/* Button and modal of new dateEvent */}
-      {/* <div className="flex my-4">
+      <div className="flex my-4">
         <EventDateNew onAfterSave={reloadDateEvents} />
-      </div> */}
+      </div>
 
       {/* dateEvents search */}
       {dateEventCount > 0 && (
@@ -26,6 +26,7 @@ function EventDateIndex() {
       {/* dateEvents list */}
       <EventDateList
         searchTerm={searchTerm}
+        reloadFlag={reloadFlag}
         onCountChange={setDateEventCount}
       />
     </>

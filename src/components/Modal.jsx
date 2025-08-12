@@ -1,7 +1,7 @@
 function Modal({ 
   isOpen, 
   onClose, 
-  sizeClass = 'max-w-4xl',
+  sizeClass = 'max-w-2xl',
   title,
   children, 
   actions

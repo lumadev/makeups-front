@@ -4,6 +4,11 @@ function validateEventDateForm(formData) {
     errorMessage: ''
   }
 
+  if (!formData.description) {
+    error.errorMessage = 'Descrição não preenchida.'
+    return error
+  }
+
   if (!formData.initialDate) {
     error.errorMessage = 'Data inicial não preenchida.'
     return error

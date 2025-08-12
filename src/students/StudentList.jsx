@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { listStudents } from "../services/studentService.js"
 
 import StudentActions from './StudentActions'
+import Pagination from '../components/Pagination'
 import TableHeaderCell from '../components/table/TableHeaderCell'
 import TableDataCell from '../components/table/TableDataCell'
 import SkeletonStudentList from '../components/skeleton/SkeletonStudentList'
@@ -15,6 +16,23 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadingAfterSave, setLoadingAfterSave] = useState(false)
+
+  const filteredStudents = students.filter((student) => {
+    const term = searchTerm.toLowerCase()
+    return (
+      student.name.toLowerCase().includes(term) ||
+      student.email.toLowerCase().includes(term) ||
+      student.phone.toLowerCase().includes(term)
+    )
+  })
+
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10
+  const totalPages = Math.ceil(filteredStudents.length / itemsPerPage)
+
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const paginatedStudents = filteredStudents.slice(startIndex, startIndex + itemsPerPage)
 
   const getStudents = useCallback(async (isFirstLoad = false) => {
     try {
@@ -46,15 +64,6 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
       setLoadingAfterSave(false)
     }, 1000)
   }, [getStudents])
-
-  const filteredStudents = students.filter((student) => {
-    const term = searchTerm.toLowerCase()
-    return (
-      student.name.toLowerCase().includes(term) ||
-      student.email.toLowerCase().includes(term) ||
-      student.phone.toLowerCase().includes(term)
-    )
-  })
 
   useEffect(() => {
     getStudents(true)
@@ -97,7 +106,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                       </thead>
 
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                        {filteredStudents.map((student, index) => (
+                        {paginatedStudents.map((student, index) => (
                           <tr key={index}>
 
                             {/* name and email */}
@@ -141,6 +150,13 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                     </table>
                   </div>
                 </div>
+              </div>
+              <div class="mx-6 pb-2">
+                <Pagination 
+                  totalPages={totalPages}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
               </div>
             </section>
           ) : (

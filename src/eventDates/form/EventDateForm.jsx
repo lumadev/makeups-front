@@ -49,7 +49,6 @@ function EventDateForm({
       </div>
       <div className="mb-4">
         <TextArea
-          isEdit={isEdit}
           value={observations}
           onChange={handleObservationsChange}
           title="Observações"

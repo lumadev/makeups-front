@@ -4,6 +4,7 @@ import './App.css'
 
 import Layout from './Layout'
 import Login from './auth/Login'
+import EventDateIndex from './eventDates/EventDateIndex'
 import MakeupIndex from './makeups/MakeupIndex'
 import MakeupDoneIndex from './makeupsDone/MakeupDoneIndex'
 import NotFound from './errors/NotFound'
@@ -24,6 +25,7 @@ function App() {
             <Route path="alunos" element={<StudentIndex />} />
             <Route path="reposicoes" element={<MakeupIndex />} />
             <Route path="reposicoes-concluidas" element={<MakeupDoneIndex />} />
+            <Route path="datas-de-evento" element={<EventDateIndex />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

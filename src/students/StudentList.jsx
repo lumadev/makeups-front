@@ -85,13 +85,21 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
       ) : (
         <>
           {loadingAfterSave && (
-            <div>
+            <div className="mb-4">
               <span>Atualizando lista...</span>
             </div>
           )}
 
           {students.length > 0 ? (
-            <section className="container">
+            <section className="container mt-2">
+              <div className="flex items-center justify-between">
+                <h2 className="font-semibold">
+                  Alunos
+                </h2>
+                <span className="text-gray-400">
+                  {filteredStudents.length} no total
+                </span>
+              </div>
               <div>
                 <div className="min-w-full py-2 align-middle">
                   <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
@@ -151,7 +159,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                   </div>
                 </div>
               </div>
-              <div class="mx-6 pb-2">
+              <div className="mx-6 pb-2">
                 <Pagination 
                   totalPages={totalPages}
                   currentPage={currentPage}

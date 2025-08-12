@@ -16,7 +16,7 @@ function MakeupDoneIndex() {
 
       {/* Makeups list */}
       <MakeupList 
-        title="Reposições"
+        title="Reposições Concluídas"
         screenType="makeups-done"
         searchTerm={searchTerm} 
         onCountChange={setMakeupCount}

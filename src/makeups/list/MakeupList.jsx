@@ -174,7 +174,7 @@ function MakeupList({
                   </div>
                 </div>
               </div>
-              <div class="mx-6 pb-2">
+              <div className="mx-6 pb-2">
                 <Pagination 
                   totalPages={totalPages}
                   currentPage={currentPage}

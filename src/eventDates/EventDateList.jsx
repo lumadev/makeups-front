@@ -1,4 +1,4 @@
-import { formatDate } from '../utils/date'
+import { formatDateAndHour } from '../utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
@@ -25,8 +25,8 @@ function EventDateList({
   // filter by search term
   const filteredEventDates = eventDates.filter((eventDate) => {
     const term = searchTerm.toLowerCase()
-    const startDate = formatDate(eventDate.startDate)
-    const endDate = formatDate(eventDate.endDate)
+    const startDate = formatDateAndHour(eventDate.startDate)
+    const endDate = formatDateAndHour(eventDate.endDate)
     const observations = eventDate.observations?.toLowerCase() || ""
 
     return (
@@ -112,6 +112,7 @@ function EventDateList({
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                       <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
+                          <TableHeaderCell>Descrição</TableHeaderCell>
                           <TableHeaderCell>Data de Início</TableHeaderCell>
                           <TableHeaderCell>Data do Fim</TableHeaderCell>
                           <TableHeaderCell>Observações</TableHeaderCell>
@@ -121,14 +122,17 @@ function EventDateList({
                         {paginatedEventDates.map((eventDate, index) => (
                           <tr key={index}>
                             <TableDataCell>
-                              {formatDate(eventDate.startDate)}
+                              {eventDate.description}
                             </TableDataCell>
                             <TableDataCell>
-                              {formatDate(eventDate.endDate)}
+                              {formatDateAndHour(eventDate.initialDate)}
                             </TableDataCell>
                             <TableDataCell>
+                              {formatDateAndHour(eventDate.finalDate)}
+                            </TableDataCell>
+                            {/* <TableDataCell>
                               {eventDate.observations || "-"}
-                            </TableDataCell>
+                            </TableDataCell> */}
                           </tr>
                         ))}
                       </tbody>

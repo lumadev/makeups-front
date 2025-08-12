@@ -7,7 +7,8 @@ import {
   IconUser,
   IconCheck,
   IconMenu2,
-  IconX
+  IconX,
+  IconCalendarEvent
 } from '@tabler/icons-react'
 
 import ItemMenu from './ItemMenu'
@@ -119,6 +120,13 @@ function Sidebar() {
                 title="Alunos"
                 icon={<IconUser size={20} />}
                 active={location.pathname === '/alunos'}
+              />
+            </Link>
+            <Link to="/datas-de-evento" className="group">
+              <ItemMenu 
+                title="Datas de Evento"
+                icon={<IconCalendarEvent size={20} />}
+                active={location.pathname === '/datas-de-evento'}
               />
             </Link>
           </div>

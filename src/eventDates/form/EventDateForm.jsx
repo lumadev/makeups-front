@@ -20,8 +20,8 @@ function EventDateForm({
   }
 
   return (
-    <form>
-      <div className="grid gap-6 mb-6 grid-cols-1 md:grid-cols-2">
+    <form className="w-full">
+      <div className="mb-4">
         <DateInput
           isEdit={isEdit}
           value={initialDate}
@@ -29,6 +29,8 @@ function EventDateForm({
           title="Data inicial"
           fieldName="initialDate"
         />
+      </div>
+      <div className="mb-4">
         <DateInput
           isEdit={isEdit}
           value={finalDate}

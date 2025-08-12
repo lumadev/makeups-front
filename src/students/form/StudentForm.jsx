@@ -8,7 +8,7 @@ function StudentForm({ isEdit = false, formData, setFormData }) {
   const handlePhoneChanged = (e) => {
     const input = e.target.value
 
-    const rawValue = input.replace(/\D/g, '') // remove não dígitos
+    const rawValue = input.replace(/\D/g, '')
     const masked = applyMaskPhone('(99) 99999-9999', rawValue)
     
     setPhoneMasked(masked)

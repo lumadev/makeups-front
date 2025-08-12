@@ -22,7 +22,7 @@ function EventDateList({
   const [loading, setLoading] = useState(true)
   const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
-  // filtro por termo de busca
+  // filter by search term
   const filteredEventDates = eventDates.filter((eventDate) => {
     const term = searchTerm.toLowerCase()
     const startDate = formatDate(eventDate.startDate)
@@ -36,7 +36,7 @@ function EventDateList({
     )
   })
 
-  // paginação
+  // pagination
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
   const totalPages = Math.ceil(filteredEventDates.length / itemsPerPage)

@@ -22,12 +22,11 @@ function Sidebar() {
   const [isMobile, setIsMobile] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  // Detectar se é mobile baseado na largura da tela
   useEffect(() => {
     function handleResize() {
       const isNowMobile = window.innerWidth < 768
       setIsMobile(isNowMobile)
-      setSidebarOpen(!isNowMobile) // aberto em desktop, fechado em mobile
+      setSidebarOpen(!isNowMobile)
     }
 
     handleResize()

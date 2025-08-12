@@ -1,5 +1,7 @@
 import { useState } from 'react'
+
 import DateInput from "../../components/inputs/DateInput"
+import TextArea from "../../components/inputs/TextArea"
 
 function EventDateForm({
   isEdit = false,
@@ -8,6 +10,7 @@ function EventDateForm({
 }) {
   const [initialDate, setInitialDate] = useState(eventDateEdit?.initialDate || "")
   const [finalDate, setFinalDate] = useState(eventDateEdit?.finalDate || "")
+  const [observations, setObservations] = useState(eventDateEdit?.observations || "")
 
   const handleInitialDateChange = (date) => {
     setInitialDate(date)
@@ -17,6 +20,11 @@ function EventDateForm({
   const handleFinalDateChange = (date) => {
     setFinalDate(date)
     setFormData((prev) => ({ ...prev, finalDate: date }))
+  }
+
+  const handleObservationsChange = (text) => {
+    setObservations(text)
+    setFormData((prev) => ({ ...prev, observations: text }))
   }
 
   return (
@@ -37,6 +45,16 @@ function EventDateForm({
           onChange={handleFinalDateChange}
           title="Data final"
           fieldName="finalDate"
+        />
+      </div>
+      <div className="mb-4">
+        <TextArea
+          isEdit={isEdit}
+          value={observations}
+          onChange={handleObservationsChange}
+          title="Observações"
+          fieldName="description"
+          placeholder="Digite observações sobre o evento..."
         />
       </div>
     </form>

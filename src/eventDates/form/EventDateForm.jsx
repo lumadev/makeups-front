@@ -42,7 +42,7 @@ function EventDateForm({
       <div className="mb-4">
         <DateInput
           isEdit={isEdit}
-          value={initialDate}
+          itemEdit={eventDateEdit}
           onChange={handleInitialDateChange}
           title="Data inicial"
           fieldName="initialDate"
@@ -51,7 +51,7 @@ function EventDateForm({
       <div className="mb-4">
         <DateInput
           isEdit={isEdit}
-          value={finalDate}
+          itemEdit={eventDateEdit}
           onChange={handleFinalDateChange}
           title="Data final"
           fieldName="finalDate"

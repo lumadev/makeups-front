@@ -90,7 +90,7 @@ function MakeupForm({
           />
           <DateInput 
             isEdit={isEdit}
-            makeupEdit={makeupEdit}
+            itemEdit={makeupEdit}
             onChange={setDateOld}
             title="Data e horário da aula antiga"
             fieldName="dateOld"
@@ -100,7 +100,7 @@ function MakeupForm({
         <div className="grid gap-6 mb-6 grid-cols-1 md:grid-cols-[2fr_1fr]">
           <DateInput 
             isEdit={isEdit}
-            makeupEdit={makeupEdit}
+            itemEdit={makeupEdit}
             isOpenDate={isOpenDate}
             onChange={setDateReplacement}
             title="Data e horário da reposição"

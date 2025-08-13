@@ -4,7 +4,7 @@ function DateInput({
   isEdit = false,
   onChange, 
   title,
-  makeupEdit = null,
+  itemEdit = null,
   isOpenDate,
   fieldName
 }) {
@@ -29,9 +29,9 @@ function DateInput({
 
   useEffect(() => {
     // runs only one time
-    if (!isEdit || !makeupEdit || didInitialize.current) return
+    if (!isEdit || !itemEdit || didInitialize.current) return
 
-    const dateValue = makeupEdit?.[fieldName]
+    const dateValue = itemEdit?.[fieldName]
 
     if (isEdit && dateValue) {
       const date = new Date(dateValue)
@@ -52,7 +52,7 @@ function DateInput({
       didInitialize.current = true
       return
     }
-  }, [isEdit, makeupEdit, onChange, fieldName])
+  }, [isEdit, itemEdit, onChange, fieldName])
 
   useEffect(() => {
     setIsDisabled(isOpenDate === true)

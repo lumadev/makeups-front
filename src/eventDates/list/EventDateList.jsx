@@ -74,6 +74,11 @@ function EventDateList({
     }, 1000)
   }, [getEventDates])
 
+  const truncateText = (text, maxLength) => {
+    if (!text) return ""
+    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text
+  }
+
   useEffect(() => {
     getEventDates(true)
   }, [getEventDates])
@@ -133,7 +138,7 @@ function EventDateList({
                               {formatDateAndHour(eventDate.finalDate)}
                             </TableDataCell>
                             <TableDataCell>
-                              {eventDate.observations || "-"}
+                              {eventDate.observations ? truncateText(eventDate.observations, 25) : "-"}
                             </TableDataCell>
                             <TableDataCell>
                               <div className="flex items-center gap-x-6">

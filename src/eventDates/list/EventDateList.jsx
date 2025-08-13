@@ -8,7 +8,7 @@ import EventDateActions from './EventDateActions'
 import Pagination from '../../components/Pagination'
 import TableHeaderCell from '../../components/table/TableHeaderCell'
 import TableDataCell from '../../components/table/TableDataCell'
-// import SkeletonEventDateList from '../components/skeleton/SkeletonEventDateList'
+import SkeletonEventDateList from '../../components/skeleton/SkeletonEventDateList'
 
 function EventDateList({
   title,
@@ -94,8 +94,7 @@ function EventDateList({
   return (
     <div>
       {loading ? (
-        // <SkeletonEventDateList />
-        <div>Carregando...</div>
+        <SkeletonEventDateList />
       ) : (
         <>
           {loadingAfterSave && (

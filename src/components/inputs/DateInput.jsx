@@ -83,7 +83,7 @@ function DateInput({
       </label>
 
       <div className="flex items-center">
-        {/* DIA */}
+        {/* day */}
         <input
           type="number"
           min="1"
@@ -95,7 +95,7 @@ function DateInput({
           className={`w-24 mr-2 px-3 py-2 ${inputBaseClasses} ${disabledClasses}`}
         />
 
-        {/* MÊS */}
+        {/* month */}
         <select
           value={month}
           onChange={(e) => handleChange(day, e.target.value, year, time)}
@@ -110,7 +110,7 @@ function DateInput({
           ))}
         </select>
 
-        {/* HORA */}
+        {/* hour */}
         <input
           type="time"
           value={time}
@@ -119,7 +119,7 @@ function DateInput({
           className={`py-2 mr-2 ${inputBaseClasses} ${disabledClasses}`}
         />
 
-        {/* ANO */}
+        {/* year */}
         <input
           type="number"
           value={year}

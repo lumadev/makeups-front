@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import EventDateList from './EventDateList'
+import EventDateList from './list/EventDateList'
 import EventDateNew from './EventDateNew'
-import EventDateSearch from './EventDateSearch'
+import EventDateSearch from './list/EventDateSearch'
 
 function EventDateIndex() {
   const [searchTerm, setSearchTerm] = useState('')

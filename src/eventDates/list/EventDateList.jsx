@@ -1,12 +1,13 @@
-import { formatDateAndHour } from '../utils/date'
+import { formatDateAndHour } from '../../utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-import { listEventDates } from "../services/eventDateService"
+import { listEventDates } from "../../services/eventDateService"
 
-import Pagination from '../components/Pagination'
-import TableHeaderCell from '../components/table/TableHeaderCell'
-import TableDataCell from '../components/table/TableDataCell'
+import EventDateActions from './EventDateActions'
+import Pagination from '../../components/Pagination'
+import TableHeaderCell from '../../components/table/TableHeaderCell'
+import TableDataCell from '../../components/table/TableDataCell'
 // import SkeletonEventDateList from '../components/skeleton/SkeletonEventDateList'
 
 function EventDateList({
@@ -116,6 +117,7 @@ function EventDateList({
                           <TableHeaderCell>Data de Início</TableHeaderCell>
                           <TableHeaderCell>Data do Fim</TableHeaderCell>
                           <TableHeaderCell>Observações</TableHeaderCell>
+                          <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
@@ -130,9 +132,17 @@ function EventDateList({
                             <TableDataCell>
                               {formatDateAndHour(eventDate.finalDate)}
                             </TableDataCell>
-                            {/* <TableDataCell>
+                            <TableDataCell>
                               {eventDate.observations || "-"}
-                            </TableDataCell> */}
+                            </TableDataCell>
+                            <TableDataCell>
+                              <div className="flex items-center gap-x-6">
+                                <EventDateActions
+                                  eventDate={eventDate}
+                                  onAfterSave={refreshEventDates}
+                                />
+                              </div>
+                            </TableDataCell>
                           </tr>
                         ))}
                       </tbody>

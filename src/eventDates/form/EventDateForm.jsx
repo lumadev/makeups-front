@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import DateInput from "../../components/inputs/DateInput"
 import TextArea from "../../components/inputs/TextArea"
 import TextInput from "../../components/inputs/TextInput"
@@ -10,16 +8,11 @@ function EventDateForm({
   setFormData,
   eventDateEdit = null
 }) {
-  const [initialDate, setInitialDate] = useState(eventDateEdit?.initialDate || "")
-  const [finalDate, setFinalDate] = useState(eventDateEdit?.finalDate || "")
-
   const handleInitialDateChange = (date) => {
-    setInitialDate(date)
     setFormData((prev) => ({ ...prev, initialDate: date }))
   }
 
   const handleFinalDateChange = (date) => {
-    setFinalDate(date)
     setFormData((prev) => ({ ...prev, finalDate: date }))
   }
 

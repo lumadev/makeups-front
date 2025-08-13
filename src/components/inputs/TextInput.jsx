@@ -24,7 +24,7 @@ function TextInput({
         maxLength={maxLength}
         className={inputClass}
         placeholder={placeholder}
-        value={value}
+        value={value || ""}
         onChange={onChange}
         required={required}
         pattern={pattern}

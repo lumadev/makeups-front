@@ -2,15 +2,16 @@ import { useState } from 'react'
 
 import DateInput from "../../components/inputs/DateInput"
 import TextArea from "../../components/inputs/TextArea"
+import TextInput from "../../components/inputs/TextInput"
 
 function EventDateForm({
   isEdit = false,
+  formData,
   setFormData,
   eventDateEdit = null
 }) {
   const [initialDate, setInitialDate] = useState(eventDateEdit?.initialDate || "")
   const [finalDate, setFinalDate] = useState(eventDateEdit?.finalDate || "")
-  const [observations, setObservations] = useState(eventDateEdit?.observations || "")
 
   const handleInitialDateChange = (date) => {
     setInitialDate(date)
@@ -22,13 +23,22 @@ function EventDateForm({
     setFormData((prev) => ({ ...prev, finalDate: date }))
   }
 
-  const handleObservationsChange = (text) => {
-    setObservations(text)
-    setFormData((prev) => ({ ...prev, observations: text }))
+  const handleChange = (event) => {
+    const { id, value } = event.target
+    setFormData(prev => ({ ...prev, [id]: value }))
   }
 
   return (
     <form className="w-full">
+      <div className="mb-4">
+        <TextInput
+          id="description"
+          value={formData.description}
+          onChange={handleChange}
+          label="Descrição"
+          placeholder="Digite a descrição do evento..."
+        />
+      </div>
       <div className="mb-4">
         <DateInput
           isEdit={isEdit}
@@ -49,11 +59,12 @@ function EventDateForm({
       </div>
       <div className="mb-4">
         <TextArea
-          value={observations}
-          onChange={handleObservationsChange}
+          id="observations"
+          value={formData.observations}
+          onChange={handleChange}
           title="Observações"
-          fieldName="description"
-          placeholder="Digite observações sobre o evento..."
+          fieldName="observations"
+          placeholder="Digite observações adicionais sobre o evento..."
         />
       </div>
     </form>

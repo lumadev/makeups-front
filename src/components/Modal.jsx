@@ -13,8 +13,12 @@ function Modal({
       className="fixed inset-0 z-50 flex justify-center items-center overflow-x-hidden overflow-y-auto bg-black bg-opacity-50"
       role="dialog"
       aria-modal="true"
+      onClick={onClose} // fecha ao clicar no backdrop
     >
-      <div className={`relative w-full ${sizeClass} px-4 h-auto`}>
+      <div
+        className={`relative w-full ${sizeClass} px-4 h-auto`}
+        onClick={(e) => e.stopPropagation()} // impede fechar ao clicar no conteúdo
+      >
         <div className="bg-white rounded-lg shadow dark:bg-gray-700">
           {/* Header */}
           <div className="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-600">

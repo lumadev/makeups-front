@@ -16,7 +16,7 @@ function Login() {
     setLoading(true)
 
     // shows warning if login takes more than 5s
-    const warningTimeout = setTimeout(() => {
+    const warningInterval = setInterval(() => {
       toast.warn("O login está demorando mais do que o normal...")
     }, 5000)
 
@@ -41,7 +41,7 @@ function Login() {
         type: 'error'
       })
     } finally {
-      clearTimeout(warningTimeout)
+      clearInterval(warningInterval)
       setLoading(false)
     }
   }
@@ -96,18 +96,6 @@ function Login() {
 
         <ToastContainer autoClose={3000} />
       </div>
-
-      <p className="mt-16 text-sm text-zinc-950 dark:text-white text-center">
-        Formulário de autenticação inspirado no&nbsp;
-        <a
-          href="https://horizon-ui.com/shadcn-ui?ref=twcomponents"
-          target="_blank"
-          className="text-teal-500 font-bold"
-          rel="noreferrer"
-        >
-          Horizon UI Boilerplate
-        </a>
-      </p>
     </div>
   )
 }

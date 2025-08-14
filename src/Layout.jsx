@@ -1,20 +1,22 @@
 import { Outlet } from "react-router-dom"
 import { ToastContainer } from 'react-toastify'
-
 import Sidebar from './menu/Sidebar'
 
 function Layout() {
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <main className="ml-52 p-4">
+    <div className="flex flex-col md:flex-row h-screen">
+      {/* Sidebar */}
+      <aside className="w-full md:w-52 flex-shrink-0 bg-white shadow-md">
         <Sidebar />
-      </main>
+      </aside>
 
-      <div style={{ flex: 1, padding: "20px" }}>
-        <Outlet />
-
+      {/* Conteúdo com scroll horizontal */}
+      <main className="flex-1 p-4 md:ml-10 overflow-x-auto overflow-y-auto">
+        <div className="min-w-[1200px]">
+          <Outlet />
+        </div>
         <ToastContainer autoClose={3000} />
-      </div>
+      </main>
     </div>
   )
 }

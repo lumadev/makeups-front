@@ -10,8 +10,14 @@ function ConfirmationDialog({
   cancelText = 'Cancelar',
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="relative mx-auto max-w-auto rounded-md border border-slate-100 bg-white p-4 px-6 text-sm shadow-lg">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      onClick={onClose} // Fecha ao clicar no backdrop
+    >
+      <div
+        className="relative mx-auto max-w-auto rounded-md border border-slate-100 bg-white p-4 px-6 text-sm shadow-lg"
+        onClick={(e) => e.stopPropagation()} // Impede o clique interno de fechar
+      >
         <button
           onClick={onClose}
           className="absolute right-4 top-4 ml-auto text-slate-500 hover:text-slate-900"

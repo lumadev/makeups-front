@@ -56,7 +56,7 @@ function Sidebar() {
       <div
         id="sidebar"
         className={`
-          fixed top-0 left-0 bg-gray-900 h-screen shadow-2xl border-r border-gray-800 px-5
+          fixed top-0 left-0 bg-gray-900 min-h-screen shadow-2xl border-r border-gray-800 px-5
           transition-all duration-300 ease-in-out
           ${isMobile ? 'w-60' : 'w-60 md:w-60 lg:w-60'}
           ${sidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}

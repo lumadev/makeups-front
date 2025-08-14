@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom"
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react"
 
 import {
@@ -12,7 +11,6 @@ import {
 } from '@tabler/icons-react'
 
 import ItemMenu from './ItemMenu'
-
 import musicImg from '../assets/musica.jpg'
 
 function Sidebar() {
@@ -23,15 +21,14 @@ function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
-    function handleResize() {
-      const isNowMobile = window.innerWidth < 768
-      setIsMobile(isNowMobile)
-      setSidebarOpen(!isNowMobile)
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      setSidebarOpen(!mobile)
     }
 
     handleResize()
     window.addEventListener('resize', handleResize)
-
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -40,9 +37,16 @@ function Sidebar() {
     navigate('/login')
   }
 
+  const menuItems = [
+    { title: "Reposições", path: "/reposicoes", icon: <IconSchool size={20} />, evenodd: "true" },
+    { title: "Concluídas", path: "/reposicoes-concluidas", icon: <IconCheck size={20} />, evenodd: "true" },
+    { title: "Alunos", path: "/alunos", icon: <IconUser size={20} /> },
+    { title: "Datas de Evento", path: "/datas-de-evento", icon: <IconCalendarEvent size={20} /> },
+  ]
+
   return (
     <>
-      {/* Botão hamburguer para abrir/fechar no mobile */}
+      {/* hamburger button on mobile */}
       {isMobile && (
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -53,6 +57,7 @@ function Sidebar() {
         </button>
       )}
 
+      {/* sidebar */}
       <div
         id="sidebar"
         className={`
@@ -71,7 +76,7 @@ function Sidebar() {
             Reposições
           </h1>
 
-          {/* Usuário logado e logout */}
+          {/* profile */}
           <div id="profile">
             <div>
               <img
@@ -79,7 +84,6 @@ function Sidebar() {
                 alt="Music"
                 className="rounded-full mx-auto opacity-50 border-2 ring-1 ring-teal-400"
               />
-
               <div className="flex justify-center items-center mt-4">
                 <h2 className="font-medium text-sm md:text-base text-center text-teal-400">
                   Weslley Joanes
@@ -96,43 +100,28 @@ function Sidebar() {
             </div>
           </div>
 
-          {/* Sidebar menu */}
+          {/* menu */}
           <div id="menu" className="flex flex-col space-y-2">
-            <Link to="/reposicoes" className="group">
-              <ItemMenu 
-                title="Reposições"
-                evenodd="true"
-                icon={<IconSchool size={20} />}
-                active={location.pathname === '/reposicoes'}
-              />
-            </Link>
-            <Link to="/reposicoes-concluidas" className="group">
-              <ItemMenu 
-                title="Concluídas"
-                evenodd="true"
-                icon={<IconCheck size={20} />}
-                active={location.pathname === '/reposicoes-concluidas'}
-              />
-            </Link>
-            <Link to="/alunos" className="group">
-              <ItemMenu 
-                title="Alunos"
-                icon={<IconUser size={20} />}
-                active={location.pathname === '/alunos'}
-              />
-            </Link>
-            <Link to="/datas-de-evento" className="group">
-              <ItemMenu 
-                title="Datas de Evento"
-                icon={<IconCalendarEvent size={20} />}
-                active={location.pathname === '/datas-de-evento'}
-              />
-            </Link>
+            {menuItems.map(item => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="group"
+                onClick={() => isMobile && setSidebarOpen(false)}
+              >
+                <ItemMenu
+                  title={item.title}
+                  icon={item.icon}
+                  evenodd={item.evenodd}
+                  active={location.pathname === item.path}
+                />
+              </Link>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Fundo escuro semi-transparente no mobile quando o menu está aberto */}
+      {/* opacity mobile */}
       {isMobile && sidebarOpen && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300"

@@ -16,7 +16,7 @@ function Modal({
       onClick={onClose}
     >
       <div
-        className={`relative w-full ${sizeClass} max-h-[90vh] sm:max-h-[85vh] overflow-y-auto px-0 sm:px-4`}
+        className={`relative w-full ${sizeClass} max-h-[90vh] sm:max-h-[85vh] px-0 sm:px-4`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-white rounded-lg shadow dark:bg-gray-700 flex flex-col h-full">

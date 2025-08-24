@@ -10,6 +10,7 @@ import MakeupDoneIndex from './makeupsDone/MakeupDoneIndex'
 import NotFound from './errors/NotFound'
 import RequireAuth from './RequireAuth'
 import StudentIndex from './students/StudentIndex'
+import JokeIndex from './jokes/JokeIndex'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="reposicoes" element={<MakeupIndex />} />
             <Route path="reposicoes-concluidas" element={<MakeupDoneIndex />} />
             <Route path="datas-de-evento" element={<EventDateIndex />} />
+            <Route path="piadas" element={<JokeIndex />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

@@ -1,24 +1,29 @@
-
-import { btnClass } from '../utils/classes'
 import { useState } from "react"
-
-import JokeModal from './JokeModal'
+import { btnClass } from "../utils/classes"
+import JokeModal from "./JokeModal"
 
 function JokeNew({ jokes }) {
   const [showModal, setShowModal] = useState(false)
+  const [currentJoke, setCurrentJoke] = useState(null)
+
+  const handleShowModal = () => {
+    if (jokes.length === 0) return
+
+    const randomIndex = Math.floor(Math.random() * jokes.length)
+
+    setCurrentJoke(jokes[randomIndex])
+    setShowModal(true)
+  }
 
   return (
     <>
-      <button
-        onClick={() => setShowModal(true)}
-        className={btnClass}
-      >
+      <button onClick={handleShowModal} className={btnClass}>
         Gerar Piada
       </button>
 
       <JokeModal
         isOpen={showModal}
-        jokes={jokes}
+        joke={currentJoke}
         onClose={() => setShowModal(false)}
       />
     </>

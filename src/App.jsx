@@ -10,7 +10,7 @@ import MakeupDoneIndex from './makeupsDone/MakeupDoneIndex'
 import NotFound from './errors/NotFound'
 import RequireAuth from './RequireAuth'
 import StudentIndex from './students/StudentIndex'
-import JokeIndex from './jokes/JokeIndex'
+import JokeIndex from './features/jokes/JokeIndex'
 
 function App() {
   return (

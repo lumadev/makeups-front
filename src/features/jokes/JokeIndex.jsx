@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllJokes } from "../services/jokeService"
+import { getAllJokes } from "../../services/jokeService"
 import { toast } from 'react-toastify'
 
 import JokeNew from "./JokeNew"

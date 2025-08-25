@@ -1,14 +1,14 @@
-import { formatDateAndHour } from '../../common/utils/date'
+import { formatDateAndHour } from '../../../common/utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-import { listEventDates } from "../../services/eventDateService"
+import { listEventDates } from "../../../services/eventDateService"
 
 import EventDateActions from './EventDateActions'
-import Pagination from '../../components/Pagination'
-import TableHeaderCell from '../../components/table/TableHeaderCell'
-import TableDataCell from '../../components/table/TableDataCell'
-import SkeletonEventDateList from '../../components/skeleton/SkeletonEventDateList'
+import Pagination from '../../../components/Pagination'
+import TableHeaderCell from '../../../components/table/TableHeaderCell'
+import TableDataCell from '../../../components/table/TableDataCell'
+import SkeletonEventDateList from '../../../components/skeleton/SkeletonEventDateList'
 
 function EventDateList({
   title,

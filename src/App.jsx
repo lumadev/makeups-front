@@ -4,7 +4,7 @@ import './App.css'
 
 import Layout from './Layout'
 import Login from './auth/Login'
-import EventDateIndex from './eventDates/EventDateIndex'
+import EventDateIndex from './features/eventDates/EventDateIndex'
 import MakeupIndex from './makeups/MakeupIndex'
 import MakeupDoneIndex from './makeupsDone/MakeupDoneIndex'
 import NotFound from './errors/NotFound'

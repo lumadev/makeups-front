@@ -1,6 +1,6 @@
-import DateInput from "../../components/inputs/DateInput"
-import TextArea from "../../components/inputs/TextArea"
-import TextInput from "../../components/inputs/TextInput"
+import DateInput from "../../../components/inputs/DateInput"
+import TextArea from "../../../components/inputs/TextArea"
+import TextInput from "../../../components/inputs/TextInput"
 
 function EventDateForm({
   isEdit = false,

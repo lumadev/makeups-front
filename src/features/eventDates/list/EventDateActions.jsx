@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteEventDate } from "../../services/eventDateService.js"
+import { deleteEventDate } from "../../../services/eventDateService.js"
 
-import ConfirmationDialog from '../../components/confirmation/ConfirmationDialog'
+import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
 import EventDateFormModal from '../form/EventDateFormModal'
 
 function EventDateActions({ eventDate, onAfterSave }) {

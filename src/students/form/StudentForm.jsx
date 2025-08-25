@@ -1,4 +1,4 @@
-import { applyMaskPhone } from '../../utils/mask'
+import { applyMaskPhone } from '../../common/utils/mask'
 import { useEffect, useState } from 'react'
 import TextInput from '../../components/inputs/TextInput'
 

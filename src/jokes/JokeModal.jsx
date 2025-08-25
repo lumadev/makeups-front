@@ -1,4 +1,4 @@
-import { btnCancelClass } from "../utils/classes"
+import { btnCancelClass } from "../common/utils/classes"
 import Modal from "../components/Modal"
 
 function JokeModal({ isOpen, onClose, joke }) {

@@ -1,5 +1,5 @@
 
-import { btnClass, btnCancelClass } from '../../utils/classes'
+import { btnClass, btnCancelClass } from '../../common/utils/classes'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { saveStudent, editStudent } from "../../services/studentService"

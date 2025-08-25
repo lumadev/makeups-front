@@ -1,6 +1,6 @@
 
-import { btnClass, btnCancelClass } from '../../utils/classes'
-import { validateMakeupForm } from '../../utils/makeupUtils'
+import { btnClass, btnCancelClass } from '../../common/utils/classes'
+import { validateMakeupForm } from '../../common/utils/makeupUtils'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { saveMakeup, editMakeup } from "../../services/makeupService"

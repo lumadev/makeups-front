@@ -1,5 +1,5 @@
-import { applyMaskPhone } from '../utils/mask'
-import { formatDate } from '../utils/date'
+import { applyMaskPhone } from '../common/utils/mask'
+import { formatDate } from '../common/utils/date'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { listStudents } from "../services/studentService.js"

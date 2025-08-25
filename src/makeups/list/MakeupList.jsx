@@ -1,4 +1,4 @@
-import { formatDate, formatDateAndHour } from '../../utils/date'
+import { formatDate, formatDateAndHour } from '../../common/utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 

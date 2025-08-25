@@ -1,5 +1,5 @@
-import { btnClass, btnCancelClass } from '../../utils/classes'
-import { validateEventDateForm } from '../../utils/eventDateUtils'
+import { btnClass, btnCancelClass } from '../../common/utils/classes'
+import { validateEventDateForm } from '../../common/utils/eventDateUtils'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { saveEventDate, editEventDate } from "../../services/eventDateService"

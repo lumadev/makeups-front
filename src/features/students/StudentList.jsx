@@ -107,7 +107,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                       <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
                           <TableHeaderCell>Nome</TableHeaderCell>
-                          <TableHeaderCell>Telefone</TableHeaderCell>
+                          {/* <TableHeaderCell>Telefone</TableHeaderCell> */}
                           <TableHeaderCell>Data do Cadastro</TableHeaderCell>
                           <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
@@ -119,24 +119,17 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
 
                             {/* name and email */}
                             <TableDataCell>
-                              <div className="flex items-center gap-x-2">
-                                <div>
-                                  <h2 className="text-sm font-medium text-gray-800 dark:text-white ">
-                                    {student.name}
-                                  </h2>
-                                  <p className="text-xs font-normal text-gray-600 dark:text-gray-400">
-                                    {student.email || 'Sem dados'}
-                                  </p>
-                                </div>
-                              </div>
+                              <h2 className="text-sm font-medium text-gray-800 dark:text-white ">
+                                {student.name}
+                              </h2>
                             </TableDataCell>
 
                             {/* phone number */}
-                            <TableDataCell>
+                            {/* <TableDataCell>
                               {student.phone
                                 ? applyMaskPhone('(99) 99999-9999', student.phone)
                                 : 'Sem dados'}
-                            </TableDataCell>
+                            </TableDataCell> */}
 
                             {/* date register */}
                             <TableDataCell>

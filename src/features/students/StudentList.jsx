@@ -90,7 +90,7 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
             </div>
           )}
 
-          {students.length > 0 ? (
+          {filteredStudents.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold">

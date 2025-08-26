@@ -18,7 +18,7 @@ function JokeNew({ jokes }) {
   return (
     <>
       <button onClick={handleShowModal} className={btnClass}>
-        Gerar Piada de Tiozão
+        Gerar Piada para Alegrar o dia do Meu Amor
       </button>
 
       <JokeModal

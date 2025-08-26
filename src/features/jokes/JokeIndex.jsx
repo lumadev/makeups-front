@@ -13,11 +13,6 @@ function JokesIndex() {
     <>
       {totalJokes > 0 && (
         <div>
-          {/* Simple alert with toast */}
-          <div className="mt-4">
-            Total de piadas cadastradas: {totalJokes} piadas de tiozão
-          </div>
-
           {/* Button and modal to generate a joke */}
           <div className="flex my-4">
             <JokeNew jokes={jokes} />

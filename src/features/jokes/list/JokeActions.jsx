@@ -4,7 +4,7 @@ import { deleteJoke } from "../../../services/jokeService.js"
 
 import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
 
-function JokeActions({ joke }) {
+function JokeActions({ joke, onAfterSave }) {
   const [showDialogDelete, setShowDialogDelete] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
 
@@ -14,6 +14,8 @@ function JokeActions({ joke }) {
     try {
       const jokeId = joke.id
       await deleteJoke(jokeId)
+
+      onAfterSave()
 
       toast("Piada excluída com sucesso", {
         type: 'success'

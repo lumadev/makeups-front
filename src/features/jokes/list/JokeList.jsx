@@ -16,6 +16,7 @@ function JokeList({
 }) {
   const [jokes, setJokes] = useState([])
   const [loading, setLoading] = useState(true)
+  const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
   // filter by search term
   const filteredJokes = jokes.filter((joke) => {
@@ -54,6 +55,16 @@ function JokeList({
     }
   }, [onCountChange, setJokesList])
 
+  const refreshJokes = useCallback(async () => {
+    setTimeout(async () => {
+      setLoadingAfterSave(true)
+
+      await getJokes()
+
+      setLoadingAfterSave(false)
+    }, 1000)
+  }, [getJokes])
+
   const truncateText = (text, maxLength) => {
     if (!text) return ""
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text
@@ -69,7 +80,13 @@ function JokeList({
         <SkeletonJokeList />
       ) : (
         <>
-          {jokes.length > 0 ? (
+          {loadingAfterSave && (
+            <div className="mb-4">
+              <span>Atualizando lista...</span>
+            </div>
+          )}
+
+          {filteredJokes.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold">Piadas</h2>
@@ -99,7 +116,10 @@ function JokeList({
 
                             <TableDataCell>
                                 <div className="flex items-center gap-x-6">
-                                  <JokeActions joke={joke} />
+                                  <JokeActions 
+                                    joke={joke}
+                                    onAfterSave={refreshJokes}
+                                  />
                                 </div>
                               </TableDataCell>
                           </tr>

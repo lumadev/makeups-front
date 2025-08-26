@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useState } from "react"
 import { toast } from "react-toastify"
 
+import JokeActions  from './JokeActions'
 import Pagination from "../../../components/Pagination"
 import TableHeaderCell from "../../../components/table/TableHeaderCell"
 import TableDataCell from "../../../components/table/TableDataCell"
@@ -84,15 +85,23 @@ function JokeList({
                         <tr>
                           <TableHeaderCell>Descrição</TableHeaderCell>
                           <TableHeaderCell>Tipo</TableHeaderCell>
+                          <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                         {paginatedJokes.map((joke, index) => (
                           <tr key={index}>
                             <TableDataCell>
-                              {truncateText(joke.description, 80)}
+                              {truncateText(joke.description, 200)}
                             </TableDataCell>
+
                             <TableDataCell>{joke.type}</TableDataCell>
+
+                            <TableDataCell>
+                                <div className="flex items-center gap-x-6">
+                                  <JokeActions joke={joke} />
+                                </div>
+                              </TableDataCell>
                           </tr>
                         ))}
                       </tbody>

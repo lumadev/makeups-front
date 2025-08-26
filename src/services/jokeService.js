@@ -4,11 +4,11 @@ const getAllJokes = () => {
   return api.get('/jokes')
 }
 
-const getRandomJoke = () => {
-  return api.get('/jokes/random/random-joke')
+const deleteJoke = (id) => {
+  return api.delete(`/jokes/${id}`)
 }
 
 export { 
-  getRandomJoke,
-  getAllJokes
+  getAllJokes,
+  deleteJoke
 }

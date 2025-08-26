@@ -3,13 +3,13 @@ import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import './App.css'
 
 import Layout from './Layout'
-import Login from './auth/Login'
+import Login from './features/auth/Login'
 import EventDateIndex from './features/eventDates/EventDateIndex'
-import MakeupIndex from './makeups/MakeupIndex'
-import MakeupDoneIndex from './makeupsDone/MakeupDoneIndex'
+import MakeupIndex from './features/makeups/MakeupIndex'
+import MakeupDoneIndex from './features/makeupsDone/MakeupDoneIndex'
 import NotFound from './errors/NotFound'
 import RequireAuth from './RequireAuth'
-import StudentIndex from './students/StudentIndex'
+import StudentIndex from './features/students/StudentIndex'
 import JokeIndex from './features/jokes/JokeIndex'
 
 function App() {

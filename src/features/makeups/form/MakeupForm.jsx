@@ -1,9 +1,9 @@
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
-import { listStudents } from "../../services/studentService"
+import { listStudents } from "../../../services/studentService"
 
-import CheckboxInput from "../../components/inputs/CheckboxInput"
-import DateInput from "../../components/inputs/DateInput"
+import CheckboxInput from "../../../components/inputs/CheckboxInput"
+import DateInput from "../../../components/inputs/DateInput"
 import StudentAutocomplete from './StudentAutocomplete'
 
 function MakeupForm({

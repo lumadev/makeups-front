@@ -1,10 +1,10 @@
 
-import { btnClass } from '../common/utils/classes'
+import { btnClass } from '../../common/utils/classes'
 import { useState } from "react"
 
-import StudentFormModal from './form/StudentFormModal'
+import MakeupFormModal from './form/MakeupFormModal'
 
-function StudentNew({ onAfterSave }) {
+function MakeupNew({ onAfterSave }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -13,10 +13,10 @@ function StudentNew({ onAfterSave }) {
         onClick={() => setShowModal(true)}
         className={btnClass}
       >
-        Novo Aluno
+        Nova Reposição
       </button>
 
-      <StudentFormModal
+      <MakeupFormModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onAfterSave={onAfterSave}
@@ -25,4 +25,4 @@ function StudentNew({ onAfterSave }) {
   )
 }
 
-export default StudentNew
+export default MakeupNew

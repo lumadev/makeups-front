@@ -1,13 +1,13 @@
 
-import { btnClass, btnCancelClass } from '../../common/utils/classes'
-import { validateMakeupForm } from '../../common/utils/makeupUtils'
+import { btnClass, btnCancelClass } from '../../../common/utils/classes'
+import { validateMakeupForm } from '../../../common/utils/makeupUtils'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
-import { saveMakeup, editMakeup } from "../../services/makeupService"
+import { saveMakeup, editMakeup } from "../../../services/makeupService"
 
-import Alert from '../../components/Alert'
-import LoadingButton from '../../components/LoadingButton'
-import Modal from "../../components/Modal"
+import Alert from '../../../components/Alert'
+import LoadingButton from '../../../components/LoadingButton'
+import Modal from "../../../components/Modal"
 import MakeupForm from './MakeupForm'
 
 function MakeupFormModal({

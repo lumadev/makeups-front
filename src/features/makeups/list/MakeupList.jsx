@@ -1,15 +1,15 @@
-import { formatDate, formatDateAndHour } from '../../common/utils/date'
+import { formatDate, formatDateAndHour } from '../../../common/utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-import { listMakeups } from "../../services/makeupService"
-import { listMakeupsDone } from "../../services/makeupDoneService"
+import { listMakeups } from "../../../services/makeupService"
+import { listMakeupsDone } from "../../../services/makeupDoneService"
 
 import MakeupActions from './MakeupActions'
-import Pagination from '../../components/Pagination'
-import TableHeaderCell from '../../components/table/TableHeaderCell'
-import TableDataCell from '../../components/table/TableDataCell'
-import SkeletonMakeupList from '../../components/skeleton/SkeletonMakeupList'
+import Pagination from '../../../components/Pagination'
+import TableHeaderCell from '../../../components/table/TableHeaderCell'
+import TableDataCell from '../../../components/table/TableDataCell'
+import SkeletonMakeupList from '../../../components/skeleton/SkeletonMakeupList'
 
 function MakeupList({
   title,

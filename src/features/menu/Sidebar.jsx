@@ -11,7 +11,7 @@ import {
 } from '@tabler/icons-react'
 
 import ItemMenu from './ItemMenu'
-import musicImg from '../assets/musica.jpg'
+import musicImg from '../../assets/musica.jpg'
 import { IconJoker } from '@tabler/icons-react'
 
 function Sidebar() {

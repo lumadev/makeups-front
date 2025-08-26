@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import { ToastContainer } from 'react-toastify'
-import Sidebar from './menu/Sidebar'
+import Sidebar from './features/menu/Sidebar'
 
 function Layout() {
   return (

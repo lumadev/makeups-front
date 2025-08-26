@@ -1,43 +1,41 @@
-import { useEffect, useState } from "react"
-import { getAllJokes } from "../../services/jokeService"
-import { toast } from 'react-toastify'
+import { useState } from "react"
 
+import JokeList from "./JokeList"
 import JokeNew from "./JokeNew"
+import JokeSearch from "./JokeSearch"
 
 function JokesIndex() {
+  const [searchTerm, setSearchTerm] = useState('')
   const [totalJokes, setTotalJokes] = useState(0)
   const [jokes, setJokes] = useState([])
 
-  useEffect(() => {
-    const fetchJokes = async () => {
-      try {
-        const res = await getAllJokes()
-        const jokes = res.data
-
-        setTotalJokes(jokes.length)
-        setJokes(jokes)
-      } catch {
-        toast("Ocorreu um erro ao buscar as piadas", { 
-          type: 'error'
-        })
-      }
-    }
-    fetchJokes()
-  }, [])
-
   return (
     <>
-      {/* Alerta simples com total */}
       {totalJokes > 0 && (
-        <div className="mt-4">
-          Total de piadas cadastradas: {totalJokes} piadas de tiozão
+        <div>
+          {/* Simple alert with toast */}
+          <div className="mt-4">
+            Total de piadas cadastradas: {totalJokes} piadas de tiozão
+          </div>
+
+          {/* Button and modal to generate a joke */}
+          <div className="flex my-4">
+            <JokeNew jokes={jokes} />
+          </div>
         </div>
       )}
 
-      {/* Botão e modal de gerar piada */}
-      <div className="flex my-4">
-        <JokeNew jokes={jokes} />
-      </div>
+      {/* Joke search */}
+      {totalJokes > 0 && (
+        <JokeSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+      )}
+
+      {/* Jokes list */}
+      <JokeList 
+        searchTerm={searchTerm} 
+        onCountChange={setTotalJokes}
+        setJokesList={setJokes}
+      />
     </>
   )
 }

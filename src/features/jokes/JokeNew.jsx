@@ -18,7 +18,7 @@ function JokeNew({ jokes }) {
   return (
     <>
       <button onClick={handleShowModal} className={btnClass}>
-        Gerar Piada
+        Gerar Piada de Tiozão
       </button>
 
       <JokeModal

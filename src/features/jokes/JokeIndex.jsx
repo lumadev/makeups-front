@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-import JokeList from "./JokeList"
+import JokeList from "./list/JokeList"
 import JokeNew from "./JokeNew"
-import JokeSearch from "./JokeSearch"
+import JokeSearch from "./list/JokeSearch"
 
 function JokesIndex() {
   const [searchTerm, setSearchTerm] = useState('')

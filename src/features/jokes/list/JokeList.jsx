@@ -1,12 +1,12 @@
 import { useEffect, useCallback, useState } from "react"
 import { toast } from "react-toastify"
 
-import Pagination from "../../components/Pagination"
-import TableHeaderCell from "../../components/table/TableHeaderCell"
-import TableDataCell from "../../components/table/TableDataCell"
-import SkeletonJokeList from "../../components/skeleton/SkeletonJokeList"
+import Pagination from "../../../components/Pagination"
+import TableHeaderCell from "../../../components/table/TableHeaderCell"
+import TableDataCell from "../../../components/table/TableDataCell"
+import SkeletonJokeList from "../../../components/skeleton/SkeletonJokeList"
 
-import { getAllJokes } from "../../services/jokeService"
+import { getAllJokes } from "../../../services/jokeService"
 
 function JokeList({
   searchTerm,

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { btnClass } from "../../common/utils/classes"
 import JokeModal from "./JokeModal"
 
@@ -7,15 +7,17 @@ function JokeButtons({ jokes }) {
   const [showModal, setShowModal] = useState(false)
   const [currentJoke, setCurrentJoke] = useState(null)
 
-  // Generate unique types array
-  useEffect(() => {
-    const uniqueTypes = [...new Set(jokes.map(j => j.type))]
-    setTypes(uniqueTypes)
-  }, [jokes])
+  // create jokes array copy 
+  const jokesCopy = useMemo(() => [...jokes], [jokes])
 
-  // Get a random joke from a given type (avoid consecutive repetition)
+  // generate unique types array
+  useEffect(() => {
+    const uniqueTypes = [...new Set(jokesCopy.map(j => j.type))]
+    setTypes(uniqueTypes)
+  }, [jokesCopy])
+
   const getRandomJokeByType = (type, excludeJoke = null) => {
-    const filtered = jokes.filter(j => j.type === type)
+    const filtered = jokesCopy.filter(j => j.type === type)
     if (filtered.length === 0) return null
 
     let randomJoke = null
@@ -55,7 +57,7 @@ function JokeButtons({ jokes }) {
         ))}
       </div>
 
-      {/* Joke modal */}
+      {/* jokes modal */}
       {currentJoke && (
         <JokeModal
           isOpen={showModal}

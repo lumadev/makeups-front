@@ -4,31 +4,26 @@ import { deleteEventDate } from "../../../services/eventDateService.js"
 
 import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
 import EventDateFormModal from '../form/EventDateFormModal'
+import ActionButton from '../../../components/button/ActionButton'
 
 function EventDateActions({ eventDate, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
-
   const [loadingDelete, setLoadingDelete] = useState(false)
 
-  const openModalEdit = () => {
-    setShowModalEdit(true)
-  }
+  const openModalEdit = () => setShowModalEdit(true)
 
   const deleteEventDateApi = async () => {
     setLoadingDelete(true)
-
     try {
-      const eventDateId = eventDate.id
-      await deleteEventDate(eventDateId)
-
+      await deleteEventDate(eventDate.id)
       onAfterSave()
-
-      toast("Data de evento excluída com sucesso", { 
+      
+      toast("Data de evento excluída com sucesso", {
         type: 'success'
       })
     } catch {
-      toast("Ocorreu um erro ao excluir a data de evento", { 
+      toast("Ocorreu um erro ao excluir a data de evento", {
         type: 'error'
       })
     } finally {
@@ -40,20 +35,14 @@ function EventDateActions({ eventDate, onAfterSave }) {
   return (
     <>
       {/* edit button */}
-      <button 
-        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-        onClick={openModalEdit}
-      >
+      <ActionButton onClick={openModalEdit}>
         Editar
-      </button>
+      </ActionButton>
 
       {/* delete button */}
-      <button
-        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-        onClick={() => setShowDialogDelete(true)}
-      >
+      <ActionButton onClick={() => setShowDialogDelete(true)}>
         Excluir
-      </button>
+      </ActionButton>
 
       {showDialogDelete && (
         <ConfirmationDialog

@@ -4,30 +4,26 @@ import { deleteStudent } from "../../../services/studentService.js"
 
 import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
 import StudentFormModal from '../form/StudentFormModal'
+import ActionButton from '../../../components/button/ActionButton'
 
 function StudentActions({ student, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
 
-  const openModalEdit = () => {
-    setShowModalEdit(true)
-  }
+  const openModalEdit = () => setShowModalEdit(true)
 
   const deleteStudentApi = async () => {
     setLoadingDelete(true)
-
     try {
-      const studentId = student.id
-      await deleteStudent(studentId)
-
+      await deleteStudent(student.id)
       onAfterSave()
-
+      
       toast("Aluno excluído com sucesso", { 
         type: 'success'
       })
     } catch {
-      toast("Ocorreu um erro ao excluir o aluno", { 
+      toast("Ocorreu um erro ao excluir o aluno", {
         type: 'error'
       })
     } finally {
@@ -38,25 +34,21 @@ function StudentActions({ student, onAfterSave }) {
 
   return (
     <>
-      <button 
-        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-        onClick={() => openModalEdit()}
-      >
+      {/* edit button */}
+      <ActionButton onClick={openModalEdit}>
         Editar
-      </button>
-      <button
-        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-        onClick={() => setShowDialogDelete(true)}
-      >
+      </ActionButton>
+      {/* delete button */}
+      <ActionButton onClick={() => setShowDialogDelete(true)}>
         Excluir
-      </button>
+      </ActionButton>
 
       {showDialogDelete && (
         <ConfirmationDialog
           title="Excluir aluno"
           message={`Deseja realmente excluir o aluno ${student.name}?`}
           loading={loadingDelete}
-          onConfirm={() => deleteStudentApi()}
+          onConfirm={deleteStudentApi}
           onClose={() => setShowDialogDelete(false)}
         />
       )}

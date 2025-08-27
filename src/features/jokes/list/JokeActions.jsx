@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { deleteJoke } from "../../../services/jokeService.js"
 
 import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
+import ActionButton from '../../../components/button/ActionButton'
 
 function JokeActions({ joke, onAfterSave }) {
   const [showDialogDelete, setShowDialogDelete] = useState(false)
@@ -10,11 +11,8 @@ function JokeActions({ joke, onAfterSave }) {
 
   const deleteJokeApi = async () => {
     setLoadingDelete(true)
-
     try {
-      const jokeId = joke.id
-      await deleteJoke(jokeId)
-
+      await deleteJoke(joke.id)
       onAfterSave()
 
       toast("Piada excluída com sucesso", {
@@ -32,20 +30,17 @@ function JokeActions({ joke, onAfterSave }) {
 
   return (
     <>
-      {/* botão excluir */}
-      <button
-        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-        onClick={() => setShowDialogDelete(true)}
-      >
+      {/* delete button */}
+      <ActionButton onClick={() => setShowDialogDelete(true)}>
         Excluir
-      </button>
+      </ActionButton>
 
       {showDialogDelete && (
         <ConfirmationDialog
           title="Excluir piada"
           message={`Deseja realmente excluir a piada: "${joke.description}"?`}
           loading={loadingDelete}
-          onConfirm={() => deleteJokeApi()}
+          onConfirm={deleteJokeApi}
           onClose={() => setShowDialogDelete(false)}
         />
       )}

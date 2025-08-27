@@ -37,7 +37,10 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const getStudents = useCallback(async (isFirstLoad = false) => {
     try {
       const response = await listStudents()
-      const students = response.data
+      let students = response.data
+
+      // hide luma tests
+      students = hideStudentsTests(students)
 
       // sort alphabetically
       students.sort((a, b) => a.name.localeCompare(b.name))
@@ -54,6 +57,13 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
       }
     }
   }, [onCountChange])
+
+  const hideStudentsTests = function(students) {
+    if (import.meta.env.VITE_ENV !== "development") {
+      return students.filter(student => !student.name.includes("Luma"))
+    }
+    return students
+  }
 
   const refreshStudents = useCallback(async () => {
     setTimeout(async () => {

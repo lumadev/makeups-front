@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import StudentList from './StudentList'
+import StudentList from './list/StudentList'
 import StudentNew from './StudentNew'
-import StudentSearch  from './StudentSearch'
+import StudentSearch  from './list/StudentSearch'
 
 function StudentIndex() {
   const [searchTerm, setSearchTerm] = useState('')

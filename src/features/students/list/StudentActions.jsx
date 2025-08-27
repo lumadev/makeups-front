@@ -1,9 +1,9 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteStudent } from "../../services/studentService.js"
+import { deleteStudent } from "../../../services/studentService.js"
 
-import ConfirmationDialog from '../../components/confirmation/ConfirmationDialog'
-import StudentFormModal from './form/StudentFormModal'
+import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
+import StudentFormModal from '../form/StudentFormModal'
 
 function StudentActions({ student, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)

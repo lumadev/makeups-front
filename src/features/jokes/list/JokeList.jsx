@@ -41,7 +41,9 @@ function JokeList({
       const response = await getAllJokes()
       const data = response.data
 
-      setJokes(data)
+      const reversedData = [...data].reverse()
+
+      setJokes(reversedData)
       setJokesList?.(data)
       onCountChange(data.length)
     } catch {

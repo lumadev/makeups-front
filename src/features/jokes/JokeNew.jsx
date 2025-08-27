@@ -6,25 +6,44 @@ function JokeNew({ jokes }) {
   const [showModal, setShowModal] = useState(false)
   const [currentJoke, setCurrentJoke] = useState(null)
 
+  const getRandomJoke = (excludeJoke = null) => {
+    if (jokes.length === 0) return null
+
+    let randomJoke = null
+    let attempts = 0
+
+    // avoid repeat same joke
+    do {
+      const randomIndex = Math.floor(Math.random() * jokes.length)
+      randomJoke = jokes[randomIndex]
+      attempts++
+    } while (randomJoke === excludeJoke && attempts < 10)
+
+    return randomJoke
+  }
+
   const handleShowModal = () => {
-    if (jokes.length === 0) return
-
-    const randomIndex = Math.floor(Math.random() * jokes.length)
-
-    setCurrentJoke(jokes[randomIndex])
+    const joke = getRandomJoke()
+    setCurrentJoke(joke)
     setShowModal(true)
+  }
+
+  const handleNextJoke = () => {
+    const joke = getRandomJoke(currentJoke)
+    setCurrentJoke(joke)
   }
 
   return (
     <>
       <button onClick={handleShowModal} className={btnClass}>
-        Gerar Piada para Alegrar o dia do Meu Amor
+        Gerar Piada Aleatória
       </button>
 
       <JokeModal
         isOpen={showModal}
         joke={currentJoke}
         onClose={() => setShowModal(false)}
+        onNextJoke={handleNextJoke}
       />
     </>
   )

@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import JokeList from "./list/JokeList"
 import JokeNew from "./JokeNew"
+import JokeButtons from "./JokeButtons"
 import JokeSearch from "./list/JokeSearch"
 
 function JokesIndex() {
@@ -14,9 +15,15 @@ function JokesIndex() {
       {totalJokes > 0 && (
         <div>
           {/* Button and modal to generate a joke */}
-          <div className="flex my-4">
+          <div className="flex flex-wrap my-4">
             <JokeNew jokes={jokes} />
           </div>
+        </div>
+      )}
+
+      {totalJokes > 0 && (
+        <div className="flex my-4">
+          <JokeButtons jokes={jokes} />
         </div>
       )}
 

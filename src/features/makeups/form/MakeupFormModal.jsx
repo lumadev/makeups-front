@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { saveMakeup, editMakeup } from "../../../services/makeupService"
 
 import Alert from '../../../components/Alert'
-import LoadingButton from '../../../components/LoadingButton'
+import LoadingButton from '../../../components/button/LoadingButton'
 import Modal from "../../../components/Modal"
 import MakeupForm from './MakeupForm'
 

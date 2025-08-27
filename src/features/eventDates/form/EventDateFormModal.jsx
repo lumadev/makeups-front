@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { saveEventDate, editEventDate } from "../../../services/eventDateService"
 
 import Alert from '../../../components/Alert'
-import LoadingButton from '../../../components/LoadingButton'
+import LoadingButton from '../../../components/button/LoadingButton'
 import Modal from "../../../components/Modal"
 import EventDateForm from './EventDateForm'
 

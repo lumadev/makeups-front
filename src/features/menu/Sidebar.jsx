@@ -20,8 +20,20 @@ function Sidebar() {
 
   const [isMobile, setIsMobile] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [userName, setUserName] = useState("")
+  const [userType, setUserType] = useState("")
 
   useEffect(() => {
+    const storedName = localStorage.getItem("name")
+    const storedUserType = localStorage.getItem("name")
+
+    if (storedName) {
+      setUserName(storedName)
+    }
+    if (storedUserType) {
+      setUserType(storedUserType)
+    }
+
     const handleResize = () => {
       const mobile = window.innerWidth < 768
       setIsMobile(mobile)
@@ -35,6 +47,7 @@ function Sidebar() {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('name')
     navigate('/login')
   }
 
@@ -88,7 +101,7 @@ function Sidebar() {
               />
               <div className="flex justify-center items-center mt-4">
                 <h2 className="font-medium text-sm md:text-base text-center text-teal-400">
-                  Weslley Joanes
+                  {userName || "Usuário"}
                 </h2>
                 <a 
                   href="#" 
@@ -98,7 +111,9 @@ function Sidebar() {
                   Sair
                 </a>
               </div>
-              <p className="text-sm text-gray-500 text-center">Administrador</p>
+              { userType === 'admin' && (
+                <p className="text-sm text-gray-500 text-center">Administrador</p>
+              )}
             </div>
           </div>
 

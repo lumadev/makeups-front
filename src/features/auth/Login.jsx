@@ -23,9 +23,12 @@ function Login() {
     try {
       const formData = { username, password }
       const res = await login(formData)
-      const token = res.data.token
 
-      localStorage.setItem("token", token) 
+      const { token, name, type } = res.data
+
+      localStorage.setItem("token", token)
+      localStorage.setItem("name", name)
+      localStorage.setItem("userType", type) 
 
       toast("Login feito com sucesso", { 
         type: 'success'

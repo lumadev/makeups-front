@@ -38,7 +38,12 @@ function Login() {
       const now = new Date()
       localStorage.setItem("lastRequestHour", now.toISOString())
 
-      navigate('/reposicoes')
+      // redirect by user permission
+      if (type === 'restricted') {
+        navigate('/jokes')
+      } else {
+        navigate('/reposicoes')
+      }
     } catch {
       toast("Credenciais inválidas", { 
         type: 'error'

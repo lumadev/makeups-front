@@ -25,7 +25,7 @@ function Sidebar() {
 
   useEffect(() => {
     const storedName = localStorage.getItem("name")
-    const storedUserType = localStorage.getItem("name")
+    const storedUserType = localStorage.getItem("userType")
 
     if (storedName) {
       setUserName(storedName)
@@ -58,6 +58,13 @@ function Sidebar() {
     { title: "Datas de Evento", path: "/datas-de-evento", icon: <IconCalendarEvent size={20} /> },
     { title: "Piadas", path: "/piadas", icon: <IconJoker size={20} /> },
   ]
+
+  // filter items by user type
+  const filteredMenu = menuItems.filter(item => {
+    if (item.title === "Piadas") return true // always visible
+    
+    return userType === "admin" || userType === "full"
+  })
 
   return (
     <>
@@ -119,7 +126,7 @@ function Sidebar() {
 
           {/* menu */}
           <div id="menu" className="flex flex-col space-y-2">
-            {menuItems.map(item => (
+            {filteredMenu.map(item => (
               <Link
                 key={item.path}
                 to={item.path}

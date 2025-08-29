@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import JokeList from "./list/JokeList"
-import JokeNew from "./JokeNew"
+import JokeGenerateNew from "./JokeGenerateNew"
 import JokeButtons from "./JokeButtons"
 import JokeSearch from "./list/JokeSearch"
 
@@ -16,7 +16,7 @@ function JokesIndex() {
         <div>
           {/* Button and modal to generate a joke */}
           <div className="flex flex-wrap my-4">
-            <JokeNew jokes={jokes} />
+            <JokeGenerateNew jokes={jokes} />
           </div>
         </div>
       )}

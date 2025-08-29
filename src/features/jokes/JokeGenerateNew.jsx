@@ -2,7 +2,7 @@ import { useState } from "react"
 import { btnClass } from "../../common/utils/classes"
 import JokeModal from "./JokeModal"
 
-function JokeNew({ jokes }) {
+function JokeGenerateNew({ jokes }) {
   const [showModal, setShowModal] = useState(false)
   const [currentJoke, setCurrentJoke] = useState(null)
 
@@ -49,4 +49,4 @@ function JokeNew({ jokes }) {
   )
 }
 
-export default JokeNew
+export default JokeGenerateNew

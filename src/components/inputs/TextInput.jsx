@@ -26,6 +26,7 @@ function TextInput({
         placeholder={placeholder}
         value={value || ""}
         onChange={onChange}
+        onMouseDown={(e) => e.stopPropagation()} 
         required={required}
         pattern={pattern}
       />

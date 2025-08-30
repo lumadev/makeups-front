@@ -8,12 +8,19 @@ function Modal({
 }) {
   if (!isOpen) return null
 
+  const handleOverlayClick = (e) => {
+    // fecha apenas se o clique for no próprio overlay
+    if (e.target === e.currentTarget) {
+      onClose()
+    }
+  }
+
   return (
     <div
       className="fixed inset-0 z-50 flex justify-center items-center p-2 sm:p-4 overflow-x-hidden overflow-y-auto bg-black bg-opacity-50"
       role="dialog"
       aria-modal="true"
-      onClick={onClose}
+      onMouseDown={handleOverlayClick}
     >
       <div
         className={`relative w-full ${sizeClass} max-h-[90vh] sm:max-h-[85vh] px-0 sm:px-4`}

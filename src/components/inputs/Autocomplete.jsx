@@ -28,7 +28,8 @@ function Autocomplete({ id, label, value, options = [], placeholder, onChange, d
     setShowSuggestions(false)
   }
 
-  const handleFocus = () => {
+  const handleFocus = (e) => {
+    e.stopPropagation()
     if (!searchTerm) {
       setFiltered(options)
     }
@@ -64,7 +65,10 @@ function Autocomplete({ id, label, value, options = [], placeholder, onChange, d
               <li
                 key={idx}
                 className="px-4 py-2 cursor-pointer hover:bg-blue-100"
-                onClick={() => handleClick(option)}
+                onClick={(e) => {
+                  e.stopPropagation() 
+                  handleClick(option)
+                }}
               >
                 {option}
               </li>

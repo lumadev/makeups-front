@@ -1,6 +1,4 @@
-import { useMemo } from "react"
-
-function validateJokeForm(formData) {
+function validateJokeForm(formData, types) {
   const error = {
     isValid: false,
     errorMessage: ''
@@ -13,6 +11,11 @@ function validateJokeForm(formData) {
 
   if (!formData.type) {
     error.errorMessage = 'Tipo não preenchido.'
+    return error
+  }
+
+  if (!types.includes(formData.type)) {
+    error.errorMessage = 'Tipo inválido. Escolha um tipo existente.'
     return error
   }
   return false

@@ -1,7 +1,7 @@
 import { btnClass, btnCancelClass } from '../../../common/utils/classes'
-import { validateJokeForm } from '../../../common/utils/jokeUtils'
+import { validateJokeForm, getUniqueTypes } from '../../../common/utils/jokeUtils'
 import { toast } from 'react-toastify'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { saveJoke } from "../../../services/jokeService"
 
 import Alert from '../../../components/Alert'
@@ -19,15 +19,21 @@ function JokeFormModal({
   const [validationMessage, setValidationMessage] = useState('')
   const [formData, setFormData] = useState({})
 
+  // cria uma cópia do array de piadas
+  const jokesCopy = useMemo(() => [...jokes], [jokes])
+  // array de tipos únicos
+  const types = useMemo(() => getUniqueTypes(jokesCopy), [jokesCopy])
+
   const save = async () => {
-    const error = validateJokeForm(formData)
+    const error = validateJokeForm(formData, types)
     if (error) {
       setValidationMessage(error.errorMessage)
       return
     }
+
     setValidationMessage('')
     setLoadingSave(true)
-    
+
     try {
       await saveJoke(formData)
 

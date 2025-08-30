@@ -19,7 +19,6 @@ function JokeList({
 
   const [jokes, setJokes] = useState([])
   const [loading, setLoading] = useState(true)
-  const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
   // filter by search term
   const filteredJokes = jokes.filter((joke) => {
@@ -44,9 +43,7 @@ function JokeList({
       const response = await getAllJokes()
       const data = response.data
 
-      const reversedData = [...data].reverse()
-
-      setJokes(reversedData)
+      setJokes(data)
       setJokesList?.(data)
       onCountChange(data.length)
     } catch {
@@ -61,13 +58,9 @@ function JokeList({
   }, [onCountChange, setJokesList])
 
   const refreshJokes = useCallback(async () => {
-    setTimeout(async () => {
-      setLoadingAfterSave(true)
-
-      await getJokes()
-
-      setLoadingAfterSave(false)
-    }, 1000)
+    setLoading(true)
+    await getJokes()
+    setLoading(false)
   }, [getJokes])
 
   const truncateText = (text, maxLength) => {
@@ -94,12 +87,6 @@ function JokeList({
         <SkeletonJokeList />
       ) : (
         <>
-          {loadingAfterSave && (
-            <div className="mb-4">
-              <span>Atualizando lista...</span>
-            </div>
-          )}
-
           {filteredJokes.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
@@ -129,13 +116,13 @@ function JokeList({
                             <TableDataCell>{joke.type}</TableDataCell>
 
                             <TableDataCell>
-                                <div className="flex items-center gap-x-6">
-                                  <JokeActions 
-                                    joke={joke}
-                                    onAfterSave={refreshJokes}
-                                  />
-                                </div>
-                              </TableDataCell>
+                              <div className="flex items-center gap-x-6">
+                                <JokeActions 
+                                  joke={joke}
+                                  onAfterSave={refreshJokes}
+                                />
+                              </div>
+                            </TableDataCell>
                           </tr>
                         ))}
                       </tbody>

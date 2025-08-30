@@ -14,7 +14,6 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
 
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
-  const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
   const filteredStudents = students.filter((student) => {
     const term = searchTerm.toLowerCase()
@@ -65,13 +64,9 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   }
 
   const refreshStudents = useCallback(async () => {
-    setTimeout(async () => {
-      setLoadingAfterSave(true)
-
-      await getStudents()
-
-      setLoadingAfterSave(false)
-    }, 1000)
+    setLoading(true)
+    await getStudents()
+    setLoading(false)
   }, [getStudents])
 
   useEffect(() => {
@@ -93,12 +88,6 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
         <SkeletonStudentList/>
       ) : (
         <>
-          {loadingAfterSave && (
-            <div className="mb-4">
-              <span>Atualizando lista...</span>
-            </div>
-          )}
-
           {filteredStudents.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
@@ -116,7 +105,6 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                       <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
                           <TableHeaderCell>Nome</TableHeaderCell>
-                          {/* <TableHeaderCell>Telefone</TableHeaderCell> */}
                           <TableHeaderCell>Data do Cadastro</TableHeaderCell>
                           <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
@@ -125,27 +113,16 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                         {paginatedStudents.map((student, index) => (
                           <tr key={index}>
-
-                            {/* name and email */}
                             <TableDataCell>
                               <h2 className="text-sm font-medium text-gray-800 dark:text-white ">
                                 {student.name}
                               </h2>
                             </TableDataCell>
 
-                            {/* phone number */}
-                            {/* <TableDataCell>
-                              {student.phone
-                                ? applyMaskPhone('(99) 99999-9999', student.phone)
-                                : 'Sem dados'}
-                            </TableDataCell> */}
-
-                            {/* date register */}
                             <TableDataCell>
                               {formatDate(student.dateRegister)}
                             </TableDataCell>
                             
-                            {/* actions */}
                             <TableDataCell>
                               <div className="flex items-center gap-x-6">
                                 <StudentActions

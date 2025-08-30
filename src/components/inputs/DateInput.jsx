@@ -66,9 +66,7 @@ function DateInput({
 
     if (newDay && newMonth && newTime) {
       const [hours, minutes] = newTime.split(":")
-
       const date = new Date(newYear, newMonth - 1, newDay, hours, minutes)
-
       onChange(date)
     }
   }
@@ -89,7 +87,13 @@ function DateInput({
           min="1"
           max="31"
           value={day}
-          onChange={(e) => handleChange(e.target.value, month, year, time)}
+          onChange={(e) => {
+            const value = e.target.value
+            if (value.length <= 2) handleChange(value, month, year, time)
+
+            const dayNum = Math.min(parseInt(value) || 1, 30)
+            handleChange(dayNum.toString(), month, year, time)
+          }}
           placeholder="Dia"
           disabled={isDisabled}
           className={`w-24 mr-2 px-3 py-2 ${inputBaseClasses} ${disabledClasses}`}

@@ -21,7 +21,6 @@ function EventDateList({
 
   const [eventDates, setEventDates] = useState([])
   const [loading, setLoading] = useState(true)
-  const [loadingAfterSave, setLoadingAfterSave] = useState(false)
 
   // filter by search term
   const filteredEventDates = eventDates.filter((eventDate) => {
@@ -65,13 +64,9 @@ function EventDateList({
   }, [onCountChange, setEventDatesList])
 
   const refreshEventDates = useCallback(async () => {
-    setTimeout(async () => {
-      setLoadingAfterSave(true)
-
-      await getEventDates()
-
-      setLoadingAfterSave(false)
-    }, 1000)
+    setLoading(true)
+    await getEventDates()
+    setLoading(false)
   }, [getEventDates])
 
   const truncateText = (text, maxLength) => {
@@ -97,12 +92,6 @@ function EventDateList({
         <SkeletonEventDateList />
       ) : (
         <>
-          {loadingAfterSave && (
-            <div className="mb-4">
-              <span>Atualizando lista...</span>
-            </div>
-          )}
-
           {eventDates.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">

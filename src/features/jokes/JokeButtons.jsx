@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from "react"
 import { btnClass } from "../../common/utils/classes"
+import { getUniqueTypes } from "../../common/utils/jokeUtils"
+
 import JokeModal from "./JokeModal"
 
 function JokeButtons({ jokes }) {
@@ -10,11 +12,9 @@ function JokeButtons({ jokes }) {
   // create jokes array copy 
   const jokesCopy = useMemo(() => [...jokes], [jokes])
 
-  // generate unique types array
   useEffect(() => {
-    const uniqueTypes = [...new Set(jokesCopy.map(j => j.type))]
-    setTypes(uniqueTypes)
-  }, [jokesCopy])
+    setTypes(getUniqueTypes(jokes))
+  }, [jokes])
 
   const getRandomJokeByType = (type, excludeJoke = null) => {
     const filtered = jokesCopy.filter(j => j.type === type)

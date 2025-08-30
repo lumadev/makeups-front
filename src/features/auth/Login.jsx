@@ -40,7 +40,7 @@ function Login() {
 
       // redirect by user permission
       if (type === 'restricted') {
-        navigate('/jokes')
+        navigate('/piadas')
       } else {
         navigate('/reposicoes')
       }

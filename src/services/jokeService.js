@@ -1,5 +1,9 @@
 import { api } from "./api"
 
+const saveJoke = (data) => {
+  return api.post('/jokes', data)
+}
+
 const getAllJokes = () => {
   return api.get('/jokes')
 }
@@ -9,6 +13,7 @@ const deleteJoke = (id) => {
 }
 
 export { 
+  saveJoke,
   getAllJokes,
   deleteJoke
 }

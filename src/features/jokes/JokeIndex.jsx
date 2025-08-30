@@ -4,6 +4,7 @@ import JokeList from "./list/JokeList"
 import JokeGenerateNew from "./JokeGenerateNew"
 import JokeButtons from "./JokeButtons"
 import JokeSearch from "./list/JokeSearch"
+import JokeNew from "./new/JokeNew"
 
 function JokesIndex() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -16,6 +17,9 @@ function JokesIndex() {
         <div>
           {/* Button and modal to generate a joke */}
           <div className="flex flex-wrap my-4">
+            <div className="mr-4">
+              <JokeNew jokes={jokes} />
+            </div>
             <JokeGenerateNew jokes={jokes} />
           </div>
         </div>

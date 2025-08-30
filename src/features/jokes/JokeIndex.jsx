@@ -10,6 +10,9 @@ function JokesIndex() {
   const [searchTerm, setSearchTerm] = useState('')
   const [totalJokes, setTotalJokes] = useState(0)
   const [jokes, setJokes] = useState([])
+  const [reloadFlag, setReloadFlag] = useState(false)
+
+  const reloadJokes = () => setReloadFlag(prev => !prev)
 
   return (
     <>
@@ -18,9 +21,9 @@ function JokesIndex() {
           {/* Button and modal to generate a joke */}
           <div className="flex flex-wrap my-4">
             <div className="mr-4">
-              <JokeNew jokes={jokes} />
+              <JokeNew jokes={jokes} onAfterSave={reloadJokes} />
             </div>
-            <JokeGenerateNew jokes={jokes} />
+            <JokeGenerateNew jokes={jokes} onAfterSave={reloadJokes} />
           </div>
         </div>
       )}
@@ -39,6 +42,7 @@ function JokesIndex() {
       {/* Jokes list */}
       <JokeList 
         searchTerm={searchTerm} 
+        reloadFlag={reloadFlag}
         onCountChange={setTotalJokes}
         setJokesList={setJokes}
       />

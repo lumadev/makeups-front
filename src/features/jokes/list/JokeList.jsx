@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react"
+import { useEffect, useCallback, useState, useRef } from "react"
 import { toast } from "react-toastify"
 
 import JokeActions  from './JokeActions'
@@ -13,7 +13,10 @@ function JokeList({
   searchTerm,
   onCountChange,
   setJokesList = null,
+  reloadFlag = null, 
 }) {
+  const isFirstLoad = useRef(true)
+
   const [jokes, setJokes] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadingAfterSave, setLoadingAfterSave] = useState(false)
@@ -75,6 +78,15 @@ function JokeList({
   useEffect(() => {
     getJokes(true)
   }, [getJokes])
+
+  // logic triggered only after save new joke
+  useEffect(() => {
+    if (isFirstLoad.current) {
+      isFirstLoad.current = false
+      return
+    }
+    refreshJokes()
+  }, [reloadFlag, refreshJokes])
 
   return (
     <div>

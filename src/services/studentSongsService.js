@@ -1,19 +1,19 @@
 import { api } from "./api"
 
 const listStudentSongs = (studentId) => {
-  return api.get(`/students/${studentId}/songs`)
+  return api.get(`/student-songs/${studentId}/songs`)
 }
 
 const saveStudentSong = (studentId, data) => {
-  return api.post(`/students/${studentId}/songs`, data)
+  return api.post(`/student-songs/${studentId}/songs`, data)
 }
 
 const editStudentSong = (studentId, songId, data) => {
-  return api.put(`/students/${studentId}/songs/${songId}`, data)
+  return api.put(`/student-songs/${studentId}/songs/${songId}`, data)
 }
 
 const deleteStudentSong = (studentId, songId) => {
-  return api.delete(`/students/${studentId}/songs/${songId}`)
+  return api.delete(`/student-songs/${studentId}/songs/${songId}`)
 }
 
 export { 

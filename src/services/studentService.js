@@ -16,9 +16,14 @@ const deleteStudent = (id) => {
   return api.delete(`/students/${id}`)
 }
 
+const getStudentById = (id) => {
+  return api.get(`/students/${id}`)
+}
+
 export { 
   listStudents,
   saveStudent,
   editStudent,
-  deleteStudent
+  deleteStudent,
+  getStudentById
 }

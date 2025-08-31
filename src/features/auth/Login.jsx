@@ -69,6 +69,7 @@ function Login() {
               </label>
               <input
                 id="username"
+                name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full rounded-lg border border-zinc-200 bg-white dark:bg-transparent dark:border-zinc-800 px-4 py-3 text-sm text-zinc-950 dark:text-white placeholder:text-zinc-400 focus:outline-none"

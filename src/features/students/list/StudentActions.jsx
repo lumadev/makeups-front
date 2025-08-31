@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { deleteStudent } from "../../../services/studentService.js"
 
 import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
@@ -10,6 +11,8 @@ function StudentActions({ student, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
+
+  const navigate = useNavigate()
 
   const openModalEdit = () => setShowModalEdit(true)
 
@@ -32,15 +35,25 @@ function StudentActions({ student, onAfterSave }) {
     }
   }
 
+  const viewStudent = () => {
+    navigate(`/aluno/${student.id}/musicas`)
+  }
+
   return (
     <>
       {/* edit button */}
       <ActionButton onClick={openModalEdit}>
         Editar
       </ActionButton>
+
       {/* delete button */}
       <ActionButton onClick={() => setShowDialogDelete(true)}>
         Excluir
+      </ActionButton>
+
+      {/* view button */}
+      <ActionButton onClick={viewStudent}>
+        Visualizar
       </ActionButton>
 
       {showDialogDelete && (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getStudentById } from '../../services/studentService'
+import { toast } from 'react-toastify'
 
 import StudentSongsIndex from './songs/StudentSongsIndex'
 
@@ -9,7 +10,6 @@ function StudentManage() {
   
   const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchStudent = async () => {
@@ -18,7 +18,9 @@ function StudentManage() {
         const response = await getStudentById(id)
         setStudent(response.data)
       } catch {
-        setError('Erro ao carregar o aluno')
+        toast("Erro ao carregar o aluno", { 
+          type: 'error'
+        })
       } finally {
         setLoading(false)
       }
@@ -28,7 +30,6 @@ function StudentManage() {
   }, [id])
 
   if (loading) return <p>Carregando...</p>
-  if (error) return <p>{error}</p>
 
   return (
     <div className="p-4">

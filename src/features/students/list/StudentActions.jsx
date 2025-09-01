@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { deleteStudent } from "../../../services/studentService.js"
+import { deleteStudent } from "@/services/studentService.js"
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import StudentFormModal from '../form/StudentFormModal'

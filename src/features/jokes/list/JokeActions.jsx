@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteJoke } from "../../../services/jokeService.js"
+import { deleteJoke } from "@/services/jokeService.js"
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import ActionButton from '@/components/button/ActionButton'

@@ -7,7 +7,7 @@ import TableHeaderCell from "@/components/table/TableHeaderCell"
 import TableDataCell from "@/components/table/TableDataCell"
 import SkeletonJokeList from "@/components/skeleton/SkeletonJokeList"
 
-import { getAllJokes } from "../../../services/jokeService"
+import { getAllJokes } from "@/services/jokeService"
 
 function JokeList({
   searchTerm,

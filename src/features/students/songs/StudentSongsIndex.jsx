@@ -22,6 +22,9 @@ function StudentSongsIndex({ student }) {
         />
       </div>
 
+      {/* Separator */}
+      <div className="border-b border-gray-300 dark:border-gray-700 my-4" />
+
       {/* studentSongs search */}
       {studentSongCount > 0 && (
         <StudentSongsSearch searchTerm={searchTerm} onSearch={setSearchTerm} />

@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { deleteStudent } from "../../../services/studentService.js"
 
-import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
+import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import StudentFormModal from '../form/StudentFormModal'
-import ActionButton from '../../../components/button/ActionButton'
+import ActionButton from '@/components/button/ActionButton'
 
 function StudentActions({ student, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)

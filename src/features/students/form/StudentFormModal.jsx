@@ -1,10 +1,10 @@
 
-import { btnClass, btnCancelClass } from '../../../common/utils/classes'
+import { btnClass, btnCancelClass } from '@/common/utils/classes'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { saveStudent, editStudent } from "../../../services/studentService"
 
-import LoadingButton from '../../../components/button/LoadingButton'
+import LoadingButton from '@/components/button/LoadingButton'
 import Modal from "../../../components/Modal"
 import StudentForm from './StudentForm'
 

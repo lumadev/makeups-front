@@ -1,6 +1,6 @@
-import { applyMaskPhone } from '../../../common/utils/mask'
+import { applyMaskPhone } from '@/common/utils/mask'
 import { useEffect, useState } from 'react'
-import TextInput from '../../../components/inputs/TextInput'
+import TextInput from '@/components/inputs/TextInput'
 
 function StudentForm({ isEdit = false, formData, setFormData }) {
   const [phoneMasked, setPhoneMasked] = useState('')

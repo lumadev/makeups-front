@@ -1,4 +1,4 @@
-import { formatDate } from '../../../common/utils/date'
+import { formatDate } from '@/common/utils/date'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { listStudents } from "../../../services/studentService.js"

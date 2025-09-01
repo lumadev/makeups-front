@@ -2,9 +2,9 @@ import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { deleteEventDate } from "../../../services/eventDateService.js"
 
-import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
+import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import EventDateFormModal from '../form/EventDateFormModal'
-import ActionButton from '../../../components/button/ActionButton'
+import ActionButton from '@/components/button/ActionButton'
 
 function EventDateActions({ eventDate, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)

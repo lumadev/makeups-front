@@ -1,5 +1,5 @@
 
-import { btnClass } from '../../common/utils/classes'
+import { btnClass } from '@/common/utils/classes'
 import { useState } from "react"
 
 import EventDateFormModal from './form/EventDateFormModal'

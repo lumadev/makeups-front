@@ -1,4 +1,4 @@
-import { inputClass, inputLabelClass } from '../../common/utils/classes'
+import { inputClass, inputLabelClass } from '@/common/utils/classes'
 
 function TextInput({
   id,

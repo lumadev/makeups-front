@@ -13,6 +13,7 @@ function SkeletonStudentSongList() {
             <tr>
               <TableHeaderCell>Nome da Música</TableHeaderCell>
               <TableHeaderCell>Artista</TableHeaderCell>
+              <TableHeaderCell>Link da Versão</TableHeaderCell>
               <TableHeaderCell>Recital</TableHeaderCell>
               <TableHeaderCell>Audição</TableHeaderCell>
             </tr>
@@ -22,6 +23,9 @@ function SkeletonStudentSongList() {
               <tr key={idx} className="animate-pulse">
                 <TableDataCell>
                   <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
+                </TableDataCell>
+                <TableDataCell>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
                 </TableDataCell>
                 <TableDataCell>
                   <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />

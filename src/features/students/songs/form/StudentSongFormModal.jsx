@@ -57,6 +57,7 @@ function StudentSongFormModal({
       setFormData({
         songName: "",
         artist: "",
+        versionLink: "",
         isRecital: false,
         isMusicAudition: false,
         done: false

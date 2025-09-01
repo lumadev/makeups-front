@@ -51,6 +51,18 @@ function StudentSongForm({ formData, setFormData }) {
         />
       </div>
 
+      <div className="mb-6">
+        <TextInput
+          id="versionLink"
+          label="Link da Versão"
+          value={formData.versionLink || ''}
+          onChange={handleChange}
+          placeholder="Cole o link da versão da música"
+          maxLength="500"
+          type="url"
+        />
+      </div>
+
       <div className="grid gap-6 mb-6 lg:grid-cols-2">
         <CheckboxInput
           label="É música do recital"

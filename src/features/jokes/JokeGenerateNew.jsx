@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { btnClass } from "../../common/utils/classes"
+import { btnClass } from "@/common/utils/classes"
 import JokeModal from "./JokeModal"
 
 function JokeGenerateNew({ jokes }) {

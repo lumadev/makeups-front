@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react"
-import { btnClass } from "../../common/utils/classes"
-import { getUniqueTypes } from "../../common/utils/jokeUtils"
+import { btnClass } from "@/common/utils/classes"
+import { getUniqueTypes } from "@/common/utils/jokeUtils"
 
 import JokeModal from "./JokeModal"
 

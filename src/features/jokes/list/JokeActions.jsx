@@ -2,8 +2,8 @@ import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { deleteJoke } from "../../../services/jokeService.js"
 
-import ConfirmationDialog from '../../../components/confirmation/ConfirmationDialog'
-import ActionButton from '../../../components/button/ActionButton'
+import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
+import ActionButton from '@/components/button/ActionButton'
 
 function JokeActions({ joke, onAfterSave }) {
   const [showDialogDelete, setShowDialogDelete] = useState(false)

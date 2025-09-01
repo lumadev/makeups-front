@@ -1,12 +1,12 @@
-import { btnClass, btnCancelClass } from '../../../common/utils/classes'
-import { validateJokeForm, getUniqueTypes } from '../../../common/utils/jokeUtils'
+import { btnClass, btnCancelClass } from '@/common/utils/classes'
+import { validateJokeForm, getUniqueTypes } from '@/common/utils/jokeUtils'
 import { toast } from 'react-toastify'
 import { useState, useEffect, useMemo } from 'react'
-import { saveJoke } from "../../../services/jokeService"
+import { saveJoke } from "@/services/jokeService"
 
-import Alert from '../../../components/Alert'
-import LoadingButton from '../../../components/button/LoadingButton'
-import Modal from "../../../components/Modal"
+import Alert from '@/components/Alert'
+import LoadingButton from '@/components/button/LoadingButton'
+import Modal from "@/components/Modal"
 import JokeForm from './JokeForm'
 
 function JokeFormModal({

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { getUniqueTypes } from "../../../common/utils/jokeUtils"
+import { getUniqueTypes } from "@/common/utils/jokeUtils"
 
-import TextInput from "../../../components/inputs/TextInput"
-import Autocomplete from "../../../components/inputs/Autocomplete"
+import TextInput from "@/components/inputs/TextInput"
+import Autocomplete from "@/components/inputs/Autocomplete"
 
 function JokeForm({ formData, setFormData, jokes }) {
   const [types, setTypes] = useState([])

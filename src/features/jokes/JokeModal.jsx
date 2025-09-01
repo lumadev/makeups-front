@@ -1,5 +1,5 @@
-import { btnCancelClass, btnClass } from "../../common/utils/classes"
-import Modal from "../../components/Modal"
+import { btnCancelClass, btnClass } from "@/common/utils/classes"
+import Modal from "@/components/Modal"
 
 function JokeModal({ isOpen, onClose, joke, onNextJoke }) {
   return (

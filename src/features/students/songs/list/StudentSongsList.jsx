@@ -8,6 +8,7 @@ import TableDataCell from "@/components/table/TableDataCell"
 import SkeletonStudentSongList from "@/components/skeleton/SkeletonStudentSongList"
 
 import { listStudentSongs } from "@/services/studentSongsService"
+import { IconLink } from "@tabler/icons-react"
 
 function StudentSongsList({
   student,
@@ -47,8 +48,7 @@ function StudentSongsList({
       setStudentSongs(data)
       setStudentSongsList?.(data)
       onCountChange(data.length)
-    } catch(e) {
-      console.log(e)
+    } catch {
       toast("Ocorreu um erro ao buscar as músicas do aluno", {
         type: "error",
       })
@@ -102,6 +102,7 @@ function StudentSongsList({
                         <tr>
                           <TableHeaderCell>Nome da Música</TableHeaderCell>
                           <TableHeaderCell>Artista</TableHeaderCell>
+                          <TableHeaderCell>Link da Versão</TableHeaderCell>
                           <TableHeaderCell>Recital</TableHeaderCell>
                           <TableHeaderCell>Audição</TableHeaderCell>
                           <TableHeaderCell>Ações</TableHeaderCell>
@@ -115,6 +116,25 @@ function StudentSongsList({
                             </TableDataCell>
                             <TableDataCell>
                               {studentSong.artist}
+                            </TableDataCell>
+                            <TableDataCell>
+                              <div className="flex items-center gap-x-2">
+                                {studentSong.versionLink ? (
+                                  <>
+                                    <a
+                                      href={studentSong.versionLink}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-blue-600 hover:underline truncate max-w-xs"
+                                    >
+                                      Ir para o link
+                                    </a>
+                                    <IconLink size={18} />
+                                  </>
+                                ) : (
+                                  "-"
+                                )}
+                              </div>
                             </TableDataCell>
                             <TableDataCell>
                               {studentSong.isRecital ? "Sim" : "Não"}

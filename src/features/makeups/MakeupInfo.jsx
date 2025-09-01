@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { formatDate } from '../../common/utils/date'
+import { formatDate } from '@/common/utils/date'
 
 function MakeupInfo({ makeups = [] }) {
   const todaysCount = useMemo(() => {

@@ -4,10 +4,10 @@ import { toast } from 'react-toastify'
 import { listStudents } from "../../../services/studentService.js"
 
 import StudentActions from './StudentActions'
-import Pagination from '../../../components/Pagination'
-import TableHeaderCell from '../../../components/table/TableHeaderCell'
-import TableDataCell from '../../../components/table/TableDataCell'
-import SkeletonStudentList from '../../../components/skeleton/SkeletonStudentList'
+import Pagination from '@/components/Pagination'
+import TableHeaderCell from '@/components/table/TableHeaderCell'
+import TableDataCell from '@/components/table/TableDataCell'
+import SkeletonStudentList from '@/components/skeleton/SkeletonStudentList'
 
 function StudentList({ searchTerm, reloadFlag, onCountChange }) {
   const isFirstLoad = useRef(true)

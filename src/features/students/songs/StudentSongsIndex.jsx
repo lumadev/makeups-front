@@ -16,7 +16,10 @@ function StudentSongsIndex({ student }) {
     <>
       {/* Button and modal of new studentSong */}
       <div className="flex my-4">
-        <StudentSongNew onAfterSave={reloadStudentSongs} />
+        <StudentSongNew 
+          student={student}
+          onAfterSave={reloadStudentSongs}
+        />
       </div>
 
       {/* studentSongs search */}

@@ -5,9 +5,10 @@ import { saveStudentSong, editStudentSong } from "@/services/studentSongsService
 
 import LoadingButton from '@/components/button/LoadingButton'
 import Modal from "@/components/Modal"
-// import StudentSongForm from './StudentSongForm'
+import StudentSongForm from './StudentSongForm'
 
-function StudentSongsFormModal({
+function StudentSongFormModal({
+  student,
   isEdit = false,
   isOpen,
   onClose,
@@ -18,11 +19,13 @@ function StudentSongsFormModal({
   const [formData, setFormData] = useState({})
 
   const saveOrEdit = () => {
+    const studentId = student.id
+
     if (isEdit) {
-      const idStudentSongs = formData.id
-      return editStudentSong(idStudentSongs, formData)
+      const idStudentSong = formData.id
+      return editStudentSong(studentId, idStudentSong, formData)
     } else {
-      return saveStudentSong(formData)
+      return saveStudentSong(studentId, formData)
     }
   }
 
@@ -55,7 +58,8 @@ function StudentSongsFormModal({
         songName: "",
         artist: "",
         isRecital: false,
-        isMusicAudition: false
+        isMusicAudition: false,
+        done: false
       })
     }
   }, [isEdit, studentSongsEdit, isOpen])
@@ -87,13 +91,13 @@ function StudentSongsFormModal({
         </>
       }
     >
-      {/* <StudentSongForm 
+      <StudentSongForm 
         isEdit={isEdit}
         formData={formData} 
         setFormData={setFormData}
-      /> */}
+      />
     </Modal>
   )
 }
 
-export default StudentSongsFormModal
+export default StudentSongFormModal

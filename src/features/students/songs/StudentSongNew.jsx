@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import StudentSongFormModal from './form/StudentSongFormModal'
 
-function StudentSongsNew({ onAfterSave }) {
+function StudentSongsNew({ student, onAfterSave }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -16,6 +16,7 @@ function StudentSongsNew({ onAfterSave }) {
       </button>
 
       <StudentSongFormModal
+        student={student}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onAfterSave={onAfterSave}

@@ -1,0 +1,71 @@
+import { useEffect, useState } from 'react'
+import TextInput from '@/components/inputs/TextInput'
+import CheckboxInput from '@/components/inputs/CheckboxInput'
+
+function StudentSongForm({ formData, setFormData }) {
+  const [isRecital, setIsRecital] = useState(formData.isRecital || false)
+  const [isMusicAudition, setIsMusicAudition] = useState(formData.isMusicAudition || false)
+
+  const handleChange = (event) => {
+    const { id, value } = event.target
+    setFormData(prev => ({ ...prev, [id]: value }))
+  }
+
+  const handleRecitalChange = (checked) => {
+    setIsRecital(checked)
+    setFormData(prev => ({ ...prev, isRecital: checked }))
+  }
+
+  const handleMusicAuditionChange = (checked) => {
+    setIsMusicAudition(checked)
+    setFormData(prev => ({ ...prev, isMusicAudition: checked }))
+  }
+
+  useEffect(() => {
+    // sincroniza com formData caso seja edição
+    setIsRecital(formData.isRecital || false)
+    setIsMusicAudition(formData.isMusicAudition || false)
+  }, [formData.isRecital, formData.isMusicAudition])
+
+  return (
+    <form>
+      <div className="grid gap-6 mb-6 lg:grid-cols-2">
+        <TextInput
+          id="songName"
+          label="Nome da Música"
+          value={formData.songName || ''}
+          onChange={handleChange}
+          placeholder="Nome da Música"
+          maxLength="200"
+          required
+        />
+
+        <TextInput
+          id="artist"
+          label="Artista"
+          value={formData.artist || ''}
+          onChange={handleChange}
+          placeholder="Artista"
+          maxLength="200"
+          required
+        />
+      </div>
+
+      <div className="grid gap-6 mb-6 lg:grid-cols-2">
+        <CheckboxInput
+          label="É música do recital"
+          checked={isRecital}
+          onChange={handleRecitalChange}
+        />
+
+        <CheckboxInput
+          label="É música da audição?"
+          checked={isMusicAudition}
+          onChange={handleMusicAuditionChange}
+        />
+      </div>
+    </form>
+  )
+}
+
+export default StudentSongForm

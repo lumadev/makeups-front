@@ -1,7 +1,8 @@
-function CheckboxInput({ label, checked, onChange, name }) {
+function CheckboxInput({ id, label, checked, onChange, name }) {
   return (
     <label className="flex items-center space-x-2 cursor-pointer select-none">
       <input
+        id={id}
         type="checkbox"
         name={name}
         checked={checked}

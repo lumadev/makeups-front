@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useState, useRef } from "react"
 import { toast } from "react-toastify"
 
-// import StudentSongActions from './StudentSongActions'
+import StudentSongActions from './StudentSongActions'
 import Pagination from "../../../../components/Pagination"
 import TableHeaderCell from "../../../../components/table/TableHeaderCell"
 import TableDataCell from "../../../../components/table/TableDataCell"

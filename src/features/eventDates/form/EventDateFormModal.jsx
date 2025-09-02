@@ -2,7 +2,7 @@ import { btnClass, btnCancelClass } from '@/common/utils/classes'
 import { validateEventDateForm } from '@/common/utils/eventDateUtils'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
-import { saveEventDate, editEventDate } from "@/services/eventDateService"
+import { saveEventDate, editEventDate } from "@/features/eventDates/eventDateService"
 
 import Alert from '@/components/Alert'
 import LoadingButton from '@/components/button/LoadingButton'

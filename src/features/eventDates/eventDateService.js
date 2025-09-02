@@ -1,4 +1,4 @@
-import { api } from "./api"
+import { api } from "@/services/api"
 
 const listEventDates = () => {
   return api.get('/event-dates')

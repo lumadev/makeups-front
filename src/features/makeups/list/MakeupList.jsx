@@ -3,7 +3,7 @@ import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
 import { listMakeups } from "@/features/makeups/makeupService"
-import { listMakeupsDone } from "@/services/makeupDoneService"
+import { listMakeupsDone } from "@/features/makeupsDone/makeupDoneService"
 
 import MakeupActions from './MakeupActions'
 import Pagination from "@/components/Pagination"

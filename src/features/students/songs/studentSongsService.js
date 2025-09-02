@@ -1,4 +1,4 @@
-import { api } from "./api"
+import { api } from "@/services/api"
 
 const listStudentSongs = (studentId) => {
   return api.get(`/student-songs/${studentId}/songs`)

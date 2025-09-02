@@ -4,10 +4,14 @@ import { deleteStudentSong } from "@/services/studentSongsService.js"
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import ActionButton from '@/components/button/ActionButton'
+import StudentSongFormModal from '@/features/students/songs/form/StudentSongFormModal'
 
 function StudentSongActions({ student, studentSong, onAfterSave }) {
+  const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
+
+  const openModalEdit = () => setShowModalEdit(true)
 
   const deleteStudentSongApi = async () => {
     setLoadingDelete(true)
@@ -30,6 +34,11 @@ function StudentSongActions({ student, studentSong, onAfterSave }) {
 
   return (
     <>
+      {/* edit button */}
+      <ActionButton onClick={openModalEdit}>
+        Editar
+      </ActionButton>
+
       {/* delete button */}
       <ActionButton onClick={() => setShowDialogDelete(true)}>
         Excluir
@@ -44,6 +53,15 @@ function StudentSongActions({ student, studentSong, onAfterSave }) {
           onClose={() => setShowDialogDelete(false)}
         />
       )}
+
+      <StudentSongFormModal
+        student={student}
+        isEdit="true"
+        isOpen={showModalEdit}
+        onClose={() => setShowModalEdit(false)}
+        onAfterSave={onAfterSave}
+        studentSongsEdit={studentSong}
+      />
     </>
   )
 }

@@ -3,7 +3,7 @@ import { btnClass, btnCancelClass } from '@/common/utils/classes'
 import { validateMakeupForm } from '@/common/utils/makeupUtils'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
-import { saveMakeup, editMakeup } from "@/services/makeupService"
+import { saveMakeup, editMakeup } from "@/features/makeups/makeupService"
 
 import Alert from "@/components/Alert"
 import LoadingButton from "@/components/button/LoadingButton"

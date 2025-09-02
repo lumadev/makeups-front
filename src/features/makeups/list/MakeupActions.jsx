@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteMakeup, markMakeupAsDone } from "@/services/makeupService.js"
+import { deleteMakeup, markMakeupAsDone } from "@/features/makeups/makeupService"
 
 import { IconCheck } from '@tabler/icons-react'
 

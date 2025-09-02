@@ -5,7 +5,7 @@ import JokeActions  from './JokeActions'
 import Pagination from "@/components/Pagination"
 import TableHeaderCell from "@/components/table/TableHeaderCell"
 import TableDataCell from "@/components/table/TableDataCell"
-import SkeletonJokeList from "@/components/skeleton/SkeletonJokeList"
+import SkeletonJokeList from "./SkeletonJokeList"
 
 import { getAllJokes } from "@/features/jokes/jokeService"
 

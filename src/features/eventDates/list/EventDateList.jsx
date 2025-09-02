@@ -8,7 +8,7 @@ import EventDateActions from './EventDateActions'
 import Pagination from '@/components/Pagination'
 import TableHeaderCell from '@/components/table/TableHeaderCell'
 import TableDataCell from '@/components/table/TableDataCell'
-import SkeletonEventDateList from '@/components/skeleton/SkeletonEventDateList'
+import SkeletonEventDateList from './SkeletonEventDateList'
 
 function EventDateList({
   title,

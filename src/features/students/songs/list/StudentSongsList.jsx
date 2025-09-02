@@ -5,7 +5,7 @@ import StudentSongActions from './StudentSongActions'
 import Pagination from "@/components/Pagination"
 import TableHeaderCell from "@/components/table/TableHeaderCell"
 import TableDataCell from "@/components/table/TableDataCell"
-import SkeletonStudentSongList from "@/components/skeleton/SkeletonStudentSongList"
+import SkeletonStudentSongList from "./SkeletonStudentSongList"
 
 import { listStudentSongs } from "@/features/students/songs/studentSongsService"
 import { IconLink } from "@tabler/icons-react"

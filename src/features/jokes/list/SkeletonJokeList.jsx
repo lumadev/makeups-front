@@ -1,5 +1,5 @@
-import TableHeaderCell from '../table/TableHeaderCell'
-import TableDataCell from '../table/TableDataCell'
+import TableHeaderCell from '@/components/table/TableHeaderCell'
+import TableDataCell from '@/components/table/TableDataCell'
 
 function SkeletonJokeList() {
   return (

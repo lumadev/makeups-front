@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getStudentById } from '@/services/studentService'
+import { getStudentById } from "@/features/students/studentService"
 import { toast } from 'react-toastify'
 
 import StudentSongsIndex from './songs/StudentSongsIndex'

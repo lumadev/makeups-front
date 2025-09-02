@@ -1,7 +1,7 @@
 import { formatDate } from '@/common/utils/date'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { toast } from 'react-toastify'
-import { listStudents } from "@/services/studentService.js"
+import { listStudents } from "@/features/students/studentService"
 
 import StudentActions from './StudentActions'
 import Pagination from '@/components/Pagination'

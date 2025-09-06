@@ -1,15 +1,26 @@
+import { IconCheck } from '@tabler/icons-react'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteStudentSong } from "@/features/students/songs/studentSongsService"
+import { deleteStudentSong, editStudentSong } from "@/features/students/songs/studentSongsService"
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import ActionButton from '@/components/button/ActionButton'
 import StudentSongFormModal from '@/features/students/songs/form/StudentSongFormModal'
 
-function StudentSongActions({ student, studentSong, onAfterSave }) {
+function StudentSongActions({ 
+  student,
+  screenType,
+  studentSong,
+  onAfterSave
+}) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
+  const [showDialogConfirmDone, setShowDialogConfirmDone] = useState(false)
+
+  const [loadingMarkAsDone, setLoadingMarkAsDone] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
+  
+  const isScreenSongsDone = screenType === 'songs-done'
 
   const openModalEdit = () => setShowModalEdit(true)
 
@@ -32,14 +43,49 @@ function StudentSongActions({ student, studentSong, onAfterSave }) {
     }
   }
 
+  const markAsDone = async () => {
+    const songUpdated = { ...studentSong, done: true }
+
+    setLoadingMarkAsDone(true)
+
+    try {
+      await editStudentSong(student.id, studentSong.id, songUpdated)
+
+      toast("Música marcada como concluída", { 
+        type: 'success'
+      })
+      onAfterSave()
+    } catch {
+      toast("Erro ao marcar como concluída", {
+        type: 'error'
+      })
+    } finally {
+      setLoadingMarkAsDone(false)
+      setShowDialogConfirmDone(false)
+    }
+  }
+
   return (
     <>
-      {/* edit button */}
-      <ActionButton onClick={openModalEdit}>
-        Editar
-      </ActionButton>
+      {!isScreenSongsDone && (
+        <>
+          {/* edit button */}
+          <ActionButton onClick={openModalEdit}>
+            Editar
+          </ActionButton>
 
-      {/* delete button */}
+          {/* mark as checked button */}
+          <button
+            className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
+            onClick={() => setShowDialogConfirmDone(true)}
+          >
+            <IconCheck size={18} />
+            Marcar como concluída
+          </button>
+        </>
+      )}
+
+      {/* delete button (sempre aparece em qualquer tela) */}
       <ActionButton onClick={() => setShowDialogDelete(true)}>
         Excluir
       </ActionButton>
@@ -51,6 +97,16 @@ function StudentSongActions({ student, studentSong, onAfterSave }) {
           loading={loadingDelete}
           onConfirm={deleteStudentSongApi}
           onClose={() => setShowDialogDelete(false)}
+        />
+      )}
+
+      {showDialogConfirmDone && (
+        <ConfirmationDialog
+          title="Marcar como concluída"
+          message={`Deseja realmente marcar como concluída a música ${studentSong.songName}?`}
+          loading={loadingMarkAsDone}
+          onConfirm={() => markAsDone()}
+          onClose={() => setShowDialogConfirmDone(false)}
         />
       )}
 

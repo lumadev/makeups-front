@@ -7,11 +7,12 @@ import TableHeaderCell from "@/components/table/TableHeaderCell"
 import TableDataCell from "@/components/table/TableDataCell"
 import SkeletonStudentSongList from "./SkeletonStudentSongList"
 
-import { listStudentSongs } from "@/features/students/songs/studentSongsService"
+import { listNotDoneStudentSongs, listDoneStudentSongs } from "@/features/students/songs/studentSongsService"
 import { IconLink } from "@tabler/icons-react"
 
 function StudentSongsList({
   student,
+  screenType,
   searchTerm,
   onCountChange,
   setStudentSongsList = null,
@@ -42,7 +43,13 @@ function StudentSongsList({
   // get student songs
   const getStudentSongs = useCallback(async (isFirstLoad = false) => {
     try {
-      const response = await listStudentSongs(student.id)
+      let response
+      if (screenType === 'songs-not-done') {
+        response = await listNotDoneStudentSongs(student.id)
+
+      } else if (screenType === 'songs-done') {
+        response = await listDoneStudentSongs(student.id)
+      }
       const data = response.data
 
       setStudentSongs(data)
@@ -146,6 +153,7 @@ function StudentSongsList({
                               <div className="flex items-center gap-x-6">
                                 <StudentSongActions 
                                   student={student}
+                                  screenType={screenType}
                                   studentSong={studentSong}
                                   onAfterSave={refreshStudentSongs}
                                 />

@@ -4,11 +4,13 @@ import { deleteMakeup, markMakeupAsDone } from "@/features/makeups/makeupService
 
 import { IconCheck } from '@tabler/icons-react'
 
+import ActionButton from '@/components/button/ActionButton'
 import ConfirmationDialog from "@/components/confirmation/ConfirmationDialog"
 import MakeupFormModal from '../form/MakeupFormModal'
 
 function MakeupActions({ makeup, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
+  
   const [showDialogDelete, setShowDialogDelete] = useState(false)
   const [showDialogConfirmDone, setShowDialogConfirmDone] = useState(false)
 
@@ -65,19 +67,15 @@ function MakeupActions({ makeup, onAfterSave }) {
   return (
     <>
       {/* edit button */}
-      <button 
-        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-        onClick={() => openModalEdit()}
-      >
+      <ActionButton onClick={openModalEdit}>
         Editar
-      </button>
+      </ActionButton>
+
       {/* delete button */}
-      <button
-        className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-        onClick={() => setShowDialogDelete(true)}
-      >
+      <ActionButton onClick={() => setShowDialogDelete(true)}>
         Excluir
-      </button>
+      </ActionButton>
+      
       {/* mark as checked button */}
       <button
         className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"

@@ -3,6 +3,8 @@ import { useState } from 'react'
 import StudentSongsList from './list/StudentSongsList'
 import StudentSongNew from './StudentSongNew'
 import StudentSongsSearch from './list/StudentSongsSearch'
+import StudentSongBtnListDone from './list/StudentSongBtnListDone'
+
 
 function StudentSongsIndex({ student }) {
   const [searchTerm, setSearchTerm] = useState('')
@@ -25,6 +27,9 @@ function StudentSongsIndex({ student }) {
       {/* Separator */}
       <div className="border-b border-gray-300 dark:border-gray-700 my-4" />
 
+      {/* Botão para visualizar concluídas */}
+      <StudentSongBtnListDone student={student} />
+
       {/* studentSongs search */}
       {studentSongCount > 0 && (
         <StudentSongsSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
@@ -33,6 +38,7 @@ function StudentSongsIndex({ student }) {
       {/* studentSongs list */}
       <StudentSongsList
         student={student}
+        screenType="songs-not-done"
         searchTerm={searchTerm}
         reloadFlag={reloadFlag}
         onCountChange={setStudentSongCount}

@@ -4,6 +4,14 @@ const listStudentSongs = (studentId) => {
   return api.get(`/student-songs/${studentId}/songs`)
 }
 
+const listDoneStudentSongs = (studentId) => {
+  return api.get(`/student-songs/${studentId}/songs-done`)
+}
+
+const listNotDoneStudentSongs = (studentId) => {
+  return api.get(`/student-songs/${studentId}/songs-not-done`)
+}
+
 const saveStudentSong = (studentId, data) => {
   return api.post(`/student-songs/${studentId}/songs`, data)
 }
@@ -18,6 +26,8 @@ const deleteStudentSong = (studentId, songId) => {
 
 export { 
   listStudentSongs,
+  listDoneStudentSongs,
+  listNotDoneStudentSongs,
   saveStudentSong,
   editStudentSong,
   deleteStudentSong,

@@ -1,23 +1,25 @@
 import { api } from "@/services/api"
 
+const basePath = '/makeups'
+
 const listMakeups = () => {
-  return api.get('/makeups')
+  return api.get(basePath)
 }
 
 const saveMakeup = (data) => {
-  return api.post('/makeups', data)
+  return api.post(basePath, data)
 }
 
 const editMakeup = (id, data) => {
-  return api.put(`/makeups/${id}`, data)
+  return api.put(`${basePath}/${id}`, data)
 }
 
 const deleteMakeup = (id) => {
-  return api.delete(`/makeups/${id}`)
+  return api.delete(`${basePath}/${id}`)
 }
 
 const markMakeupAsDone = (id) => {
-  return api.put(`/makeups/${id}/mark-as-done`)
+  return api.put(`${basePath}/${id}/mark-as-done`)
 }
 
 export { 

@@ -12,7 +12,7 @@ import { IconLink } from "@tabler/icons-react"
 
 function StudentSongsList({
   student,
-  screenType,
+  screenType = 'songs-not-done',
   searchTerm,
   onCountChange,
   setStudentSongsList = null,

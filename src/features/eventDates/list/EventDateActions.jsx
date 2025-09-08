@@ -1,6 +1,7 @@
+import { IconCheck } from '@tabler/icons-react'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { deleteEventDate } from "@/features/eventDates/eventDateService"
+import { deleteEventDate, editEventDate } from "@/features/eventDates/eventDateService"
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import EventDateFormModal from '../form/EventDateFormModal'
@@ -9,6 +10,9 @@ import ActionButton from '@/components/button/ActionButton'
 function EventDateActions({ eventDate, onAfterSave }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
+  const [showDialogConfirmDone, setShowDialogConfirmDone] = useState(false)
+
+  const [loadingMarkAsDone, setLoadingMarkAsDone] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
 
   const openModalEdit = () => setShowModalEdit(true)
@@ -32,12 +36,43 @@ function EventDateActions({ eventDate, onAfterSave }) {
     }
   }
 
+  const markAsDone = async () => {
+    const eventDateUpdated = { ...eventDate, done: true }
+
+    setLoadingMarkAsDone(true)
+
+    try {
+      await editEventDate(eventDate.id, eventDateUpdated)
+
+      toast("Evento marcado como concluído", { 
+        type: 'success'
+      })
+      onAfterSave()
+    } catch {
+      toast("Erro ao marcar o evento como concluído", {
+        type: 'error'
+      })
+    } finally {
+      setLoadingMarkAsDone(false)
+      setShowDialogConfirmDone(false)
+    }
+  }
+
   return (
     <>
       {/* edit button */}
       <ActionButton onClick={openModalEdit}>
         Editar
       </ActionButton>
+
+      {/* mark as checked button */}
+      <button
+        className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
+        onClick={() => setShowDialogConfirmDone(true)}
+      >
+        <IconCheck size={18} />
+        Marcar como concluída
+      </button>
 
       {/* delete button */}
       <ActionButton onClick={() => setShowDialogDelete(true)}>
@@ -51,6 +86,16 @@ function EventDateActions({ eventDate, onAfterSave }) {
           loading={loadingDelete}
           onConfirm={deleteEventDateApi}
           onClose={() => setShowDialogDelete(false)}
+        />
+      )}
+
+      {showDialogConfirmDone && (
+        <ConfirmationDialog
+          title="Marcar como concluída"
+          message={`Deseja realmente marcar a data de evento ${eventDate.description} como concluída?`}
+          loading={loadingMarkAsDone}
+          onConfirm={() => markAsDone()}
+          onClose={() => setShowDialogConfirmDone(false)}
         />
       )}
 

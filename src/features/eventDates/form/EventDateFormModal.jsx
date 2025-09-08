@@ -63,7 +63,8 @@ function EventDateFormModal({
       setFormData({ 
         initialDate: "", 
         finalDate: "", 
-        observations: ""
+        observations: "",
+        done: false
       })
     }
     // always clear validation message when open modal

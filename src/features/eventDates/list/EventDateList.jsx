@@ -2,7 +2,7 @@ import { formatDateAndHour } from '@/common/utils/date'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-import { listEventDates } from "@/features/eventDates/eventDateService"
+import { listDoneEventDates, listNotDoneEventDates } from "@/features/eventDates/eventDateService"
 
 import EventDateActions from './EventDateActions'
 import Pagination from '@/components/Pagination'
@@ -12,6 +12,7 @@ import SkeletonEventDateList from './SkeletonEventDateList'
 
 function EventDateList({
   title,
+  screenType = 'event-dates-not-done',
   searchTerm,
   onCountChange,
   setEventDatesList = null,
@@ -46,7 +47,13 @@ function EventDateList({
 
   const getEventDates = useCallback(async (isFirstLoad = false) => {
     try {
-      const response = await listEventDates()
+      let response
+      if (screenType === 'event-dates-not-done') {
+        response = await listNotDoneEventDates()
+
+      } else if (screenType === 'event-dates-done') {
+        response = await listDoneEventDates()
+      }
       const data = response.data
       setEventDates(data)
 

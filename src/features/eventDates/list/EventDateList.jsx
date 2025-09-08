@@ -139,6 +139,7 @@ function EventDateList({
                               <div className="flex items-center gap-x-6">
                                 <EventDateActions
                                   eventDate={eventDate}
+                                  screenType={screenType}
                                   onAfterSave={refreshEventDates}
                                 />
                               </div>

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import EventDateList from './list/EventDateList'
 import EventDateNew from './EventDateNew'
 import EventDateSearch from './list/EventDateSearch'
+import EventDateListDoneModal from './list/EventDateListDoneModal'
 
 function EventDateIndex() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -17,6 +18,12 @@ function EventDateIndex() {
       <div className="flex my-4">
         <EventDateNew onAfterSave={reloadDateEvents} />
       </div>
+
+      {/* Separator */}
+      <div className="border-b border-gray-300 dark:border-gray-700 my-4" />
+
+      {/* Botão para visualizar concluídas */}
+      <EventDateListDoneModal />
 
       {/* dateEvents search */}
       {dateEventCount > 0 && (

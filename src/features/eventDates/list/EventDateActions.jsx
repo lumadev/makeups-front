@@ -7,13 +7,19 @@ import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import EventDateFormModal from '../form/EventDateFormModal'
 import ActionButton from '@/components/button/ActionButton'
 
-function EventDateActions({ eventDate, onAfterSave }) {
+function EventDateActions({ 
+  eventDate,
+  screenType,
+  onAfterSave
+}) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
   const [showDialogConfirmDone, setShowDialogConfirmDone] = useState(false)
 
   const [loadingMarkAsDone, setLoadingMarkAsDone] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
+
+  const isScreenEventsDone = screenType === 'event-dates-done'
 
   const openModalEdit = () => setShowModalEdit(true)
 
@@ -60,19 +66,23 @@ function EventDateActions({ eventDate, onAfterSave }) {
 
   return (
     <>
-      {/* edit button */}
-      <ActionButton onClick={openModalEdit}>
-        Editar
-      </ActionButton>
+      {!isScreenEventsDone && (
+        <>
+          {/* edit button */}
+          <ActionButton onClick={openModalEdit}>
+            Editar
+          </ActionButton>
 
-      {/* mark as checked button */}
-      <button
-        className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
-        onClick={() => setShowDialogConfirmDone(true)}
-      >
-        <IconCheck size={18} />
-        Marcar como concluída
-      </button>
+          {/* mark as checked button */}
+          <button
+            className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
+            onClick={() => setShowDialogConfirmDone(true)}
+          >
+            <IconCheck size={18} />
+            Marcar como concluída
+          </button>
+        </>
+      )}
 
       {/* delete button */}
       <ActionButton onClick={() => setShowDialogDelete(true)}>

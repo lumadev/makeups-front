@@ -3,7 +3,7 @@ import { useState } from 'react'
 import StudentSongsList from './list/StudentSongsList'
 import StudentSongNew from './StudentSongNew'
 import StudentSongsSearch from './list/StudentSongsSearch'
-import StudentSongBtnListDone from './list/StudentSongBtnListDone'
+import StudentSongListDoneModal from './list/StudentSongListDoneModal'
 
 
 function StudentSongsIndex({ student }) {
@@ -28,7 +28,7 @@ function StudentSongsIndex({ student }) {
       <div className="border-b border-gray-300 dark:border-gray-700 my-4" />
 
       {/* Botão para visualizar concluídas */}
-      <StudentSongBtnListDone student={student} />
+      <StudentSongListDoneModal student={student} />
 
       {/* studentSongs search */}
       {studentSongCount > 0 && (

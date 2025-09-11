@@ -22,7 +22,7 @@ function EventDateSongListDoneModal({ eventDate }) {
       <ActionButton
         onClick={() => setIsOpen(true)}
       >
-        Visualizar Concluídas
+        Visualizar Eventos Concluídos
       </ActionButton>
 
       {/* Modal */}

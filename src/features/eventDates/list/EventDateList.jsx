@@ -17,6 +17,7 @@ function EventDateList({
   onCountChange,
   setEventDatesList = null,
   reloadFlag = null,
+  onlyConfirmed
 }) {
   const isFirstLoad = useRef(true)
 
@@ -26,15 +27,20 @@ function EventDateList({
   // filter by search term
   const filteredEventDates = eventDates.filter((eventDate) => {
     const term = searchTerm.toLowerCase()
-    const startDate = formatDateAndHour(eventDate.startDate)
-    const endDate = formatDateAndHour(eventDate.endDate)
+    const startDate = formatDateAndHour(eventDate.initialDate)
+    const endDate = formatDateAndHour(eventDate.finalDate)
     const observations = eventDate.observations?.toLowerCase() || ""
+    const description = eventDate.description?.toLowerCase() || ""
 
-    return (
+    const matchesSearch = 
       startDate.includes(term) ||
       endDate.includes(term) ||
-      observations.includes(term)
-    )
+      observations.includes(term) ||
+      description.includes(term)
+
+    const matchesConfirmed = onlyConfirmed ? eventDate.confirmed === true : true
+
+    return matchesSearch && matchesConfirmed
   })
 
   // pagination

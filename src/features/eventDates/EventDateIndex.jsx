@@ -11,6 +11,7 @@ function EventDateIndex() {
   const [reloadFlag, setReloadFlag] = useState(false)
   const [dateEventCount, setDateEventCount] = useState(0)
   const [eventDates, setEventDates] = useState([])
+  const [onlyConfirmed, setOnlyConfirmed] = useState(false)
 
   const reloadDateEvents = () => setReloadFlag((prev) => !prev)
 
@@ -36,7 +37,11 @@ function EventDateIndex() {
 
       {/* dateEvents search */}
       {dateEventCount > 0 && (
-        <EventDateSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+        <EventDateSearch 
+          searchTerm={searchTerm}
+          setOnlyConfirmed={setOnlyConfirmed}
+          onSearch={setSearchTerm}
+        />
       )}
 
       {/* dateEvents list */}
@@ -45,6 +50,7 @@ function EventDateIndex() {
         reloadFlag={reloadFlag}
         setEventDatesList={setEventDates}
         onCountChange={setDateEventCount}
+        onlyConfirmed={onlyConfirmed}
       />
     </>
   )

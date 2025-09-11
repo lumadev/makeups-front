@@ -61,10 +61,12 @@ function EventDateList({
         response = await listDoneEventDates()
       }
       const data = response.data
-      setEventDates(data)
+      const sortedData = data.sort((a, b) => new Date(a.initialDate) - new Date(b.initialDate))
 
-      setEventDatesList?.(data)
-      onCountChange(data.length)
+      setEventDates(sortedData)
+
+      setEventDatesList?.(sortedData)
+      onCountChange(sortedData.length)
     } catch {
       toast("Ocorreu um erro ao buscar as datas de evento", { 
         type: 'error'

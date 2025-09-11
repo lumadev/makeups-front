@@ -68,7 +68,7 @@ function EventDateList({
         setLoading(false)
       }
     }
-  }, [onCountChange, setEventDatesList])
+  }, [onCountChange, setEventDatesList, screenType])
 
   const refreshEventDates = useCallback(async () => {
     setLoading(true)

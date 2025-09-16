@@ -9,7 +9,10 @@ function TextInput({
   placeholder = "",
   maxLength,
   required = false,
-  pattern
+  pattern,
+  className = "",
+  rightElement = null,
+  ...rest
 }) {
   return (
     <div>
@@ -18,18 +21,28 @@ function TextInput({
           {label}
         </label>
       )}
-      <input
-        type={type}
-        id={id}
-        maxLength={maxLength}
-        className={inputClass}
-        placeholder={placeholder}
-        value={value || ""}
-        onChange={onChange}
-        onMouseDown={(e) => e.stopPropagation()} 
-        required={required}
-        pattern={pattern}
-      />
+
+      <div className="relative">
+        <input
+          id={id}
+          type={type}
+          maxLength={maxLength}
+          className={`${inputClass} ${className} ${rightElement ? 'pr-10' : ''}`}
+          placeholder={placeholder}
+          value={value || ""}
+          onChange={onChange}
+          onMouseDown={(e) => e.stopPropagation()}
+          required={required}
+          pattern={pattern}
+          {...rest}
+        />
+
+        {rightElement && (
+          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-auto">
+            {rightElement}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

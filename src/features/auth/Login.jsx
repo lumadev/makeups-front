@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { login } from '@/features/auth/authService'
 import { ToastContainer } from 'react-toastify'
 
+import TextInput from "@/components/inputs/TextInput"
+import PasswordInput from "@/components/inputs/PasswordInput"
+
 function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -63,32 +66,19 @@ function Login() {
           </h1>
 
           <form className="space-y-4">
-            <div>
-              <label htmlFor="username" className="block text-sm text-zinc-950 mb-1">
-                Usuário
-              </label>
-              <input
-                id="username"
-                name="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full rounded-lg border border-zinc-200 bg-white dark:bg-transparent dark:border-zinc-800 px-4 py-3 text-sm text-zinc-950 dark:text-white placeholder:text-zinc-400 focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm text-zinc-950 mb-1">
-                Senha
-              </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-zinc-200 bg-white dark:bg-transparent dark:border-zinc-800 px-4 py-3 text-sm text-zinc-950 dark:text-white placeholder:text-zinc-400 focus:outline-none"
-              />
-            </div>
+            <TextInput
+              id="username"
+              label="Usuário"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <PasswordInput
+              id="password"
+              label="Senha"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
             <button
               type="submit"

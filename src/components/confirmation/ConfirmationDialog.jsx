@@ -11,55 +11,60 @@ function ConfirmationDialog({
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
-      onClick={onClose} // Fecha ao clicar no backdrop
+      className="fixed break-words whitespace-normal inset-0 z-50 flex items-end justify-center bg-black/40 p-2 sm:items-center sm:p-0"
+      onClick={onClose}
     >
       <div
-        className="relative mx-auto max-w-auto rounded-md border border-slate-100 bg-white p-4 px-6 text-sm shadow-lg"
-        onClick={(e) => e.stopPropagation()} // Impede o clique interno de fechar
+        className="w-full max-w-lg rounded-t-lg sm:rounded-lg bg-white p-4 sm:p-5 shadow-lg overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
       >
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 ml-auto text-slate-500 hover:text-slate-900"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="h-5 w-5"
+        {/* Cabeçalho */}
+        <div className="mb-3 flex items-start justify-between w-full">
+          <h4 className="font-medium text-slate-900 break-words w-full pr-4 text-sm sm:text-base">
+            {title}
+          </h4>
+          <button
+            onClick={onClose}
+            className="ml-2 text-slate-500 hover:text-slate-900 shrink-0"
           >
-            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="h-5 w-5"
+            >
+              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+            </svg>
+          </button>
+        </div>
 
-        <div className="flex space-x-4 pt-4">
-          <div className="flex-1">
-            <h4 className="pr-6 font-medium text-slate-900">{title}</h4>
-            <div className="mt-1 text-slate-500">{message}</div>
-
-            <div className="mt-3 flex space-x-4">
-              <button
-                onClick={onConfirm}
-                disabled={loading}
-                className={`inline-flex items-center font-medium leading-loose text-blue-600 hover:text-blue-700 ${
-                  loading ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-              >
-                {loading && (
-                  <span className="mr-2">
-                    <ConfirmationDialogLoading />
-                  </span>
-                )}
-                {confirmText}
-              </button>
-              <button
-                onClick={onClose}
-                className="inline-block font-medium leading-loose text-slate-500 hover:text-slate-900"
-              >
-                {cancelText}
-              </button>
-            </div>
+        {/* Mensagem */}
+        <div>
+          <div className="mb-4 text-slate-600 break-all w-full text-sm sm:text-base">
+            {message}
           </div>
+        </div>
+
+        {/* Ações */}
+        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:space-x-3">
+          <button
+            onClick={onClose}
+            className="rounded-md border border-slate-200 px-4 py-2 text-slate-600 hover:bg-slate-50 w-full sm:w-auto text-sm sm:text-base"
+          >
+            {cancelText}
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={loading}
+            className="px-3 py-2 lg:px-4 bg-teal-400 text-white text-sm sm:text-base font-semibold rounded hover:bg-teal-500 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+          >
+            {loading && (
+              <span className="mr-2 inline-block">
+                <ConfirmationDialogLoading />
+              </span>
+            )}
+            {confirmText}
+          </button>
         </div>
       </div>
     </div>

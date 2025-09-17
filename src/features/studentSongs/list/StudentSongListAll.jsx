@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
+import { Link } from "react-router-dom"
 import { toast } from 'react-toastify'
 import { listAllStudentSongs } from "@/features/students/songs/studentSongsService"
 import { IconLink } from "@tabler/icons-react"
@@ -7,7 +8,7 @@ import { IconLink } from "@tabler/icons-react"
 import Pagination from '@/components/Pagination'
 import TableHeaderCell from '@/components/table/TableHeaderCell'
 import TableDataCell from '@/components/table/TableDataCell'
-import SkeletonStudentSongList from './SkeletonStudentSongList'
+import SkeletonStudentSongListAll from './SkeletonStudentSongListAll'
 
 function StudentSongList({ searchTerm, reloadFlag }) {
   const isFirstLoad = useRef(true)
@@ -74,7 +75,7 @@ function StudentSongList({ searchTerm, reloadFlag }) {
   return (
     <div>
       {loading ? (
-        <SkeletonStudentSongList/>
+        <SkeletonStudentSongListAll/>
       ) : (
         <>
           {filteredStudentSongs.length > 0 ? (
@@ -118,7 +119,12 @@ function StudentSongList({ searchTerm, reloadFlag }) {
                             </TableDataCell>
 
                             <TableDataCell>
-                              {song.studentName}
+                              <Link 
+                                to={`/aluno/${song.studentId}/musicas`} 
+                                className="text-blue-600 hover:underline"
+                              >
+                                {song.studentName}
+                              </Link>
                             </TableDataCell>
 
                             <TableDataCell>

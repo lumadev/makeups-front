@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { getStudentById } from "@/features/students/studentService"
 import { toast } from 'react-toastify'
 
@@ -7,6 +7,7 @@ import StudentSongsIndex from './songs/StudentSongsIndex'
 
 function StudentManage() {
   const { id } = useParams()
+  const navigate = useNavigate()
   
   const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -16,18 +17,20 @@ function StudentManage() {
       try {
         setLoading(true)
         const response = await getStudentById(id)
+
         setStudent(response.data)
       } catch {
         toast("Erro ao carregar o aluno", { 
           type: 'error'
         })
+        navigate('/alunos')
       } finally {
         setLoading(false)
       }
     }
 
     fetchStudent()
-  }, [id])
+  }, [id, navigate])
 
   if (loading) {
     return (
@@ -45,7 +48,9 @@ function StudentManage() {
       <h1 className="text-xl font-semibold mb-4">
         Bem-vindo à área do Aluno {student?.name}
       </h1>
-      <StudentSongsIndex student={student} />
+      { student && (
+        <StudentSongsIndex student={student} />
+      )}
     </div>
   )
 }

@@ -8,9 +8,9 @@ import { IconLink } from "@tabler/icons-react"
 import Pagination from '@/components/Pagination'
 import TableHeaderCell from '@/components/table/TableHeaderCell'
 import TableDataCell from '@/components/table/TableDataCell'
-import SkeletonStudentSongListAll from './SkeletonStudentSongListAll'
+import SkeletonStudentAllSongsList from './SkeletonStudentAllSongsList'
 
-function StudentSongList({ searchTerm, reloadFlag }) {
+function StudentAllSongsList({ searchTerm, reloadFlag }) {
   const isFirstLoad = useRef(true)
 
   const [studentSongs, setStudentSongs] = useState([])
@@ -75,7 +75,7 @@ function StudentSongList({ searchTerm, reloadFlag }) {
   return (
     <div>
       {loading ? (
-        <SkeletonStudentSongListAll/>
+        <SkeletonStudentAllSongsList/>
       ) : (
         <>
           {filteredStudentSongs.length > 0 ? (
@@ -185,4 +185,4 @@ function StudentSongList({ searchTerm, reloadFlag }) {
   )
 }
 
-export default StudentSongList
+export default StudentAllSongsList

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-import StudentSongListAll from './list/StudentSongListAll'
+import StudentAllSongsList from './list/StudentAllSongsList'
 // import StudentSongNew from './StudentSongNew'
 // import StudentSongSearch  from './list/StudentSongSearch'
 
-function StudentSongIndex() {
+function StudentAllSongsIndex() {
   const [searchTerm] = useState('')
   const [reloadFlag] = useState(false)
   // const [studentSongCount, setStudentSongCount] = useState(0)
@@ -24,7 +24,7 @@ function StudentSongIndex() {
       )} */}
 
       {/* Students list */}
-      <StudentSongListAll 
+      <StudentAllSongsList 
         searchTerm={searchTerm} 
         reloadFlag={reloadFlag}
         // onCountChange={setStudentSongCount}
@@ -33,4 +33,4 @@ function StudentSongIndex() {
   )
 }
 
-export default StudentSongIndex
+export default StudentAllSongsIndex

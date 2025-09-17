@@ -1,7 +1,7 @@
 import TableHeaderCell from '@/components/table/TableHeaderCell'
 import TableDataCell from '@/components/table/TableDataCell'
 
-function SkeletonStudentSongList() {
+function SkeletonStudentAllSongsList() {
   return (
     <section className="container mt-2">
       <div className="flex items-center justify-between mb-2">
@@ -46,4 +46,4 @@ function SkeletonStudentSongList() {
   )
 }
 
-export default SkeletonStudentSongList
+export default SkeletonStudentAllSongsList

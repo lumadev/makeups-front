@@ -11,7 +11,7 @@ import NotFound from './errors/NotFound'
 import RequireAuth from './RequireAuth'
 import StudentIndex from './features/students/StudentIndex'
 import StudentManage from './features/students/StudentManage'
-import StudentSongIndex from './features/studentSongs/StudentSongIndex'
+import StudentAllSongsIndex from './features/studentSongs/StudentAllSongsIndex'
 import JokeIndex from './features/jokes/JokeIndex'
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             <Route index element={<Navigate to="/reposicoes" replace />} />
             <Route path="alunos" element={<StudentIndex />} />
             <Route path="aluno/:id/musicas" element={<StudentManage />} />
-            <Route path="musicas-alunos" element={<StudentSongIndex />} />
+            <Route path="musicas-alunos" element={<StudentAllSongsIndex />} />
             <Route path="reposicoes" element={<MakeupIndex />} />
             <Route path="reposicoes-concluidas" element={<MakeupDoneIndex />} />
             <Route path="datas-de-evento" element={<EventDateIndex />} />

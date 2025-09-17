@@ -2,12 +2,12 @@ import { useState } from 'react'
 
 import StudentAllSongsList from './list/StudentAllSongsList'
 // import StudentSongNew from './StudentSongNew'
-// import StudentSongSearch  from './list/StudentSongSearch'
+import StudentAllSongsSearch  from './list/StudentAllSongsSearch'
 
 function StudentAllSongsIndex() {
-  const [searchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
   const [reloadFlag] = useState(false)
-  // const [studentSongCount, setStudentSongCount] = useState(0)
+  const [studentSongCount, setStudentSongCount] = useState(0)
 
   // const reloadStudentSongs = () => setReloadFlag((prev) => !prev)
 
@@ -19,15 +19,15 @@ function StudentAllSongsIndex() {
       </div> */}
 
       {/* Students search */}
-      {/* {studentSongCount > 0 && (
-        <StudentSongSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
-      )} */}
+      {studentSongCount > 0 && (
+        <StudentAllSongsSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+      )}
 
       {/* Students list */}
       <StudentAllSongsList 
         searchTerm={searchTerm} 
         reloadFlag={reloadFlag}
-        // onCountChange={setStudentSongCount}
+        onCountChange={setStudentSongCount}
       />
     </>
   )

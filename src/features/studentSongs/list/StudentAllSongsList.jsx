@@ -10,7 +10,7 @@ import TableHeaderCell from '@/components/table/TableHeaderCell'
 import TableDataCell from '@/components/table/TableDataCell'
 import SkeletonStudentAllSongsList from './SkeletonStudentAllSongsList'
 
-function StudentAllSongsList({ searchTerm, reloadFlag }) {
+function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
   const isFirstLoad = useRef(true)
 
   const [studentSongs, setStudentSongs] = useState([])
@@ -18,13 +18,11 @@ function StudentAllSongsList({ searchTerm, reloadFlag }) {
 
   const filteredStudentSongs = studentSongs.filter((song) => {
     const term = searchTerm.toLowerCase()
-    return (
-      song.songName.toLowerCase().includes(term) ||
-      song.artist.toLowerCase().includes(term) ||
-      song.versionLink.toLowerCase().includes(term)
-    )
-  })
+    const fields = [song.songName, song.artist, song.versionLink, song.studentName]
 
+    return fields.some(field => field.toLowerCase().includes(term))
+  })
+  
   // pagination
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
@@ -39,7 +37,7 @@ function StudentAllSongsList({ searchTerm, reloadFlag }) {
       let songs = response.data
 
       setStudentSongs(songs)
-      // onCountChange(songs.length)
+      onCountChange(songs.length)
     } catch {
       toast("Ocorreu um erro ao buscar as músicas dos alunos", { 
         type: 'error'

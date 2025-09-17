@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { listAllStudentSongs } from "@/features/students/songs/studentSongsService"
+import { IconLink } from "@tabler/icons-react"
 
 // import StudentActions from './StudentActions'
 import Pagination from '@/components/Pagination'
@@ -8,7 +9,7 @@ import TableHeaderCell from '@/components/table/TableHeaderCell'
 import TableDataCell from '@/components/table/TableDataCell'
 import SkeletonStudentSongList from './SkeletonStudentSongList'
 
-function StudentSongList({ searchTerm, reloadFlag, onCountChange }) {
+function StudentSongList({ searchTerm, reloadFlag }) {
   const isFirstLoad = useRef(true)
 
   const [studentSongs, setStudentSongs] = useState([])
@@ -95,7 +96,10 @@ function StudentSongList({ searchTerm, reloadFlag, onCountChange }) {
                           <TableHeaderCell>Nome</TableHeaderCell>
                           <TableHeaderCell>Artista</TableHeaderCell>
                           <TableHeaderCell>Estudante</TableHeaderCell>
+                          <TableHeaderCell>Link da Versão</TableHeaderCell>
                           <TableHeaderCell>Concluída</TableHeaderCell>
+                          {/* <TableHeaderCell>Recital</TableHeaderCell>
+                          <TableHeaderCell>Audição</TableHeaderCell> */}
                           {/* <TableHeaderCell>Ações</TableHeaderCell> */}
                         </tr>
                       </thead>
@@ -115,6 +119,26 @@ function StudentSongList({ searchTerm, reloadFlag, onCountChange }) {
 
                             <TableDataCell>
                               {song.studentName}
+                            </TableDataCell>
+
+                            <TableDataCell>
+                              <div className="flex items-center gap-x-2">
+                                {song.versionLink ? (
+                                  <>
+                                    <a
+                                      href={song.versionLink}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-blue-600 hover:underline truncate max-w-xs"
+                                    >
+                                      Ir para o link
+                                    </a>
+                                    <IconLink size={18} />
+                                  </>
+                                ) : (
+                                  "-"
+                                )}
+                              </div>
                             </TableDataCell>
 
                             <TableDataCell>

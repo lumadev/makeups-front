@@ -64,7 +64,7 @@ function StudentSongsList({
         setLoading(false)
       }
     }
-  }, [student.id, onCountChange, setStudentSongsList])
+  }, [student.id, onCountChange, setStudentSongsList, screenType])
 
   const refreshStudentSongs = useCallback(async () => {
     setLoading(true)

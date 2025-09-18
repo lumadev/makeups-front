@@ -17,24 +17,24 @@ function MakeupInfo({ makeups = [] }) {
   const plural = count === 1 ? "reposição" : "reposições"
 
   return (
-    <div className={baseClasses}>
-      {count > 0 ? (
-        <>
-          <div>
-            Você tem {count} {plural} para hoje:
-          </div>
-          <ul className={listItemClasses}>
-            {todaysMakeups.map((makeup, index) => (
-              <li key={index}>
-                {makeup.studentName} - {formatDateAndHour(makeup.dateReplacement)}
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        "Você não tem reposições para hoje!"
+    <>
+      {count > 0 && (
+        <div className={baseClasses}>
+          <>
+            <div>
+              Você tem {count} {plural} para hoje:
+            </div>
+            <ul className={listItemClasses}>
+              {todaysMakeups.map((makeup, index) => (
+                <li key={index}>
+                  {makeup.studentName} - {formatDateAndHour(makeup.dateReplacement)}
+                </li>
+              ))}
+            </ul>
+          </>
+        </div>
       )}
-    </div>
+    </>
   )
 }
 

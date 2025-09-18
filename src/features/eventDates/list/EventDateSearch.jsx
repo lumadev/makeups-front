@@ -2,7 +2,7 @@ import { useState } from "react"
 import CheckboxInput from "@/components/inputs/CheckboxInput"
 
 function EventDateSearch({ searchTerm, onSearch, setOnlyConfirmed }) {
-  const [onlyConfirmed, setInternalOnlyConfirmed] = useState(true)
+  const [onlyConfirmed, setInternalOnlyConfirmed] = useState(false)
 
   const handleCheckboxChange = (value) => {
     setInternalOnlyConfirmed(value)

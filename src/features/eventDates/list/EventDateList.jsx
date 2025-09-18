@@ -107,7 +107,7 @@ function EventDateList({
         <SkeletonEventDateList />
       ) : (
         <>
-          {eventDates.length > 0 ? (
+          {filteredEventDates.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold">{title}</h2>

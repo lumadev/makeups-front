@@ -24,21 +24,21 @@ function HomeIndex() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-8">
+    <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 overflow-x-hidden w-full">
       {/* Título */}
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">
+      <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-center">
         Bem-vindo ao sistema de reposições!
       </h1>
 
       {/* Componente MakeupInfo só após carregamento */}
       {!loading && (
-        <div className="w-full">
+        <div className="w-full mb-8">
           <MakeupInfo makeups={makeups} />
         </div>
       )}
 
       {/* Grid de Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 w-full">
         <CardLink href="/reposicoes" label="Reposições de Aula" icon={IconSchool} />
         <CardLink href="/musicas-alunos" label="Músicas de Alunos" icon={IconCheck} />
         <CardLink href="/alunos" label="Lista de Alunos" icon={IconUser} />

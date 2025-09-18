@@ -1,28 +1,39 @@
 import { useMemo } from 'react'
-import { formatDate } from '@/common/utils/date'
+import { formatDate, formatDateAndHour } from '@/common/utils/date'
 
 function MakeupInfo({ makeups = [] }) {
-  const todaysCount = useMemo(() => {
-    const makeupsToday = makeups.filter((makeup) => {
-      const dateReplacement = makeup.dateReplacement
-
-      if (!dateReplacement) return false
-
+  const todaysMakeups = useMemo(() => {
+    return makeups.filter((makeup) => {
+      if (!makeup.dateReplacement) return false
       const todayFormatted = formatDate(new Date())
-      const dateFormatted = formatDate(dateReplacement)
-
+      const dateFormatted = formatDate(makeup.dateReplacement)
       return dateFormatted === todayFormatted
     })
-    return makeupsToday.length
   }, [makeups])
 
   const baseClasses = "bg-blue-50 text-blue-800 p-4 mb-4 rounded-lg shadow-sm"
+  const listItemClasses = "ml-4 list-disc"
+  const count = todaysMakeups.length
+  const plural = count === 1 ? "reposição" : "reposições"
 
   return (
     <div className={baseClasses}>
-      {todaysCount > 0
-        ? `Você tem ${todaysCount} reposição(ões) para hoje!`
-        : "Você não tem reposições para hoje!"}
+      {count > 0 ? (
+        <>
+          <div>
+            Você tem {count} {plural} para hoje:
+          </div>
+          <ul className={listItemClasses}>
+            {todaysMakeups.map((makeup, index) => (
+              <li key={index}>
+                {makeup.studentName} - {formatDateAndHour(makeup.dateReplacement)}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        "Você não tem reposições para hoje!"
+      )}
     </div>
   )
 }

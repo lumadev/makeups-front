@@ -20,33 +20,17 @@ function Login() {
 
     // shows warning if login takes more than 5s
     const warningInterval = setInterval(() => {
-      toast.warn("O login está demorando mais do que o normal...")
+      toast.warn("O login está demorando para variar um pouco...", {
+        toastId: "login-warning",
+        autoClose: false
+      })
     }, 5000)
 
     try {
       const formData = { username, password }
       const res = await login(formData)
 
-      const { token, name, type } = res.data
-
-      localStorage.setItem("token", token)
-      localStorage.setItem("name", name)
-      localStorage.setItem("userType", type) 
-
-      toast("Login feito com sucesso", { 
-        type: 'success'
-      })
-
-      // reboot lastRequestHour
-      const now = new Date()
-      localStorage.setItem("lastRequestHour", now.toISOString())
-
-      // redirect by user permission
-      if (type === 'restricted') {
-        navigate('/piadas')
-      } else {
-        navigate('/reposicoes')
-      }
+      onAfterLogin(res.data)
     } catch {
       toast("Credenciais inválidas", { 
         type: 'error'
@@ -54,6 +38,28 @@ function Login() {
     } finally {
       clearInterval(warningInterval)
       setLoading(false)
+    }
+  }
+
+  const onAfterLogin = (data) => {
+    const { token, name, type } = data
+
+    // salvar dados no localStorage
+    localStorage.setItem("token", token)
+    localStorage.setItem("name", name)
+    localStorage.setItem("userType", type)
+
+    toast("Login feito com sucesso", { type: "success" })
+
+    // reboot lastRequestHour
+    const now = new Date()
+    localStorage.setItem("lastRequestHour", now.toISOString())
+
+    // redirect por permissão
+    if (type === "restricted") {
+      navigate("/piadas")
+    } else {
+      navigate("/reposicoes")
     }
   }
 

@@ -5,6 +5,7 @@ import './App.css'
 import Layout from './Layout'
 import Login from './features/auth/Login'
 import EventDateIndex from './features/eventDates/EventDateIndex'
+import HomeIndex from './features/home/HomeIndex'
 import MakeupIndex from './features/makeups/MakeupIndex'
 import MakeupDoneIndex from './features/makeupsDone/MakeupDoneIndex'
 import NotFound from './errors/NotFound'
@@ -27,6 +28,7 @@ function App() {
             <Route index element={<Navigate to="/reposicoes" replace />} />
             <Route path="alunos" element={<StudentIndex />} />
             <Route path="aluno/:id/musicas" element={<StudentManage />} />
+            <Route path="home" element={<HomeIndex />} />
             <Route path="musicas-alunos" element={<StudentAllSongsIndex />} />
             <Route path="reposicoes" element={<MakeupIndex />} />
             <Route path="reposicoes-concluidas" element={<MakeupDoneIndex />} />

@@ -96,9 +96,11 @@ function Sidebar() {
         `}
       >
         <div className="md:space-y-10 mt-10">
-          <h1 className="hidden md:block font-bold text-xl mb-6 text-center text-white">
-            Reposições
-          </h1>
+          <Link to="/reposicoes">
+            <h1 className="hidden md:block font-bold text-xl mb-6 text-center text-white">
+              Reposições
+            </h1>
+          </Link>
 
           {/* profile */}
           <div id="profile">

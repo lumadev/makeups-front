@@ -59,7 +59,7 @@ function Login() {
     if (type === "restricted") {
       navigate("/piadas")
     } else {
-      navigate("/reposicoes")
+      navigate("/home")
     }
   }
 

@@ -59,7 +59,7 @@ function EventDateList({
         response = await listDoneEventDates()
       }
       const data = response.data
-      const sortedData = data.sort((a, b) => new Date(a.initialDate) - new Date(b.initialDate))
+      const sortedData = data.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
 
       setEventDates(sortedData)
 

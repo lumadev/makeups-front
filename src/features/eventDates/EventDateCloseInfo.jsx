@@ -19,15 +19,18 @@ function EventDateCloseInfo({ eventDates }) {
 
       return notFinished && overlapsMonth
     })
-    .sort((a, b) => dayjs(a.initialDate).diff(dayjs(b.initialDate)))
+    .sort((a, b) => dayjs(a.eventDate).diff(dayjs(b.eventDate)))
 
   const closestEvent = futureEventsThisMonth[0]
   if (!closestEvent) return null
 
   return (
     <div className="my-2 text-sm text-gray-700 dark:text-gray-300">
-      <strong>Evento próximo:</strong> {closestEvent.description} (
-      {dayjs(closestEvent.eventDate).format("DD/MM")} -{" "}
+      <strong>Evento próximo:</strong> 
+      {' '}
+      {closestEvent.description} 
+      {' '}
+      ({dayjs(closestEvent.eventDate).format("DD/MM")})
     </div>
   )
 }

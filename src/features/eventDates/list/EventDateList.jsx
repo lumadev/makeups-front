@@ -27,14 +27,12 @@ function EventDateList({
   // filter by search term
   const filteredEventDates = eventDates.filter((eventDate) => {
     const term = searchTerm.toLowerCase()
-    const startDate = formatDateAndHour(eventDate.initialDate)
-    const endDate = formatDateAndHour(eventDate.finalDate)
+    const eventDateAndHour = formatDateAndHour(eventDate.eventDate)
     const observations = eventDate.observations?.toLowerCase() || ""
     const description = eventDate.description?.toLowerCase() || ""
 
     const matchesSearch = 
-      startDate.includes(term) ||
-      endDate.includes(term) ||
+      eventDateAndHour.includes(term) ||
       observations.includes(term) ||
       description.includes(term)
 
@@ -122,8 +120,7 @@ function EventDateList({
                       <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
                           <TableHeaderCell>Descrição</TableHeaderCell>
-                          <TableHeaderCell>Data de Início</TableHeaderCell>
-                          <TableHeaderCell>Data do Fim</TableHeaderCell>
+                          <TableHeaderCell>Data do Evento</TableHeaderCell>
                           <TableHeaderCell>Observações</TableHeaderCell>
                           <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
@@ -135,10 +132,7 @@ function EventDateList({
                               {eventDate.description}
                             </TableDataCell>
                             <TableDataCell>
-                              {formatDateAndHour(eventDate.initialDate)}
-                            </TableDataCell>
-                            <TableDataCell>
-                              {formatDateAndHour(eventDate.finalDate)}
+                              {formatDateAndHour(eventDate.eventDate)}
                             </TableDataCell>
                             <TableDataCell>
                               {eventDate.observations ? truncateText(eventDate.observations, 25) : "-"}

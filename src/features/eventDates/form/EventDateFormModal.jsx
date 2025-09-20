@@ -61,8 +61,7 @@ function EventDateFormModal({
       setFormData(eventDateEdit)
     } else {
       setFormData({ 
-        initialDate: "", 
-        finalDate: "", 
+        eventDate: "", 
         observations: "",
         done: false
       })

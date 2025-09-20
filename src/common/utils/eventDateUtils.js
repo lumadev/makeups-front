@@ -9,15 +9,11 @@ function validateEventDateForm(formData) {
     return error
   }
 
-  if (!formData.initialDate) {
-    error.errorMessage = 'Data inicial não preenchida.'
+  if (!formData.eventDate) {
+    error.errorMessage = 'Data do evento não preenchida.'
     return error
   }
 
-  if (!formData.finalDate) {
-    error.errorMessage = 'Data final não preenchida.'
-    return error
-  }
   return false
 }
 

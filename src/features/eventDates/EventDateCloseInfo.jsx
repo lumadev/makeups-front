@@ -9,14 +9,13 @@ function EventDateCloseInfo({ eventDates }) {
 
   const futureEventsThisMonth = eventDates
     .filter((event) => {
-      const initialDate = dayjs(event.initialDate)
-      const finalDate = dayjs(event.finalDate)
+      const eventDateAndHour = dayjs(event.eventDate)
 
-      const notFinished = finalDate.isAfter(now) || finalDate.isSame(now, "day")
+      const notFinished = eventDateAndHour.isAfter(now) || eventDateAndHour.isSame(now, "day")
 
       const overlapsMonth =
-        (initialDate.isBefore(endOfMonth) || initialDate.isSame(endOfMonth, "day")) &&
-        (finalDate.isAfter(startOfMonth) || finalDate.isSame(startOfMonth, "day"))
+        (eventDateAndHour.isBefore(endOfMonth) || eventDateAndHour.isSame(endOfMonth, "day")) &&
+        (eventDateAndHour.isAfter(startOfMonth) || eventDateAndHour.isSame(startOfMonth, "day"))
 
       return notFinished && overlapsMonth
     })
@@ -28,8 +27,7 @@ function EventDateCloseInfo({ eventDates }) {
   return (
     <div className="my-2 text-sm text-gray-700 dark:text-gray-300">
       <strong>Evento próximo:</strong> {closestEvent.description} (
-      {dayjs(closestEvent.initialDate).format("DD/MM")} -{" "}
-      {dayjs(closestEvent.finalDate).format("DD/MM")})
+      {dayjs(closestEvent.eventDate).format("DD/MM")} -{" "}
     </div>
   )
 }

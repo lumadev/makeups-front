@@ -12,10 +12,6 @@ function EventDateForm({
     setFormData((prev) => ({ ...prev, initialDate: date }))
   }
 
-  const handleFinalDateChange = (date) => {
-    setFormData((prev) => ({ ...prev, finalDate: date }))
-  }
-
   const handleChange = (event) => {
     const { id, value } = event.target
     setFormData(prev => ({ ...prev, [id]: value }))
@@ -37,17 +33,8 @@ function EventDateForm({
           isEdit={isEdit}
           itemEdit={eventDateEdit}
           onChange={handleInitialDateChange}
-          title="Data inicial"
+          title="Data e hora do evento"
           fieldName="initialDate"
-        />
-      </div>
-      <div className="mb-4">
-        <DateInput
-          isEdit={isEdit}
-          itemEdit={eventDateEdit}
-          onChange={handleFinalDateChange}
-          title="Data final"
-          fieldName="finalDate"
         />
       </div>
       <div className="mb-4">

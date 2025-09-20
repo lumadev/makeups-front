@@ -63,6 +63,7 @@ function EventDateFormModal({
       setFormData({ 
         eventDate: "", 
         observations: "",
+        link: "",
         done: false
       })
     }

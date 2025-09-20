@@ -8,8 +8,8 @@ function EventDateForm({
   setFormData,
   eventDateEdit = null
 }) {
-  const handleInitialDateChange = (date) => {
-    setFormData((prev) => ({ ...prev, initialDate: date }))
+  const handleEventDateChange = (date) => {
+    setFormData((prev) => ({ ...prev, eventDate: date }))
   }
 
   const handleChange = (event) => {
@@ -32,9 +32,20 @@ function EventDateForm({
         <DateInput
           isEdit={isEdit}
           itemEdit={eventDateEdit}
-          onChange={handleInitialDateChange}
+          onChange={handleEventDateChange}
           title="Data e hora do evento"
-          fieldName="initialDate"
+          fieldName="eventDate"
+        />
+      </div>
+      <div className="mb-4">
+        <TextInput
+          id="link"
+          label="Link do Evento"
+          value={formData.link || ''}
+          onChange={handleChange}
+          placeholder="Cole o link do evento"
+          maxLength="500"
+          type="url"
         />
       </div>
       <div className="mb-4">

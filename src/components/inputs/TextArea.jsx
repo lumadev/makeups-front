@@ -6,6 +6,7 @@ function TextArea({
   placeholder = "",
   rows = 4,
   className = "",
+  maxLength,
 }) {
   return (
     <div className={`w-full ${className}`}>
@@ -24,6 +25,7 @@ function TextArea({
         onChange={onChange}
         placeholder={placeholder}
         rows={rows}
+        maxLength={maxLength}
         className={`block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-500 ${className}`}
       />
     </div>

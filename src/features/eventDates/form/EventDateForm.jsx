@@ -57,6 +57,7 @@ function EventDateForm({
           onChange={handleChange}
           title="Observações"
           fieldName="observations"
+          maxLength="5000"
           placeholder="Digite observações adicionais sobre o evento..."
         />
       </div>

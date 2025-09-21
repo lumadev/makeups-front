@@ -1,9 +1,9 @@
 import { useState } from "react"
 
+import InputSearch from '@/components/inputs/InputSearch'
 import JokeList from "./list/JokeList"
 import JokeGenerateNew from "./JokeGenerateNew"
 import JokeButtons from "./JokeButtons"
-import JokeSearch from "./list/JokeSearch"
 import JokeNew from "./new/JokeNew"
 
 function JokesIndex() {
@@ -36,7 +36,12 @@ function JokesIndex() {
 
       {/* Joke search */}
       {totalJokes > 0 && (
-        <JokeSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+        <InputSearch
+          searchTerm={searchTerm}
+          label="Buscar piada"
+          placeholder="Digite a piada"
+          onSearch={setSearchTerm}
+        />
       )}
 
       {/* Jokes list */}

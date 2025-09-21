@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import MakeupList from '../makeups/list/MakeupList'
-import MakeupSearch  from '../makeups/list/MakeupSearch'
+import InputSearch from '@/components/inputs/InputSearch'
 
 function MakeupDoneIndex() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -11,7 +11,12 @@ function MakeupDoneIndex() {
     <>
       {/* Makeup search */}
       {makeupCount > 0 && (
-        <MakeupSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+        <InputSearch
+          searchTerm={searchTerm}
+          label="Buscar reposição"
+          placeholder="Digite a data da reposição ou nome do aluno"
+          onSearch={setSearchTerm}
+        />
       )}
 
       {/* Makeups list */}

@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import StudentList from './list/StudentList'
 import StudentNew from './StudentNew'
-import StudentSearch  from './list/StudentSearch'
 import InputSearch from '@/components/inputs/InputSearch'
 
 function StudentIndex() {

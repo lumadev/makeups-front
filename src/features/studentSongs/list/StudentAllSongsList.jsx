@@ -9,6 +9,7 @@ import Pagination from '@/components/Pagination'
 import TableHeaderCell from '@/components/table/TableHeaderCell'
 import TableDataCell from '@/components/table/TableDataCell'
 import SkeletonStudentAllSongsList from './SkeletonStudentAllSongsList'
+import StudentSongActions from '@/features/students/songs/list/StudentSongActions'
 
 function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
   const isFirstLoad = useRef(true)
@@ -96,10 +97,7 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
                           <TableHeaderCell>Artista</TableHeaderCell>
                           <TableHeaderCell>Estudante</TableHeaderCell>
                           <TableHeaderCell>Link da Versão</TableHeaderCell>
-                          <TableHeaderCell>Concluída</TableHeaderCell>
-                          {/* <TableHeaderCell>Recital</TableHeaderCell>
-                          <TableHeaderCell>Audição</TableHeaderCell> */}
-                          {/* <TableHeaderCell>Ações</TableHeaderCell> */}
+                          <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
                       </thead>
 
@@ -146,17 +144,13 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
                             </TableDataCell>
 
                             <TableDataCell>
-                              {song.done ? "Sim" : "Não"}
-                            </TableDataCell>
-                            
-                            {/* <TableDataCell> */}
-                              {/* <div className="flex items-center gap-x-6">
-                                <StudentActions
-                                  student={student}
-                                  onAfterSave={refreshStudents}
+                              <div className="flex items-center gap-x-6">
+                                <StudentSongActions
+                                  studentSong={song}
+                                  screenType="student-all-songs"
                                 />
-                              </div> */}
-                            {/* </TableDataCell> */}
+                              </div>
+                            </TableDataCell>
                           </tr>
                         ))}
                       </tbody>

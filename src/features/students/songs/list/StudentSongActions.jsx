@@ -2,6 +2,7 @@ import { IconCheck } from '@tabler/icons-react'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { deleteStudentSong, editStudentSong } from "@/features/students/songs/studentSongsService"
+// import { listSongsInfo } from "@/services/spotifyService"
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import ActionButton from '@/components/button/ActionButton'
@@ -21,6 +22,7 @@ function StudentSongActions({
   const [loadingDelete, setLoadingDelete] = useState(false)
   
   const isScreenSongsDone = screenType === 'songs-done'
+  const isScreenAllSongs = screenType === 'student-all-songs'
 
   const openModalEdit = () => setShowModalEdit(true)
 
@@ -65,6 +67,16 @@ function StudentSongActions({
     }
   }
 
+  // const checkInfo = async () => {
+  //   try {
+  //     await listSongsInfo(studentSong.songName, studentSong.artist)
+  //   } catch {
+  //     toast("Erro ao buscar informações sobre a música", {
+  //       type: 'error'
+  //     })
+  //   }
+  // }
+
   return (
     <>
       {!isScreenSongsDone && (
@@ -74,14 +86,20 @@ function StudentSongActions({
             Editar
           </ActionButton>
 
-          {/* mark as checked button */}
-          <button
-            className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
-            onClick={() => setShowDialogConfirmDone(true)}
-          >
-            <IconCheck size={18} />
-            Marcar como concluída
-          </button>
+          {/* edit button */}
+          {/* <ActionButton onClick={checkInfo}>
+            Ver Sobre...
+          </ActionButton> */}
+
+          {!studentSong.done && !isScreenAllSongs && (
+            <button
+              className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
+              onClick={() => setShowDialogConfirmDone(true)}
+            >
+              <IconCheck size={18} />
+              Marcar como concluída
+            </button>
+          )}
         </>
       )}
 

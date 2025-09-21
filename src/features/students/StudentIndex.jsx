@@ -3,6 +3,7 @@ import { useState } from 'react'
 import StudentList from './list/StudentList'
 import StudentNew from './StudentNew'
 import StudentSearch  from './list/StudentSearch'
+import InputSearch from '@/components/inputs/InputSearch'
 
 function StudentIndex() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -20,7 +21,12 @@ function StudentIndex() {
 
       {/* Students search */}
       {studentCount > 0 && (
-        <StudentSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+        <InputSearch
+          searchTerm={searchTerm}
+          label="Buscar aluno"
+          placeholder="Digite o nome do aluno"
+          onSearch={setSearchTerm}
+        />
       )}
 
       {/* Students list */}

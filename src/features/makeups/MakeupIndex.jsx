@@ -3,7 +3,7 @@ import { useState } from 'react'
 import MakeupInfo from './MakeupInfo'
 import MakeupList from './list/MakeupList'
 import MakeupNew from './MakeupNew'
-import MakeupSearch  from './list/MakeupSearch'
+import InputSearch from '@/components/inputs/InputSearch'
 
 function MakeupIndex() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -26,7 +26,12 @@ function MakeupIndex() {
 
       {/* Makeup search */}
       {makeupCount > 0 && (
-        <MakeupSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
+        <InputSearch
+          searchTerm={searchTerm}
+          label="Buscar reposição"
+          placeholder="Digite a data da reposição ou nome do aluno"
+          onSearch={setSearchTerm}
+        />
       )}
 
       {/* Makeups list */}

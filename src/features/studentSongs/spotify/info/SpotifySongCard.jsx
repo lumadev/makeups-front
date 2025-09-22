@@ -1,32 +1,42 @@
-import React, { useState } from "react"
-import { toast } from "react-toastify"
-import { editStudentSong } from "@/features/students/songs/studentSongsService"
+// import React, { useState } from "react"
+// import { toast } from "react-toastify"
+// import { editStudentSong } from "@/features/students/songs/studentSongsService"
 
 import ActionButton from "@/components/button/ActionButton"
 import LoadingButton from "@/components/button/LoadingButton"
 
-function SpotifySongCard({ spotifySong, studentId, song }) {
-  const [loading, setLoading] = useState(false)
+function SpotifySongCard({ 
+  spotifySong, 
+  // studentId, 
+  // song,
+  // onAfterVinculate
+}) {
+  // const [loading, setLoading] = useState(false)
 
   if (!spotifySong) return null
 
-  const handleVinculate = async () => {
-    setLoading(true)
-    try {
-      const formData = { ...song, spotifyId: spotifySong.id }
-      await editStudentSong(studentId, song.id, formData)
+  // const handleVinculate = async () => {
+  //   setLoading(true)
+  //   try {
+  //     const formData = { ...song, spotifyId: spotifySong.id }
 
-      toast("Versão vinculada com sucesso", {
-        type: "success",
-      })
-    } catch {
-      toast("Erro ao vincular a versão", {
-        type: "error",
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
+  //     await editStudentSong(studentId, song.id, formData)
+
+  //     song.spotifyId = spotifySong.id
+
+  //     toast("Versão vinculada com sucesso", {
+  //       type: "success",
+  //     })
+  //     // onAfterVinculate(spotifySong.id)
+  //   } catch(e) {
+  //     console.log(e)
+  //     toast("Erro ao vincular a versão", {
+  //       type: "error",
+  //     })
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
 
   return (
     <div className="grid grid-cols-4 gap-3 p-3 bg-white rounded-xl shadow">
@@ -54,7 +64,7 @@ function SpotifySongCard({ spotifySong, studentId, song }) {
       </div>
 
       {/* Botão Vincular */}
-      <div className="flex items-center justify-center">
+      {/* <div className="flex items-center justify-center">
         {loading ? (
           <LoadingButton text="Vinculando..." />
         ) : (
@@ -62,7 +72,7 @@ function SpotifySongCard({ spotifySong, studentId, song }) {
             Vincular esta versão
           </ActionButton>
         )}
-      </div>
+      </div> */}
     </div>
   )
 }

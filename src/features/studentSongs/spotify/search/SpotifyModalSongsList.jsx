@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import SpotifySongCard from "../info/SpotifySongCard"
 
-function SpotifySongList({ songs, studentId, song }) {
+function SpotifyModalSongsList({ songs, studentId, song }) {
   const [page, setPage] = useState(0)
   const itemsPerPage = 3
 
@@ -28,6 +28,7 @@ function SpotifySongList({ songs, studentId, song }) {
           spotifySong={spotifySong}
           studentId={studentId}
           song={song}
+          // onAfterVinculate={onAfterVinculate}
         />
       ))}
 
@@ -60,4 +61,4 @@ function SpotifySongList({ songs, studentId, song }) {
   )
 }
 
-export default SpotifySongList
+export default SpotifyModalSongsList

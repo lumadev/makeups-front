@@ -57,9 +57,11 @@ function Modal({
           </div>
 
           {/* Footer */}
-          <div className="flex flex-wrap gap-2 justify-end items-center p-4 sm:p-6 border-t border-gray-200 rounded-b dark:border-gray-600">
-            {actions}
-          </div>
+          { actions && (
+            <div className="flex flex-wrap gap-2 justify-end items-center p-4 sm:p-6 border-t border-gray-200 rounded-b dark:border-gray-600">
+              {actions}
+            </div>
+          )}
         </div>
       </div>
     </div>

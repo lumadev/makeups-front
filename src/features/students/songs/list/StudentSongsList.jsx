@@ -152,7 +152,7 @@ function StudentSongsList({
                             <TableDataCell>
                               <div className="flex items-center gap-x-6">
                                 <StudentSongActions 
-                                  student={student}
+                                  studentId={student.id}
                                   screenType={screenType}
                                   studentSong={studentSong}
                                   onAfterSave={refreshStudentSongs}

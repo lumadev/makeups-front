@@ -8,7 +8,7 @@ import Modal from "@/components/Modal"
 import StudentSongForm from './StudentSongForm'
 
 function StudentSongFormModal({
-  student,
+  studentId,
   isEdit = false,
   isOpen,
   onClose,
@@ -19,8 +19,6 @@ function StudentSongFormModal({
   const [formData, setFormData] = useState({})
 
   const saveOrEdit = () => {
-    const studentId = student.id
-
     if (isEdit) {
       const idStudentSong = formData.id
       return editStudentSong(studentId, idStudentSong, formData)

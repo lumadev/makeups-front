@@ -146,7 +146,7 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
                             <TableDataCell>
                               <div className="flex items-center gap-x-6">
                                 <StudentSongActions
-                                  student={song.studentId}
+                                  studentId={song.studentId}
                                   screenType="student-all-songs"
                                   studentSong={song}
                                   onAfterSave={refreshStudentSongs}

@@ -9,7 +9,7 @@ import StudentSongFormModal from '@/features/students/songs/form/StudentSongForm
 import SpotifyModalInfoIndex from '@/features/studentSongs/spotify/SpotifyModalInfoIndex'
 
 function StudentSongActions({ 
-  student,
+  studentId,
   screenType,
   studentSong,
   onAfterSave
@@ -53,7 +53,7 @@ function StudentSongActions({
     setLoadingMarkAsDone(true)
 
     try {
-      await editStudentSong(student.id, studentSong.id, songUpdated)
+      await editStudentSong(studentId, studentSong.id, songUpdated)
 
       toast("Música marcada como concluída", { 
         type: 'success'
@@ -121,7 +121,7 @@ function StudentSongActions({
       )}
 
       <StudentSongFormModal
-        student={student}
+        studentId={studentId}
         isEdit="true"
         isOpen={showModalEdit}
         onClose={() => setShowModalEdit(false)}
@@ -131,7 +131,7 @@ function StudentSongActions({
 
       <SpotifyModalInfoIndex
         song={studentSong}
-        studentId={student.id}
+        studentId={studentId}
         isOpen={showModalInfo}
         onClose={() => setShowModalInfo(false)}
       />

@@ -30,7 +30,7 @@ function EventDateIndex() {
       
       {/* Closest event on this month */}
       {dateEventCount > 0 && (
-        <div class="mt-4">
+        <div className="mt-4">
           <EventDateCloseInfo eventDates={eventDates} />
         </div>
       )}

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 // import { listSongsInfo } from "@/services/spotifyService"
-import { btnCancelClass } from '@/common/utils/classes'
 
 import Modal from "@/components/Modal"
-import SpotifySongCard from "@/features/studentSongs/spotify/info/SpotifySongCard"
+// import SpotifySongCard from "@/features/studentSongs/spotify/info/SpotifySongCard"
+import SpotifyModalSongsList from "@/features/studentSongs/spotify/search/SpotifyModalSongsList"
 
 function SpotifyModalItemsSearch({ 
   song,
@@ -98,7 +98,6 @@ function SpotifyModalItemsSearch({
         setLoading(false)
       }
     }
-
     fetchData()
   }, [isOpen, song])
 
@@ -110,40 +109,17 @@ function SpotifyModalItemsSearch({
       onClose={onClose}
       title={`Buscar no Spotify ${song.songName}...`}
       sizeClass="max-w-5xl"
-      actions={
-        <>
-          {/* {loadingSave ? (
-            <LoadingButton />
-          ) : (
-            <button 
-              onClick={save} 
-              className={btnClass}
-            >
-              Salvar
-            </button>
-          )} */}
-          <button 
-            onClick={onClose}
-            className={btnCancelClass}
-          >
-            Cancelar
-          </button>
-        </>
-      }
     >
       {loading ? (
         <p>Carregando...</p>
       ) : (
         <>
           {results && results.length > 0 ? (
-            results.map((spotifySong) => (
-              <SpotifySongCard 
-                key={spotifySong.id}
-                spotifySong={spotifySong}
-                studentId={studentId}
-                song={song}
-              />
-            ))
+            <SpotifyModalSongsList 
+              songs={results}
+              studentId={studentId}
+              song={song}
+            />
           ) : (
             <p>Nenhuma música encontrada.</p>
           )}

@@ -2,11 +2,11 @@ import { IconCheck } from '@tabler/icons-react'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { deleteStudentSong, editStudentSong } from "@/features/students/songs/studentSongsService"
-// import { listSongsInfo } from "@/services/spotifyService"
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import ActionButton from '@/components/button/ActionButton'
 import StudentSongFormModal from '@/features/students/songs/form/StudentSongFormModal'
+// import SpotifyModalInfoIndex from '@/features/studentSongs/spotify/SpotifyModalInfoIndex'
 
 function StudentSongActions({ 
   student,
@@ -15,6 +15,7 @@ function StudentSongActions({
   onAfterSave
 }) {
   const [showModalEdit, setShowModalEdit] = useState(false)
+  const [showModalInfo, setShowModalInfo] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState(false)
   const [showDialogConfirmDone, setShowDialogConfirmDone] = useState(false)
 
@@ -25,6 +26,7 @@ function StudentSongActions({
   const isScreenAllSongs = screenType === 'student-all-songs'
 
   const openModalEdit = () => setShowModalEdit(true)
+  // const openModalInfo = () => setShowModalInfo(true)
 
   const deleteStudentSongApi = async () => {
     setLoadingDelete(true)
@@ -67,29 +69,19 @@ function StudentSongActions({
     }
   }
 
-  // const checkInfo = async () => {
-  //   try {
-  //     await listSongsInfo(studentSong.songName, studentSong.artist)
-  //   } catch {
-  //     toast("Erro ao buscar informações sobre a música", {
-  //       type: 'error'
-  //     })
-  //   }
-  // }
-
   return (
     <>
       {!isScreenSongsDone && (
         <>
+          {/* Spotify button */}
+          {/* <ActionButton onClick={openModalInfo}>
+            Ver Sobre...
+          </ActionButton> */}
+          
           {/* edit button */}
           <ActionButton onClick={openModalEdit}>
             Editar
           </ActionButton>
-
-          {/* edit button */}
-          {/* <ActionButton onClick={checkInfo}>
-            Ver Sobre...
-          </ActionButton> */}
 
           {!studentSong.done && !isScreenAllSongs && (
             <button
@@ -135,6 +127,13 @@ function StudentSongActions({
         onClose={() => setShowModalEdit(false)}
         onAfterSave={onAfterSave}
         studentSongsEdit={studentSong}
+      />
+
+      <SpotifyModalInfoIndex
+        song={studentSong}
+        studentId={student.id}
+        isOpen={showModalInfo}
+        onClose={() => setShowModalInfo(false)}
       />
     </>
   )

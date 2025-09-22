@@ -1,23 +1,30 @@
-import React from "react"
-
+import React, { useState } from "react"
 import { toast } from "react-toastify"
 import { editStudentSong } from "@/features/students/songs/studentSongsService"
 
+import ActionButton from "@/components/button/ActionButton"
+import LoadingButton from "@/components/button/LoadingButton"
+
 function SpotifySongCard({ spotifySong, studentId, song }) {
+  const [loading, setLoading] = useState(false)
+
   if (!spotifySong) return null
 
   const handleVinculate = async () => {
+    setLoading(true)
     try {
       const formData = { ...song, spotifyId: spotifySong.id }
       await editStudentSong(studentId, song.id, formData)
 
-      toast("Música vinculada com sucesso", {
+      toast("Versão vinculada com sucesso", {
         type: "success",
       })
     } catch {
-      toast("Erro ao vincular música", {
+      toast("Erro ao vincular a versão", {
         type: "error",
       })
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -48,12 +55,13 @@ function SpotifySongCard({ spotifySong, studentId, song }) {
 
       {/* Botão Vincular */}
       <div className="flex items-center justify-center">
-        <button
-          onClick={handleVinculate}
-          className="px-3 py-2 text-sm bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition-colors"
-        >
-          Vincular esta versão
-        </button>
+        {loading ? (
+          <LoadingButton text="Vinculando..." />
+        ) : (
+          <ActionButton onClick={handleVinculate}>
+            Vincular esta versão
+          </ActionButton>
+        )}
       </div>
     </div>
   )

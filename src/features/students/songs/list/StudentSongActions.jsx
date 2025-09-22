@@ -6,7 +6,7 @@ import { deleteStudentSong, editStudentSong } from "@/features/students/songs/st
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import ActionButton from '@/components/button/ActionButton'
 import StudentSongFormModal from '@/features/students/songs/form/StudentSongFormModal'
-// import SpotifyModalInfoIndex from '@/features/studentSongs/spotify/SpotifyModalInfoIndex'
+import SpotifyModalInfoIndex from '@/features/studentSongs/spotify/SpotifyModalInfoIndex'
 
 function StudentSongActions({ 
   student,
@@ -26,7 +26,7 @@ function StudentSongActions({
   const isScreenAllSongs = screenType === 'student-all-songs'
 
   const openModalEdit = () => setShowModalEdit(true)
-  // const openModalInfo = () => setShowModalInfo(true)
+  const openModalInfo = () => setShowModalInfo(true)
 
   const deleteStudentSongApi = async () => {
     setLoadingDelete(true)
@@ -74,9 +74,9 @@ function StudentSongActions({
       {!isScreenSongsDone && (
         <>
           {/* Spotify button */}
-          {/* <ActionButton onClick={openModalInfo}>
+          <ActionButton onClick={openModalInfo}>
             Ver Sobre...
-          </ActionButton> */}
+          </ActionButton>
           
           {/* edit button */}
           <ActionButton onClick={openModalEdit}>

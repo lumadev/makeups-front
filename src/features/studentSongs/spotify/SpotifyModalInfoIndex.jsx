@@ -3,7 +3,13 @@ import { useState } from "react"
 import SpotifyModalInfo from "./info/SpotifyModalInfo"
 import SpotifyModalItemsSearch from "./search/SpotifyModalItemsSearch"
 
-function SpotifyModalInfoIndex({ studentSong, studentId, isOpen, onClose }) {
+function SpotifyModalInfoIndex({ 
+  studentSong, 
+  studentId, 
+  isOpen, 
+  onClose, 
+  onAfterSave,
+}) {
   const [vinculated, setVinculated] = useState(false)
 
   if (!isOpen) return null
@@ -11,7 +17,14 @@ function SpotifyModalInfoIndex({ studentSong, studentId, isOpen, onClose }) {
   const onAfterVinculate = ((spotifyId) => {    
     studentSong.spotifyId = spotifyId
     setVinculated(true)
+
+    onAfterSave()
   })
+
+  const onAfterRemove = () => {
+    onAfterSave()
+    onClose()
+  }
 
   return (
     <>
@@ -21,6 +34,7 @@ function SpotifyModalInfoIndex({ studentSong, studentId, isOpen, onClose }) {
           studentSong={studentSong}
           isOpen={isOpen}
           onClose={onClose}
+          onAfterRemove={onAfterRemove}
         />
       ) : (
         <SpotifyModalItemsSearch

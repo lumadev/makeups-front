@@ -11,6 +11,7 @@ function SpotifyModalInfo({
   studentSong,
   isOpen,
   onClose,
+  onAfterRemove
 }) {
   const [songDetails, setSongDetails] = useState(null)
 
@@ -41,7 +42,11 @@ function SpotifyModalInfo({
       sizeClass={songDetails ? 'max-w-3xl': 'max-w-5xl'}
     >
       {songDetails ? (
-        <SpotifyCardVersion spotifySong={songDetails} />
+        <SpotifyCardVersion 
+          spotifySong={songDetails}
+          studentSong={studentSong}
+          onAfterRemove={onAfterRemove}
+        />
       ) : (
         <SpotifyCardSkeleton />
       )}

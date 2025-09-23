@@ -142,6 +142,7 @@ function StudentSongActions({
         studentSong={studentSong}
         studentId={studentId}
         isOpen={showModalInfo}
+        onAfterSave={onAfterSave}
         onClose={() => setShowModalInfo(false)}
       />
     </>

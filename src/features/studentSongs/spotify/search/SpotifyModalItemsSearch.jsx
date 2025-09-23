@@ -7,7 +7,7 @@ import SpotifyModalSongsList from "@/features/studentSongs/spotify/search/Spotif
 import SpotifyModalItemsSearchSkeleton from "./SpotifyModalItemsSearchSkeleton"
 
 function SpotifyModalItemsSearch({ 
-  song,
+  studentSong,
   studentId,
   isOpen,
   onClose,
@@ -22,7 +22,7 @@ function SpotifyModalItemsSearch({
     const fetchData = async () => {
       setLoading(true)
       try {
-        const res = await listSongsInfo(song.songName, song.artist)
+        const res = await listSongsInfo(studentSong.songName, studentSong.artist)
         setResults(res.data || [])
       } catch {
         toast("Erro ao buscar informações sobre a música", {
@@ -33,7 +33,7 @@ function SpotifyModalItemsSearch({
       }
     }
     fetchData()
-  }, [isOpen, song])
+  }, [isOpen, studentSong])
 
   if (!isOpen) return null
 
@@ -41,7 +41,7 @@ function SpotifyModalItemsSearch({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`Buscar no Spotify ${song.songName}...`}
+      title={`Buscar no Spotify ${studentSong.songName}...`}
       sizeClass="max-w-5xl"
     >
       {loading ? (
@@ -52,7 +52,7 @@ function SpotifyModalItemsSearch({
             <SpotifyModalSongsList 
               songs={results}
               studentId={studentId}
-              song={song}
+              studentSong={studentSong}
               onAfterVinculate={onAfterVinculate}
             />
           ) : (

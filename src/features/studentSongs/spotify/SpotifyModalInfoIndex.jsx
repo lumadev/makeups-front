@@ -3,28 +3,28 @@ import { useState } from "react"
 import SpotifyModalInfo from "./info/SpotifyModalInfo"
 import SpotifyModalItemsSearch from "./search/SpotifyModalItemsSearch"
 
-function SpotifyModalInfoIndex({ song, studentId, isOpen, onClose }) {
+function SpotifyModalInfoIndex({ studentSong, studentId, isOpen, onClose }) {
   const [vinculated, setVinculated] = useState(false)
 
   if (!isOpen) return null
 
   const onAfterVinculate = ((spotifyId) => {    
-    song.spotifyId = spotifyId
+    studentSong.spotifyId = spotifyId
     setVinculated(true)
   })
 
   return (
     <>
-      {song.spotifyId || vinculated ? (
+      {studentSong.spotifyId || vinculated ? (
         <SpotifyModalInfo
-          spotifyId={song.spotifyId}
-          song={song}
+          spotifyId={studentSong.spotifyId}
+          studentSong={studentSong}
           isOpen={isOpen}
           onClose={onClose}
         />
       ) : (
         <SpotifyModalItemsSearch
-          song={song}
+          studentSong={studentSong}
           studentId={studentId}
           isOpen={isOpen}
           onClose={onClose}

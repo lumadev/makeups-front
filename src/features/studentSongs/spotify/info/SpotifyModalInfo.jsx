@@ -8,7 +8,7 @@ import { toast } from "react-toastify"
 
 function SpotifyModalInfo({ 
   spotifyId,
-  song,
+  studentSong,
   isOpen,
   onClose,
 }) {
@@ -37,7 +37,7 @@ function SpotifyModalInfo({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`${song.songName} no Spotify`}
+      title={`${studentSong.songName} no Spotify`}
       sizeClass={songDetails ? 'max-w-3xl': 'max-w-5xl'}
     >
       {songDetails ? (

@@ -139,7 +139,7 @@ function StudentSongActions({
       />
 
       <SpotifyModalInfoIndex
-        song={studentSong}
+        studentSong={studentSong}
         studentId={studentId}
         isOpen={showModalInfo}
         onClose={() => setShowModalInfo(false)}

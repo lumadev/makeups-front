@@ -8,7 +8,7 @@ import LoadingButton from "@/components/button/LoadingButton"
 function SpotifySongCard({ 
   spotifySong, 
   studentId, 
-  song,
+  studentSong,
   onAfterVinculate
 }) {
   const [loading, setLoading] = useState(false)
@@ -18,11 +18,11 @@ function SpotifySongCard({
   const handleVinculate = async () => {
     setLoading(true)
     try {
-      const formData = { ...song, spotifyId: spotifySong.id }
+      const formData = { ...studentSong, spotifyId: spotifySong.id }
 
-      await editStudentSong(studentId, song.id, formData)
+      await editStudentSong(studentId, studentSong.id, formData)
 
-      song.spotifyId = spotifySong.id
+      studentSong.spotifyId = spotifySong.id
 
       toast("Versão vinculada com sucesso", {
         type: "success",

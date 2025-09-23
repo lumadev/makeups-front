@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import SpotifySongCard from "../info/SpotifySongCard"
+import SpotifySongCardSearch from "../info/SpotifySongCardSearch"
 
-function SpotifyModalSongsList({ songs, studentId, song }) {
+function SpotifyModalSongsList({ songs, studentId, song, onAfterVinculate }) {
   const [page, setPage] = useState(0)
   const itemsPerPage = 3
 
@@ -23,12 +23,12 @@ function SpotifyModalSongsList({ songs, studentId, song }) {
   return (
     <div className="space-y-4">
       {paginatedSongs.map((spotifySong) => (
-        <SpotifySongCard
+        <SpotifySongCardSearch
           key={spotifySong.id}
           spotifySong={spotifySong}
           studentId={studentId}
           song={song}
-          // onAfterVinculate={onAfterVinculate}
+          onAfterVinculate={onAfterVinculate}
         />
       ))}
 

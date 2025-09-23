@@ -10,7 +10,7 @@ function SpotifyModalItemsSearch({
   studentId,
   isOpen,
   onClose,
-  // onAfterVinculate
+  onAfterVinculate
 }) {
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState([])
@@ -52,7 +52,7 @@ function SpotifyModalItemsSearch({
               songs={results}
               studentId={studentId}
               song={song}
-              // onAfterVinculate={onAfterVinculate}
+              onAfterVinculate={onAfterVinculate}
             />
           ) : (
             <p>Nenhuma música encontrada.</p>

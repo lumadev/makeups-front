@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { IconSchool, IconUser, IconCheck } from "@tabler/icons-react"
 
-import CardLink from "./CardLink"
+import HomeCardLink from "./HomeCardLink"
 import MakeupInfo from "@/features/makeups/MakeupInfo"
 import { listMakeups } from "@/features/makeups/makeupService"
 
@@ -39,9 +39,9 @@ function HomeIndex() {
 
       {/* Grid de Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 w-full">
-        <CardLink href="/reposicoes" label="Reposições de Aula" icon={IconSchool} />
-        <CardLink href="/musicas-alunos" label="Músicas de Alunos" icon={IconCheck} />
-        <CardLink href="/alunos" label="Lista de Alunos" icon={IconUser} />
+        <HomeCardLink href="/reposicoes" label="Reposições de Aula" icon={IconSchool} />
+        <HomeCardLink href="/musicas-alunos" label="Músicas de Alunos" icon={IconCheck} />
+        <HomeCardLink href="/alunos" label="Lista de Alunos" icon={IconUser} />
       </div>
     </div>
   )

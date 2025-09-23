@@ -4,6 +4,7 @@ import { listSongsInfo } from "@/services/spotifyService"
 
 import Modal from "@/components/Modal"
 import SpotifyModalSongsList from "@/features/studentSongs/spotify/search/SpotifyModalSongsList"
+import SpotifyModalItemsSearchSkeleton from "./SpotifyModalItemsSearchSkeleton"
 
 function SpotifyModalItemsSearch({ 
   song,
@@ -44,7 +45,7 @@ function SpotifyModalItemsSearch({
       sizeClass="max-w-5xl"
     >
       {loading ? (
-        <p>Carregando...</p>
+        <SpotifyModalItemsSearchSkeleton />
       ) : (
         <>
           {results && results.length > 0 ? (

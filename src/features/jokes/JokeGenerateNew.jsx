@@ -1,35 +1,21 @@
 import { useState } from "react"
 import { btnClass } from "@/common/utils/classes"
+import { getRandomJoke } from "./jokeUtils"
+
 import JokeModal from "./JokeModal"
 
 function JokeGenerateNew({ jokes }) {
   const [showModal, setShowModal] = useState(false)
   const [currentJoke, setCurrentJoke] = useState(null)
 
-  const getRandomJoke = (excludeJoke = null) => {
-    if (jokes.length === 0) return null
-
-    let randomJoke = null
-    let attempts = 0
-
-    // avoid repeat same joke
-    do {
-      const randomIndex = Math.floor(Math.random() * jokes.length)
-      randomJoke = jokes[randomIndex]
-      attempts++
-    } while (randomJoke === excludeJoke && attempts < 10)
-
-    return randomJoke
-  }
-
   const handleShowModal = () => {
-    const joke = getRandomJoke()
+    const joke = getRandomJoke(jokes)
     setCurrentJoke(joke)
     setShowModal(true)
   }
 
   const handleNextJoke = () => {
-    const joke = getRandomJoke(currentJoke)
+    const joke = getRandomJoke(jokes, currentJoke)
     setCurrentJoke(joke)
   }
 

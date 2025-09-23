@@ -31,7 +31,7 @@ function StudentSongActions({
   const deleteStudentSongApi = async () => {
     setLoadingDelete(true)
     try {
-      await deleteStudentSong(student.id, studentSong.id)
+      await deleteStudentSong(studentId, studentSong.id)
       onAfterSave()
 
       toast("Música do aluno excluída com sucesso", { 
@@ -74,10 +74,19 @@ function StudentSongActions({
       {!isScreenSongsDone && (
         <>
           {/* Spotify button */}
-          <ActionButton onClick={openModalInfo}>
-            Versões do Spotify...
-          </ActionButton>
-          
+          {studentSong.spotifyId ? (
+            <>
+              <IconCheck className="text-green-500" size={22} />
+              <ActionButton onClick={openModalInfo}>
+                Ver info Spotify...
+              </ActionButton>
+            </>
+          ) : (
+            <ActionButton onClick={openModalInfo}>
+              Vincular no Spotify...
+            </ActionButton>
+          )}
+              
           {/* edit button */}
           <ActionButton onClick={openModalEdit}>
             Editar

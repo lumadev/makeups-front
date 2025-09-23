@@ -3,6 +3,8 @@ import { IconSchool, IconUser, IconCheck } from "@tabler/icons-react"
 
 import HomeCardLink from "./HomeCardLink"
 import MakeupInfo from "@/features/makeups/MakeupInfo"
+import HomeDailyJoke from "./HomeDailyJoke"
+
 import { listMakeups } from "@/features/makeups/makeupService"
 
 function HomeIndex() {
@@ -29,6 +31,8 @@ function HomeIndex() {
       <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-center">
         Bem-vindo ao sistema de reposições!
       </h1>
+
+      <HomeDailyJoke />
 
       {/* Componente MakeupInfo só após carregamento */}
       {!loading && (

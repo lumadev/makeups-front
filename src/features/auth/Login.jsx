@@ -20,7 +20,7 @@ function Login() {
 
     // shows warning if login takes more than 5s
     const warningInterval = setInterval(() => {
-      toast.warn("O login está demorando para variar um pouco...", {
+      toast.warn("O login está demorando, o que acha de pegar um cafézinho enquanto espera?", {
         toastId: "login-warning",
         autoClose: false
       })

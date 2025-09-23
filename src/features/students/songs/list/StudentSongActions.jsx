@@ -75,7 +75,7 @@ function StudentSongActions({
         <>
           {/* Spotify button */}
           <ActionButton onClick={openModalInfo}>
-            Ver Sobre...
+            Versões do Spotify...
           </ActionButton>
           
           {/* edit button */}

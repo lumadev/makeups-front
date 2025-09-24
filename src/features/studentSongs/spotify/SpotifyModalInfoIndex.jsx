@@ -42,6 +42,7 @@ function SpotifyModalInfoIndex({
           studentId={studentId}
           isOpen={isOpen}
           onClose={onClose}
+          screenType="student-song-vinculate"
           onAfterVinculate={onAfterVinculate}
         />
       )}

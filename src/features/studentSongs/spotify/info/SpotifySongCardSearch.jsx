@@ -9,6 +9,7 @@ function SpotifySongCard({
   spotifySong, 
   studentId, 
   studentSong,
+  screenType,
   onAfterVinculate
 }) {
   const [loading, setLoading] = useState(false)
@@ -63,15 +64,17 @@ function SpotifySongCard({
       </div>
 
       {/* Botão Vincular */}
-      <div className="flex items-center justify-center">
-        {loading ? (
-          <LoadingButton text="Vinculando..." />
-        ) : (
-          <ActionButton onClick={handleVinculate}>
-            Vincular esta versão
-          </ActionButton>
-        )}
-      </div>
+      {screenType === "student-song-vinculate" && (
+        <div className="flex items-center justify-center">
+          {loading ? (
+            <LoadingButton text="Vinculando..." />
+          ) : (
+            <ActionButton onClick={handleVinculate}>
+              Vincular esta versão
+            </ActionButton>
+          )}
+        </div>
+      )}
     </div>
   )
 }

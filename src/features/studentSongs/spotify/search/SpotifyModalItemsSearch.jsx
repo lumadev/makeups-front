@@ -8,10 +8,11 @@ import SpotifyModalItemsSearchSkeleton from "./SpotifyModalItemsSearchSkeleton"
 
 function SpotifyModalItemsSearch({ 
   studentSong,
-  studentId,
+  studentId = null,
   isOpen,
   onClose,
-  onAfterVinculate
+  screenType,
+  onAfterVinculate = () => {}
 }) {
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState([])
@@ -53,6 +54,7 @@ function SpotifyModalItemsSearch({
               songs={results}
               studentId={studentId}
               studentSong={studentSong}
+              screenType={screenType}
               onAfterVinculate={onAfterVinculate}
             />
           ) : (

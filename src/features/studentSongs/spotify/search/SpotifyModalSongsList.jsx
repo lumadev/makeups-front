@@ -1,7 +1,13 @@
 import React, { useState } from "react"
 import SpotifySongCardSearch from "../info/SpotifySongCardSearch"
 
-function SpotifyModalSongsList({ songs, studentId, studentSong, onAfterVinculate }) {
+function SpotifyModalSongsList({ 
+  songs,
+  studentId, 
+  studentSong, 
+  screenType,
+  onAfterVinculate
+}) {
   const [page, setPage] = useState(0)
   const itemsPerPage = 3
 
@@ -28,6 +34,7 @@ function SpotifyModalSongsList({ songs, studentId, studentSong, onAfterVinculate
           spotifySong={spotifySong}
           studentId={studentId}
           studentSong={studentSong}
+          screenType={screenType}
           onAfterVinculate={onAfterVinculate}
         />
       ))}

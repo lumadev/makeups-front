@@ -16,7 +16,7 @@ function StudentSongsNew({ student, onAfterSave }) {
       </button>
 
       <StudentSongFormModal
-        student={student}
+        studentId={student.id}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onAfterSave={onAfterSave}

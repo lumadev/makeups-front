@@ -19,7 +19,7 @@ function StudentSongsIndex({ student }) {
       {/* Button and modal of new studentSong */}
       <div className="flex my-4">
         <StudentSongNew 
-          student={student}
+          studentId={student.id}
           onAfterSave={reloadStudentSongs}
         />
       </div>
@@ -27,7 +27,7 @@ function StudentSongsIndex({ student }) {
       {/* Separator */}
       <div className="border-b border-gray-300 dark:border-gray-700 my-4" />
 
-      {/* Botão para visualizar concluídas */}
+      {/* Button to see songs done list */}
       <StudentSongListDoneModal student={student} />
 
       {/* studentSongs search */}

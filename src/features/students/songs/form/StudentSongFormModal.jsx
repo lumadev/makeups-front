@@ -8,7 +8,8 @@ import Modal from "@/components/Modal"
 import StudentSongForm from './StudentSongForm'
 
 function StudentSongFormModal({
-  studentId,
+  studentId = null,
+  screenType,
   isEdit = false,
   isOpen,
   onClose,
@@ -16,15 +17,28 @@ function StudentSongFormModal({
   studentSongsEdit = null
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
+  const [studentIdSelected, setStudentIdSelected] = useState(false)
   const [formData, setFormData] = useState({})
 
+  const isStudentAllSongsScreen = screenType === 'student-all-songs'
+
   const saveOrEdit = () => {
+    // only save new songs in student all songs screen
+    if (isStudentAllSongsScreen) {
+      return saveStudentSong(studentIdSelected, formData)
+    }
+
     if (isEdit) {
       const idStudentSong = formData.id
       return editStudentSong(studentId, idStudentSong, formData)
     } else {
       return saveStudentSong(studentId, formData)
     }
+  }
+
+  // for student id selection in autocomplete field
+  const handleSelectStudentId = (studentId) => {
+    setStudentIdSelected(studentId)
   }
 
   const save = async () => {
@@ -91,9 +105,10 @@ function StudentSongFormModal({
       }
     >
       <StudentSongForm 
-        isEdit={isEdit}
+        screenType={screenType}
         formData={formData} 
         setFormData={setFormData}
+        handleSelectStudentId={handleSelectStudentId}
       />
     </Modal>
   )

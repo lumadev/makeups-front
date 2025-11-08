@@ -3,7 +3,11 @@ import { useState } from "react"
 
 import StudentSongFormModal from '@/features/students/songs/form/StudentSongFormModal'
 
-function StudentSongsNew({ student, onAfterSave }) {
+function StudentSongsNew({ 
+  studentId, 
+  onAfterSave, 
+  screenType = 'student-songs'
+}) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -16,7 +20,8 @@ function StudentSongsNew({ student, onAfterSave }) {
       </button>
 
       <StudentSongFormModal
-        studentId={student.id}
+        studentId={studentId}
+        screenType={screenType}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onAfterSave={onAfterSave}

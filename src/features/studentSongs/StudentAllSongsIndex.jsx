@@ -2,15 +2,19 @@ import { useState } from 'react'
 import { btnClass } from '@/common/utils/classes'
 
 import StudentAllSongsList from './list/StudentAllSongsList'
+import StudentSongNew from '@/features/students/songs/StudentSongNew'
 import InputSearch from '@/components/inputs/InputSearch'
 import SpotifyModalSearchVersions from '@/features/spotify/searchVersion/SpotifyModalSearchVersions.jsx'
 
 function StudentAllSongsIndex() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [reloadFlag] = useState(false)
+  const [reloadFlag, setReloadFlag] = useState(false)
   const [studentSongCount, setStudentSongCount] = useState(0)
 
   const [showSpotifyModal, setShowSpotifyModal] = useState(false)
+
+  // Toggle reload flag to force list refresh
+  const reloadStudentSongs = () => setReloadFlag(prev => !prev)
 
   return (
     <>
@@ -24,12 +28,22 @@ function StudentAllSongsIndex() {
             onSearch={setSearchTerm}
           />
 
-          <button
-            onClick={() => setShowSpotifyModal(true)}
-            className={btnClass}
-          >
-            Buscar versões no Spotify
-          </button>
+          {/* Button and modal of new studentSong */}
+          <div className="flex justify-between my-4">
+            {/* Spotify search button */}
+            <button
+              onClick={() => setShowSpotifyModal(true)}
+              className={btnClass}
+            >
+              Buscar versões no Spotify
+            </button>
+
+            {/* new song button */}
+            <StudentSongNew 
+              screenType='student-all-songs'
+              onAfterSave={reloadStudentSongs}
+            />
+          </div>
         </>
       )}
 

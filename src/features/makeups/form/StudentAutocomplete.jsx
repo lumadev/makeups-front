@@ -1,21 +1,38 @@
 import { useEffect, useState } from "react"
+import { listStudents } from "@/features/students/studentService"
+import { toast } from 'react-toastify'
 
 function StudentAutocomplete({ 
   isEdit = false,
-  students, 
-  loadingStudents,
   onSelect,
   makeupEdit = null
 }) {
   const [searchTerm, setSearchTerm] = useState("")
   const [filtered, setFiltered] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [loadingStudents, setLoadingStudents] = useState(true)
+  const [students, setStudents] = useState([])
 
-  useEffect(() => {
-    if (isEdit && makeupEdit?.studentName) {
-      setSearchTerm(makeupEdit.studentName || "")
+  // get students to show in autocomplete field
+  const getStudents = async () => {
+    setLoadingStudents(true)
+
+    try {
+      const response = await listStudents()
+      const students = response.data
+
+      // sort alphabetically
+      students.sort((a, b) => a.name.localeCompare(b.name))
+
+      setStudents(students)
+    } catch {
+      toast("Ocorreu um erro ao buscar os alunos", { 
+        type: 'error'
+      })
+    } finally {
+      setLoadingStudents(false)
     }
-  }, [isEdit, makeupEdit, students])
+  }
 
   const filterStudents = (term) => {
     const filtered = students.filter((student) =>
@@ -71,6 +88,16 @@ function StudentAutocomplete({
     onSelect?.(student)
     setShowSuggestions(false)
   }
+  
+  useEffect(() => {
+    if (isEdit && makeupEdit?.studentName) {
+      setSearchTerm(makeupEdit.studentName || "")
+    }
+  }, [isEdit, makeupEdit, students])
+
+  useEffect(() => {
+    getStudents()
+  }, [])
   
   return (
     <div className="flex flex-col w-full max-w-md relative">

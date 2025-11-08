@@ -11,30 +11,7 @@ function MakeupForm({
   setFormData,
   makeupEdit = null
 }) {
-  const [students, setStudents] = useState([])
-  const [loadingStudents, setLoadingStudents] = useState(true)
   const [isOpenDate, setIsOpenDate] = useState(false)
-
-  // get students to show in autocomplete field
-  const getStudents = async () => {
-    setLoadingStudents(true)
-
-    try {
-      const response = await listStudents()
-      const students = response.data
-
-      // sort alphabetically
-      students.sort((a, b) => a.name.localeCompare(b.name))
-
-      setStudents(students)
-    } catch {
-      toast("Ocorreu um erro ao buscar os alunos", { 
-        type: 'error'
-      })
-    } finally {
-      setLoadingStudents(false)
-    }
-  }
 
   const handleSelectStudent = (studentId) => {
     setFormData((prev) => ({ ...prev, studentId }))
@@ -65,10 +42,6 @@ function MakeupForm({
     }))
   }
 
-  useEffect(() => {
-    getStudents()
-  }, [])
-
   // set isOpenDate based on makeupEdit
   useEffect(() => {
     if (!makeupEdit) return
@@ -84,8 +57,6 @@ function MakeupForm({
           <StudentAutocomplete
             isEdit={isEdit}
             makeupEdit={makeupEdit}
-            students={students}
-            loadingStudents={loadingStudents}
             onSelect={(student) => handleSelectStudent(student.id)}
           />
           <DateInput 

@@ -7,9 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src",
-    "start:front": "pnpm dev",
-    "start:back": "cd ../reposicoes-back && node index",
-    "start": "concurrently \"pnpm run start:back\" \"pnpm run start:front\""
+    "run:front": "pnpm dev",
+    "run:back": "cd ../reposicoes-back && node index",
+    "run:all": "concurrently \"pnpm run start:back\" \"pnpm run start:front\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

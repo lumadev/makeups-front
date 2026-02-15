@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { deleteMakeup, markMakeupAsDone } from "@/features/makeups/makeupService"
+import { deleteMakeupDone } from "@/features/makeupsDone/makeupDoneService"
 
 import { IconCheck } from '@tabler/icons-react'
 
@@ -8,7 +9,11 @@ import ActionButton from '@/components/button/ActionButton'
 import ConfirmationDialog from "@/components/confirmation/ConfirmationDialog"
 import MakeupFormModal from '../form/MakeupFormModal'
 
-function MakeupActions({ makeup, onAfterSave }) {
+function MakeupActions({ 
+  makeup, 
+  screenType = 'makeups',
+  onAfterSave
+}) {
   const [showModalEdit, setShowModalEdit] = useState(false)
   
   const [showDialogDelete, setShowDialogDelete] = useState(false)
@@ -26,8 +31,12 @@ function MakeupActions({ makeup, onAfterSave }) {
 
     try {
       const makeupId = makeup.id
-      await deleteMakeup(makeupId)
 
+      if (screenType === "makeups") {
+        await deleteMakeup(makeupId)
+      } else {
+        await deleteMakeupDone(makeupId)
+      }
       onAfterSave()
 
       toast("Reposição excluída com sucesso", { 
@@ -66,24 +75,27 @@ function MakeupActions({ makeup, onAfterSave }) {
 
   return (
     <>
-      {/* edit button */}
-      <ActionButton onClick={openModalEdit}>
-        Editar
-      </ActionButton>
+      {screenType === 'makeups-done' ? (
+        // Somente botão Excluir
+        <ActionButton onClick={() => setShowDialogDelete(true)}>
+          Excluir
+        </ActionButton>
+      ) : (
+        // Botões para os outros casos
+        <>
+          <ActionButton onClick={openModalEdit}>
+            Editar
+          </ActionButton>
 
-      {/* delete button */}
-      <ActionButton onClick={() => setShowDialogDelete(true)}>
-        Excluir
-      </ActionButton>
-      
-      {/* mark as checked button */}
-      <button
-        className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
-        onClick={() => setShowDialogConfirmDone(true)}
-      >
-        <IconCheck size={18} />
-        Marcar como concluída
-      </button>
+          <button
+            className="flex items-center gap-1 text-green-600 transition-colors duration-200 hover:text-green-700 focus:outline-none"
+            onClick={() => setShowDialogConfirmDone(true)}
+          >
+            <IconCheck size={18} />
+            Marcar como concluída
+          </button>
+        </>
+      )}
 
       {showDialogDelete && (
         <ConfirmationDialog

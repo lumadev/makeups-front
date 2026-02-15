@@ -130,9 +130,7 @@ function MakeupList({
                           <TableHeaderCell>Aluno</TableHeaderCell>
                           <TableHeaderCell>Data da Reposição</TableHeaderCell>
                           <TableHeaderCell>Data Antiga</TableHeaderCell>
-                          {isScreenMakeups && (
-                            <TableHeaderCell>Ações</TableHeaderCell>
-                          )}
+                          <TableHeaderCell>Ações</TableHeaderCell>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
@@ -157,16 +155,15 @@ function MakeupList({
                             </TableDataCell>
 
                             {/* Actions of makeup class */}
-                            {isScreenMakeups && (
-                              <TableDataCell>
-                                <div className="flex items-center gap-x-6">
-                                  <MakeupActions
-                                    makeup={makeup}
-                                    onAfterSave={refreshMakeups}
-                                  />
-                                </div>
-                              </TableDataCell>
-                            )}
+                            <TableDataCell>
+                              <div className="flex items-center gap-x-6">
+                                <MakeupActions
+                                  makeup={makeup}
+                                  screenType="makeups-done"
+                                  onAfterSave={refreshMakeups}
+                                />
+                              </div>
+                            </TableDataCell>
                           </tr>
                         ))}
                       </tbody>

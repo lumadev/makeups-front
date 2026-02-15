@@ -20,7 +20,6 @@ function MakeupList({
   reloadFlag = null, 
 }) {
   const isFirstLoad = useRef(true)
-  const isScreenMakeups = screenType === 'makeups'
 
   const [makeups, setMakeups] = useState([])
   const [loading, setLoading] = useState(true)
@@ -159,7 +158,7 @@ function MakeupList({
                               <div className="flex items-center gap-x-6">
                                 <MakeupActions
                                   makeup={makeup}
-                                  screenType="makeups-done"
+                                  screenType={screenType}
                                   onAfterSave={refreshMakeups}
                                 />
                               </div>

@@ -1,40 +1,34 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { menuItems } from './constants/menuItems'
+import { useMediaQuery } from './hooks/useMediaQuery'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 
 import ItemMenu from './ItemMenu'
 import musicImg from '../../assets/musica.jpg'
 
+const MOBILE_BREAKPOINT = '(max-width: 767px)'
+
 function Sidebar() {
   const location = useLocation()
   const navigate = useNavigate()
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
-  const [isMobile, setIsMobile] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userName, setUserName] = useState("")
   const [userType, setUserType] = useState("")
+
+  // Deriva sidebarOpen: no desktop sempre aberto, no mobile controlado pelo usuário
+  useEffect(() => {
+    if (!isMobile) setSidebarOpen(true)
+  }, [isMobile])
 
   useEffect(() => {
     const storedName = localStorage.getItem("name")
     const storedUserType = localStorage.getItem("userType")
 
-    if (storedName) {
-      setUserName(storedName)
-    }
-    if (storedUserType) {
-      setUserType(storedUserType)
-    }
-
-    const handleResize = () => {
-      const mobile = window.innerWidth < 768
-      setIsMobile(mobile)
-      setSidebarOpen(!mobile)
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    if (storedName) setUserName(storedName)
+    if (storedUserType) setUserType(storedUserType)
   }, [])
 
   const handleLogout = () => {

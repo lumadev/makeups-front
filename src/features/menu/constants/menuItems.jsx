@@ -1,5 +1,5 @@
 import {
-  IconSchool,
+  IconRefresh,
   IconUser,
   IconCheck,
   IconCalendarEvent,
@@ -12,7 +12,7 @@ import {
  * highlight: destaque visual nos dois primeiros itens (estilo evenodd)
  */
 export const menuItems = [
-  { title: 'Reposições', path: '/reposicoes', icon: IconSchool, allowedRoles: ['admin', 'full'], highlight: true },
+  { title: 'Reposições', path: '/reposicoes', icon: IconRefresh, allowedRoles: ['admin', 'full'], highlight: true },
   { title: 'Concluídas', path: '/reposicoes-concluidas', icon: IconCheck, allowedRoles: ['admin', 'full'], highlight: true },
   { title: 'Alunos', path: '/alunos', icon: IconUser, allowedRoles: ['admin', 'full'] },
   { title: 'Músicas de Alunos', path: '/musicas-alunos', icon: IconMusic, allowedRoles: ['admin', 'full'] },

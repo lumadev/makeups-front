@@ -2,7 +2,7 @@ function Alert({ type = "info", children }) {
   let classes = "p-4 mb-4 rounded-lg flex items-center gap-2 shadow-sm"
 
   if (type === "info") {
-    classes += " bg-blue-50 text-blue-800"
+    classes += " bg-orange-50 text-orange-800"
   } else if (type === "warning") {
     classes += " bg-amber-50 text-amber-800"
   } else if (type === "error") {

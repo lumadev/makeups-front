@@ -112,7 +112,7 @@ function StudentAutocomplete({
         onFocus={handleFocus}
         onBlur={handleBlur}
         disabled={loadingStudents}
-        className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+        className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-orange-400"
         placeholder={loadingStudents ? 'Carregando...' : 'Digite o nome do aluno'}
       />
       {showSuggestions && filtered.length > 0 && (
@@ -121,7 +121,7 @@ function StudentAutocomplete({
             {filtered.map((student) => (
               <li
                 key={student.id}
-                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                className="px-4 py-2 cursor-pointer hover:bg-orange-50"
                 onClick={() => {
                   setTimeout(() => {
                     handleClick(student)

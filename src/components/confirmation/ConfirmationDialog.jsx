@@ -56,7 +56,7 @@ function ConfirmationDialog({
           <button
             onClick={onConfirm}
             disabled={loading}
-            className="px-3 py-2 lg:px-4 bg-teal-400 text-white text-sm sm:text-base font-semibold rounded hover:bg-teal-500 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+            className="px-3 py-2 lg:px-4 bg-orange-500 text-white text-sm sm:text-base font-semibold rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
           >
             {loading && (
               <span className="mr-2 inline-block">

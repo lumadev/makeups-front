@@ -117,7 +117,7 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
                             <TableDataCell>
                               <Link 
                                 to={`/aluno/${song.studentId}/musicas`} 
-                                className="text-blue-600 hover:underline"
+                                className="text-orange-600 hover:underline"
                               >
                                 {song.studentName}
                               </Link>
@@ -131,7 +131,7 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
                                       href={song.versionLink}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      className="text-blue-600 hover:underline truncate max-w-xs"
+                                      className="text-orange-600 hover:underline truncate max-w-xs"
                                     >
                                       Ir para o link
                                     </a>

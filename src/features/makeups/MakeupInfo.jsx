@@ -26,7 +26,7 @@ function MakeupInfo({ makeups = [] }) {
     return { pastMakeups, upcomingMakeups }
   }, [makeups])
 
-  const baseClasses = "bg-blue-50 text-blue-800 p-4 mb-4 rounded-lg shadow-sm"
+  const baseClasses = "bg-orange-50 text-orange-800 p-4 mb-4 rounded-lg shadow-sm"
   const listItemClasses = "ml-4 list-disc"
 
   return (

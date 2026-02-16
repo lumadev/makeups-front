@@ -1,10 +1,14 @@
-function ItemMenu({ title, active, highlight, icon: Icon }) {
+function ItemMenu({ title, active, icon: Icon }) {
   return (
     <div
-      className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-all duration-200 
-        ${active ? 'bg-teal-500 text-white' : highlight ? 'bg-gray-800 text-gray-300' : 'text-gray-400 hover:bg-gray-700'}`}
+      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
+        active
+          ? 'text-white'
+          : 'text-white hover:bg-white/5'
+      }`}
+      style={active ? { backgroundColor: '#FF8C00' } : undefined}
     >
-      {Icon && <Icon size={20} />}
+      {Icon && <Icon size={20} strokeWidth={2} />}
       <span className="text-sm font-medium">{title}</span>
     </div>
   )

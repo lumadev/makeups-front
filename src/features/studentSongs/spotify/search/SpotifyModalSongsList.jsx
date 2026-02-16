@@ -46,7 +46,7 @@ function SpotifyModalSongsList({
           className={`px-4 py-2 rounded-lg shadow transition-colors ${
             page === 0
               ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-              : "bg-blue-600 text-white hover:bg-blue-700"
+              : "bg-orange-500 text-white hover:bg-orange-600"
           }`}
         >
           Página anterior
@@ -58,7 +58,7 @@ function SpotifyModalSongsList({
           className={`px-4 py-2 rounded-lg shadow transition-colors ${
             (page + 1) * itemsPerPage >= songs.length
               ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-              : "bg-blue-600 text-white hover:bg-blue-700"
+              : "bg-orange-500 text-white hover:bg-orange-600"
           }`}
         >
           Próxima página

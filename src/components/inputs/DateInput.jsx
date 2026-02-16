@@ -71,7 +71,7 @@ function DateInput({
     }
   }
 
-  const inputBaseClasses = "border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+  const inputBaseClasses = "border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none"
   const disabledClasses = isDisabled ? "bg-gray-100 cursor-not-allowed" : "bg-white"
   
   return (

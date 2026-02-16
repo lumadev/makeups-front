@@ -9,7 +9,7 @@ function PasswordInput(props) {
     <button
       type="button"
       onClick={() => setShowPassword((p) => !p)}
-      className="p-1 rounded focus:outline-none focus:ring-2 focus:ring-teal-300 dark:focus:ring-teal-600"
+      className="p-1 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-600"
       aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
     >
       {showPassword ? (

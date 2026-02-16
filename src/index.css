@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@theme {
+  /* Cor primária do sistema - Laranja */
+  --color-primary-400: #fb923c;
+  --color-primary-500: #f97316;
+  --color-primary-600: #ea580c;
+}

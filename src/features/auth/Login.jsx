@@ -90,7 +90,7 @@ function Login() {
               type="submit"
               disabled={loading}
               className={`w-full mt-2 py-3 text-sm font-medium text-white rounded-lg transition-colors ${
-                loading ? "bg-teal-300 cursor-not-allowed" : "bg-teal-400 hover:bg-teal-500"
+                loading ? "bg-orange-300 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"
               }`}
               onClick={onClickLogin}
             >

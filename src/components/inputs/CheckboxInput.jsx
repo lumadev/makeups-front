@@ -7,7 +7,7 @@ function CheckboxInput({ id, label, checked, onChange, name }) {
         name={name}
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="h-5 w-5 rounded border-gray-300 accent-blue-600 transition duration-200 focus:outline-none"
+        className="h-5 w-5 rounded border-gray-300 accent-orange-600 transition duration-200 focus:outline-none"
       />
       <span className="text-gray-700">{label}</span>
     </label>

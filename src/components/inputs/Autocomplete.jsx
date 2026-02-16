@@ -55,7 +55,7 @@ function Autocomplete({ id, label, value, options = [], placeholder, onChange, d
         onFocus={handleFocus}
         onBlur={handleBlur}
         disabled={disabled}
-        className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300 px-3 py-2"
+        className="w-full mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-orange-400 px-3 py-2"
         placeholder={placeholder}
       />
       {showSuggestions && filtered.length > 0 && (
@@ -64,7 +64,7 @@ function Autocomplete({ id, label, value, options = [], placeholder, onChange, d
             {filtered.map((option, idx) => (
               <li
                 key={idx}
-                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                className="px-4 py-2 cursor-pointer hover:bg-orange-50"
                 onClick={(e) => {
                   e.stopPropagation() 
                   handleClick(option)

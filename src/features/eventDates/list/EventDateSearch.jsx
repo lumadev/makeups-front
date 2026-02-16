@@ -22,7 +22,7 @@ function EventDateSearch({ searchTerm, onSearch, setOnlyConfirmed }) {
         value={searchTerm}
         onChange={(e) => onSearch(e.target.value)}
         placeholder="Digite o nome do evento"
-        className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mb-4"
+        className="border border-gray-300 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2 mb-4"
       />
 
       {/* Checkbox Apenas Confirmados */}

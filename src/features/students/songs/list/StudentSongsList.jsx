@@ -132,7 +132,7 @@ function StudentSongsList({
                                       href={studentSong.versionLink}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      className="text-blue-600 hover:underline truncate max-w-xs"
+                                      className="text-orange-600 hover:underline truncate max-w-xs"
                                     >
                                       Ir para o link
                                     </a>

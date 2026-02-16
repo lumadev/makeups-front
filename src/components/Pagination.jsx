@@ -65,7 +65,7 @@ function Pagination({ totalPages, currentPage, setCurrentPage }) {
             onClick={() => setCurrentPage(page)}
             className={`px-3 py-1 rounded border ${
               page === currentPage
-                ? "bg-blue-500 text-white border-blue-500"
+                ? "bg-orange-500 text-white border-orange-500"
                 : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
             }`}
           >

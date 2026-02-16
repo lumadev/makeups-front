@@ -70,7 +70,10 @@ function Sidebar() {
         </button>
       )}
 
-      <div id="sidebar" className={sidebarClasses} style={{ backgroundColor: SIDEBAR_BG, fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <div id="sidebar" className={sidebarClasses} style={{ 
+        backgroundColor: SIDEBAR_BG, 
+        fontFamily: "'Inter', system-ui, sans-serif" 
+      }}>
         <div className="flex flex-col h-full pt-8 pb-6">
           <SidebarHeader onNavigate={() => isMobile && setSidebarOpen(false)} />
 

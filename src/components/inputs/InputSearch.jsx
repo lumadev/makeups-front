@@ -16,7 +16,7 @@ function InputSearch({
         value={searchTerm}
         onChange={(e) => onSearch(e.target.value)}
         placeholder={placeholder}
-        className="border border-gray-300 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2"
+        className="border border-gray-300 text-sm rounded-lg block w-full p-2"
         rightElement={<IconSearch size={18} className="text-gray-400" />}
       />
     </div>

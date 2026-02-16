@@ -137,12 +137,15 @@ function MakeupList({
                           <tr key={index}>
 
                             {/* Student */}
-                            <TableDataCell isBold>
+                            <TableDataCell isBold variant="black">
                               {makeup.studentName}
                             </TableDataCell>
 
                             {/* Replacement Date */}
-                            <TableDataCell isBold>
+                            <TableDataCell 
+                              isBold={!!makeup.dateReplacement} 
+                              variant={makeup.dateReplacement ? "black" : "gray"}
+                            >
                               {makeup.dateReplacement
                                 ? formatDateAndHour(makeup.dateReplacement)
                                 : 'Em Aberto'}

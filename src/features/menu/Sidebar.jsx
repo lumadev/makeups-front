@@ -1,29 +1,17 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useMemo } from 'react'
 import { menuItems } from './constants/menuItems'
 import { useMediaQuery } from './hooks/useMediaQuery'
 import { STORAGE_KEYS } from '@/constants/storageKeys'
-import { IconMenu2, IconX, IconMusic, IconLogout } from '@tabler/icons-react'
+import { IconMenu2, IconX } from '@tabler/icons-react'
 
-import ItemMenu from './ItemMenu'
+import MenuItems from './MenuItems'
+import SidebarHeader from './SidebarHeader'
+import UserProfile from './UserProfile'
 
 const MOBILE_BREAKPOINT = '(max-width: 767px)'
 const SIDEBAR_BG = '#1A1D24'
-const PROFILE_BG = '#272A32'
-const PRIMARY_ORANGE = '#FF8C00'
-
-function getInitials(name) {
-  if (!name || typeof name !== 'string') return '??'
-  const parts = name.trim().split(/\s+/)
-  if (parts.length >= 2) {
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
-  }
-  return name.slice(0, 2).toUpperCase()
-}
 
 function Sidebar() {
-  const location = useLocation()
-  const navigate = useNavigate()
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -50,17 +38,6 @@ function Sidebar() {
     document.addEventListener('keydown', onEscape)
     return () => document.removeEventListener('keydown', onEscape)
   }, [isMobile, sidebarOpen])
-
-  const handleLogout = (e) => {
-    if (e?.preventDefault) e.preventDefault()
-
-    localStorage.removeItem(STORAGE_KEYS.TOKEN)
-    localStorage.removeItem(STORAGE_KEYS.NAME)
-    localStorage.removeItem(STORAGE_KEYS.USER_TYPE)
-    localStorage.removeItem(STORAGE_KEYS.LAST_REQUEST_HOUR)
-
-    navigate('/login')
-  }
 
   const filteredMenu = useMemo(() => {
     return menuItems.filter((item) => {
@@ -93,69 +70,16 @@ function Sidebar() {
         </button>
       )}
 
-      <div id="sidebar" className={sidebarClasses} style={{ backgroundColor: SIDEBAR_BG }}>
+      <div id="sidebar" className={sidebarClasses} style={{ backgroundColor: SIDEBAR_BG, fontFamily: "'Inter', system-ui, sans-serif" }}>
         <div className="flex flex-col h-full pt-8 pb-6">
-          {/* Logo */}
-          <Link
-            to="/reposicoes"
-            className="flex items-center gap-3 mb-8"
-            onClick={() => isMobile && setSidebarOpen(false)}
-          >
-            <div
-              className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0"
-              style={{ backgroundColor: PRIMARY_ORANGE }}
-            >
-              <IconMusic size={24} className="text-white" strokeWidth={2} />
-            </div>
-            <h1 className="hidden md:block font-bold text-xl text-white">Reposições</h1>
-          </Link>
+          <SidebarHeader onNavigate={() => isMobile && setSidebarOpen(false)} />
 
-          {/* Perfil do usuário */}
-          <div
-            className="flex items-center gap-3 px-4 py-3 rounded-lg mb-6"
-            style={{ backgroundColor: PROFILE_BG }}
-          >
-            <div
-              className="flex items-center justify-center w-10 h-10 rounded-full shrink-0 text-white font-semibold text-sm"
-              style={{ backgroundColor: PRIMARY_ORANGE }}
-            >
-              {getInitials(userName)}
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="font-semibold text-white text-sm truncate">{userName || 'Usuário'}</p>
-              {userType === 'admin' && (
-                <p className="text-xs text-gray-400">Administrador</p>
-              )}
-            </div>
-          </div>
+          <UserProfile userName={userName} userType={userType} />
 
-          {/* Menu */}
-          <nav id="menu" className="flex-1 flex flex-col gap-1" aria-label="Menu principal">
-            {filteredMenu.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="group"
-                onClick={() => isMobile && setSidebarOpen(false)}
-              >
-                <ItemMenu
-                  title={item.title}
-                  icon={item.icon}
-                  active={location.pathname === item.path}
-                />
-              </Link>
-            ))}
-
-            {/* Sair */}
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg w-full text-left text-white hover:bg-white/5 transition-colors duration-200 mt-auto"
-            >
-              <IconLogout size={20} strokeWidth={2} />
-              <span className="text-sm font-medium">Sair</span>
-            </button>
-          </nav>
+          <MenuItems
+            items={filteredMenu}
+            onItemClick={() => isMobile && setSidebarOpen(false)}
+          />
         </div>
       </div>
 

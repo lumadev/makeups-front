@@ -9,7 +9,7 @@ function ItemMenu({ title, active, icon: Icon }) {
       style={active ? { backgroundColor: '#FF8C00' } : undefined}
     >
       {Icon && <Icon size={20} strokeWidth={2} />}
-      <span className="text-sm font-medium">{title}</span>
+      <span className="text-sm font-normal">{title}</span>
     </div>
   )
 }

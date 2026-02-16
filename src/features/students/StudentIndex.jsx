@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import StudentList from './list/StudentList'
-import StudentNew from './StudentNew'
+import StudentHeader from './StudentHeader'
 import InputSearch from '@/components/inputs/InputSearch'
 
 function StudentIndex() {
@@ -14,9 +14,7 @@ function StudentIndex() {
   return (
     <>
       {/* Button and modal of new student */}
-      <div className="flex my-4">
-        <StudentNew onAfterSave={reloadStudents} />
-      </div>
+      <StudentHeader onAfterSave={reloadStudents} />
 
       {/* Students search */}
       {studentCount > 0 && (

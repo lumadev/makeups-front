@@ -8,7 +8,7 @@ function SidebarHeader({ onNavigate }) {
   return (
     <Link
       to="/reposicoes"
-      className="flex items-center gap-3 mb-8"
+      className="hidden md:flex items-center gap-3 mb-8"
       onClick={onNavigate}
     >
       <div

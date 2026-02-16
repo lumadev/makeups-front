@@ -4,9 +4,9 @@ import { useMediaQuery } from './hooks/useMediaQuery'
 import { STORAGE_KEYS } from '@/constants/storageKeys'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 
-import MenuItems from './MenuItems'
-import SidebarHeader from './SidebarHeader'
-import UserProfile from './UserProfile'
+import MenuItems from './items/MenuItems'
+import SidebarHeader from './header/SidebarHeader'
+import UserProfile from './header/UserProfile'
 
 const MOBILE_BREAKPOINT = '(max-width: 767px)'
 const SIDEBAR_BG = '#1A1D24'

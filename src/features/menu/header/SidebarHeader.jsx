@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { IconMusic } from '@tabler/icons-react'
 
-const PRIMARY_ORANGE = '#FF8C00'
+const ICON_CONTAINER_BG = '#4a4540'
+const ICON_ORANGE = '#e8a84a'
 
 function SidebarHeader({ onNavigate }) {
   return (
@@ -11,10 +12,10 @@ function SidebarHeader({ onNavigate }) {
       onClick={onNavigate}
     >
       <div
-        className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0"
-        style={{ backgroundColor: PRIMARY_ORANGE }}
+        className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0"
+        style={{ backgroundColor: ICON_CONTAINER_BG }}
       >
-        <IconMusic size={24} className="text-white" strokeWidth={2} />
+        <IconMusic size={18} style={{ color: ICON_ORANGE }} strokeWidth={2} />
       </div>
       <h1 className="hidden md:block text-xl text-white font-bold font-['Cormorant_Garamond',Georgia,serif]">
         Reposições

@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import MakeupInfo from './MakeupInfo'
 import MakeupList from './list/MakeupList'
-import MakeupNew from './MakeupNew'
+import MakeupHeader from './MakeupHeader'
 import InputSearch from '@/components/inputs/InputSearch'
 
 function MakeupIndex() {
@@ -16,9 +16,7 @@ function MakeupIndex() {
   return (
     <>
       {/* Button and modal of new makeup */}
-      <div className="flex my-4">
-        <MakeupNew onAfterSave={reloadMakeups} />
-      </div>
+      <MakeupHeader onAfterSave={reloadMakeups} />
 
       {makeupCount > 0 && (
         <MakeupInfo makeups={makeups} />

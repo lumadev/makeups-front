@@ -3,8 +3,9 @@ import { backgroundStyle } from '@/common/utils/classes'
 
 function LeftSideLogin() {
   return (
-    <div className="hidden lg:flex flex-col justify-center items-center bg-gradient-to-br from-slate-900 to-slate-800 text-white px-16">
-      
+    <div className="hidden lg:flex flex-col justify-center items-center 
+            bg-slate-950 
+            text-white px-16 h-full">      
       <div 
         style={backgroundStyle}
         className="p-5 rounded-2xl mb-8 shadow-lg"

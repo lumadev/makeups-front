@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom"
-import { ToastContainer } from 'react-toastify'
 import Sidebar from './features/menu/Sidebar'
 
 function Layout() {
@@ -15,7 +14,6 @@ function Layout() {
         <div className="min-w-[1200px]">
           <Outlet />
         </div>
-        <ToastContainer autoClose={3000} />
       </main>
     </div>
   )

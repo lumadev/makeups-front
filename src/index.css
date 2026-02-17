@@ -6,3 +6,8 @@
   --color-primary-500: #f97316;
   --color-primary-600: #ea580c;
 }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}

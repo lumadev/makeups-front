@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { ToastContainer } from "react-toastify"
 import { IconLogin2 } from "@tabler/icons-react"
 
 import { backgroundStyle } from '@/common/utils/classes'
@@ -22,7 +21,7 @@ function Login() {
   }
 
   return (
-    <div className="grid lg:grid-cols-2 h-screen">
+    <div className="grid lg:grid-cols-2 min-h-screen w-full">
       
       {/* LEFT SIDE */}
       <LeftSideLogin />
@@ -75,8 +74,6 @@ function Login() {
           </p>
         </div>
       </div>
-
-      <ToastContainer autoClose={3000} />
     </div>
   )
 }

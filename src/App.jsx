@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom"
+import { ToastContainer } from 'react-toastify'
 
 import "./App.css"
 
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ToastContainer autoClose={3000} />
       <Routes>
         {/* Public routes */}
         <Route path="/login" element={<Login />} />

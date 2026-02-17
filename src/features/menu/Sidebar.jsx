@@ -74,7 +74,7 @@ function Sidebar() {
         backgroundColor: SIDEBAR_BG, 
         fontFamily: "'Inter', system-ui, sans-serif" 
       }}>
-        <div className="flex flex-col h-full pt-8 pb-6">
+        <div className="flex flex-col h-screen pt-8 pb-6">
           <SidebarHeader onNavigate={() => isMobile && setSidebarOpen(false)} />
 
           <UserProfile userName={userName} userType={userType} />

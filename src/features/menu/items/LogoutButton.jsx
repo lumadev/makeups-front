@@ -18,15 +18,15 @@ function LogoutButton({ onClick, className = '' }) {
   }
 
   return (
-    <button
-      type="button"
+    <div
       onClick={handleClick}
-      className={`flex items-center gap-3 px-3 py-2 rounded-lg w-full text-left text-white hover:bg-white/5 transition-colors duration-200 mt-auto ${className}`.trim()}
+      className={`flex items-center gap-2 pl-3 pb-3 rounded-md w-full mt-auto text-white text-sm font-medium transition-colors duration-200 hover:bg-white/10 cursor-pointer ${className}`}
+      role="button"
       aria-label="Sair"
     >
       <IconLogout size={20} strokeWidth={2} />
-      <span className="text-sm font-medium">Sair</span>
-    </button>
+      <span className="text-sm font-normal">Sair</span>
+    </div>
   )
 }
 

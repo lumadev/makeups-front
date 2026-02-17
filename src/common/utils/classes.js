@@ -8,7 +8,9 @@ const inputLabelClass = 'block mb-2 text-sm font-medium text-gray-900 dark:text-
 
 const btnClass = 'px-3 py-2 lg:px-4 bg-orange-500 text-white text-sm font-semibold rounded hover:bg-orange-600'
 const btnNewClass = 'px-3 py-1.5 lg:px-4 bg-orange-500 text-white text-sm font-semibold rounded hover:bg-orange-600'
+
 const backgroundStyle = { backgroundColor: '#FF8C00' }
+const colorStyle = { color: '#FF8C00' }
 
 const btnCancelClass = 'bg-gray-100 text-gray-700 px-5 py-2 rounded-lg text-sm border'
 
@@ -19,6 +21,7 @@ export {
   btnClass,
   btnNewClass,
   backgroundStyle,
+  colorStyle,
   btnCancelClass,
   btnClassWarning,
   inputClass, 

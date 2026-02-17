@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { login } from '@/features/auth/authService'
 import { ToastContainer } from 'react-toastify'
+
+import { useAuth } from "@/features/auth/hooks/useAuth"
 import { inspirationalPhrases } from './inspirationalPhrases.js'
 
 import TextInput from "@/components/inputs/TextInput"
@@ -11,62 +10,12 @@ import PasswordInput from "@/components/inputs/PasswordInput"
 function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [loading, setLoading] = useState(false)
 
-  const navigate = useNavigate()
+  const { login, loading } = useAuth()
 
-  const onClickLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
-
-    // shows a phrase if login takes more than 5s
-    const warningInterval = setInterval(() => {
-      const randomPhrase =
-        inspirationalPhrases[
-          Math.floor(Math.random() * inspirationalPhrases.length)
-        ]
-
-      toast.warn(randomPhrase, {
-        toastId: "login-warning",
-        autoClose: false
-      })
-    }, 4000)
-
-    try {
-      const formData = { username, password }
-      const res = await login(formData)
-
-      onAfterLogin(res.data)
-    } catch {
-      toast("Credenciais inválidas", { 
-        type: 'error'
-      })
-    } finally {
-      clearInterval(warningInterval)
-      setLoading(false)
-    }
-  }
-
-  const onAfterLogin = (data) => {
-    const { token, name, type } = data
-
-    // salvar dados no localStorage
-    localStorage.setItem("token", token)
-    localStorage.setItem("name", name)
-    localStorage.setItem("userType", type)
-
-    toast("Login feito com sucesso", { type: "success" })
-
-    // reboot lastRequestHour
-    const now = new Date()
-    localStorage.setItem("lastRequestHour", now.toISOString())
-
-    // redirect por permissão
-    if (type === "restricted") {
-      navigate("/piadas")
-    } else {
-      navigate("/home")
-    }
+    await login({ username, password }, inspirationalPhrases)
   }
 
   return (
@@ -98,7 +47,7 @@ function Login() {
               className={`w-full mt-2 py-3 text-sm font-medium text-white rounded-lg transition-colors ${
                 loading ? "bg-orange-300 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"
               }`}
-              onClick={onClickLogin}
+              onClick={handleSubmit}
             >
               {loading ? "Carregando..." : "Entrar"}
             </button>

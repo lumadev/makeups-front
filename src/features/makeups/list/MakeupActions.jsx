@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { deleteMakeup, markMakeupAsDone } from "@/features/makeups/makeupService"
 import { deleteMakeupDone } from "@/features/makeupsDone/makeupDoneService"
 
-import { IconCheck } from '@tabler/icons-react'
+import { IconCheck, IconPencil } from '@tabler/icons-react'
 
 import ActionButton from '@/components/button/ActionButton'
 import ConfirmationDialog from "@/components/confirmation/ConfirmationDialog"
@@ -83,8 +83,12 @@ function MakeupActions({
       ) : (
         // Botões para os outros casos
         <>
-          <ActionButton onClick={openModalEdit}>
-            Editar
+          <ActionButton 
+            onClick={openModalEdit}
+            className="flex items-center gap-2"
+          >
+            <IconPencil size={12} className="text-orange-500" />
+            <span>Editar</span>
           </ActionButton>
 
           <button

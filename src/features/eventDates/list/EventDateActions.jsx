@@ -1,4 +1,4 @@
-import { IconCheck } from '@tabler/icons-react'
+import { IconCheck, IconPencil } from '@tabler/icons-react'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { deleteEventDate, editEventDate } from "@/features/eventDates/eventDateService"
@@ -69,7 +69,11 @@ function EventDateActions({
       {!isScreenEventsDone && (
         <>
           {/* edit button */}
-          <ActionButton onClick={openModalEdit}>
+          <ActionButton 
+            onClick={openModalEdit}
+            className="flex items-center gap-2"
+          >
+            <IconPencil size={12} className="text-orange-500" />
             Editar
           </ActionButton>
 

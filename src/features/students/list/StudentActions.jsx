@@ -2,6 +2,7 @@ import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { deleteStudent } from "@/features/students/studentService"
+import { IconPencil } from '@tabler/icons-react'
 
 import ConfirmationDialog from '@/components/confirmation/ConfirmationDialog'
 import StudentFormModal from '../form/StudentFormModal'
@@ -42,7 +43,11 @@ function StudentActions({ student, onAfterSave }) {
   return (
     <>
       {/* edit button */}
-      <ActionButton onClick={openModalEdit}>
+      <ActionButton 
+        onClick={openModalEdit}
+        className="flex items-center gap-2"
+      >
+        <IconPencil size={12} className="text-orange-500" />
         Editar
       </ActionButton>
 

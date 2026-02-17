@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { login as loginService } from "../authService"
+import { login as loginService } from "../services/authService"
 
 export function useAuth() {
   const [loading, setLoading] = useState(false)
@@ -53,14 +53,8 @@ export function useAuth() {
     }
   }
 
-  const logout = () => {
-    localStorage.clear()
-    navigate("/")
-  }
-
   return {
     login,
-    logout,
     loading,
   }
 }

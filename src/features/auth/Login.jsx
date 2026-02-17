@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { login } from '@/features/auth/authService'
 import { ToastContainer } from 'react-toastify'
+import { inspirationalPhrases } from './inspirationalPhrases.js'
 
 import TextInput from "@/components/inputs/TextInput"
 import PasswordInput from "@/components/inputs/PasswordInput"
@@ -18,13 +19,18 @@ function Login() {
     e.preventDefault()
     setLoading(true)
 
-    // shows warning if login takes more than 5s
+    // shows a phrase if login takes more than 5s
     const warningInterval = setInterval(() => {
-      toast.warn("O login está demorando, o que acha de pegar um cafézinho enquanto espera?", {
+      const randomPhrase =
+        inspirationalPhrases[
+          Math.floor(Math.random() * inspirationalPhrases.length)
+        ]
+
+      toast.warn(randomPhrase, {
         toastId: "login-warning",
         autoClose: false
       })
-    }, 5000)
+    }, 4000)
 
     try {
       const formData = { username, password }

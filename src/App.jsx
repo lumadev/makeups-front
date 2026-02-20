@@ -5,7 +5,6 @@ import "./App.css"
 
 import Login from "./features/auth/Login"
 import Layout from "./Layout"
-import LayoutHome from "./LayoutHome"
 import EventDateIndex from "./features/eventDates/EventDateIndex"
 import HomeIndex from "./features/home/HomeIndex"
 import MakeupIndex from "./features/makeups/MakeupIndex"
@@ -38,7 +37,9 @@ function App() {
         {/* Protected routes */}
         <Route element={<RequireAuth />}>
           {/* Home separado se precisar de outro layout */}
-          <Route path="/" element={<LayoutHome />}>
+          <Route path="/" element={
+            <Layout hasMinWidth="false" />
+          }>
             <Route path="home" element={<HomeIndex />} />
           </Route>
 

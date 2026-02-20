@@ -7,7 +7,7 @@ const ICON_ORANGE = '#e8a84a'
 function SidebarHeader({ onNavigate }) {
   return (
     <Link
-      to="/reposicoes"
+      to="/home"
       className="hidden md:flex items-center gap-3 mb-8"
       onClick={onNavigate}
     >

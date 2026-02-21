@@ -26,13 +26,17 @@ function HomeIndex() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 overflow-x-hidden w-full">
+    <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:p-8 overflow-x-hidden w-full">
+      
       {/* Título */}
-      <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-center">
+      <h1 className="text-lg sm:text-2xl font-bold text-gray-800 mb-6 sm:mb-4 text-center leading-snug px-2 sm:px-0">
         Bem-vindo ao sistema de reposições!
       </h1>
 
-      <HomeDailyJoke />
+      {/* Piada com respiro melhor no mobile */}
+      <div className="w-full mb-6 sm:mb-0 mb-4">
+        <HomeDailyJoke />
+      </div>
 
       {/* Componente MakeupInfo só após carregamento */}
       {!loading && (
@@ -42,10 +46,22 @@ function HomeIndex() {
       )}
 
       {/* Grid de Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 w-full">
-        <HomeCardLink href="/reposicoes" label="Reposições de Aula" icon={IconSchool} />
-        <HomeCardLink href="/musicas-alunos" label="Músicas de Alunos" icon={IconCheck} />
-        <HomeCardLink href="/alunos" label="Lista de Alunos" icon={IconUser} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 w-full">
+        <HomeCardLink
+          href="/reposicoes"
+          label="Reposições de Aula"
+          icon={IconSchool}
+        />
+        <HomeCardLink
+          href="/musicas-alunos"
+          label="Músicas de Alunos"
+          icon={IconCheck}
+        />
+        <HomeCardLink
+          href="/alunos"
+          label="Lista de Alunos"
+          icon={IconUser}
+        />
       </div>
     </div>
   )

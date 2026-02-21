@@ -23,7 +23,7 @@ function Layout({ hasMinWidth = false }) {
   }, [])
 
   return (
-    <div className={`flex flex-col md:flex-row h-screen transition-colors duration-300 ${isDark ? 'bg-[#0f172a]' : 'bg-slate-50'}`}>
+    <div className={`flex flex-col md:flex-row min-h-screen md:h-screen transition-colors duration-300 ${isDark ? 'bg-[#0f172a]' : 'bg-slate-50'}`}>
       
       {/* Sidebar */}
       <aside className={`w-full md:w-64 flex-shrink-0 transition-colors duration-300 shadow-md 
@@ -33,7 +33,7 @@ function Layout({ hasMinWidth = false }) {
       </aside>
 
       {/* Conteúdo Principal */}
-      <main className="flex-1 overflow-x-auto overflow-y-auto">
+      <main className="md:flex-1 overflow-auto">
         <div className="p-8 md:p-12">
           {hasMinWidth ? (
             <div className="min-w-[1200px]">

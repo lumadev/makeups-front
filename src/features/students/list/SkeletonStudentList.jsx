@@ -7,7 +7,7 @@ function SkeletonStudentList() {
       <div className="flex items-center justify-between mb-2">
         <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-48 animate-pulse" />
       </div>
-      <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+      <div className="border border-gray-200 dark:border-gray-700 md:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
           <thead className="bg-gray-50 dark:bg-gray-800">
             <tr>

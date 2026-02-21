@@ -77,7 +77,11 @@ function Sidebar() {
         <div className="flex flex-col h-screen pt-8 pb-6">
           <SidebarHeader onNavigate={() => isMobile && setSidebarOpen(false)} />
 
-          <UserProfile userName={userName} userType={userType} />
+          <UserProfile 
+            userName={userName} 
+            userType={userType}
+            onNavigate={() => isMobile && setSidebarOpen(false)}
+          />
 
           <MenuItems
             items={filteredMenu}

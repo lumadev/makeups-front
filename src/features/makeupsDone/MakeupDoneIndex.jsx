@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import MakeupList from '../makeups/list/MakeupList'
 import InputSearch from '@/components/inputs/InputSearch'
+import MakeupDoneHeader from './MakeupDoneHeader'
 
 function MakeupDoneIndex() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -9,7 +10,10 @@ function MakeupDoneIndex() {
 
   return (
     <>
-      {/* Makeup search */}
+      {/* Makeup done header */}
+      <MakeupDoneHeader />
+
+      {/* Makeup done search */}
       {makeupCount > 0 && (
         <InputSearch
           searchTerm={searchTerm}
@@ -19,7 +23,7 @@ function MakeupDoneIndex() {
         />
       )}
 
-      {/* Makeups list */}
+      {/* Makeups done list */}
       <MakeupList 
         title="Reposições Concluídas"
         screenType="makeups-done"

@@ -35,7 +35,7 @@ function Layout({ hasMinWidth = false }) {
       {/* Conteúdo Principal */}
       <main className={`md:flex-1 overflow-auto transition-colors duration-300 
           ${isDark ? 'bg-[#0f172a]' : 'bg-slate-50'}`}>
-        <div className="p-8 md:p-12">
+        <div className="pt-12 px-6 md:p-2">
           {hasMinWidth ? (
             <div className="min-w-[1200px]">
               <Outlet context={{ isDark }} />

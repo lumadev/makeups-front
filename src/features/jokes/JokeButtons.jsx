@@ -1,26 +1,22 @@
-import { useState, useEffect, useMemo } from "react"
-import { btnClass } from "@/common/utils/classes"
+import { useState, useMemo } from "react"
+import JokeModal from "./JokeModal"
 import { getUniqueTypes } from "@/common/utils/jokeUtils"
 
-import JokeModal from "./JokeModal"
-
 function JokeButtons({ jokes }) {
-  const [types, setTypes] = useState([])
+  const [selectedType, setSelectedType] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [currentJoke, setCurrentJoke] = useState(null)
 
-  // create jokes array copy 
-  const jokesCopy = useMemo(() => [...jokes], [jokes])
-
-  useEffect(() => {
-    setTypes(getUniqueTypes(jokes))
-  }, [jokes])
+  // memoiza tipos únicos
+  const types = useMemo(() => getUniqueTypes(jokes), [jokes])
 
   const getRandomJokeByType = (type, excludeJoke = null) => {
-    const filtered = jokesCopy.filter(j => j.type === type)
-    if (filtered.length === 0) return null
+    const filtered = jokes.filter((j) => j.type === type)
+    if (!filtered.length) return null
 
-    let randomJoke = null
+    if (filtered.length === 1) return filtered[0]
+
+    let randomJoke
     let attempts = 0
 
     do {
@@ -32,38 +28,72 @@ function JokeButtons({ jokes }) {
     return randomJoke
   }
 
-  const handleShowModal = (type) => {
-    const joke = getRandomJokeByType(type)
+  const handleGenerateJoke = () => {
+    if (!selectedType) return
+    const joke = getRandomJokeByType(selectedType)
     setCurrentJoke(joke)
     setShowModal(true)
   }
 
-  const handleNextJoke = (type) => {
-    const joke = getRandomJokeByType(type, currentJoke)
+  const handleNextJoke = () => {
+    if (!currentJoke) return
+    const joke = getRandomJokeByType(selectedType, currentJoke)
     setCurrentJoke(joke)
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-6 p-4 bg-white rounded-2xl shadow-sm">
+      
+      {/* Title */}
+      <div>
+        <h2 className="text-lg font-semibold">Escolha o tipo de piada</h2>
+      </div>
+
+      {/* Chips */}
       <div className="flex flex-wrap gap-2">
         {types.map((type) => (
           <button
             key={type}
-            className={btnClass}
-            onClick={() => handleShowModal(type)}
+            onClick={() => setSelectedType(type)}
+            className={`
+              px-4 py-1.5 rounded-full text-sm transition-all duration-200
+              ${
+                selectedType === type
+                  ? "bg-blue-600 text-white shadow"
+                  : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+              }
+            `}
           >
-            Gerar piada de {type}
+            {type}
           </button>
         ))}
       </div>
 
-      {/* jokes modal */}
+      {/* Generate button */}
+      <div>
+        <button
+          disabled={!selectedType}
+          onClick={handleGenerateJoke}
+          className={`
+            px-5 py-2 rounded-lg font-medium transition
+            ${
+              selectedType
+                ? "bg-green-600 text-white hover:bg-green-700"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            }
+          `}
+        >
+          Gerar piada
+        </button>
+      </div>
+
+      {/* Modal */}
       {currentJoke && (
         <JokeModal
           isOpen={showModal}
           joke={currentJoke}
           onClose={() => setShowModal(false)}
-          onNextJoke={() => handleNextJoke(currentJoke.type)}
+          onNextJoke={handleNextJoke}
         />
       )}
     </div>

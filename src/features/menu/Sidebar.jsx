@@ -47,7 +47,7 @@ function Sidebar() {
   }, [userType])
 
   const sidebarClasses = [
-    'fixed top-0 left-0 min-h-screen shadow-2xl border-r border-gray-800/50 px-5',
+    'fixed top-0 left-0 min-h-screen px-5',
     'transition-all duration-300 ease-in-out w-60 overflow-x-hidden z-40',
     sidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0',
     !isMobile && 'opacity-100 translate-x-0',

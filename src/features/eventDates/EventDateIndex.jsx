@@ -5,6 +5,7 @@ import EventDateList from './list/EventDateList'
 import EventDateHeader from './EventDateHeader'
 import EventDateSearch from './list/EventDateSearch'
 import EventDateListDoneModal from './list/EventDateListDoneModal'
+import InputSearch from '@/components/inputs/InputSearch'
 
 function EventDateIndex() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -34,11 +35,18 @@ function EventDateIndex() {
 
       {/* dateEvents search */}
       {dateEventCount > 0 && (
-        <EventDateSearch 
-          searchTerm={searchTerm}
-          setOnlyConfirmed={setOnlyConfirmed}
-          onSearch={setSearchTerm}
-        />
+        <>
+          <InputSearch
+            searchTerm={searchTerm}
+            label="Buscar evento"
+            placeholder="Digite o nome do evento"
+            onSearch={setSearchTerm}
+          />
+
+          <EventDateSearch 
+            setOnlyConfirmed={setOnlyConfirmed}
+          />
+        </>
       )}
 
       {/* dateEvents list */}

@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import EventDateCloseInfo from './EventDateCloseInfo'
 import EventDateList from './list/EventDateList'
-import EventDateNew from './EventDateNew'
+import EventDateHeader from './EventDateHeader'
 import EventDateSearch from './list/EventDateSearch'
 import EventDateListDoneModal from './list/EventDateListDoneModal'
 
@@ -17,10 +17,7 @@ function EventDateIndex() {
 
   return (
     <>
-      {/* Button and modal of new dateEvent */}
-      <div className="flex my-4">
-        <EventDateNew onAfterSave={reloadDateEvents} />
-      </div>
+      <EventDateHeader onAfterSave={reloadDateEvents} />
 
       {/* Separator */}
       <div className="border-b border-gray-300 dark:border-gray-700 my-4" />

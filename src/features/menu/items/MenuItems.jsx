@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import ItemMenu from './ItemMenu'
 import LogoutButton from './LogoutButton'
+import ThemeButton from './ThemeButton'
 
 function MenuItems({ items, onItemClick }) {
   const location = useLocation()
@@ -30,11 +31,16 @@ function MenuItems({ items, onItemClick }) {
         ))}
       </div>
 
-      {/* Logout fixo no fim */}
-      <LogoutButton
-        className="mt-auto pt-4"
-        onClick={onItemClick}
-      />
+      <div className="mt-auto flex flex-col gap-1">
+        {/* Botão de alternar entre tema claro e escuro */}
+        <ThemeButton />
+        
+        {/* Logout fixo no fim */}
+        <LogoutButton
+          className="mt-auto pt-4"
+          onClick={onItemClick}
+        />
+      </div>
     </nav>
   )
 }

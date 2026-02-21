@@ -80,7 +80,7 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
           {filteredStudentSongs.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold my-4">
+                <h2 className="font-semibold text-slate-900 dark:text-white transition-colors duration-200">
                   Músicas dos Alunos
                 </h2>
                 <span className="text-gray-400">

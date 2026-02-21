@@ -105,15 +105,18 @@ function MakeupList({
       ) : (
         <>
           {loadingAfterSave && (
-            <div className="mb-4">
-              <span>Atualizando lista...</span>
+            <div className="mb-4 flex items-center gap-2">
+              {/* O texto agora alterna entre cinza escuro no modo claro e cinza azulado no modo escuro */}
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-400 animate-pulse">
+                Atualizando lista...
+              </span>
             </div>
           )}
 
           {filteredMakeups.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold">
+                <h2 className="font-semibold text-slate-900 dark:text-white transition-colors duration-200">
                   {title}
                 </h2>
                 <span className="text-gray-400">

@@ -90,7 +90,9 @@ function JokeList({
           {filteredJokes.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold">Piadas</h2>
+                <h2 className="font-semibold text-slate-900 dark:text-white transition-colors duration-200">
+                  Piadas
+                </h2>
                 <span className="text-gray-400">
                   {filteredJokes.length} no total
                 </span>

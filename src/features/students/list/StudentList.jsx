@@ -81,9 +81,6 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
           {filteredStudents.length > 0 ? (
             <section className="container mt-2">
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold">
-                  Alunos
-                </h2>
                 <span className="text-gray-400">
                   {filteredStudents.length} no total
                 </span>

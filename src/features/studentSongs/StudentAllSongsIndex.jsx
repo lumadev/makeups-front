@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { btnClass } from '@/common/utils/classes'
 
 import StudentAllSongsList from './list/StudentAllSongsList'
-import StudentSongNew from '@/features/students/songs/StudentSongNew'
+import StudentAllSongsHeader from './StudentAllSongsHeader'
+
+// import StudentSongNew from '@/features/students/songs/StudentSongNew'
 import InputSearch from '@/components/inputs/InputSearch'
 import SpotifyModalSearchVersions from '@/features/spotify/searchVersion/SpotifyModalSearchVersions.jsx'
 
@@ -18,6 +20,9 @@ function StudentAllSongsIndex() {
 
   return (
     <>
+      {/* Button and modal of new student song */}
+      <StudentAllSongsHeader reloadStudentSongs={reloadStudentSongs} />
+
       {/* Students search */}
       {studentSongCount > 0 && (
         <>
@@ -39,10 +44,10 @@ function StudentAllSongsIndex() {
             </button>
 
             {/* new song button */}
-            <StudentSongNew 
+            {/* <StudentSongNew 
               screenType='student-all-songs'
               onAfterSave={reloadStudentSongs}
-            />
+            /> */}
           </div>
         </>
       )}

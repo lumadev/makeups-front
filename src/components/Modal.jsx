@@ -8,8 +8,14 @@ function Modal({
   children, 
   actions
 }) {
-  const [isDark, setIsDark] = useState(false)
+  // Detecta tema logo no render
+  const [isDark, setIsDark] = useState(
+    typeof window !== 'undefined' 
+      ? document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark'
+      : false
+  )
 
+  // Observa mudanças de tema enquanto o modal está aberto
   useEffect(() => {
     const checkTheme = () => {
       const isDarkMode = document.documentElement.classList.contains('dark') || 
@@ -17,13 +23,11 @@ function Modal({
       setIsDark(isDarkMode)
     }
 
-    if (isOpen) {
-      checkTheme()
-      const observer = new MutationObserver(checkTheme)
-      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-      return () => observer.disconnect()
-    }
-  }, [isOpen])
+    const observer = new MutationObserver(checkTheme)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+    return () => observer.disconnect()
+  }, [])
 
   if (!isOpen) return null
 
@@ -33,7 +37,7 @@ function Modal({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex justify-center items-center p-2 sm:p-4 overflow-x-hidden overflow-y-auto transition-all ${
+      className={`fixed inset-0 z-50 flex justify-center items-center p-2 sm:p-4 overflow-x-hidden overflow-y-auto transition-all duration-300 ${
         isDark ? 'bg-black/80 backdrop-blur-sm' : 'bg-black/50'
       }`}
       role="dialog"
@@ -41,7 +45,6 @@ function Modal({
     >
       <div className={`relative w-full ${sizeClass} max-h-[90vh] sm:max-h-[85vh] px-0 sm:px-4`}>
         
-        {/* Card do Modal: Note a mudança na classe 'border' */}
         <div className={`flex flex-col h-full rounded-xl shadow-2xl transition-colors duration-300 border ${
           isDark 
             ? 'bg-[#0b1120] border-white/10 text-white shadow-black/50' 
@@ -49,7 +52,7 @@ function Modal({
         }`}>
           
           {/* Header */}
-          <div className={`flex items-start justify-between p-4 sm:p-5 border-b transition-colors ${
+          <div className={`flex items-start justify-between p-4 sm:p-5 border-b transition-colors duration-300 ${
             isDark ? 'border-white/5' : 'border-gray-100'
           }`}>
             <h3 className="text-lg sm:text-xl font-semibold">
@@ -58,7 +61,7 @@ function Modal({
             <button
               type="button"
               onClick={onClose}
-              className={`p-1.5 ml-auto inline-flex items-center rounded-lg transition-colors ${
+              className={`p-1.5 ml-auto inline-flex items-center rounded-lg transition-colors duration-300 ${
                 isDark 
                   ? 'text-gray-400 hover:bg-white/10 hover:text-white' 
                   : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900'
@@ -71,7 +74,7 @@ function Modal({
           </div>
 
           {/* Body */}
-          <div className={`p-4 sm:p-6 space-y-6 flex-1 overflow-y-auto ${
+          <div className={`p-4 sm:p-6 space-y-6 flex-1 overflow-y-auto transition-colors duration-300 ${
             isDark ? 'text-slate-300' : 'text-gray-600'
           }`}>
             {children}
@@ -79,7 +82,7 @@ function Modal({
 
           {/* Footer */}
           {actions && (
-            <div className={`flex flex-wrap gap-2 justify-end items-center p-4 sm:p-6 border-t transition-colors ${
+            <div className={`flex flex-wrap gap-2 justify-end items-center p-4 sm:p-6 border-t transition-colors duration-300 ${
               isDark ? 'border-white/5' : 'border-gray-100'
             }`}>
               {actions}

@@ -1,18 +1,25 @@
 import { useState, useEffect } from 'react'
 import { IconSun, IconMoon } from '@tabler/icons-react'
 
-function ThemeButton({ className = "" }) {
-  const [isDark, setIsDark] = useState(() => {
-    const savedTheme = localStorage.getItem('theme')
-    return savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  })
+// Função utilitária para pegar o tema inicial
+const getInitialTheme = () => {
+  if (typeof window === 'undefined') return false // SSR fallback
+  const saved = localStorage.getItem('theme')
+  if (saved) return saved === 'dark'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}
 
+function ThemeButton({ className = "" }) {
+  const [isDark, setIsDark] = useState(getInitialTheme)
+
+  // Aplica o tema no <html> sempre que mudar
   useEffect(() => {
+    const html = document.documentElement
     if (isDark) {
-      document.documentElement.classList.add('dark')
+      html.classList.add('dark')
       localStorage.setItem('theme', 'dark')
     } else {
-      document.documentElement.classList.remove('dark')
+      html.classList.remove('dark')
       localStorage.setItem('theme', 'light')
     }
   }, [isDark])
@@ -20,7 +27,6 @@ function ThemeButton({ className = "" }) {
   return (
     <div
       onClick={() => setIsDark(!isDark)}
-      // Removido mt-auto e pb-3 para ficar colado no Logout
       className={`flex items-center gap-2 pl-3 py-3 rounded-md w-full text-white text-sm font-medium transition-colors duration-200 hover:bg-white/10 cursor-pointer ${className}`}
       role="button"
     >

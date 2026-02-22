@@ -18,3 +18,11 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
+<script>
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.classList.add('dark');
+  }
+</script>

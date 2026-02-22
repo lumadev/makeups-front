@@ -14,21 +14,16 @@ const SIDEBAR_BG = '#1A1D24'
 function Sidebar() {
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [userName, setUserName] = useState('')
-  const [userType, setUserType] = useState('')
+  const [sidebarOpen, setSidebarOpen] = useState(() => !isMobile)
+  const [userName] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return localStorage.getItem(STORAGE_KEYS.NAME) || ''
+  })
 
-  useEffect(() => {
-    if (!isMobile) setSidebarOpen(true)
-  }, [isMobile])
-
-  useEffect(() => {
-    const name = localStorage.getItem(STORAGE_KEYS.NAME)
-    const type = localStorage.getItem(STORAGE_KEYS.USER_TYPE)
-
-    if (name) setUserName(name)
-    if (type) setUserType(type)
-  }, [])
+  const [userType] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return localStorage.getItem(STORAGE_KEYS.USER_TYPE) || ''
+  })
 
   useEffect(() => {
     if (!isMobile || !sidebarOpen) return

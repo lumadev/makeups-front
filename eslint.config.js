@@ -31,4 +31,12 @@ export default [
       'semi': ['error', 'never']
     },
   },
+  {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      globals: {
+        process: 'readonly'
+      }
+    }
+  }
 ]

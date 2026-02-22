@@ -29,12 +29,12 @@ function HomeIndex() {
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:p-8 overflow-x-hidden w-full">
       
       {/* Título */}
-      <h1 className="text-lg sm:text-2xl font-bold text-gray-800 mb-6 sm:mb-4 text-center leading-snug px-2 sm:px-0">
+      <h1 className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6 sm:mb-4 text-center leading-snug px-2 sm:px-0">
         Bem-vindo ao sistema de reposições!
       </h1>
 
       {/* Piada com respiro melhor no mobile */}
-      <div className="w-full mb-6 sm:mb-0 mb-4">
+      <div className="w-full">
         <HomeDailyJoke />
       </div>
 

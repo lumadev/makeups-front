@@ -15,6 +15,7 @@ import StudentIndex from "./features/students/StudentIndex"
 import StudentManage from "./features/students/StudentManage"
 import StudentAllSongsIndex from "./features/studentSongs/StudentAllSongsIndex"
 import JokeIndex from "./features/jokes/JokeIndex"
+import PacmanGame from "./features/menu/PacmanGame"
 
 function App() {
   const protectedRoutes = [
@@ -25,6 +26,8 @@ function App() {
     { path: "reposicoes-concluidas", element: <MakeupDoneIndex /> },
     { path: "datas-de-evento", element: <EventDateIndex /> },
     { path: "piadas", element: <JokeIndex /> },
+    // 👾
+    { path: "pacman", element: <PacmanGame /> },
   ]
 
   return (

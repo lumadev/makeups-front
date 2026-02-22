@@ -1,27 +1,19 @@
 import { useNavigate, useOutletContext } from "react-router-dom"
-import { IconArrowLeft, IconGhost, IconHome } from '@tabler/icons-react'
+import { IconArrowLeft, IconHome } from '@tabler/icons-react'
+import MiniPacman from "./MiniPacman"
 
 function NotFound() {
   const navigate = useNavigate()
   const { isDark } = useOutletContext() || {}
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[75vh] px-6 text-center">
-      {/* Elemento Visual */}
-      <div className="relative mb-12">
-        <IconGhost 
-          size={120} 
-          stroke={1.2}
-          className={`${isDark ? 'text-slate-700' : 'text-slate-200'} animate-pulse`} 
-        />
-        <h1 className={`absolute inset-0 flex items-center justify-center text-6xl font-black opacity-40
-          ${isDark ? 'text-blue-500' : 'text-slate-400'}`}>
-          404
-        </h1>
-      </div>
-
+    <div className="flex flex-col items-center justify-center min-h-[75vh] 
+      px-6 text-center my-10"
+    >
+      <MiniPacman isDark={isDark} />
+      
       {/* Texto Minimalista */}
-      <h2 className={`text-xl font-medium mb-8 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+      <h2 className={`text-xl font-medium mt-10 mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
         Oops! Essa página não existe ou foi movida.
       </h2>
       

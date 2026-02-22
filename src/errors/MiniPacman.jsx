@@ -1,15 +1,24 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 function MiniPacman({ isDark }) {
   const canvasRef = useRef()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d")
 
-    const cellSize = 24
+    const cellSize = isMobile ? 18 : 24
 
-    // Labirinto totalmente conectado (sem caminhos impossíveis)
     const mazeTemplate = [
       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -24,9 +33,13 @@ function MiniPacman({ isDark }) {
       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     ]
 
-    let maze, pellets, pacman, ghost, gameOver, victory
     const rows = mazeTemplate.length
     const cols = mazeTemplate[0].length
+
+    canvas.width = cols * cellSize
+    canvas.height = rows * cellSize
+
+    let maze, pellets, pacman, ghost, gameOver, victory
 
     const resetGame = () => {
       maze = JSON.parse(JSON.stringify(mazeTemplate))
@@ -64,10 +77,7 @@ function MiniPacman({ isDark }) {
       }
     }
 
-    // Fantasma um pouco mais fácil
     const moveGhost = () => {
-      const chase = Math.random() < 0.6
-
       const directions = [
         { x: 1, y: 0 },
         { x: -1, y: 0 },
@@ -75,17 +85,15 @@ function MiniPacman({ isDark }) {
         { x: 0, y: -1 },
       ]
 
-      if (chase) {
-        directions.sort((a, b) => {
-          const da =
-            Math.abs(pacman.x - (ghost.x + a.x)) +
-            Math.abs(pacman.y - (ghost.y + a.y))
-          const db =
-            Math.abs(pacman.x - (ghost.x + b.x)) +
-            Math.abs(pacman.y - (ghost.y + b.y))
-          return da - db
-        })
-      }
+      directions.sort((a, b) => {
+        const da =
+          Math.abs(pacman.x - (ghost.x + a.x)) +
+          Math.abs(pacman.y - (ghost.y + a.y))
+        const db =
+          Math.abs(pacman.x - (ghost.x + b.x)) +
+          Math.abs(pacman.y - (ghost.y + b.y))
+        return da - db
+      })
 
       for (let d of directions) {
         if (canMove(ghost.x + d.x, ghost.y + d.y)) {
@@ -98,7 +106,6 @@ function MiniPacman({ isDark }) {
 
     const checkCollisions = () => {
       pellets = pellets.filter(p => !(p.x === pacman.x && p.y === pacman.y))
-
       if (pellets.length === 0) victory = true
       if (ghost.x === pacman.x && ghost.y === pacman.y)
         gameOver = true
@@ -109,7 +116,6 @@ function MiniPacman({ isDark }) {
         resetGame()
         return
       }
-
       if (e.key === "ArrowUp") pacman.dir = "UP"
       if (e.key === "ArrowDown") pacman.dir = "DOWN"
       if (e.key === "ArrowLeft") pacman.dir = "LEFT"
@@ -118,6 +124,7 @@ function MiniPacman({ isDark }) {
 
     window.addEventListener("keydown", keyHandler)
 
+    // 👻 Fantasma estilo clássico
     const drawGhost = () => {
       const x = ghost.x * cellSize
       const y = ghost.y * cellSize
@@ -167,20 +174,19 @@ function MiniPacman({ isDark }) {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       ctx.fillStyle = "#fff"
-      ctx.font = "24px Arial"
+      ctx.font = `${isMobile ? 14 : 20}px Arial`
       ctx.textAlign = "center"
 
       ctx.fillText(
         victory ? "VOCÊ VENCEU!" : "GAME OVER",
         canvas.width / 2,
-        canvas.height / 2 - 20
+        canvas.height / 2 - 10
       )
 
-      ctx.font = "16px Arial"
       ctx.fillText(
         "Pressione R para reiniciar",
         canvas.width / 2,
-        canvas.height / 2 + 15
+        canvas.height / 2 + 20
       )
     }
 
@@ -239,15 +245,26 @@ function MiniPacman({ isDark }) {
       clearInterval(loop)
       window.removeEventListener("keydown", keyHandler)
     }
-  }, [isDark])
+  }, [isDark, isMobile])
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={456}
-      height={264}
-      className="rounded-2xl shadow-2xl"
-    />
+    <div className="flex flex-col items-center gap-4">
+      <canvas ref={canvasRef} className="rounded-2xl shadow-2xl" />
+
+      {isMobile && (
+        <div className="grid grid-cols-3 gap-2 text-xl select-none">
+          <div></div>
+          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowUp"}))}>⬆️</button>
+          <div></div>
+          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowLeft"}))}>⬅️</button>
+          <div></div>
+          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight"}))}>➡️</button>
+          <div></div>
+          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowDown"}))}>⬇️</button>
+          <div></div>
+        </div>
+      )}
+    </div>
   )
 }
 

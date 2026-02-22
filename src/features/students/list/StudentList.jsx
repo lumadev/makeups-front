@@ -135,7 +135,9 @@ function StudentList({ searchTerm, reloadFlag, onCountChange }) {
             </section>
           ) : (
             <div className="mt-2">
-              <p className="text-gray-400 font-medium">Nenhum aluno encontrado :(</p>
+              <p className="text-gray-400 font-medium">
+                Nenhum aluno encontrado
+              </p>
             </div>
           )}
         </>

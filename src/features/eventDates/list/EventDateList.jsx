@@ -163,7 +163,9 @@ function EventDateList({
             </section>
           ) : (
             <div className="mt-2">
-              <p className="text-gray-400 font-medium">Nenhuma data de evento encontrada :(</p>
+              <p className="text-gray-400 font-medium">
+                Shhh… o show ainda não começou! Nenhuma data de evento disponível.
+              </p>
             </div>
           )}
         </>

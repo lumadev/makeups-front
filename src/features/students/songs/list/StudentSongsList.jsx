@@ -176,7 +176,9 @@ function StudentSongsList({
             </section>
           ) : (
             <div className="mt-2">
-              <p className="text-gray-400 font-medium">Nenhuma música encontrada :(</p>
+              <p className="text-gray-400 font-medium">
+                Nenhuma música encontrada
+              </p>
             </div>
           )}
         </>

@@ -142,7 +142,9 @@ function JokeList({
             </section>
           ) : (
             <div className="mt-2">
-              <p className="text-gray-400 font-medium">Nenhuma piada encontrada :(</p>
+              <p className="text-gray-400 font-medium">
+                Ops… o baú de piadas está vazio!
+              </p>
             </div>
           )}
         </>

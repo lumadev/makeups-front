@@ -170,7 +170,9 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
             </section>
           ) : (
             <div className="mt-2">
-              <p className="text-gray-400 font-medium">Nenhuma música encontrada :(</p>
+              <p className="text-gray-400 font-medium">
+                Ops… o player está em silêncio! Nenhuma música encontrada
+              </p>
             </div>
           )}
         </>

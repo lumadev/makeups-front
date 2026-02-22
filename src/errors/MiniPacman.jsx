@@ -7,125 +7,102 @@ function MiniPacman({ isDark }) {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d")
 
-    const cellSize = 30
-    const rows = 15
-    const cols = 15
+    const cellSize = 24
 
-    // Labirinto simples
-    const maze = Array.from({ length: rows }, (_, y) =>
-      Array.from({ length: cols }, (_, x) =>
-        x === 0 || y === 0 || x === cols - 1 || y === rows - 1 ? 1 : 0
-      )
-    )
+    const mazeTemplate = [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1],
+      [0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0],
+      [1,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,1],
+      [1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    ]
 
-    let score = 0
+    let maze, pellets, pacman, ghost, score, gameOver, victory
+    const rows = mazeTemplate.length
+    const cols = mazeTemplate[0].length
 
-    // Bolinhas
-    let pellets = []
-    for (let y = 1; y < rows - 1; y++) {
-      for (let x = 1; x < cols - 1; x++) {
-        pellets.push({ x, y })
-      }
+    const resetGame = () => {
+      maze = JSON.parse(JSON.stringify(mazeTemplate))
+      pellets = []
+      score = 0
+      gameOver = false
+      victory = false
+
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++)
+          if (maze[y][x] === 0) pellets.push({ x, y })
+
+      pacman = { x: 1, y: 1, dir: "RIGHT" }
+      ghost = { x: cols - 2, y: rows - 2 }
     }
 
-    let pacman = {
-      x: 1,
-      y: 1,
-      dir: "RIGHT",
-      mouth: 0
-    }
+    resetGame()
 
-    let ghost = {
-      x: cols - 2,
-      y: rows - 2,
-      dir: "LEFT"
-    }
+    const canMove = (x, y) =>
+      y >= 0 && y < rows && x >= 0 && x < cols && maze[y][x] === 0
 
-    const drawMaze = () => {
-      ctx.fillStyle = isDark ? "#111" : "#f1f5f9"
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      ctx.fillStyle = isDark ? "#1e293b" : "#cbd5e1"
-      maze.forEach((row, y) => {
-        row.forEach((cell, x) => {
-          if (cell === 1) {
-            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
-          }
-        })
-      })
-    }
-
-    const drawPellets = () => {
-      ctx.fillStyle = "#fff"
-      pellets.forEach(p => {
-        ctx.beginPath()
-        ctx.arc(
-          p.x * cellSize + cellSize / 2,
-          p.y * cellSize + cellSize / 2,
-          4,
-          0,
-          Math.PI * 2
-        )
-        ctx.fill()
-      })
-    }
-
-    const drawPacman = () => {
-      const px = pacman.x * cellSize + cellSize / 2
-      const py = pacman.y * cellSize + cellSize / 2
-
-      pacman.mouth += 0.2
-      const open = Math.abs(Math.sin(pacman.mouth)) * 0.5
-
-      ctx.fillStyle = "yellow"
-      ctx.beginPath()
-      ctx.arc(px, py, cellSize / 2 - 2, open, Math.PI * 2 - open)
-      ctx.lineTo(px, py)
-      ctx.fill()
-    }
-
-    const drawGhost = () => {
-      const gx = ghost.x * cellSize + cellSize / 2
-      const gy = ghost.y * cellSize + cellSize / 2
-
-      ctx.fillStyle = "red"
-      ctx.beginPath()
-      ctx.arc(gx, gy, cellSize / 2 - 2, Math.PI, 0)
-      ctx.lineTo(gx + cellSize / 2 - 2, gy + cellSize / 2 - 2)
-      ctx.lineTo(gx - cellSize / 2 + 2, gy + cellSize / 2 - 2)
-      ctx.closePath()
-      ctx.fill()
-    }
-
-    const drawScore = () => {
-      ctx.fillStyle = isDark ? "#fff" : "#000"
-      ctx.font = "16px Arial"
-      ctx.fillText("Score: " + score, 10, canvas.height - 10)
-    }
-
-    const move = (entity) => {
+    const movePacman = () => {
       const dirs = {
         UP: { x: 0, y: -1 },
         DOWN: { x: 0, y: 1 },
         LEFT: { x: -1, y: 0 },
-        RIGHT: { x: 1, y: 0 }
+        RIGHT: { x: 1, y: 0 },
       }
 
-      const nextX = entity.x + dirs[entity.dir].x
-      const nextY = entity.y + dirs[entity.dir].y
+      const nextX = pacman.x + dirs[pacman.dir].x
+      const nextY = pacman.y + dirs[pacman.dir].y
 
-      if (maze[nextY][nextX] === 0) {
-        entity.x = nextX
-        entity.y = nextY
+      if (canMove(nextX, nextY)) {
+        pacman.x = nextX
+        pacman.y = nextY
       }
     }
 
-    const randomGhostMove = () => {
-      const directions = ["UP", "DOWN", "LEFT", "RIGHT"]
-      ghost.dir = directions[Math.floor(Math.random() * 4)]
+    // BFS Pathfinding
+    const findPath = (start, target) => {
+      const queue = [[start]]
+      const visited = new Set()
+      visited.add(`${start.x},${start.y}`)
+
+      while (queue.length) {
+        const path = queue.shift()
+        const { x, y } = path[path.length - 1]
+
+        if (x === target.x && y === target.y) return path
+
+        const neighbors = [
+          { x: x + 1, y },
+          { x: x - 1, y },
+          { x, y: y + 1 },
+          { x, y: y - 1 },
+        ]
+
+        for (let n of neighbors) {
+          const key = `${n.x},${n.y}`
+          if (canMove(n.x, n.y) && !visited.has(key)) {
+            visited.add(key)
+            queue.push([...path, n])
+          }
+        }
+      }
+      return null
     }
 
-    const checkPelletCollision = () => {
+    const moveGhost = () => {
+      const path = findPath(ghost, pacman)
+      if (path && path.length > 1) {
+        ghost.x = path[1].x
+        ghost.y = path[1].y
+      }
+    }
+
+    const checkCollisions = () => {
       pellets = pellets.filter(p => {
         if (p.x === pacman.x && p.y === pacman.y) {
           score += 10
@@ -133,42 +110,122 @@ function MiniPacman({ isDark }) {
         }
         return true
       })
+
+      if (pellets.length === 0) victory = true
+      if (ghost.x === pacman.x && ghost.y === pacman.y)
+        gameOver = true
     }
 
-    const checkGhostCollision = () => {
-      if (ghost.x === pacman.x && ghost.y === pacman.y) {
-        alert("Game Over! Score: " + score)
-        window.location.reload()
+    const keyHandler = e => {
+      if ((gameOver || victory) && e.key.toLowerCase() === "r") {
+        resetGame()
+        return
       }
-    }
 
-    const keyHandler = (e) => {
-      if (e.key === "ArrowUp") pacman.dir = "UP"
-      if (e.key === "ArrowDown") pacman.dir = "DOWN"
-      if (e.key === "ArrowLeft") pacman.dir = "LEFT"
-      if (e.key === "ArrowRight") pacman.dir = "RIGHT"
+      if (!gameOver && !victory) {
+        if (e.key === "ArrowUp") pacman.dir = "UP"
+        if (e.key === "ArrowDown") pacman.dir = "DOWN"
+        if (e.key === "ArrowLeft") pacman.dir = "LEFT"
+        if (e.key === "ArrowRight") pacman.dir = "RIGHT"
+      }
     }
 
     window.addEventListener("keydown", keyHandler)
 
-    const gameLoop = setInterval(() => {
-      move(pacman)
-      if (Math.random() < 0.3) randomGhostMove()
-      move(ghost)
+    const drawGhost = () => {
+      const x = ghost.x * cellSize
+      const y = ghost.y * cellSize
+      const r = cellSize / 2 - 2
 
-      checkPelletCollision()
-      checkGhostCollision()
+      ctx.fillStyle = "#ef4444"
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      drawMaze()
-      drawPellets()
-      drawPacman()
+      // cabeça
+      ctx.beginPath()
+      ctx.arc(x + cellSize / 2, y + r, r, Math.PI, 0)
+      ctx.lineTo(x + cellSize - 2, y + cellSize - 2)
+
+      // base ondulada
+      const waveWidth = cellSize / 4
+      for (let i = 0; i < 4; i++) {
+        ctx.quadraticCurveTo(
+          x + waveWidth * i + waveWidth / 2,
+          y + cellSize - 6,
+          x + waveWidth * (i + 1),
+          y + cellSize - 2
+        )
+      }
+
+      ctx.closePath()
+      ctx.fill()
+
+      // olhos
+      ctx.fillStyle = "#fff"
+      ctx.beginPath()
+      ctx.arc(x + cellSize * 0.35, y + cellSize * 0.5, 4, 0, Math.PI * 2)
+      ctx.arc(x + cellSize * 0.65, y + cellSize * 0.5, 4, 0, Math.PI * 2)
+      ctx.fill()
+
+      ctx.fillStyle = "#000"
+      ctx.beginPath()
+      ctx.arc(x + cellSize * 0.35, y + cellSize * 0.5, 2, 0, Math.PI * 2)
+      ctx.arc(x + cellSize * 0.65, y + cellSize * 0.5, 2, 0, Math.PI * 2)
+      ctx.fill()
+    }
+
+    const draw = () => {
+      ctx.fillStyle = isDark ? "#111827" : "#f1f5f9"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      ctx.fillStyle = "#2563eb"
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++)
+          if (maze[y][x] === 1)
+            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
+
+      ctx.fillStyle = "#fff"
+      pellets.forEach(p => {
+        ctx.beginPath()
+        ctx.arc(
+          p.x * cellSize + cellSize / 2,
+          p.y * cellSize + cellSize / 2,
+          3,
+          0,
+          Math.PI * 2
+        )
+        ctx.fill()
+      })
+
+      // Pacman
+      ctx.fillStyle = "yellow"
+      ctx.beginPath()
+      ctx.arc(
+        pacman.x * cellSize + cellSize / 2,
+        pacman.y * cellSize + cellSize / 2,
+        cellSize / 2 - 2,
+        0.2,
+        Math.PI * 2 - 0.2
+      )
+      ctx.lineTo(
+        pacman.x * cellSize + cellSize / 2,
+        pacman.y * cellSize + cellSize / 2
+      )
+      ctx.fill()
+
       drawGhost()
-      drawScore()
-    }, 200)
+    }
+
+    // ⏳ MAIS LENTO AQUI
+    const loop = setInterval(() => {
+      if (!gameOver && !victory) {
+        movePacman()
+        moveGhost()
+        checkCollisions()
+      }
+      draw()
+    }, 180) // antes era 120
 
     return () => {
-      clearInterval(gameLoop)
+      clearInterval(loop)
       window.removeEventListener("keydown", keyHandler)
     }
   }, [isDark])
@@ -176,9 +233,9 @@ function MiniPacman({ isDark }) {
   return (
     <canvas
       ref={canvasRef}
-      width={450}
-      height={450}
-      className="rounded-xl shadow-2xl"
+      width={456}
+      height={264}
+      className="rounded-2xl shadow-2xl"
     />
   )
 }

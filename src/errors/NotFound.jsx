@@ -6,55 +6,46 @@ function NotFound() {
   const { isDark } = useOutletContext() || {}
 
   return (
-    <div className={`flex flex-col items-center justify-center h-full min-h-[70vh] px-6 text-center transition-colors duration-300
-      ${isDark ? 'text-slate-100' : 'text-slate-800'}`}>
-      
+    <div className="flex flex-col items-center justify-center min-h-[75vh] px-6 text-center">
       {/* Elemento Visual */}
-      <div className="relative mb-10">
+      <div className="relative mb-12">
         <IconGhost 
-          size={140} 
-          stroke={1}
+          size={120} 
+          stroke={1.2}
           className={`${isDark ? 'text-slate-700' : 'text-slate-200'} animate-pulse`} 
         />
-        <h1 className={`absolute inset-0 flex items-center justify-center text-7xl font-black tracking-tighter
-          ${isDark ? 'text-blue-500/20' : 'text-slate-900/10'}`}>
+        <h1 className={`absolute inset-0 flex items-center justify-center text-6xl font-black opacity-40
+          ${isDark ? 'text-blue-500' : 'text-slate-400'}`}>
           404
         </h1>
       </div>
 
-      {/* Mensagem */}
-      <div className="space-y-2 mb-10">
-        <h2 className="text-2xl md:text-3xl font-bold italic">
-          Página não encontrada
-        </h2>
-        <p className={`text-base max-w-sm mx-auto font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-          O recurso que você procura não existe ou foi removido do sistema de reposições.
-        </p>
-      </div>
+      {/* Texto Minimalista */}
+      <h2 className={`text-xl font-medium mb-8 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+        Oops! Essa página não existe ou foi movida.
+      </h2>
       
       {/* Ações */}
-      <div className="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md">
-        {/* Botão Voltar - Estilo Outline/Ghost */}
+      <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={() => navigate(-1)}
-          className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all active:scale-95 border-2
+          className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-semibold transition-all active:scale-95
             ${isDark 
-              ? 'bg-transparent border-slate-700 text-slate-300 hover:bg-slate-800' 
-              : 'bg-transparent border-slate-300 text-slate-600 hover:bg-slate-100'}`}
+              ? 'bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700' 
+              : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 shadow-sm'}`}
         >
-          <IconArrowLeft size={22} />
+          <IconArrowLeft size={20} />
           Voltar anterior
         </button>
 
-        {/* Botão Início - Estilo Sólido (Corrigido para não sumir no Light Mode) */}
         <button
-          onClick={() => navigate('/home')}
-          className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all active:scale-95 shadow-md
+          onClick={() => navigate('/')}
+          className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-semibold transition-all active:scale-95
             ${isDark 
-              ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-900/20' 
-              : 'bg-[#0f172a] hover:bg-slate-800 text-white shadow-slate-300'}`}
+              ? 'bg-blue-600 hover:bg-blue-500 text-white' 
+              : 'bg-slate-900 hover:bg-black text-white'}`}
         >
-          <IconHome size={22} />
+          <IconHome size={20} />
           Início do Sistema
         </button>
       </div>

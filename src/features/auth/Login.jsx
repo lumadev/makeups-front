@@ -21,19 +21,19 @@ function Login() {
   }
 
   return (
-    <div className="grid lg:grid-cols-2 min-h-screen w-full">
+    <div className="grid lg:grid-cols-2 min-h-screen w-full dark:bg-gray-900">
       
       {/* LEFT SIDE */}
       <LeftSideLogin />
 
       {/* RIGHT SIDE */}
-      <div className="flex items-center justify-center bg-gray-50 px-6">
+      <div className="flex items-center justify-center bg-gray-50 dark:bg-gray-800 px-6">
         <div className="w-full max-w-md">
           
-          <h2 className="text-3xl font-serif font-semibold text-gray-800 mb-2">
+          <h2 className="text-3xl font-serif font-semibold text-gray-800 dark:text-gray-100 mb-2">
             Bem-vindo
           </h2>
-          <p className="text-gray-500 mb-8">
+          <p className="text-gray-500 dark:text-gray-300 mb-8">
             Faça login para acessar o sistema
           </p>
 
@@ -44,6 +44,7 @@ function Login() {
               placeholder="Digite seu usuário"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className="dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-600"
             />
 
             <PasswordInput
@@ -52,6 +53,7 @@ function Login() {
               placeholder="Digite sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-600"
             />
 
             <button
@@ -69,7 +71,7 @@ function Login() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-gray-400 mt-10">
+          <p className="text-center text-sm text-gray-400 dark:text-gray-500 mt-10">
             © 2026 Sistema de Reposições by darkangel
           </p>
         </div>

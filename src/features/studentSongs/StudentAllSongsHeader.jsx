@@ -1,6 +1,11 @@
-import StudentSongNew from '@/features/students/songs/StudentSongNew'
+import ButtonNew from '@/components/button/ButtonNew'
+import StudentSongFormModal from '@/features/students/songs/form/StudentSongFormModal'
+
+import { useState } from "react"
 
 function StudentAllSongsHeader({ reloadStudentSongs }) {
+  const [showModal, setShowModal] = useState(false)
+
   return (
     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
       {/* Lado Esquerdo: Título e Descrição */}
@@ -15,11 +20,19 @@ function StudentAllSongsHeader({ reloadStudentSongs }) {
 
       {/* Lado Direito: Botão de Ação */}
       <div className="flex-shrink-0">
-        <StudentSongNew 
-          screenType="student-all-songs"
-          onAfterSave={reloadStudentSongs}
+        <ButtonNew 
+          text="Nova Música"
+          onClick={() => setShowModal(true)}
         />
       </div>
+
+      {/* Modal */}
+      <StudentSongFormModal
+        screenType="student-all-songs"
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onAfterSave={reloadStudentSongs}
+      />
     </div>
   )
 }

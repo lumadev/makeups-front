@@ -29,10 +29,12 @@ function NotFound() {
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={() => navigate(-1)}
-          className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-semibold transition-all active:scale-95
+          className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-semibold transition transform duration-150
+            focus:outline-none focus:ring-2 focus:ring-offset-1 
             ${isDark 
-              ? 'bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700' 
-              : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 shadow-sm'}`}
+              ? 'bg-slate-800 text-white border border-slate-700 hover:bg-slate-700 focus:ring-slate-500' 
+              : 'bg-white text-slate-700 border border-slate-300 shadow-sm hover:bg-slate-50 focus:ring-slate-300'}
+            active:scale-95`}
         >
           <IconArrowLeft size={20} />
           Voltar anterior
@@ -40,10 +42,12 @@ function NotFound() {
 
         <button
           onClick={() => navigate('/')}
-          className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-semibold transition-all active:scale-95
-            ${isDark 
-              ? 'bg-blue-600 hover:bg-blue-500 text-white' 
-              : 'bg-slate-900 hover:bg-black text-white'}`}
+          className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-semibold transition transform duration-150
+            focus:outline-none focus:ring-2 focus:ring-offset-1
+            ${isDark
+              ? 'bg-blue-600 text-white hover:bg-blue-500 focus:ring-blue-400'
+              : 'bg-white text-slate-900 border border-slate-300 shadow-sm hover:bg-slate-50 focus:ring-slate-300'}
+            active:scale-95`}
         >
           <IconHome size={20} />
           Início do Sistema

@@ -170,10 +170,13 @@ function MiniPacman({ isDark }) {
     const drawOverlay = () => {
       if (!gameOver && !victory) return
 
-      ctx.fillStyle = "rgba(0,0,0,0.7)"
+      ctx.fillStyle = isDark
+        ? "rgba(0,0,0,0.7)"
+        : "rgba(255,255,255,0.8)"
+
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      ctx.fillStyle = "#fff"
+      ctx.fillStyle = isDark ? "#ffffff" : "#0f172a"
       ctx.font = `${isMobile ? 14 : 20}px Arial`
       ctx.textAlign = "center"
 
@@ -191,16 +194,19 @@ function MiniPacman({ isDark }) {
     }
 
     const draw = () => {
-      ctx.fillStyle = isDark ? "#111827" : "#f1f5f9"
+      // 🎨 FUNDO
+      ctx.fillStyle = isDark ? "#111827" : "#ffffff"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      ctx.fillStyle = "#2563eb"
+      // 🎨 PAREDES
+      ctx.fillStyle = isDark ? "#2563eb" : "#1d4ed8"
       for (let y = 0; y < rows; y++)
         for (let x = 0; x < cols; x++)
           if (maze[y][x] === 1)
             ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
 
-      ctx.fillStyle = "#fff"
+      // 🎨 PELLETS
+      ctx.fillStyle = isDark ? "#ffffff" : "#334155"
       pellets.forEach(p => {
         ctx.beginPath()
         ctx.arc(
@@ -213,7 +219,8 @@ function MiniPacman({ isDark }) {
         ctx.fill()
       })
 
-      ctx.fillStyle = "yellow"
+      // 🎨 PACMAN
+      ctx.fillStyle = "#facc15"
       ctx.beginPath()
       ctx.arc(
         pacman.x * cellSize + cellSize / 2,
@@ -249,7 +256,14 @@ function MiniPacman({ isDark }) {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <canvas ref={canvasRef} className="rounded-2xl shadow-2xl" />
+      <canvas
+        ref={canvasRef}
+        className={`rounded-2xl shadow-2xl ${
+          isDark
+            ? ""
+            : "border border-gray-300"
+        }`}
+      />
 
       {isMobile && (
         <div className="grid grid-cols-3 gap-2 text-xl select-none">

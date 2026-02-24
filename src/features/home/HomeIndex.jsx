@@ -4,12 +4,29 @@ import { IconSchool, IconUser, IconCheck } from "@tabler/icons-react"
 import HomeCardLink from "./HomeCardLink"
 import MakeupInfo from "@/features/makeups/MakeupInfo"
 import HomeDailyJoke from "./HomeDailyJoke"
+import MakeupCalendar from "../calendar/MakeupCalendar"
 
 import { listMakeups } from "@/features/makeups/makeupService"
 
 function HomeIndex() {
   const [makeups, setMakeups] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDarkMode = document.documentElement.classList.contains('dark') || 
+        localStorage.getItem('theme') === 'dark'
+      setIsDark(isDarkMode)
+    }
+    checkTheme()
+
+    const observer = new MutationObserver(checkTheme)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const fetchMakeups = async () => {
@@ -63,6 +80,13 @@ function HomeIndex() {
           icon={IconUser}
         />
       </div>
+
+      {!loading && (
+        <div className={`${isDark ? "bg-slate-950" : "bg-gray-100"} min-h-screen mt-6`}>
+          <MakeupCalendar makeups={makeups} isDark={isDark} />
+        </div>
+      )}
+
     </div>
   )
 }

@@ -1,15 +1,15 @@
-function CardLink({ href, label, icon: Icon }) {
+function HomeCardLink({ href, label, icon: Icon }) {
   return (
     <a
       href={href}
       className="
         group block w-full
-        min-h-[72px] sm:h-[140px] md:h-[180px] lg:h-[200px]
+        min-h-[60px] sm:h-[100px] md:h-[120px] lg:h-[140px]
         rounded-2xl border border-gray-200 dark:border-gray-700
         bg-white dark:bg-gray-800
         shadow-sm dark:shadow-gray-900/20
         hover:bg-gray-50 dark:hover:bg-gray-700
-        hover:shadow-md dark:hover:shadow-gray-900/40
+        hover:shadow-md dark:shadow-gray-900/40
         transition-all duration-300 ease-out
         flex items-center justify-center
         gap-2
@@ -35,4 +35,4 @@ function CardLink({ href, label, icon: Icon }) {
   )
 }
 
-export default CardLink
+export default HomeCardLink

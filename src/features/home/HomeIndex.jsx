@@ -40,7 +40,7 @@ function HomeIndex() {
 
       {/* Componente MakeupInfo só após carregamento */}
       {!loading && (
-        <div className="w-full mb-8">
+        <div className="w-full my-8">
           <MakeupInfo makeups={makeups} />
         </div>
       )}

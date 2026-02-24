@@ -266,15 +266,51 @@ function MiniPacman({ isDark }) {
       />
 
       {isMobile && (
-        <div className="grid grid-cols-3 gap-2 text-xl select-none">
+        <div className="grid grid-cols-3 gap-4 select-none mt-2">
           <div></div>
-          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowUp"}))}>⬆️</button>
+
+          <button
+            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
+            onClick={() =>
+              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }))
+            }
+          >
+            ⬆️
+          </button>
+
           <div></div>
-          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowLeft"}))}>⬅️</button>
+
+          <button
+            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
+            onClick={() =>
+              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft" }))
+            }
+          >
+            ⬅️
+          </button>
+
           <div></div>
-          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight"}))}>➡️</button>
+
+          <button
+            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
+            onClick={() =>
+              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight" }))
+            }
+          >
+            ➡️
+          </button>
+
           <div></div>
-          <button onClick={() => window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowDown"}))}>⬇️</button>
+
+          <button
+            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
+            onClick={() =>
+              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }))
+            }
+          >
+            ⬇️
+          </button>
+
           <div></div>
         </div>
       )}

@@ -35,6 +35,9 @@ function StudentSongsIndex({ student }) {
         <StudentSongsSearch searchTerm={searchTerm} onSearch={setSearchTerm} />
       )}
 
+      {/* Separator */}
+      <div className="border-b border-gray-300 dark:border-gray-700 my-4" />
+
       {/* studentSongs list */}
       <StudentSongsList
         student={student}

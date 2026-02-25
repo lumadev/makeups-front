@@ -1,6 +1,4 @@
-import { toast } from 'react-toastify'
-import { useEffect, useState } from 'react'
-import { listStudents } from "@/features/students/studentService"
+import { useState } from 'react'
 
 import CheckboxInput from "@/components/inputs/CheckboxInput"
 import DateInput from "@/components/inputs/DateInput"
@@ -11,7 +9,9 @@ function MakeupForm({
   setFormData,
   makeupEdit = null
 }) {
-  const [isOpenDate, setIsOpenDate] = useState(false)
+  const [isOpenDate, setIsOpenDate] = useState(
+  makeupEdit?.isOpenDate ?? false
+)
 
   const handleSelectStudent = (studentId) => {
     setFormData((prev) => ({ ...prev, studentId }))
@@ -41,14 +41,6 @@ function MakeupForm({
       isOpenDate: checked
     }))
   }
-
-  // set isOpenDate based on makeupEdit
-  useEffect(() => {
-    if (!makeupEdit) return
-
-    const isOpenDate = makeupEdit.isOpenDate
-    setIsOpenDate(isOpenDate)
-  }, [makeupEdit])
 
   return (
     <>

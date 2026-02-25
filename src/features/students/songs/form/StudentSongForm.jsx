@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import TextInput from '@/components/inputs/TextInput'
 import CheckboxInput from '@/components/inputs/CheckboxInput'
@@ -29,12 +29,6 @@ function StudentSongForm({
   }
 
   const isStudentAllSongsScreen = screenType === 'student-all-songs'
-
-  useEffect(() => {
-    // sincroniza com formData caso seja edição
-    setIsRecital(formData.isRecital || false)
-    setIsMusicAudition(formData.isMusicAudition || false)
-  }, [formData.isRecital, formData.isMusicAudition])
 
   return (
     <form>

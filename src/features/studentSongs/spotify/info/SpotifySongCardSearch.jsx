@@ -5,7 +5,7 @@ import { editStudentSong } from "@/features/students/songs/studentSongsService"
 import ActionButton from "@/components/button/ActionButton"
 import LoadingButton from "@/components/button/LoadingButton"
 
-function SpotifySongCard({ 
+function SpotifySongCardSearch({ 
   spotifySong, 
   studentId, 
   studentSong,
@@ -28,7 +28,8 @@ function SpotifySongCard({
       toast("Versão vinculada com sucesso", {
         type: "success",
       })
-      onAfterVinculate(spotifySong.id)
+
+      onAfterVinculate()
     } catch {
       toast("Erro ao vincular a versão", {
         type: "error",
@@ -39,7 +40,14 @@ function SpotifySongCard({
   }
 
   return (
-    <div className="grid grid-cols-4 gap-3 p-3 bg-white rounded-xl shadow">
+    <div
+      className="
+        grid grid-cols-4 gap-3 p-3 rounded-xl shadow
+        bg-white dark:bg-gray-800
+        border border-gray-100 dark:border-gray-700
+        transition-colors
+      "
+    >
       {/* Imagem */}
       <div className="flex items-center justify-center">
         <img
@@ -51,13 +59,23 @@ function SpotifySongCard({
 
       {/* Informações */}
       <div className="col-span-2 flex flex-col justify-center">
-        <h2 className="text-base font-bold text-gray-900">{spotifySong.name}</h2>
-        <p className="text-sm text-gray-600">{spotifySong.album}</p>
+        <h2 className="text-base font-bold text-gray-900 dark:text-gray-100">
+          {spotifySong.name}
+        </h2>
+
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {spotifySong.album}
+        </p>
+
         <a
           href={spotifySong.external_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 text-green-600 hover:text-green-700 text-sm font-medium transition-colors"
+          className="
+            mt-2 text-green-600 hover:text-green-700
+            dark:text-green-400 dark:hover:text-green-300
+            text-sm font-medium transition-colors
+          "
         >
           Abrir link do Spotify
         </a>
@@ -79,4 +97,4 @@ function SpotifySongCard({
   )
 }
 
-export default SpotifySongCard
+export default SpotifySongCardSearch

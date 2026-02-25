@@ -14,10 +14,8 @@ function SpotifyModalInfoIndex({
 
   if (!isOpen) return null
 
-  const onAfterVinculate = ((spotifyId) => {    
-    studentSong.spotifyId = spotifyId
+  const onAfterVinculate = (() => {    
     setVinculated(true)
-
     onAfterSave()
   })
 

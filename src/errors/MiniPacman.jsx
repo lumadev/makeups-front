@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 function MiniPacman({ isDark }) {
   const canvasRef = useRef()
   const [isMobile, setIsMobile] = useState(false)
+  const [mazeIndex, setMazeIndex] = useState(0)
 
   useEffect(() => {
     const checkMobile = () => {
@@ -17,9 +18,10 @@ function MiniPacman({ isDark }) {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d")
 
-    const cellSize = isMobile ? 20 : 26 // levemente maior
+    const cellSize = isMobile ? 20 : 26
 
-    const mazeTemplate = [
+    // 🎲 10 LABIRINTOS VÁLIDOS
+    const baseMaze = [
       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
       [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
@@ -32,6 +34,46 @@ function MiniPacman({ isDark }) {
       [1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1],
       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     ]
+
+    function mirrorHorizontal(maze) {
+      return maze.map(row => [...row].reverse())
+    }
+
+    function mirrorVertical(maze) {
+      return [...maze].reverse()
+    }
+
+    function addInnerWalls(maze, seed) {
+      const copy = JSON.parse(JSON.stringify(maze))
+      for (let y = 2; y < 9; y++) {
+        for (let x = 2; x < 17; x++) {
+          if ((x * y + seed) % 7 === 0 && copy[y][x] === 0) {
+            copy[y][x] = 1
+          }
+        }
+      }
+      return copy
+    }
+
+    const mazes = [
+      baseMaze,
+      mirrorHorizontal(baseMaze),
+      mirrorVertical(baseMaze),
+      mirrorHorizontal(mirrorVertical(baseMaze)),
+      addInnerWalls(baseMaze, 1),
+      addInnerWalls(baseMaze, 2),
+      addInnerWalls(baseMaze, 3),
+      addInnerWalls(mirrorHorizontal(baseMaze), 4),
+      addInnerWalls(mirrorVertical(baseMaze), 5),
+      addInnerWalls(mirrorHorizontal(baseMaze), 6),
+      addInnerWalls(mirrorVertical(baseMaze), 7),
+      addInnerWalls(baseMaze, 8),
+      addInnerWalls(baseMaze, 9),
+      addInnerWalls(baseMaze, 10),
+      addInnerWalls(baseMaze, 11),
+    ]
+
+    const mazeTemplate = mazes[mazeIndex % mazes.length]
 
     const rows = mazeTemplate.length
     const cols = mazeTemplate[0].length
@@ -60,7 +102,7 @@ function MiniPacman({ isDark }) {
       ghost = {
         x: cols - 2,
         y: rows - 2,
-        delay: 8, // pequeno atraso inicial
+        delay: 8,
       }
     }
 
@@ -86,14 +128,12 @@ function MiniPacman({ isDark }) {
       }
     }
 
-    // 👻 Fantasma ORIGINAL (persegue sempre)
     const moveGhost = () => {
       if (ghost.delay > 0) {
         ghost.delay--
         return
       }
 
-      // move só a cada 2 ticks (mais lento)
       if (tick % 2 !== 0) return
 
       const directions = [
@@ -142,7 +182,6 @@ function MiniPacman({ isDark }) {
 
     window.addEventListener("keydown", keyHandler)
 
-    // 👻 Desenho ORIGINAL do fantasma
     const drawGhost = () => {
       const x = ghost.x * cellSize
       const y = ghost.y * cellSize
@@ -167,14 +206,12 @@ function MiniPacman({ isDark }) {
       ctx.closePath()
       ctx.fill()
 
-      // olhos
       ctx.fillStyle = "#fff"
       ctx.beginPath()
       ctx.arc(x + cellSize * 0.35, y + cellSize * 0.45, 5, 0, Math.PI * 2)
       ctx.arc(x + cellSize * 0.65, y + cellSize * 0.45, 5, 0, Math.PI * 2)
       ctx.fill()
 
-      // pupilas
       ctx.fillStyle = "#1e3a8a"
       const dx = Math.sign(pacman.x - ghost.x) * 2
       const dy = Math.sign(pacman.y - ghost.y) * 2
@@ -208,6 +245,7 @@ function MiniPacman({ isDark }) {
         ctx.fill()
       })
 
+      // 🟡 PACMAN ORIGINAL
       ctx.fillStyle = "#facc15"
       ctx.beginPath()
       ctx.arc(
@@ -234,13 +272,13 @@ function MiniPacman({ isDark }) {
         checkCollisions()
       }
       draw()
-    }, 250) // mais lento
+    }, 250)
 
     return () => {
       clearInterval(loop)
       window.removeEventListener("keydown", keyHandler)
     }
-  }, [isDark, isMobile])
+  }, [isDark, isMobile, mazeIndex])
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -250,6 +288,15 @@ function MiniPacman({ isDark }) {
           isDark ? "" : "border border-gray-300"
         }`}
       />
+
+      <button
+        onClick={() =>
+          setMazeIndex(prev => prev + 1)
+        }
+        className="px-6 py-2 bg-yellow-400 rounded-lg font-semibold shadow-lg active:scale-95"
+      >
+        Novo Labirinto 🎲
+      </button>
     </div>
   )
 }

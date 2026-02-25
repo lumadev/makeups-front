@@ -4,7 +4,6 @@ import { btnClass } from '@/common/utils/classes'
 import StudentAllSongsList from './list/StudentAllSongsList'
 import StudentAllSongsHeader from './StudentAllSongsHeader'
 
-// import StudentSongNew from '@/features/students/songs/StudentSongNew'
 import InputSearch from '@/components/inputs/InputSearch'
 import SpotifyModalSearchVersions from '@/features/spotify/searchVersion/SpotifyModalSearchVersions.jsx'
 
@@ -42,12 +41,6 @@ function StudentAllSongsIndex() {
             >
               Buscar versões no Spotify
             </button>
-
-            {/* new song button */}
-            {/* <StudentSongNew 
-              screenType='student-all-songs'
-              onAfterSave={reloadStudentSongs}
-            /> */}
           </div>
         </>
       )}

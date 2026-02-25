@@ -1,15 +1,11 @@
 import { applyMaskPhone } from '@/common/utils/mask'
-import { useEffect, useState } from 'react'
 import TextInput from '@/components/inputs/TextInput'
 
 function StudentForm({ isEdit = false, formData, setFormData }) {
-  const [phoneMasked, setPhoneMasked] = useState('')
-
   const handlePhoneChanged = (e) => {
     const input = e.target.value
     const rawValue = input.replace(/\D/g, '')
-    const masked = applyMaskPhone('(99) 99999-9999', rawValue)
-    setPhoneMasked(masked)
+
     setFormData(prev => ({ ...prev, phone: rawValue }))
   }
 
@@ -18,12 +14,9 @@ function StudentForm({ isEdit = false, formData, setFormData }) {
     setFormData(prev => ({ ...prev, [id]: value }))
   }
 
-  useEffect(() => {
-    if (isEdit && formData.phone) {
-      const masked = applyMaskPhone('(99) 99999-9999', formData.phone)
-      setPhoneMasked(masked)
-    }
-  }, [isEdit, formData.phone])
+  const phoneMasked = formData.phone && isEdit
+    ? applyMaskPhone('(99) 99999-9999', formData.phone)
+    : ''
 
   return (
     <form>

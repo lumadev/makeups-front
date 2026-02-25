@@ -17,7 +17,7 @@ function MiniPacman({ isDark }) {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d")
 
-    const cellSize = isMobile ? 18 : 24
+    const cellSize = isMobile ? 20 : 26 // levemente maior
 
     const mazeTemplate = [
       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -39,20 +39,29 @@ function MiniPacman({ isDark }) {
     canvas.width = cols * cellSize
     canvas.height = rows * cellSize
 
-    let maze, pellets, pacman, ghost, gameOver, victory
+    let maze, pellets, pacman, ghost
+    let gameOver = false
+    let victory = false
+    let tick = 0
 
     const resetGame = () => {
       maze = JSON.parse(JSON.stringify(mazeTemplate))
       pellets = []
       gameOver = false
       victory = false
+      tick = 0
 
       for (let y = 0; y < rows; y++)
         for (let x = 0; x < cols; x++)
           if (maze[y][x] === 0) pellets.push({ x, y })
 
       pacman = { x: 1, y: 1, dir: "RIGHT" }
-      ghost = { x: cols - 2, y: rows - 2 }
+
+      ghost = {
+        x: cols - 2,
+        y: rows - 2,
+        delay: 8, // pequeno atraso inicial
+      }
     }
 
     resetGame()
@@ -77,7 +86,16 @@ function MiniPacman({ isDark }) {
       }
     }
 
+    // 👻 Fantasma ORIGINAL (persegue sempre)
     const moveGhost = () => {
+      if (ghost.delay > 0) {
+        ghost.delay--
+        return
+      }
+
+      // move só a cada 2 ticks (mais lento)
+      if (tick % 2 !== 0) return
+
       const directions = [
         { x: 1, y: 0 },
         { x: -1, y: 0 },
@@ -124,7 +142,7 @@ function MiniPacman({ isDark }) {
 
     window.addEventListener("keydown", keyHandler)
 
-    // 👻 Fantasma estilo clássico
+    // 👻 Desenho ORIGINAL do fantasma
     const drawGhost = () => {
       const x = ghost.x * cellSize
       const y = ghost.y * cellSize
@@ -167,45 +185,16 @@ function MiniPacman({ isDark }) {
       ctx.fill()
     }
 
-    const drawOverlay = () => {
-      if (!gameOver && !victory) return
-
-      ctx.fillStyle = isDark
-        ? "rgba(0,0,0,0.7)"
-        : "rgba(255,255,255,0.8)"
-
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      ctx.fillStyle = isDark ? "#ffffff" : "#0f172a"
-      ctx.font = `${isMobile ? 14 : 20}px Arial`
-      ctx.textAlign = "center"
-
-      ctx.fillText(
-        victory ? "VOCÊ VENCEU!" : "GAME OVER",
-        canvas.width / 2,
-        canvas.height / 2 - 10
-      )
-
-      ctx.fillText(
-        "Pressione R para reiniciar",
-        canvas.width / 2,
-        canvas.height / 2 + 20
-      )
-    }
-
     const draw = () => {
-      // 🎨 FUNDO
       ctx.fillStyle = isDark ? "#111827" : "#ffffff"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // 🎨 PAREDES
       ctx.fillStyle = isDark ? "#2563eb" : "#1d4ed8"
       for (let y = 0; y < rows; y++)
         for (let x = 0; x < cols; x++)
           if (maze[y][x] === 1)
             ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
 
-      // 🎨 PELLETS
       ctx.fillStyle = isDark ? "#ffffff" : "#334155"
       pellets.forEach(p => {
         ctx.beginPath()
@@ -219,7 +208,6 @@ function MiniPacman({ isDark }) {
         ctx.fill()
       })
 
-      // 🎨 PACMAN
       ctx.fillStyle = "#facc15"
       ctx.beginPath()
       ctx.arc(
@@ -236,17 +224,17 @@ function MiniPacman({ isDark }) {
       ctx.fill()
 
       drawGhost()
-      drawOverlay()
     }
 
     const loop = setInterval(() => {
+      tick++
       if (!gameOver && !victory) {
         movePacman()
         moveGhost()
         checkCollisions()
       }
       draw()
-    }, 200)
+    }, 250) // mais lento
 
     return () => {
       clearInterval(loop)
@@ -259,61 +247,9 @@ function MiniPacman({ isDark }) {
       <canvas
         ref={canvasRef}
         className={`rounded-2xl shadow-2xl ${
-          isDark
-            ? ""
-            : "border border-gray-300"
+          isDark ? "" : "border border-gray-300"
         }`}
       />
-
-      {isMobile && (
-        <div className="grid grid-cols-3 gap-4 select-none mt-2">
-          <div></div>
-
-          <button
-            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
-            onClick={() =>
-              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }))
-            }
-          >
-            ⬆️
-          </button>
-
-          <div></div>
-
-          <button
-            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
-            onClick={() =>
-              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft" }))
-            }
-          >
-            ⬅️
-          </button>
-
-          <div></div>
-
-          <button
-            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
-            onClick={() =>
-              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight" }))
-            }
-          >
-            ➡️
-          </button>
-
-          <div></div>
-
-          <button
-            className="h-20 w-20 text-4xl rounded-2xl bg-yellow-400 active:scale-95 transition-transform shadow-lg"
-            onClick={() =>
-              window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }))
-            }
-          >
-            ⬇️
-          </button>
-
-          <div></div>
-        </div>
-      )}
     </div>
   )
 }

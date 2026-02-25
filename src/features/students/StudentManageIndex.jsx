@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 import StudentSongsIndex from './songs/StudentSongsIndex'
 
-function StudentManage() {
+function StudentManageIndex() {
   const { id } = useParams()
   const navigate = useNavigate()
   
@@ -17,7 +17,6 @@ function StudentManage() {
       try {
         setLoading(true)
         const response = await getStudentById(id)
-
         setStudent(response.data)
       } catch {
         toast("Erro ao carregar o aluno", { 
@@ -34,7 +33,7 @@ function StudentManage() {
 
   if (loading) {
     return (
-      <div className="p-4 animate-pulse">
+      <div className="p-4 animate-pulse bg-white dark:bg-gray-900 min-h-screen transition-colors">
         <div className="h-7 bg-gray-200 dark:bg-gray-700 rounded w-72 mb-4" />
         <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
         <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
@@ -44,15 +43,18 @@ function StudentManage() {
   }
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-semibold mb-4">
+    <div className="p-4 min-h-screen bg-white dark:bg-gray-900 transition-colors">
+      <h1 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
         Bem-vindo à área do Aluno {student?.name}
       </h1>
-      { student && (
-        <StudentSongsIndex student={student} />
+
+      {student && (
+        <div className="text-gray-700 dark:text-gray-300">
+          <StudentSongsIndex student={student} />
+        </div>
       )}
     </div>
   )
 }
 
-export default StudentManage
+export default StudentManageIndex

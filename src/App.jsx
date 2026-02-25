@@ -12,7 +12,7 @@ import MakeupDoneIndex from "./features/makeupsDone/MakeupDoneIndex"
 import NotFound from "./errors/NotFound"
 import RequireAuth from "./RequireAuth"
 import StudentIndex from "./features/students/StudentIndex"
-import StudentManage from "./features/students/StudentManage"
+import StudentManageIndex from "./features/students/StudentManageIndex"
 import StudentAllSongsIndex from "./features/studentSongs/StudentAllSongsIndex"
 import JokeIndex from "./features/jokes/JokeIndex"
 import PacmanGame from "./features/pacman/PacmanGame"
@@ -20,7 +20,7 @@ import PacmanGame from "./features/pacman/PacmanGame"
 function App() {
   const protectedRoutes = [
     { path: "alunos", element: <StudentIndex /> },
-    { path: "aluno/:id/musicas", element: <StudentManage /> },
+    { path: "aluno/:id/musicas", element: <StudentManageIndex /> },
     { path: "musicas-alunos", element: <StudentAllSongsIndex /> },
     { path: "reposicoes", element: <MakeupIndex /> },
     { path: "reposicoes-concluidas", element: <MakeupDoneIndex /> },

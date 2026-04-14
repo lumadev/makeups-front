@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import { IconLogout } from '@tabler/icons-react'
 import { STORAGE_KEYS } from '@/constants/storageKeys'
 
+const LEGACY_TOKEN_KEY = 'token'
+
 function LogoutButton({ onClick, className = '' }) {
   const navigate = useNavigate()
 
@@ -9,6 +11,7 @@ function LogoutButton({ onClick, className = '' }) {
     if (e?.preventDefault) e.preventDefault()
     onClick?.(e)
 
+    localStorage.removeItem(LEGACY_TOKEN_KEY)
     localStorage.removeItem(STORAGE_KEYS.IS_AUTHENTICATED)
     localStorage.removeItem(STORAGE_KEYS.NAME)
     localStorage.removeItem(STORAGE_KEYS.USER_TYPE)

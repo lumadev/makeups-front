@@ -42,11 +42,16 @@ function JokeButtons({ jokes }) {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-4 bg-white rounded-2xl shadow-sm">
-      
+    <div className="flex flex-col gap-6 p-4 rounded-2xl shadow-sm 
+      bg-white dark:bg-gray-900
+      border border-gray-100 dark:border-gray-800"
+    >
       {/* Title */}
       <div>
-        <h2 className="text-lg font-semibold">Escolha o tipo de piada</h2>
+        <h2 className="text-lg font-semibold 
+          text-gray-900 dark:text-gray-100">
+          Escolha o tipo de piada
+        </h2>
       </div>
 
       {/* Chips */}
@@ -59,8 +64,11 @@ function JokeButtons({ jokes }) {
               px-4 py-1.5 rounded-full text-sm transition-all duration-200
               ${
                 selectedType === type
-                  ? "bg-blue-600 text-white shadow"
-                  : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+                  ? "bg-blue-600 text-white shadow dark:bg-blue-500"
+                  : `
+                    bg-gray-200 text-gray-700 hover:bg-gray-300
+                    dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700
+                  `
               }
             `}
           >
@@ -78,8 +86,14 @@ function JokeButtons({ jokes }) {
             px-5 py-2 rounded-lg font-medium transition
             ${
               selectedType
-                ? "bg-green-600 text-white hover:bg-green-700"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? `
+                  bg-green-600 text-white hover:bg-green-700
+                  dark:bg-green-500 dark:hover:bg-green-600
+                `
+                : `
+                  bg-gray-300 text-gray-500 cursor-not-allowed
+                  dark:bg-gray-800 dark:text-gray-600
+                `
             }
           `}
         >

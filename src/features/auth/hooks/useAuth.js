@@ -1,17 +1,19 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+
+import { STORAGE_KEYS } from "@/constants/storageKeys"
 import { login as loginService } from "../services/authService"
 
 export function useAuth() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const saveUserData = ({ token, name, type }) => {
-    localStorage.setItem("token", token)
-    localStorage.setItem("name", name)
-    localStorage.setItem("userType", type)
-    localStorage.setItem("lastRequestHour", new Date().toISOString())
+  const saveUserData = ({ name, type }) => {
+    localStorage.setItem(STORAGE_KEYS.IS_AUTHENTICATED, "true")
+    localStorage.setItem(STORAGE_KEYS.NAME, name)
+    localStorage.setItem(STORAGE_KEYS.USER_TYPE, type)
+    localStorage.setItem(STORAGE_KEYS.LAST_REQUEST_HOUR, new Date().toISOString())
   }
 
   const login = async ({ username, password }, inspirationalPhrases = []) => {

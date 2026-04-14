@@ -9,7 +9,7 @@ function LogoutButton({ onClick, className = '' }) {
     if (e?.preventDefault) e.preventDefault()
     onClick?.(e)
 
-    localStorage.removeItem(STORAGE_KEYS.TOKEN)
+    localStorage.removeItem(STORAGE_KEYS.IS_AUTHENTICATED)
     localStorage.removeItem(STORAGE_KEYS.NAME)
     localStorage.removeItem(STORAGE_KEYS.USER_TYPE)
     localStorage.removeItem(STORAGE_KEYS.LAST_REQUEST_HOUR)

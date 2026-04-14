@@ -1,14 +1,16 @@
 import { Navigate, Outlet } from "react-router-dom"
 
-// This function checks if the user is authenticated
+import { STORAGE_KEYS } from "@/constants/storageKeys"
+
 const isAuthenticated = () => {
-  return !!localStorage.getItem("token") 
+  return localStorage.getItem(STORAGE_KEYS.IS_AUTHENTICATED) === "true"
 }
 
 function RequireAuth() {
   if (!isAuthenticated()) {
     return <Navigate to="/login" replace />
   }
+
   return <Outlet />
 }
 

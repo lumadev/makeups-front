@@ -12,7 +12,10 @@ const btnNewClass = 'px-3 py-1.5 lg:px-4 bg-orange-500 text-white text-sm font-s
 const backgroundStyle = { backgroundColor: '#FF8C00' }
 const colorStyle = { color: '#FF8C00' }
 
-const btnCancelClass = 'bg-gray-100 text-gray-700 px-5 py-2 rounded-lg text-sm border'
+const btnCancelClass =
+  'px-5 py-2 rounded-lg text-sm border font-medium transition-colors duration-200 ' +
+  'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 ' +
+  'dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700'
 
 const btnClassWarning =
   'px-3 py-2 lg:px-4 bg-red-300 text-white text-sm font-semibold rounded hover:bg-red-400'

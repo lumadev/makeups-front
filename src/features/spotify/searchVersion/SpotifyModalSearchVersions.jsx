@@ -32,15 +32,15 @@ function SpotifyModalSearchVersions({ onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3">
+      <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg w-full max-w-2xl">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Buscar versões no Spotify
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
           >
             ✕
           </button>

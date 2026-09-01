@@ -5,6 +5,7 @@ import HomeCardLink from "./HomeCardLink"
 import MakeupInfo from "@/features/makeups/MakeupInfo"
 import HomeDailyJoke from "./HomeDailyJoke"
 import MakeupCalendar from "../calendar/MakeupCalendar"
+import MakeupSkeleton from "../calendar/MakeupSkeleton"
 
 import { listMakeups } from "@/features/makeups/makeupService"
 
@@ -81,11 +82,13 @@ function HomeIndex() {
         />
       </div>
 
-      {!loading && (
-        <div className={`${isDark ? "bg-slate-950" : "bg-gray-100"} min-h-screen mt-6`}>
+      <div className={`${isDark ? "bg-slate-950" : "bg-gray-100"} min-h-screen mt-6 w-full`}>
+        {loading ? (
+          <MakeupSkeleton isDark={isDark} />
+        ) : (
           <MakeupCalendar makeups={makeups} isDark={isDark} />
-        </div>
-      )}
+        )}
+      </div>
 
     </div>
   )

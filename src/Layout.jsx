@@ -2,8 +2,17 @@ import { useState, useEffect } from "react"
 import { Outlet } from "react-router-dom"
 import Sidebar from './features/menu/Sidebar'
 
+const getInitialDarkMode = () => {
+  if (typeof window === 'undefined') return false
+
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme) return savedTheme === 'dark'
+
+  return document.documentElement.classList.contains('dark')
+}
+
 function Layout({ hasMinWidth = false }) {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(getInitialDarkMode)
 
   useEffect(() => {
     // Função para verificar se o tema dark está ativo

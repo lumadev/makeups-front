@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { IconSchool, IconUser, IconCheck } from "@tabler/icons-react"
 
 import HomeCardLink from "./HomeCardLink"
@@ -29,19 +29,20 @@ function HomeIndex() {
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    const fetchMakeups = async () => {
-      try {
-        const response = await listMakeups()
-        setMakeups(response.data)
-      } catch {
-        // do nothing on error
-      } finally {
-        setLoading(false)
-      }
+  const fetchMakeups = useCallback(async () => {
+    try {
+      const response = await listMakeups()
+      setMakeups(response.data)
+    } catch {
+      // do nothing on error
+    } finally {
+      setLoading(false)
     }
-    fetchMakeups()
   }, [])
+
+  useEffect(() => {
+    fetchMakeups()
+  }, [fetchMakeups])
 
   return (
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:p-8 overflow-x-hidden w-full">
@@ -86,7 +87,11 @@ function HomeIndex() {
         {loading ? (
           <MakeupSkeleton isDark={isDark} />
         ) : (
-          <MakeupCalendar makeups={makeups} isDark={isDark} />
+          <MakeupCalendar
+            makeups={makeups}
+            isDark={isDark}
+            onAfterSave={fetchMakeups}
+          />
         )}
       </div>
 

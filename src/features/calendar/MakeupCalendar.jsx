@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react"
+import MakeupCalendarEventItem from "./MakeupCalendarEventItem"
 
-function MakeupCalendar({ makeups = [], isDark = false }) {
+function MakeupCalendar({ makeups = [], isDark = false, onAfterSave = () => {} }) {
   const [currentDate, setCurrentDate] = useState(new Date())
 
   // Apenas eventos com dateReplacement válido
@@ -8,7 +9,7 @@ function MakeupCalendar({ makeups = [], isDark = false }) {
     return makeups
       .filter(m => m.dateReplacement && m.dateReplacement.trim() !== "")
       .map(m => ({
-        ...m,
+        makeup: m,
         dateObj: new Date(m.dateReplacement)
       }))
   }, [makeups])
@@ -124,21 +125,13 @@ function MakeupCalendar({ makeups = [], isDark = false }) {
                 <div className="flex flex-col gap-1 overflow-hidden">
                   {hasEvents &&
                     dayEvents.map(event => (
-                      <div
-                        key={event.id}
-                        className={`text-xs px-2 py-1 rounded-lg truncate font-medium
-                          ${isDark
-                            ? "bg-blue-600 text-white"
-                            : "bg-blue-500 text-white"
-                          }
-                        `}
-                      >
-                        {event.studentName} –{" "}
-                        {event.dateObj.toLocaleTimeString("pt-BR", {
-                          hour: "2-digit",
-                          minute: "2-digit"
-                        })}
-                      </div>
+                      <MakeupCalendarEventItem
+                        key={event.makeup.id}
+                        makeup={event.makeup}
+                        dateObj={event.dateObj}
+                        isDark={isDark}
+                        onAfterSave={onAfterSave}
+                      />
                     ))}
                 </div>
               </div>

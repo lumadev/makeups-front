@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import { Link } from "react-router-dom"
 import { toast } from 'react-toastify'
 import { listAllStudentSongs } from "@/features/students/songs/studentSongsService"
-import { IconLink } from "@tabler/icons-react"
+import { IconExternalLink, IconUser } from "@tabler/icons-react"
 
 // import StudentActions from './StudentActions'
 import Pagination from '@/components/Pagination'
@@ -117,26 +117,28 @@ function StudentAllSongsList({ searchTerm, reloadFlag, onCountChange }) {
                             <TableDataCell>
                               <Link 
                                 to={`/aluno/${song.studentId}/musicas`} 
-                                className="text-orange-600 hover:underline"
+                                className="group inline-flex max-w-full items-center gap-x-2 rounded-full bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-800 ring-1 ring-amber-200 transition-colors hover:bg-amber-100 hover:text-amber-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 dark:bg-gray-800 dark:text-gray-100 dark:ring-gray-600 dark:hover:bg-gray-700 dark:hover:text-white dark:focus-visible:ring-gray-500"
                               >
-                                {song.studentName}
+                                <IconUser size={16} />
+                                <span className="truncate max-w-[180px]">{song.studentName}</span>
+                                <span className="text-[11px] font-semibold uppercase tracking-wide text-amber-700/90 dark:text-orange-300">
+                                  Ver pagina
+                                </span>
                               </Link>
                             </TableDataCell>
 
                             <TableDataCell>
                               <div className="flex items-center gap-x-2">
                                 {song.versionLink ? (
-                                  <>
-                                    <a
-                                      href={song.versionLink}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="text-orange-600 hover:underline truncate max-w-xs"
-                                    >
-                                      Ir para o link
-                                    </a>
-                                    <IconLink size={18} />
-                                  </>
+                                  <a
+                                    href={song.versionLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-x-2 rounded-full bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-700 ring-1 ring-slate-200 transition-colors hover:bg-slate-200 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600 dark:hover:bg-gray-700 dark:hover:text-white dark:focus-visible:ring-gray-500"
+                                  >
+                                    Abrir versao
+                                    <IconExternalLink size={16} className="opacity-80 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                                  </a>
                                 ) : (
                                   "-"
                                 )}

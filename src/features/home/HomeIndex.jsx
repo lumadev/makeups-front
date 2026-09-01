@@ -9,11 +9,20 @@ import MakeupSkeleton from "../calendar/MakeupSkeleton"
 
 import { listMakeups } from "@/features/makeups/makeupService"
 
+const getInitialDarkMode = () => {
+  if (typeof window === 'undefined') return false
+
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme) return savedTheme === 'dark'
+
+  return document.documentElement.classList.contains('dark')
+}
+
 function HomeIndex() {
   const [makeups, setMakeups] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(getInitialDarkMode)
 
   useEffect(() => {
     const checkTheme = () => {

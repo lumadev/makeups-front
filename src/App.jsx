@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify'
 
 import "./App.css"
 
+import { useDarkMode } from "@/common/hooks/useDarkMode"
 import Login from "./features/auth/Login"
 import Layout from "./Layout"
 import EventDateIndex from "./features/eventDates/EventDateIndex"
@@ -18,6 +19,8 @@ import JokeIndex from "./features/jokes/JokeIndex"
 import PacmanGame from "./features/pacman/PacmanGame"
 
 function App() {
+  const [isDark] = useDarkMode()
+
   const protectedRoutes = [
     { path: "alunos", element: <StudentIndex /> },
     { path: "aluno/:id/musicas", element: <StudentManageIndex /> },
@@ -32,7 +35,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ToastContainer autoClose={3000} />
+      <ToastContainer autoClose={3000} theme={isDark ? "dark" : "light"} />
       <Routes>
         {/* Public routes */}
         <Route path="/login" element={<Login />} />

@@ -1,3 +1,5 @@
+import { inputClass, inputLabelClass } from '@/common/utils/classes'
+
 function TextArea({
   value,
   onChange,
@@ -9,12 +11,9 @@ function TextArea({
   maxLength,
 }) {
   return (
-    <div className={`w-full ${className}`}>
+    <div className="w-full">
       {title && (
-        <label
-          htmlFor={fieldName}
-          className="block mb-1 text-sm font-medium text-gray-700"
-        >
+        <label htmlFor={fieldName} className={inputLabelClass}>
           {title}
         </label>
       )}
@@ -26,7 +25,7 @@ function TextArea({
         placeholder={placeholder}
         rows={rows}
         maxLength={maxLength}
-        className={`block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-orange-500 focus:ring-orange-500 disabled:bg-gray-100 disabled:text-gray-500 ${className}`}
+        className={`${inputClass} ${className}`}
       />
     </div>
   )

@@ -16,8 +16,7 @@ function EventDateList({
   searchTerm,
   onCountChange,
   setEventDatesList = null,
-  reloadFlag = null,
-  onlyConfirmed
+  reloadFlag = null
 }) {
   const isFirstLoad = useRef(true)
 
@@ -36,9 +35,7 @@ function EventDateList({
       observations.includes(term) ||
       description.includes(term)
 
-    const matchesConfirmed = onlyConfirmed ? eventDate.confirmed === true : true
-
-    return matchesSearch && matchesConfirmed
+    return matchesSearch
   })
 
   // pagination

@@ -3,7 +3,6 @@ import { btnCancelClass } from '@/common/utils/classes'
 
 import ActionButton from '@/components/button/ActionButton'
 import Modal from "@/components/Modal"
-import EventDateSearch from "./EventDateSearch"
 import EventDateList from "./EventDateList"
 
 function EventDateSongListDoneModal({ eventDate }) {
@@ -42,15 +41,6 @@ function EventDateSongListDoneModal({ eventDate }) {
         }
       >
         <div className="space-y-4">
-
-          {/* eventDate search */}
-          {eventDateSongCount > 0 && (
-            <EventDateSearch
-              searchTerm={searchTerm}
-              onSearch={setSearchTerm}
-            />
-          )}
-
           {/* eventDate list */}
           <EventDateList
             eventDate={eventDate}

@@ -3,7 +3,6 @@ import { useState } from 'react'
 import EventDateCloseInfo from './EventDateCloseInfo'
 import EventDateList from './list/EventDateList'
 import EventDateHeader from './EventDateHeader'
-import EventDateSearch from './list/EventDateSearch'
 import EventDateListDoneModal from './list/EventDateListDoneModal'
 import InputSearch from '@/components/inputs/InputSearch'
 
@@ -12,7 +11,6 @@ function EventDateIndex() {
   const [reloadFlag, setReloadFlag] = useState(false)
   const [dateEventCount, setDateEventCount] = useState(0)
   const [eventDates, setEventDates] = useState([])
-  const [onlyConfirmed, setOnlyConfirmed] = useState(false)
 
   const reloadDateEvents = () => setReloadFlag((prev) => !prev)
 
@@ -42,10 +40,6 @@ function EventDateIndex() {
             placeholder="Digite o nome do evento"
             onSearch={setSearchTerm}
           />
-
-          <EventDateSearch 
-            setOnlyConfirmed={setOnlyConfirmed}
-          />
         </>
       )}
 
@@ -55,7 +49,6 @@ function EventDateIndex() {
         reloadFlag={reloadFlag}
         setEventDatesList={setEventDates}
         onCountChange={setDateEventCount}
-        onlyConfirmed={onlyConfirmed}
       />
     </>
   )

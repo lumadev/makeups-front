@@ -48,15 +48,30 @@ function DateInput({
     setIsDisabled(isOpenDate === true)
   }, [isOpenDate])
 
+  const getMaxDays = (selectedMonth, selectedYear) => {
+    if (!selectedMonth) return 31
+
+    const monthNumber = Number(selectedMonth)
+    if (monthNumber === 2) {
+      const yearNumber = Number(selectedYear)
+      return selectedYear && yearNumber % 4 === 0 && (yearNumber % 100 !== 0 || yearNumber % 400 === 0) ? 29 : 28
+    }
+
+    return [4, 6, 9, 11].includes(monthNumber) ? 30 : 31
+  }
+
   const handleChange = (newDay, newMonth, newYear, newTime) => {
-    setDay(newDay)
+    const maxDays = getMaxDays(newMonth, newYear)
+    const validDay = newDay ? Math.min(Number(newDay), maxDays).toString() : ""
+
+    setDay(validDay)
     setMonth(newMonth)
     setYear(newYear)
     setTime(newTime)
 
-    if (newDay && newMonth && newTime) {
+    if (validDay && newMonth && newTime) {
       const [hours, minutes] = newTime.split(":")
-      const date = new Date(newYear, newMonth - 1, newDay, hours, minutes)
+      const date = new Date(newYear, newMonth - 1, validDay, hours, minutes)
       onChange(date)
     }
   }
@@ -64,6 +79,7 @@ function DateInput({
   const inputBaseClasses = "border rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none dark:focus:ring-orange-400"
   const enabledClasses = "bg-white border-gray-300 text-gray-900 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
   const disabledClasses = "bg-gray-100 cursor-not-allowed dark:bg-gray-700 dark:text-gray-400"
+  const maxDays = getMaxDays(month, year)
 
   return (
     <div className="flex flex-col gap-2">
@@ -76,13 +92,11 @@ function DateInput({
         <input
           type="number"
           min="1"
-          max="31"
+          max={maxDays}
           value={day}
           onChange={(e) => {
             const value = e.target.value
             if (value.length <= 2) handleChange(value, month, year, time)
-            const dayNum = Math.min(parseInt(value) || 1, 30)
-            handleChange(dayNum.toString(), month, year, time)
           }}
           placeholder="Dia"
           disabled={isDisabled}

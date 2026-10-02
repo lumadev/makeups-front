@@ -1,35 +1,9 @@
-import { useState, useEffect } from "react"
 import { Outlet } from "react-router-dom"
 import Sidebar from './features/menu/Sidebar'
-
-const getInitialDarkMode = () => {
-  if (typeof window === 'undefined') return false
-
-  const savedTheme = localStorage.getItem('theme')
-  if (savedTheme) return savedTheme === 'dark'
-
-  return document.documentElement.classList.contains('dark')
-}
+import { useDarkMode } from "@/common/hooks/useDarkMode"
 
 function Layout({ hasMinWidth = false }) {
-  const [isDark, setIsDark] = useState(getInitialDarkMode)
-
-  useEffect(() => {
-    // Função para verificar se o tema dark está ativo
-    const checkTheme = () => {
-      const isDarkMode = document.documentElement.classList.contains('dark') || 
-        localStorage.getItem('theme') === 'dark'
-      setIsDark(isDarkMode)
-    }
-
-    // Verifica ao montar o componente
-    checkTheme()
-
-    const observer = new MutationObserver(checkTheme)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-
-    return () => observer.disconnect()
-  }, [])
+  const [isDark] = useDarkMode()
 
   return (
     <div className={`flex flex-col md:flex-row min-h-screen md:h-screen transition-colors 

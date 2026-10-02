@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useDarkMode } from "@/common/hooks/useDarkMode"
 
 function Modal({ 
   isOpen, 
@@ -8,26 +8,7 @@ function Modal({
   children, 
   actions
 }) {
-  // Detecta tema logo no render
-  const [isDark, setIsDark] = useState(
-    typeof window !== 'undefined' 
-      ? document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark'
-      : false
-  )
-
-  // Observa mudanças de tema enquanto o modal está aberto
-  useEffect(() => {
-    const checkTheme = () => {
-      const isDarkMode = document.documentElement.classList.contains('dark') || 
-                         localStorage.getItem('theme') === 'dark'
-      setIsDark(isDarkMode)
-    }
-
-    const observer = new MutationObserver(checkTheme)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-
-    return () => observer.disconnect()
-  }, [])
+  const [isDark] = useDarkMode()
 
   if (!isOpen) return null
 

@@ -45,8 +45,7 @@ function Pagination({ totalPages, currentPage, setCurrentPage }) {
     "dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
 
   const activeButton =
-    "bg-orange-500 text-white border-orange-500 hover:bg-orange-600 " +
-    "dark:bg-orange-500 dark:hover:bg-orange-600"
+    "bg-[#FF8C00] text-white border-[#FF8C00] hover:bg-[#FF8C00]"
 
   return (
     <div className="flex justify-center items-center gap-2 mt-4">

@@ -1,5 +1,5 @@
 
-import { btnClass } from '@/common/utils/classes'
+import { backgroundStyle, btnClass } from '@/common/utils/classes'
 import { useState } from "react"
 
 import JokeFormModal from './JokeFormModal'
@@ -12,6 +12,7 @@ function JokeNew({ onAfterSave, jokes }) {
       <button
         onClick={() => setShowModal(true)}
         className={btnClass}
+        style={backgroundStyle}
       >
         Nova Piada
       </button>

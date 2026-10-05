@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { btnClass } from '@/common/utils/classes'
+import { btnClass, backgroundStyle } from '@/common/utils/classes'
 
 import StudentAllSongsList from './list/StudentAllSongsList'
 import StudentAllSongsHeader from './StudentAllSongsHeader'
@@ -38,6 +38,7 @@ function StudentAllSongsIndex() {
             <button
               onClick={() => setShowSpotifyModal(true)}
               className={btnClass}
+              style={backgroundStyle}
             >
               Buscar versões no Spotify
             </button>

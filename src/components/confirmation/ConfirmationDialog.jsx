@@ -72,7 +72,7 @@ function ConfirmationDialog({
             disabled={loading}
             className="
               px-3 py-2 lg:px-4 
-              bg-orange-500 hover:bg-orange-600
+              bg-[#FF8C00] hover:bg-[#FF8C00]
               text-white text-sm sm:text-base font-semibold 
               rounded 
               disabled:opacity-50 disabled:cursor-not-allowed 

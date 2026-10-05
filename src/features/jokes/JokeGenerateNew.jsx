@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { btnClass } from "@/common/utils/classes"
+import { backgroundStyle, btnClass } from "@/common/utils/classes"
 import { getRandomJoke } from "./jokeUtils"
 
 import JokeModal from "./JokeModal"
@@ -21,7 +21,11 @@ function JokeGenerateNew({ jokes }) {
 
   return (
     <>
-      <button onClick={handleShowModal} className={btnClass}>
+      <button
+        onClick={handleShowModal}
+        className={btnClass}
+        style={backgroundStyle}
+      >
         Gerar Piada Aleatória
       </button>
 

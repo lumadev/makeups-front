@@ -17,21 +17,29 @@ function StudentFormModal({
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
   const [formData, setFormData] = useState({})
+  const [validationErrors, setValidationErrors] = useState({})
 
-  const saveOrEdit = () => {
+  const saveOrEdit = (data) => {
     if (isEdit) {
-      const idStudent = formData.id
-      return editStudent(idStudent, formData)
+      const idStudent = data.id
+      return editStudent(idStudent, data)
     } else {
-      return saveStudent(formData)
+      return saveStudent(data)
     }
   }
 
   const save = async () => {
+    const name = formData.name?.trim() ?? ''
+    if (!name) {
+      setValidationErrors({ name: 'O nome é obrigatório.' })
+      return
+    }
+
+    setValidationErrors({})
     setLoadingSave(true)
     
     try {
-      await saveOrEdit()
+      await saveOrEdit({ ...formData, name })
 
       toast("Aluno salvo com sucesso", { 
         type: 'success'
@@ -55,6 +63,7 @@ function StudentFormModal({
     } else {
       setFormData({ name: "", email: "", phone: "" })
     }
+    setValidationErrors({})
   }, [isEdit, studentEdit, isOpen])
 
   return (
@@ -88,6 +97,8 @@ function StudentFormModal({
         isEdit={isEdit}
         formData={formData} 
         setFormData={setFormData}
+        validationErrors={validationErrors}
+        setValidationErrors={setValidationErrors}
       />
     </Modal>
   )

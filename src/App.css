@@ -1,0 +1,5 @@
+.Toastify__toast-theme--dark.Toastify__toast--success {
+  --toastify-color-success: #86efac;
+  --toastify-color-progress-success: #86efac;
+  --toastify-icon-color-success: #86efac;
+}

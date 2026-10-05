@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { saveMakeup, editMakeup } from "@/features/makeups/makeupService"
 
-import Alert from "@/components/Alert"
 import LoadingButton from "@/components/button/LoadingButton"
 import Modal from "@/components/Modal"
 import MakeupForm from './MakeupForm'
@@ -18,7 +17,7 @@ function MakeupFormModal({
   makeupEdit = null
 }) {
   const [loadingSave, setLoadingSave] = useState(false)
-  const [validationMessage, setValidationMessage] = useState('')
+  const [validationErrors, setValidationErrors] = useState({})
   const [formData, setFormData] = useState({})
 
   const saveOrEdit = () => {
@@ -33,10 +32,10 @@ function MakeupFormModal({
   const save = async () => {
     const error = validateMakeupForm(formData)
     if (error) {
-      setValidationMessage(error.errorMessage)
+      setValidationErrors({ [error.fieldName]: error.errorMessage })
       return
     }
-    setValidationMessage('')
+    setValidationErrors({})
     setLoadingSave(true)
     
     try {
@@ -69,7 +68,7 @@ function MakeupFormModal({
       })
     }
     // always clear validation message when open modal
-    setValidationMessage('')
+    setValidationErrors({})
   }, [isEdit, makeupEdit, isOpen])
 
   return (
@@ -98,16 +97,13 @@ function MakeupFormModal({
         </>
       }
     >
-      {validationMessage && (
-        <Alert type="error">
-          {validationMessage}
-        </Alert>
-      )}
       <MakeupForm 
         isEdit={isEdit}
         makeupEdit={makeupEdit}
         formData={formData} 
         setFormData={setFormData}
+        validationErrors={validationErrors}
+        setValidationErrors={setValidationErrors}
       />
     </Modal>
   )

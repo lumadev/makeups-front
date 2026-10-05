@@ -5,7 +5,8 @@ import { toast } from 'react-toastify'
 function StudentAutocomplete({ 
   isEdit = false,
   onSelect,
-  makeupEdit = null
+  makeupEdit = null,
+  error
 }) {
   const [searchTerm, setSearchTerm] = useState("")
   const [filtered, setFiltered] = useState([])
@@ -96,8 +97,14 @@ function StudentAutocomplete({
         onBlur={handleBlur}
         disabled={loadingStudents}
         placeholder={loadingStudents ? 'Carregando...' : 'Digite o nome do aluno'}
-        className="w-full mt-1 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 px-3 py-2"
+        aria-invalid={Boolean(error)}
+        className={`w-full mt-1 border rounded-md focus:outline-none focus:ring focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 px-3 py-2 ${error ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'}`}
       />
+      {error && (
+        <p className="mt-1 text-sm text-red-600 dark:text-red-300" role="alert">
+          {error}
+        </p>
+      )}
       {showSuggestions && filtered.length > 0 && (
         <div className="absolute top-full left-0 right-0 z-10 mt-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md max-h-60 overflow-y-auto shadow-lg">
           <ul>

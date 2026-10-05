@@ -7,7 +7,9 @@ import StudentAutocomplete from './StudentAutocomplete'
 function MakeupForm({
   isEdit = false,
   setFormData,
-  makeupEdit = null
+  makeupEdit = null,
+  validationErrors = {},
+  setValidationErrors
 }) {
   const [isOpenDate, setIsOpenDate] = useState(
   makeupEdit?.isOpenDate ?? false
@@ -15,18 +17,25 @@ function MakeupForm({
 
   const handleSelectStudent = (studentId) => {
     setFormData((prev) => ({ ...prev, studentId }))
+    setValidationErrors((prev) => ({ ...prev, studentId: undefined }))
   }
 
   const setDateReplacement = (dateReplacement) => {
     setFormData((prev) => ({ ...prev, dateReplacement }))
+    setValidationErrors((prev) => ({ ...prev, dateReplacement: undefined }))
   }
 
   const setDateOld = (dateOld) => {
     setFormData((prev) => ({ ...prev, dateOld }))
+    setValidationErrors((prev) => ({ ...prev, dateOld: undefined }))
   }
 
   const handleCheckboxChange = (checked) => {
     setIsOpenDate(checked)
+
+    if (checked) {
+      setValidationErrors((prev) => ({ ...prev, dateReplacement: undefined }))
+    }
 
     // clear replacement date
     if (checked) {
@@ -49,6 +58,7 @@ function MakeupForm({
           <StudentAutocomplete
             isEdit={isEdit}
             makeupEdit={makeupEdit}
+            error={validationErrors.studentId}
             onSelect={(student) => handleSelectStudent(student.id)}
           />
           <DateInput 
@@ -57,6 +67,7 @@ function MakeupForm({
             onChange={setDateOld}
             title="Data e horário da aula antiga"
             fieldName="dateOld"
+            error={validationErrors.dateOld}
           />
         </div>
 
@@ -68,6 +79,7 @@ function MakeupForm({
             onChange={setDateReplacement}
             title="Data e horário da reposição"
             fieldName="dateReplacement"
+            error={validationErrors.dateReplacement}
           />
           <div className="flex items-center md:mt-2">
             <CheckboxInput

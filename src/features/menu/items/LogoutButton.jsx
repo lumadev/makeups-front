@@ -12,6 +12,7 @@ function LogoutButton({ onClick, className = '' }) {
     onClick?.(e)
 
     localStorage.removeItem(LEGACY_TOKEN_KEY)
+    sessionStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN)
     localStorage.removeItem(STORAGE_KEYS.IS_AUTHENTICATED)
     localStorage.removeItem(STORAGE_KEYS.NAME)
     localStorage.removeItem(STORAGE_KEYS.USER_TYPE)

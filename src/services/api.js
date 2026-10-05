@@ -10,6 +10,11 @@ api.interceptors.request.use(
   (config) => {
     const now = new Date()
 
+    const authToken = sessionStorage.getItem("authToken")
+    if (authToken) {
+      config.headers.Authorization = `Bearer ${authToken}`
+    }
+
     const lastRequest = localStorage.getItem("lastRequestHour")
     const isLoginPage = window.location.pathname === "/login"
 

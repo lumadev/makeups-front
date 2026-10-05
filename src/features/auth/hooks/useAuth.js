@@ -9,7 +9,8 @@ export function useAuth() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const saveUserData = ({ name, type }) => {
+  const saveUserData = ({ name, type, token }) => {
+    if (token) sessionStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token)
     localStorage.setItem(STORAGE_KEYS.IS_AUTHENTICATED, "true")
     localStorage.setItem(STORAGE_KEYS.NAME, name)
     localStorage.setItem(STORAGE_KEYS.USER_TYPE, type)

@@ -7,4 +7,5 @@ export const STORAGE_KEYS = {
   NAME: 'name',
   USER_TYPE: 'userType',
   LAST_REQUEST_HOUR: 'lastRequestHour',
+  AUTH_TOKEN: 'authToken',
 }

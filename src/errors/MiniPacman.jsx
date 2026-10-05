@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from "react"
+import {
+  IconArrowDown,
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUp,
+} from "@tabler/icons-react"
 
-function MiniPacman({ isDark }) {
+function MiniPacman({ isDark, showControls = false }) {
   const canvasRef = useRef()
+  const directionHandlerRef = useRef(() => {})
   const [isMobile, setIsMobile] = useState(false)
   const [mazeIndex, setMazeIndex] = useState(0)
 
@@ -108,6 +115,11 @@ function MiniPacman({ isDark }) {
 
     resetGame()
 
+    const changeDirection = direction => {
+      if (!gameOver && !victory) pacman.dir = direction
+    }
+    directionHandlerRef.current = changeDirection
+
     const canMove = (x, y) =>
       y >= 0 && y < rows && x >= 0 && x < cols && maze[y][x] === 0
 
@@ -174,10 +186,17 @@ function MiniPacman({ isDark }) {
         resetGame()
         return
       }
-      if (e.key === "ArrowUp") pacman.dir = "UP"
-      if (e.key === "ArrowDown") pacman.dir = "DOWN"
-      if (e.key === "ArrowLeft") pacman.dir = "LEFT"
-      if (e.key === "ArrowRight") pacman.dir = "RIGHT"
+      const directions = {
+        ArrowUp: "UP",
+        ArrowDown: "DOWN",
+        ArrowLeft: "LEFT",
+        ArrowRight: "RIGHT",
+      }
+      const direction = directions[e.key]
+      if (direction) {
+        e.preventDefault()
+        changeDirection(direction)
+      }
     }
 
     window.addEventListener("keydown", keyHandler)
@@ -277,23 +296,55 @@ function MiniPacman({ isDark }) {
     return () => {
       clearInterval(loop)
       window.removeEventListener("keydown", keyHandler)
+      directionHandlerRef.current = () => {}
     }
   }, [isDark, isMobile, mazeIndex])
+
+  const controls = [
+    { direction: "UP", label: "Mover para cima", Icon: IconArrowUp, position: "col-start-2 row-start-1" },
+    { direction: "LEFT", label: "Mover para a esquerda", Icon: IconArrowLeft, position: "col-start-1 row-start-2" },
+    { direction: "RIGHT", label: "Mover para a direita", Icon: IconArrowRight, position: "col-start-3 row-start-2" },
+    { direction: "DOWN", label: "Mover para baixo", Icon: IconArrowDown, position: "col-start-2 row-start-3" },
+  ]
 
   return (
     <div className="flex flex-col items-center gap-4">
       <canvas
         ref={canvasRef}
-        className={`rounded-2xl shadow-2xl ${
+        className={`max-w-full h-auto rounded-2xl shadow-2xl ${
           isDark ? "" : "border border-gray-300"
         }`}
       />
+
+      {showControls && (
+        <div
+          className="grid grid-cols-3 grid-rows-3 gap-2 touch-manipulation md:hidden"
+          role="group"
+          aria-label="Controles direcionais do Pac-Man"
+        >
+          {controls.map(({ direction, label, Icon, position }) => (
+            <button
+              key={direction}
+              type="button"
+              onClick={() => directionHandlerRef.current(direction)}
+              aria-label={label}
+              className={`flex h-14 w-14 items-center justify-center rounded-xl shadow-md transition active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                isDark
+                  ? "bg-slate-700 text-yellow-300 hover:bg-slate-600 focus:ring-yellow-400"
+                  : "bg-yellow-400 text-slate-900 hover:bg-yellow-300 focus:ring-yellow-500"
+              } ${position}`}
+            >
+              <Icon size={28} stroke={2.5} aria-hidden="true" />
+            </button>
+          ))}
+        </div>
+      )}
 
       <button
         onClick={() =>
           setMazeIndex(prev => prev + 1)
         }
-        className="px-6 py-2 bg-yellow-400 rounded-lg font-semibold shadow-lg active:scale-95"
+        className="min-h-12 px-6 py-2 bg-yellow-400 rounded-lg font-semibold shadow-lg active:scale-95"
       >
         Novo Labirinto 🎲
       </button>

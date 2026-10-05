@@ -9,15 +9,15 @@ function PacmanGame() {
 
   return (
     <div
-      className="flex flex-col items-center justify-center 
-      min-h-[80vh] px-6 text-center my-10"
+      className="flex flex-col items-center justify-center
+      min-h-[80vh] px-3 sm:px-6 text-center my-4 sm:my-10"
     >
       {/* Jogo */}
-      <MiniPacman isDark={isDark} />
+      <MiniPacman isDark={isDark} showControls />
 
       {/* Título */}
       <h1
-        className={`text-2xl font-bold mt-10 mb-4 ${
+        className={`text-2xl font-bold mt-6 sm:mt-10 mb-4 ${
           isDark ? "text-yellow-400" : "text-yellow-600"
         }`}
       >

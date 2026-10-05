@@ -6,8 +6,8 @@ const inputClass =
 
 const inputLabelClass = 'block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
 
-const btnClass = 'px-3 py-2 lg:px-4 bg-orange-500 text-white text-sm font-semibold rounded hover:bg-orange-600'
-const btnNewClass = 'px-3 py-1.5 lg:px-4 bg-orange-500 text-white text-sm font-semibold rounded hover:bg-orange-600'
+const btnPrimaryColorClass = 'bg-primary-500 text-white hover:bg-primary-600'
+const btnClass = `px-3 py-2 lg:px-4 ${btnPrimaryColorClass} text-sm font-semibold rounded-lg transition-colors`
 
 const backgroundStyle = { backgroundColor: '#FF8C00' }
 const colorStyle = { color: '#FF8C00' }
@@ -21,8 +21,8 @@ const btnClassWarning =
   'px-3 py-2 lg:px-4 bg-red-300 text-white text-sm font-semibold rounded hover:bg-red-400'
 
 export { 
+  btnPrimaryColorClass,
   btnClass,
-  btnNewClass,
   backgroundStyle,
   colorStyle,
   btnCancelClass,

@@ -70,11 +70,41 @@ function DateInput({
     setYear(newYear)
     setTime(newTime)
 
-    if (validDay && newMonth && newTime) {
-      const [hours, minutes] = newTime.split(":")
-      const date = new Date(newYear, newMonth - 1, validDay, hours, minutes)
-      onChange(date)
+    const yearNumber = Number(newYear)
+    const monthNumber = Number(newMonth)
+    const dayNumber = Number(validDay)
+    const [hours, minutes] = newTime.split(":").map(Number)
+
+    if (
+      !validDay ||
+      !newMonth ||
+      !/^\d{4}$/.test(newYear) ||
+      !newTime ||
+      !Number.isInteger(yearNumber) ||
+      yearNumber < 1 ||
+      monthNumber < 1 ||
+      monthNumber > 12 ||
+      dayNumber < 1 ||
+      !Number.isInteger(hours) ||
+      hours > 23 ||
+      !Number.isInteger(minutes) ||
+      minutes < 0 ||
+      minutes > 59
+    ) {
+      onChange(null)
+      return
     }
+
+    const date = new Date(0)
+    date.setFullYear(yearNumber, monthNumber - 1, dayNumber)
+    date.setHours(hours, minutes, 0, 0)
+    const isValidDate = date.getFullYear() === yearNumber &&
+      date.getMonth() === monthNumber - 1 &&
+      date.getDate() === dayNumber &&
+      date.getHours() === hours &&
+      date.getMinutes() === minutes
+
+    onChange(isValidDate ? date : null)
   }
 
   const inputBaseClasses = "border rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none dark:focus:ring-orange-400"

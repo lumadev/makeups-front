@@ -1,3 +1,9 @@
+function isValidDate(value) {
+  if (!value) return false
+  const date = value instanceof Date ? value : new Date(value)
+  return !Number.isNaN(date.getTime())
+}
+
 function validateMakeupForm(formData) {
   const error = {
     isValid: false,
@@ -11,16 +17,16 @@ function validateMakeupForm(formData) {
     return error
   }
 
-  if (!formData.dateOld) {
+  if (!isValidDate(formData.dateOld)) {
     error.fieldName = 'dateOld'
-    error.errorMessage = 'Data antiga da reposição não preenchida.'
+    error.errorMessage = 'Preencha todos os campos da data antiga da reposição.'
     return error
   }
 
   if (!formData.isOpenDate) {
-    if (!formData.dateReplacement) {
+    if (!isValidDate(formData.dateReplacement)) {
       error.fieldName = 'dateReplacement'
-      error.errorMessage = 'Nova data de reposição não preenchida.'
+      error.errorMessage = 'Preencha todos os campos da data de reposição.'
       return error
     }
   }
